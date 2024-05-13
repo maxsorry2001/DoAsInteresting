@@ -6,7 +6,6 @@ import net.Gmaj7.doAsInteresting.daiEnchantments.custom.Plunder;
 import net.Gmaj7.doAsInteresting.daiEnchantments.custom.ShieldStrike;
 import net.Gmaj7.doAsInteresting.daiInit.daiItemTags;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.neoforged.bus.api.IEventBus;
@@ -20,7 +19,7 @@ public class daiEnchantments {
     public static final DeferredHolder< Enchantment, Enchantment> EXPLOSION_GET = dai_ENCHANTMENTS.register("explosion_get",
             () -> new ExplosionGet(
                     Enchantment.definition(
-                            ItemTags.CHEST_ARMOR_ENCHANTABLE,
+                            daiItemTags.CHEST_ARMOR_ENCHANTABLE,
                             1,
                             1,
                             Enchantment.dynamicCost(1, 10),
@@ -56,6 +55,7 @@ public class daiEnchantments {
                     )
             )
     );
+    //public static final DeferredHolder<Enchantment, Enchantment>
 
     public static void register(IEventBus eventBus){dai_ENCHANTMENTS.register(eventBus);}
 }

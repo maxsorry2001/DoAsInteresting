@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X#X",
+    "#X#",
+    "X#X"
+  ],
+  "key": {
+    "#": [
+      {
+        "item": "minecraft:sculk"
+      }
+    ],
+    "X": {
+      "item": "minecraft:gunpowder"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "doasinteresting:sculk_tnt"
+  }
+}

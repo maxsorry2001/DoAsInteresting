@@ -1,14 +1,17 @@
 package net.Gmaj7.doAsInteresting;
 
 import com.mojang.logging.LogUtils;
+import net.Gmaj7.doAsInteresting.daiBlocks.daiBlocks;
 import net.Gmaj7.doAsInteresting.daiEffects.daiMobEffects;
 import net.Gmaj7.doAsInteresting.daiEnchantments.daiEnchantments;
 import net.Gmaj7.doAsInteresting.daiEntities.daiEntities;
+import net.Gmaj7.doAsInteresting.daiEntities.renderer.SculkTntRenderer;
 import net.Gmaj7.doAsInteresting.daiInit.daiAttachmentTypes;
 import net.Gmaj7.doAsInteresting.daiInit.daiDataComponentTypes;
 import net.Gmaj7.doAsInteresting.daiItems.daiItems;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.renderer.entity.TntRenderer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -39,8 +42,9 @@ public class DoAsInteresting
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
-        daiItems.ITEMS.register(modEventBus);
-        DoAsInterestingTabs.CREATIVE_MODE_TAB.register(modEventBus);
+        daiItems.DAI_ITEMS.register(modEventBus);
+        daiBlocks.DAI_BLOCKS.register(modEventBus);
+        DoAsInterestingTabs.DAI_CREATIVE_MODE_TABS.register(modEventBus);
         daiEntities.register(modEventBus);
         daiEnchantments.register(modEventBus);
         daiMobEffects.register(modEventBus);
@@ -82,6 +86,7 @@ public class DoAsInteresting
         public static void onClientSetup(FMLClientSetupEvent event)
         {
             EntityRenderers.register(daiEntities.EXPLODE_STORAGE_ENTITY.get(), ThrownItemRenderer::new);
+            EntityRenderers.register(daiEntities.SCULK_TNT.get(), SculkTntRenderer::new);
         }
     }
 }

@@ -2,22 +2,24 @@ package net.Gmaj7.doAsInteresting.eventDispose;
 
 import net.Gmaj7.doAsInteresting.DoAsInteresting;
 import net.Gmaj7.doAsInteresting.daiEnchantments.daiEnchantments;
-import net.Gmaj7.doAsInteresting.daiInit.daiAttachmentTypes;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.util.Unit;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityAttachment;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.Vindicator;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -55,11 +57,6 @@ public class ClickDispose {
     public static void RightClickBlock(PlayerInteractEvent.RightClickBlock event){
         Player player = event.getEntity();
         BlockEntity blockEntity = player.level().getBlockEntity(event.getHitVec().getBlockPos());
-        if(blockEntity != null && blockEntity.hasData(daiAttachmentTypes.DAI_TOTEM)){
-            Vindicator vindicator = new Vindicator(EntityType.VINDICATOR, player.level());
-            vindicator.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.IRON_AXE));
-            vindicator.moveTo(player.getX(), player.getY(), player.getZ());
-            player.level().addFreshEntity(vindicator);
-        }
+        EntityDispose.totemChestSummon(player, blockEntity);
     }
 }

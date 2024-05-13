@@ -15,5 +15,8 @@ public class daiAttachmentTypes {
     public static final Supplier<AttachmentType<Integer>> DAI_TOTEM = DAI_ATTCHMENT_TYPE.register("dai_totem",
             () -> AttachmentType.builder(() -> 1).serialize(Codec.INT) .build());
 
+    public static final Supplier<AttachmentType<Integer>> DAI_ANVIL_AUTO = DAI_ATTCHMENT_TYPE.register("dai_totem_ato",
+            () -> AttachmentType.builder(() -> 1).serialize(Codec.INT).build());
+
     public static void register(IEventBus eventBus){DAI_ATTCHMENT_TYPE.register(eventBus);}
 }

@@ -46,23 +46,9 @@ public class EntityDispose {
             chestRight.setData(daiAttachmentTypes.DAI_TOTEM, 1);
             if(chestLeft instanceof ChestBlockEntity && chestRight instanceof ChestBlockEntity){
                 int i = 0;
-                for(int j = 0; j < 27; j++){
-                    for (; i < ((Player) livingEntity).getInventory().getContainerSize(); i++){
-                        if(((Player) livingEntity).getInventory().getItem(i).isEmpty()) continue;
-                        ((ChestBlockEntity) chestRight).setItem(j, ((Player) livingEntity).getInventory().getItem(i));
-                        ((Player) livingEntity).getInventory().removeItem(((Player) livingEntity).getInventory().getItem(i));
-                        break;
-                    }
-                }
+                TotemChestFill((Player) livingEntity, (ChestBlockEntity) chestRight, i);
                 if(i < ((Player) livingEntity).getInventory().getContainerSize()){
-                    for(int j = 0; j < 27; j++){
-                        for (; i < ((Player) livingEntity).getInventory().getContainerSize(); i++){
-                            if(((Player) livingEntity).getInventory().getItem(i).isEmpty()) continue;
-                            ((ChestBlockEntity) chestLeft).setItem(j, ((Player) livingEntity).getInventory().getItem(i));
-                            ((Player) livingEntity).getInventory().removeItem(((Player) livingEntity).getInventory().getItem(i));
-                            break;
-                        }
-                    }
+                    TotemChestFill((Player) livingEntity, (ChestBlockEntity) chestLeft, i);
                 }
             }
             event.setCanceled(true);
@@ -73,11 +59,26 @@ public class EntityDispose {
     public static void BlockDestroy(BlockEvent.BreakEvent event){
         Player player = event.getPlayer();
         BlockEntity blockEntity = player.level().getBlockEntity(event.getPos());
+        totemChestSummon(player, blockEntity);
+    }
+
+    protected static void totemChestSummon(Player player, BlockEntity blockEntity) {
         if(blockEntity != null && blockEntity.hasData(daiAttachmentTypes.DAI_TOTEM)){
             Vindicator vindicator = new Vindicator(EntityType.VINDICATOR, player.level());
             vindicator.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.IRON_AXE));
             vindicator.moveTo(player.getX(), player.getY(), player.getZ());
             player.level().addFreshEntity(vindicator);
+        }
+    }
+
+    protected static void TotemChestFill(Player livingEntity, ChestBlockEntity chestLeft, int i) {
+        for(int j = 0; j < 27; j++){
+            for (; i < livingEntity.getInventory().getContainerSize(); i++){
+                if(livingEntity.getInventory().getItem(i).isEmpty()) continue;
+                chestLeft.setItem(j, livingEntity.getInventory().getItem(i));
+                livingEntity.getInventory().removeItem(livingEntity.getInventory().getItem(i));
+                break;
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 package net.Gmaj7.doAsInteresting;
 
+import net.Gmaj7.doAsInteresting.daiBlocks.daiBlocks;
 import net.Gmaj7.doAsInteresting.daiInit.daiItemTags;
 import net.Gmaj7.doAsInteresting.daiItems.daiItems;
 import net.minecraft.core.Holder;
@@ -20,15 +21,19 @@ import java.util.stream.IntStream;
 public class DoAsInterestingTabs {
     public static final String DAI_TAB_STRING = "dai_tab";
 
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TAB =
+    public static final DeferredRegister<CreativeModeTab> DAI_CREATIVE_MODE_TABS =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, DoAsInteresting.MODID);
 
-    public static final DeferredHolder<CreativeModeTab ,CreativeModeTab> DAI_TAB = CREATIVE_MODE_TAB.register("dai_tab",
+    public static final DeferredHolder<CreativeModeTab ,CreativeModeTab> DAI_TAB = DAI_CREATIVE_MODE_TABS.register("dai_tab",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(daiItems.EXPLOSION_STORAGE.get()))
                     .title(Component.translatable("creativetab.dai_tab"))
                     .displayItems((pParameters, pOutput) -> {
                         pOutput.accept(daiItems.EXPLOSION_STORAGE.get());
+
+                        pOutput.accept(daiBlocks.SCULK_TNT.get());
+
                         Set<TagKey<Item>> set = Set.of(
+                                daiItemTags.CHEST_ARMOR_ENCHANTABLE,
                                 daiItemTags.SHIELD_ENCHANTABLE,
                                 daiItemTags.TOTEM_ENCHANTABLE
                         );
