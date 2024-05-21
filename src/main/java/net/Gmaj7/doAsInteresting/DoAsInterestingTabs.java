@@ -29,8 +29,10 @@ public class DoAsInterestingTabs {
                     .title(Component.translatable("creativetab.dai_tab"))
                     .displayItems((pParameters, pOutput) -> {
                         pOutput.accept(daiItems.EXPLOSION_STORAGE.get());
+                        pOutput.accept(daiItems.BLUE_ICE_BOOTS.get());
 
                         pOutput.accept(daiBlocks.SCULK_TNT.get());
+
 
                         Set<TagKey<Item>> set = Set.of(
                                 daiItemTags.CHEST_ARMOR_ENCHANTABLE,

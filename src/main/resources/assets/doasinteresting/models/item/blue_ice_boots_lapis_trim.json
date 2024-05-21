@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "doasinteresting:item/blue_ice_boots",
+    "layer1": "minecraft:trims/items/boots_trim_lapis"
+  }
+}

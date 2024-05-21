@@ -6,12 +6,12 @@ import net.Gmaj7.doAsInteresting.daiEffects.daiMobEffects;
 import net.Gmaj7.doAsInteresting.daiEnchantments.daiEnchantments;
 import net.Gmaj7.doAsInteresting.daiEntities.daiEntities;
 import net.Gmaj7.doAsInteresting.daiEntities.renderer.SculkTntRenderer;
+import net.Gmaj7.doAsInteresting.daiInit.daiArmorMaterials;
 import net.Gmaj7.doAsInteresting.daiInit.daiAttachmentTypes;
 import net.Gmaj7.doAsInteresting.daiInit.daiDataComponentTypes;
 import net.Gmaj7.doAsInteresting.daiItems.daiItems;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.client.renderer.entity.TntRenderer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -50,6 +50,7 @@ public class DoAsInteresting
         daiMobEffects.register(modEventBus);
         daiAttachmentTypes.register(modEventBus);
         daiDataComponentTypes.register(modEventBus);
+        daiArmorMaterials.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (ExampleMod) to respond directly to events.

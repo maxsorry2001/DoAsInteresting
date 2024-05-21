@@ -132,13 +132,13 @@ public class SculkTntEntity extends Entity implements TraceableEntity {
         for (LivingEntity target : list){
             target.hurt(new DamageSource(level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.SONIC_BOOM), owner), 20F);
             target.knockback(2, this.getX() - target.getX(), this.getZ() - target.getZ());
-            for (int dx = this.blockPosition().getX() - 4; dx <= this.blockPosition().getX() + 4; dx ++){
-                for (int dy = this.blockPosition().getY() - 4; dy <= this.blockPosition().getY() + 4; dy ++){
-                    for (int dz = this.blockPosition().getZ() - 4; dz <= this.blockPosition().getZ() + 4; dz++){
-                        BlockPos blockPos = new BlockPos(dx, dy, dz);
-                        if(this.level().getBlockState(blockPos).getBlock() instanceof SculkTNT) {
-                            ((SculkTNT) this.level().getBlockState(blockPos).getBlock()).beExploded(this.level(), blockPos, this.owner);
-                        }
+        }
+        for (int dx = this.blockPosition().getX() - 4; dx <= this.blockPosition().getX() + 4; dx ++){
+            for (int dy = this.blockPosition().getY() - 4; dy <= this.blockPosition().getY() + 4; dy ++){
+                for (int dz = this.blockPosition().getZ() - 4; dz <= this.blockPosition().getZ() + 4; dz++){
+                    BlockPos blockPos = new BlockPos(dx, dy, dz);
+                    if(this.level().getBlockState(blockPos).getBlock() instanceof SculkTNT) {
+                        ((SculkTNT) this.level().getBlockState(blockPos).getBlock()).beExploded(this.level(), blockPos, this.owner);
                     }
                 }
             }

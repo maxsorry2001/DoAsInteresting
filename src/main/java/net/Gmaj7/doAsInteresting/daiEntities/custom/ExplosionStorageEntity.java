@@ -12,8 +12,8 @@ import net.minecraft.world.phys.EntityHitResult;
 
 public class ExplosionStorageEntity extends ThrowableItemProjectile {
 
-    private  float radius;
-    public ExplosionStorageEntity(EntityType<? extends ThrowableItemProjectile> pEntityType, Level pLevel) {
+    private float radius;
+    public ExplosionStorageEntity(EntityType<? extends ExplosionStorageEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
