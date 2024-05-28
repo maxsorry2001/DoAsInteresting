@@ -2,6 +2,9 @@ package net.Gmaj7.doAsInteresting.eventDispose;
 
 import net.Gmaj7.doAsInteresting.DoAsInteresting;
 import net.Gmaj7.doAsInteresting.daiEnchantments.daiEnchantments;
+import net.Gmaj7.doAsInteresting.daiInit.daiTiers;
+import net.Gmaj7.doAsInteresting.daiItems.daiItems;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -11,14 +14,21 @@ import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.living.LivingDestroyBlockEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.level.BlockEvent;
 
 import java.util.List;
+import java.util.Random;
 
 @EventBusSubscriber(modid = DoAsInteresting.MODID)
 public class ClickDispose {
@@ -51,5 +61,29 @@ public class ClickDispose {
         Player player = event.getEntity();
         BlockEntity blockEntity = player.level().getBlockEntity(event.getHitVec().getBlockPos());
         EntityDispose.totemChestSummon(player, blockEntity);
+    }
+
+    @SubscribeEvent
+    public static void tt(BlockEvent.BreakEvent event){
+        Player player = event.getPlayer();
+        BlockPos blockPos = event.getPos();
+        if(player.getMainHandItem().getItem() instanceof TieredItem && ((TieredItem) player.getMainHandItem().getItem()).getTier() == daiTiers.JISTGABBURASH){
+            event.setCanceled(true);
+            getJistgabburash(blockPos, player);
+        }
+        else {
+            int flag = new Random().nextInt(10);
+            if(flag == 1){
+                event.setCanceled(true);
+                getJistgabburash(blockPos, player);
+            }
+        }
+    }
+
+    private static void getJistgabburash(BlockPos blockPos, Player player){
+        player.level().setBlock(blockPos, Blocks.AIR.defaultBlockState(), 1);
+        ItemEntity itemEntity = new ItemEntity(player.level(),blockPos.getX(), blockPos.getY(), blockPos.getZ(), new ItemStack(daiItems.JISTGABBURASH.get()));
+        player.level().addFreshEntity(itemEntity);
+        player.getMainHandItem().hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
     }
 }

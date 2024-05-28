@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    " # ",
+    " # "
+  ],
+  "key": {
+    "#": [
+      {
+        "item": "minecraft:stick"
+      }
+    ],
+    "X": {
+      "item": "doasinteresting:jistgabburash"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "doasinteresting:jistgabburash_pickaxe"
+  }
+}

@@ -3,10 +3,10 @@ package net.Gmaj7.doAsInteresting.daiItems;
 import net.Gmaj7.doAsInteresting.DoAsInteresting;
 import net.Gmaj7.doAsInteresting.daiBlocks.daiBlocks;
 import net.Gmaj7.doAsInteresting.daiInit.daiArmorMaterials;
+import net.Gmaj7.doAsInteresting.daiInit.daiTiers;
 import net.Gmaj7.doAsInteresting.daiItems.custom.ExplosionStorage;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
+import net.Gmaj7.doAsInteresting.daiItems.custom.Jistgabburash;
+import net.minecraft.world.item.*;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
@@ -18,6 +18,19 @@ public class daiItems {
 
     public static final Supplier<Item> BLUE_ICE_BOOTS = DAI_ITEMS.register("blue_ice_boots",
             () -> new ArmorItem(daiArmorMaterials.BLUE_ICE, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).durability(128)));
+
+    public static final Supplier<Item> JISTGABBURASH = DAI_ITEMS.registerItem("jistgabburash", Jistgabburash::new);
+
+    public static final Supplier<SwordItem> JISTGABBURASH_SWORD = DAI_ITEMS.register("jistgabburash_sword",
+            () -> new SwordItem(daiTiers.JISTGABBURASH, new Item.Properties().attributes(SwordItem.createAttributes(daiTiers.JISTGABBURASH, 0, 6))));
+    public static final Supplier<PickaxeItem> JISTGABBURASH_PICKAXE = DAI_ITEMS.register("jistgabburash_pickaxe",
+            () -> new PickaxeItem(daiTiers.JISTGABBURASH, new Item.Properties().attributes(PickaxeItem.createAttributes(daiTiers.JISTGABBURASH, 0, 6))));
+    public static final Supplier<AxeItem> JISTGABBURASH_AXE = DAI_ITEMS.register("jistgabburash_axe",
+            () -> new AxeItem(daiTiers.JISTGABBURASH, new Item.Properties().attributes(AxeItem.createAttributes(daiTiers.JISTGABBURASH, 0, 6))));
+    public static final Supplier<ShovelItem> JISTGABBURASH_SHOVEL = DAI_ITEMS.register("jistgabburash_shovel",
+            () -> new ShovelItem(daiTiers.JISTGABBURASH, new Item.Properties().attributes(ShovelItem.createAttributes(daiTiers.JISTGABBURASH, 0, 6))));
+    public static final Supplier<HoeItem> JISTGABBURASH_HOE = DAI_ITEMS.register("jistgabburash_hoe",
+            () -> new HoeItem(daiTiers.JISTGABBURASH, new Item.Properties().attributes(HoeItem.createAttributes(daiTiers.JISTGABBURASH, 0, 6))));
 
     public static final Supplier<BlockItem> SCULK_TNT = DAI_ITEMS.registerSimpleBlockItem("sculk_tnt", daiBlocks.SCULK_TNT);
 }

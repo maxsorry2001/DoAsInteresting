@@ -2,6 +2,7 @@ package net.Gmaj7.doAsInteresting.daiEntities;
 
 import net.Gmaj7.doAsInteresting.DoAsInteresting;
 import net.Gmaj7.doAsInteresting.daiEntities.custom.ExplosionStorageEntity;
+import net.Gmaj7.doAsInteresting.daiEntities.custom.JistgabburashEntity;
 import net.Gmaj7.doAsInteresting.daiEntities.custom.SculkTntEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
@@ -27,6 +28,11 @@ public class daiEntities {
                     .eyeHeight(0.15F)
                     .clientTrackingRange(10)
                     .build("sculk_tnt"));
+
+    public static final Supplier<EntityType<JistgabburashEntity>> JISTGABBURASH_ENTITY =
+            ENTITY_TYPES.register("jistgabburash_entity", () -> EntityType.Builder.<JistgabburashEntity>of(JistgabburashEntity::new, MobCategory.MISC)
+                    .sized(0.5F, 0.5F).clientTrackingRange(4)
+                    .build("jistgabburash_entity"));
 
     public static void register(IEventBus eventBus){ENTITY_TYPES.register(eventBus);}
 }

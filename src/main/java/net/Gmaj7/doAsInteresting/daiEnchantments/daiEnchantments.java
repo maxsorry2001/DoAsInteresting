@@ -4,7 +4,7 @@ import net.Gmaj7.doAsInteresting.DoAsInteresting;
 import net.Gmaj7.doAsInteresting.daiEnchantments.custom.ExplosionGet;
 import net.Gmaj7.doAsInteresting.daiEnchantments.custom.Plunder;
 import net.Gmaj7.doAsInteresting.daiEnchantments.custom.ShieldStrike;
-import net.Gmaj7.doAsInteresting.daiInit.daiItemTags;
+import net.Gmaj7.doAsInteresting.daiInit.daiTags;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -19,7 +19,7 @@ public class daiEnchantments {
     public static final DeferredHolder< Enchantment, Enchantment> EXPLOSION_GET = dai_ENCHANTMENTS.register("explosion_get",
             () -> new ExplosionGet(
                     Enchantment.definition(
-                            daiItemTags.CHEST_ARMOR_ENCHANTABLE,
+                            daiTags.daiItemTags.CHEST_ARMOR_ENCHANTABLE,
                             1,
                             1,
                             Enchantment.dynamicCost(1, 10),
@@ -32,7 +32,7 @@ public class daiEnchantments {
     public static final DeferredHolder<Enchantment, Enchantment> SHIELD_STRIKE = dai_ENCHANTMENTS.register("shield_strike",
             () -> new ShieldStrike(
                     Enchantment.definition(
-                            daiItemTags.SHIELD_ENCHANTABLE,
+                            daiTags.daiItemTags.SHIELD_ENCHANTABLE,
                             1,
                             1,
                             Enchantment.dynamicCost(1, 10),
@@ -45,7 +45,7 @@ public class daiEnchantments {
     public static final DeferredHolder<Enchantment, Enchantment> PLUNDER = dai_ENCHANTMENTS.register("plunder",
             () -> new Plunder(
                     Enchantment.definition(
-                            daiItemTags.TOTEM_ENCHANTABLE,
+                            daiTags.daiItemTags.TOTEM_ENCHANTABLE,
                             1,
                             1,
                             Enchantment.dynamicCost(1,10),

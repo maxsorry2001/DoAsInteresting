@@ -1,6 +1,7 @@
 package net.Gmaj7.doAsInteresting.eventDispose;
 
 import net.Gmaj7.doAsInteresting.DoAsInteresting;
+import net.Gmaj7.doAsInteresting.daiEffects.daiMobEffects;
 import net.Gmaj7.doAsInteresting.daiItems.daiItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
@@ -10,7 +11,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
@@ -28,7 +28,7 @@ public class TickDispose {
             for (BlockPos pos : blockPoses){
                 BlockState state = entity.level().getBlockState(pos);
                 if(state.is(Blocks.WATER))
-                    entity.level().setBlockAndUpdate(blockPos, Blocks.BLUE_ICE.defaultBlockState());
+                    entity.level().setBlockAndUpdate(pos, Blocks.BLUE_ICE.defaultBlockState());
             }
             if (blockState.is(Blocks.LAVA)){
                 if(entity.level().getFluidState(blockPos).is(Fluids.LAVA))
@@ -48,10 +48,12 @@ public class TickDispose {
     }
 
     @SubscribeEvent
-    public static void tt(EntityTickEvent.Post event){
+    public static void deltaMove(EntityTickEvent.Post event){
         Entity entity = event.getEntity();
-        if(entity instanceof LivingEntity && ((LivingEntity) entity).getItemBySlot(EquipmentSlot.FEET).is(daiItems.BLUE_ICE_BOOTS.get())){
-            if(((LivingEntity) entity).walkAnimation.isMoving() && entity.onGround()) entity.setDeltaMovement(entity.getDeltaMovement().add(entity.getDeltaMovement().normalize().x() * 0.1, 0 ,entity.getDeltaMovement().normalize().z() * 0.1));
+        if(entity instanceof LivingEntity) {
+            if (((LivingEntity) entity).getItemBySlot(EquipmentSlot.FEET).is(daiItems.BLUE_ICE_BOOTS.get()) && ((LivingEntity) entity).walkAnimation.isMoving() && entity.onGround())
+                entity.setDeltaMovement(entity.getDeltaMovement().add(entity.getDeltaMovement().normalize().x() * 0.1, 0 ,entity.getDeltaMovement().normalize().z() * 0.1));
+            if(((LivingEntity) entity).walkAnimation.isMoving() && ((LivingEntity) entity).hasEffect(daiMobEffects.IIIIII)) entity.setDeltaMovement(entity.getDeltaMovement().add(0, 0.1 ,0));
         }
     }
 }

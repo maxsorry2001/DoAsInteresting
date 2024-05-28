@@ -88,6 +88,7 @@ public class DoAsInteresting
         {
             EntityRenderers.register(daiEntities.EXPLODE_STORAGE_ENTITY.get(), ThrownItemRenderer::new);
             EntityRenderers.register(daiEntities.SCULK_TNT.get(), SculkTntRenderer::new);
+            EntityRenderers.register(daiEntities.JISTGABBURASH_ENTITY.get(), ThrownItemRenderer::new);
         }
     }
 }

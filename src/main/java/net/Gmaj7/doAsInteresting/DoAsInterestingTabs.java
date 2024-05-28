@@ -1,7 +1,7 @@
 package net.Gmaj7.doAsInteresting;
 
 import net.Gmaj7.doAsInteresting.daiBlocks.daiBlocks;
-import net.Gmaj7.doAsInteresting.daiInit.daiItemTags;
+import net.Gmaj7.doAsInteresting.daiInit.daiTags;
 import net.Gmaj7.doAsInteresting.daiItems.daiItems;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -29,15 +29,21 @@ public class DoAsInterestingTabs {
                     .title(Component.translatable("creativetab.dai_tab"))
                     .displayItems((pParameters, pOutput) -> {
                         pOutput.accept(daiItems.EXPLOSION_STORAGE.get());
+                        pOutput.accept(daiItems.JISTGABBURASH.get());
+                        pOutput.accept(daiItems.JISTGABBURASH_SWORD.get());
+                        pOutput.accept(daiItems.JISTGABBURASH_PICKAXE.get());
+                        pOutput.accept(daiItems.JISTGABBURASH_AXE.get());
+                        pOutput.accept(daiItems.JISTGABBURASH_SHOVEL.get());
+                        pOutput.accept(daiItems.JISTGABBURASH_HOE.get());
                         pOutput.accept(daiItems.BLUE_ICE_BOOTS.get());
 
                         pOutput.accept(daiBlocks.SCULK_TNT.get());
 
 
                         Set<TagKey<Item>> set = Set.of(
-                                daiItemTags.CHEST_ARMOR_ENCHANTABLE,
-                                daiItemTags.SHIELD_ENCHANTABLE,
-                                daiItemTags.TOTEM_ENCHANTABLE
+                                daiTags.daiItemTags.CHEST_ARMOR_ENCHANTABLE,
+                                daiTags.daiItemTags.SHIELD_ENCHANTABLE,
+                                daiTags.daiItemTags.TOTEM_ENCHANTABLE
                         );
                         pParameters.holders()
                                 .lookup(Registries.ENCHANTMENT)
