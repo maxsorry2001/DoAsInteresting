@@ -4,8 +4,10 @@ import net.Gmaj7.doAsInteresting.DoAsInteresting;
 import net.Gmaj7.doAsInteresting.daiBlocks.daiBlocks;
 import net.Gmaj7.doAsInteresting.daiInit.daiArmorMaterials;
 import net.Gmaj7.doAsInteresting.daiInit.daiTiers;
+import net.Gmaj7.doAsInteresting.daiItems.custom.ElectricCharge;
 import net.Gmaj7.doAsInteresting.daiItems.custom.ExplosionStorage;
 import net.Gmaj7.doAsInteresting.daiItems.custom.Jistgabburash;
+import net.Gmaj7.doAsInteresting.daiItems.custom.NegativeCharge;
 import net.minecraft.world.item.*;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -20,6 +22,8 @@ public class daiItems {
             () -> new ArmorItem(daiArmorMaterials.BLUE_ICE, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).durability(128)));
 
     public static final Supplier<Item> JISTGABBURASH = DAI_ITEMS.registerItem("jistgabburash", Jistgabburash::new);
+    public static final Supplier<Item> ELECTRIC_CHARGE = DAI_ITEMS.registerItem("electric_charge", ElectricCharge::new);
+    public static final Supplier<Item> NEGATIVE_CHARGE = DAI_ITEMS.registerItem("negative_charge", NegativeCharge::new);
 
     public static final Supplier<SwordItem> JISTGABBURASH_SWORD = DAI_ITEMS.register("jistgabburash_sword",
             () -> new SwordItem(daiTiers.JISTGABBURASH, new Item.Properties().attributes(SwordItem.createAttributes(daiTiers.JISTGABBURASH, 0, 6))));

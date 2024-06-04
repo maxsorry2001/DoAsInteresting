@@ -15,5 +15,9 @@ public class daiMobEffects {
 
     public static final DeferredHolder<MobEffect ,MobEffect> IIIIII = DAI_EFFECTS.register("iiiiiii",
             () -> new daiMobEffect(MobEffectCategory.NEUTRAL, 99638872));
+    public static final DeferredHolder<MobEffect, MobEffect> ELECTRIC_CHARGE = DAI_EFFECTS.register("electric_charge",
+            () -> new ElectricChargeEffect(MobEffectCategory.NEUTRAL, 1190028));
+    public static final DeferredHolder<MobEffect, MobEffect> NEGATIVE_CHARGE = DAI_EFFECTS.register("negative_charge",
+            () -> new NegativeChargeEffect(MobEffectCategory.NEUTRAL,  77261198));
     public static void register(IEventBus eventBus){DAI_EFFECTS.register(eventBus);}
 }

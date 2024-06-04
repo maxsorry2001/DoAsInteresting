@@ -1,6 +1,7 @@
 package net.Gmaj7.doAsInteresting.eventDispose;
 
 import net.Gmaj7.doAsInteresting.DoAsInteresting;
+import net.Gmaj7.doAsInteresting.daiEffects.daiMobEffects;
 import net.Gmaj7.doAsInteresting.daiEnchantments.daiEnchantments;
 import net.Gmaj7.doAsInteresting.daiInit.daiTiers;
 import net.Gmaj7.doAsInteresting.daiItems.daiItems;
@@ -11,19 +12,21 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.living.LivingDestroyBlockEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 
@@ -61,10 +64,25 @@ public class ClickDispose {
         Player player = event.getEntity();
         BlockEntity blockEntity = player.level().getBlockEntity(event.getHitVec().getBlockPos());
         EntityDispose.totemChestSummon(player, blockEntity);
+        if(EnchantmentHelper.getEnchantmentLevel(daiEnchantments.ELECTRIFICATION_BY_FRICTION.get(), player) > 0 && event.getHand() == InteractionHand.MAIN_HAND && player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty()){
+            if(player.level().isClientSide())
+                player.swing(InteractionHand.MAIN_HAND);
+            else {
+                boolean flag = new Random().nextBoolean();
+                Item item = daiItems.NEGATIVE_CHARGE.get();
+                if(flag) {
+                    item = daiItems.ELECTRIC_CHARGE.get();
+                    player.addEffect(new MobEffectInstance(daiMobEffects.NEGATIVE_CHARGE, 300));
+                }
+                else player.addEffect(new MobEffectInstance(daiMobEffects.ELECTRIC_CHARGE, 300));
+                ItemEntity itemEntity = new ItemEntity(player.level(), player.getX(), player.getY(), player.getZ(), new ItemStack(item));
+                player.level().addFreshEntity(itemEntity);
+            }
+        }
     }
 
     @SubscribeEvent
-    public static void tt(BlockEvent.BreakEvent event){
+    public static void breakBlock(BlockEvent.BreakEvent event){
         Player player = event.getPlayer();
         BlockPos blockPos = event.getPos();
         if(player.getMainHandItem().getItem() instanceof TieredItem && ((TieredItem) player.getMainHandItem().getItem()).getTier() == daiTiers.JISTGABBURASH){

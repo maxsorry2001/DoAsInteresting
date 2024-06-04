@@ -87,6 +87,8 @@ public class DoAsInteresting
         public static void onClientSetup(FMLClientSetupEvent event)
         {
             EntityRenderers.register(daiEntities.EXPLODE_STORAGE_ENTITY.get(), ThrownItemRenderer::new);
+            EntityRenderers.register(daiEntities.NEGATIVE_CHARGE_ENTITY.get(), ThrownItemRenderer::new);
+            EntityRenderers.register(daiEntities.ELECTRIC_CHARGE_ENTITY.get(), ThrownItemRenderer::new);
             EntityRenderers.register(daiEntities.SCULK_TNT.get(), SculkTntRenderer::new);
             EntityRenderers.register(daiEntities.JISTGABBURASH_ENTITY.get(), ThrownItemRenderer::new);
         }

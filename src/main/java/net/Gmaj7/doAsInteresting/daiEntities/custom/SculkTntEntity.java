@@ -102,8 +102,6 @@ public class SculkTntEntity extends Entity implements TraceableEntity {
                     }
                 }
             }
-        }
-        if(i <= 2){
             List<LivingEntity> list = level().getEntitiesOfClass(LivingEntity.class, getBoundingBox().inflate(6D));
             Vec3 vec3Start = getEyePosition();
             for (LivingEntity target : list){

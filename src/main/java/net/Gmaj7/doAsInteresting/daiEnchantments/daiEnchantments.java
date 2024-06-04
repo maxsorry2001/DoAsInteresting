@@ -1,6 +1,7 @@
 package net.Gmaj7.doAsInteresting.daiEnchantments;
 
 import net.Gmaj7.doAsInteresting.DoAsInteresting;
+import net.Gmaj7.doAsInteresting.daiEnchantments.custom.ElectrificationByFriction;
 import net.Gmaj7.doAsInteresting.daiEnchantments.custom.ExplosionGet;
 import net.Gmaj7.doAsInteresting.daiEnchantments.custom.Plunder;
 import net.Gmaj7.doAsInteresting.daiEnchantments.custom.ShieldStrike;
@@ -55,7 +56,20 @@ public class daiEnchantments {
                     )
             )
     );
-    //public static final DeferredHolder<Enchantment, Enchantment>
+    public static final DeferredHolder<Enchantment, Enchantment> ELECTRIFICATION_BY_FRICTION = dai_ENCHANTMENTS.register("electrification_by_friction",
+            () -> new ElectrificationByFriction(
+                    Enchantment.definition(
+                            daiTags.daiItemTags.CHEST_ARMOR_ENCHANTABLE,
+                            1,
+                            1,
+                            Enchantment.dynamicCost(1,10),
+                            Enchantment.dynamicCost(10, 10),
+                            1,
+                            EquipmentSlot.CHEST
+                    )
+            )
+    );
+
 
     public static void register(IEventBus eventBus){dai_ENCHANTMENTS.register(eventBus);}
 }
