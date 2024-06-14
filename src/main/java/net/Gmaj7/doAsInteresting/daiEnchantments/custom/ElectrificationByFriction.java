@@ -3,7 +3,6 @@ package net.Gmaj7.doAsInteresting.daiEnchantments.custom;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 
 public class ElectrificationByFriction extends Enchantment {

@@ -1,10 +1,7 @@
 package net.Gmaj7.doAsInteresting.daiEnchantments;
 
 import net.Gmaj7.doAsInteresting.DoAsInteresting;
-import net.Gmaj7.doAsInteresting.daiEnchantments.custom.ElectrificationByFriction;
-import net.Gmaj7.doAsInteresting.daiEnchantments.custom.ExplosionGet;
-import net.Gmaj7.doAsInteresting.daiEnchantments.custom.Plunder;
-import net.Gmaj7.doAsInteresting.daiEnchantments.custom.ShieldStrike;
+import net.Gmaj7.doAsInteresting.daiEnchantments.custom.*;
 import net.Gmaj7.doAsInteresting.daiInit.daiTags;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -39,7 +36,7 @@ public class daiEnchantments {
                             Enchantment.dynamicCost(1, 10),
                             Enchantment.dynamicCost(10,10),
                             1,
-                            EquipmentSlot.OFFHAND
+                            EquipmentSlot.values()
                     )
             )
     );
@@ -52,7 +49,7 @@ public class daiEnchantments {
                             Enchantment.dynamicCost(1,10),
                             Enchantment.dynamicCost(10,10),
                             1,
-                            EquipmentSlot.OFFHAND
+                            EquipmentSlot.values()
                     )
             )
     );
@@ -66,6 +63,19 @@ public class daiEnchantments {
                             Enchantment.dynamicCost(10, 10),
                             1,
                             EquipmentSlot.CHEST
+                    )
+            )
+    );
+    public static final DeferredHolder<Enchantment, Enchantment> FISSION = dai_ENCHANTMENTS.register("fission",
+            () -> new Fission(
+                    Enchantment.definition(
+                            daiTags.daiItemTags.BOW_ENCHANTABLE,
+                            1,
+                            3,
+                            Enchantment.dynamicCost(1, 10),
+                            Enchantment.dynamicCost(10, 10),
+                            1,
+                            EquipmentSlot.values()
                     )
             )
     );

@@ -45,7 +45,8 @@ public class DoAsInterestingTabs {
                         Set<TagKey<Item>> set = Set.of(
                                 daiTags.daiItemTags.CHEST_ARMOR_ENCHANTABLE,
                                 daiTags.daiItemTags.SHIELD_ENCHANTABLE,
-                                daiTags.daiItemTags.TOTEM_ENCHANTABLE
+                                daiTags.daiItemTags.TOTEM_ENCHANTABLE,
+                                daiTags.daiItemTags.BOW_ENCHANTABLE
                         );
                         pParameters.holders()
                                 .lookup(Registries.ENCHANTMENT)

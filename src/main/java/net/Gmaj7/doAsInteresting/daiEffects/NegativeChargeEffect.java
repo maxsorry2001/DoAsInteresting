@@ -21,9 +21,10 @@ public class NegativeChargeEffect extends MobEffect {
             int flag;
             if(target.hasEffect(daiMobEffects.NEGATIVE_CHARGE)) flag = 1;
             else if (target.hasEffect(daiMobEffects.ELECTRIC_CHARGE)) flag = -1;
-            else flag = 0;
+            else continue;
             Vec3 vec3 = new Vec3(target.getX() - pLivingEntity.getX(), target.getY() - pLivingEntity.getY(), target.getZ() - pLivingEntity.getZ());
-            Vec3 vec31 = vec3.normalize();
+            Vec3 vec31 = vec3;
+            if(vec3.length() > 1) vec31 = vec31.normalize();
             double d = Math.max(vec3.length() * vec3.length(), 1);
             target.move(MoverType.SELF,  new Vec3(vec31.x() * flag / d, vec31.y() * flag / d, vec31.z() * flag / d));
         }

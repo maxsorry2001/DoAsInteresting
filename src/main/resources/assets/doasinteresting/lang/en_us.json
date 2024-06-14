@@ -24,5 +24,6 @@
   "enchantment.doasinteresting.explosion_get": "explosion get",
   "enchantment.doasinteresting.shield_strike": "shield strike",
   "enchantment.doasinteresting.plunder": "plunder",
-  "enchantment.doasinteresting.electrification_by_friction" : "electrification by friction"
+  "enchantment.doasinteresting.electrification_by_friction" : "electrification by friction",
+  "enchantment.doasinteresting.fission" : "fission"
 }

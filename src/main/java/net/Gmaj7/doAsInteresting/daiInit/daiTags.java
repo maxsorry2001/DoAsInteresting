@@ -13,6 +13,7 @@ public class daiTags {
         public static final TagKey<Item> SHIELD_ENCHANTABLE = create("enchantable/dai_shield");
         public static final TagKey<Item> TOTEM_ENCHANTABLE = create("enchantable/dai_totem");
         public static final TagKey<Item> CHEST_ARMOR_ENCHANTABLE = create("enchantable/dai_chest_armor");
+        public static final TagKey<Item> BOW_ENCHANTABLE = create("enchantable/dai_bow");
 
         public static TagKey<Item> create(String name) {
             return ItemTags.create(new ResourceLocation(DoAsInteresting.MODID, name));

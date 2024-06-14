@@ -1,6 +1,5 @@
 package net.Gmaj7.doAsInteresting.daiItems.custom;
 
-import net.Gmaj7.doAsInteresting.daiEntities.custom.ElectricChargeEntity;
 import net.Gmaj7.doAsInteresting.daiEntities.custom.NegativeChargeEntity;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;

@@ -13,7 +13,7 @@ public class daiAttachmentTypes {
     public static final DeferredRegister<AttachmentType<?>> DAI_ATTCHMENT_TYPE = DeferredRegister.create(NeoForgeRegistries.Keys.ATTACHMENT_TYPES, DoAsInteresting.MODID);
 
     public static final Supplier<AttachmentType<Integer>> DAI_TOTEM = DAI_ATTCHMENT_TYPE.register("dai_totem",
-            () -> AttachmentType.builder(() -> 1).serialize(Codec.INT) .build());
+            () -> AttachmentType.builder(() -> 1).serialize(Codec.INT).build());
 
     public static void register(IEventBus eventBus){DAI_ATTCHMENT_TYPE.register(eventBus);}
 }
