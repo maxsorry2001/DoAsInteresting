@@ -9,6 +9,7 @@ import net.Gmaj7.doAsInteresting.daiEntities.renderer.SculkTntRenderer;
 import net.Gmaj7.doAsInteresting.daiInit.daiArmorMaterials;
 import net.Gmaj7.doAsInteresting.daiInit.daiAttachmentTypes;
 import net.Gmaj7.doAsInteresting.daiInit.daiDataComponentTypes;
+import net.Gmaj7.doAsInteresting.daiInit.daiItemProperties;
 import net.Gmaj7.doAsInteresting.daiItems.daiItems;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
@@ -91,6 +92,8 @@ public class DoAsInteresting
             EntityRenderers.register(daiEntities.ELECTRIC_CHARGE_ENTITY.get(), ThrownItemRenderer::new);
             EntityRenderers.register(daiEntities.SCULK_TNT.get(), SculkTntRenderer::new);
             EntityRenderers.register(daiEntities.JISTGABBURASH_ENTITY.get(), ThrownItemRenderer::new);
+
+            daiItemProperties.addCustomItemProperties();
         }
     }
 }

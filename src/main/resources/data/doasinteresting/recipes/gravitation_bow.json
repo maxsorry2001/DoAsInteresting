@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " a ",
+    "#b ",
+    " a "
+  ],
+  "key": {
+    "#":  {
+        "item": "minecraft:nether_star"
+      },
+    "a": {
+      "item": "minecraft:iron_block"
+    },
+    "b": {
+      "item": "minecraft:bow"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "doasinteresting:gravitation_bow"
+  }
+}

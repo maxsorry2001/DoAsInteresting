@@ -3,12 +3,14 @@ package net.Gmaj7.doAsInteresting.eventDispose;
 import net.Gmaj7.doAsInteresting.DoAsInteresting;
 import net.Gmaj7.doAsInteresting.daiEffects.daiMobEffects;
 import net.Gmaj7.doAsInteresting.daiEnchantments.daiEnchantments;
+import net.Gmaj7.doAsInteresting.daiEntities.custom.SculkTntEntity;
 import net.Gmaj7.doAsInteresting.daiInit.daiTiers;
 import net.Gmaj7.doAsInteresting.daiItems.daiItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -78,7 +80,16 @@ public class ClickDispose {
                 ItemEntity itemEntity = new ItemEntity(player.level(), player.getX(), player.getY(), player.getZ(), new ItemStack(item));
                 player.level().addFreshEntity(itemEntity);
             }
-        }
+        }/*
+        Vec3 vec3 = new Vec3(1, 1, 1).normalize().scale(3);
+        double d0 = vec3.horizontalDistance();
+        SculkTntEntity sculkTntEntity = new SculkTntEntity(player.level(), player.getX(), player.getY() + 2, player.getZ(), player);
+        sculkTntEntity.setDeltaMovement(vec3);
+        sculkTntEntity.setXRot((float)(Mth.atan2(vec3.x, vec3.z) * 180.0F / (float)Math.PI));
+        sculkTntEntity.setXRot((float)(Mth.atan2(vec3.y, d0) * 180.0F / (float)Math.PI));
+        sculkTntEntity.yRotO = sculkTntEntity.getYRot();
+        sculkTntEntity.xRotO = sculkTntEntity.getXRot();
+        player.level().addFreshEntity(sculkTntEntity);*/
     }
 
     @SubscribeEvent

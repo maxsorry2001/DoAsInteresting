@@ -4,10 +4,7 @@ import net.Gmaj7.doAsInteresting.DoAsInteresting;
 import net.Gmaj7.doAsInteresting.daiBlocks.daiBlocks;
 import net.Gmaj7.doAsInteresting.daiInit.daiArmorMaterials;
 import net.Gmaj7.doAsInteresting.daiInit.daiTiers;
-import net.Gmaj7.doAsInteresting.daiItems.custom.ElectricCharge;
-import net.Gmaj7.doAsInteresting.daiItems.custom.ExplosionStorage;
-import net.Gmaj7.doAsInteresting.daiItems.custom.Jistgabburash;
-import net.Gmaj7.doAsInteresting.daiItems.custom.NegativeCharge;
+import net.Gmaj7.doAsInteresting.daiItems.custom.*;
 import net.minecraft.world.item.*;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -35,6 +32,9 @@ public class daiItems {
             () -> new ShovelItem(daiTiers.JISTGABBURASH, new Item.Properties().attributes(ShovelItem.createAttributes(daiTiers.JISTGABBURASH, 0, 6))));
     public static final Supplier<HoeItem> JISTGABBURASH_HOE = DAI_ITEMS.register("jistgabburash_hoe",
             () -> new HoeItem(daiTiers.JISTGABBURASH, new Item.Properties().attributes(HoeItem.createAttributes(daiTiers.JISTGABBURASH, 0, 6))));
+
+    public static final Supplier<Item> GRAVITATION_BOW = DAI_ITEMS.register("gravitation_bow",
+            () -> new GravitationBow(new Item.Properties().stacksTo(1).durability(255)));
 
     public static final Supplier<BlockItem> SCULK_TNT = DAI_ITEMS.registerSimpleBlockItem("sculk_tnt", daiBlocks.SCULK_TNT);
 }
