@@ -16,5 +16,11 @@ public class daiDataComponentTypes {
     public static final Supplier<DataComponentType<Float>> ExplosionStorageRadius = DAI_DATA_COMPONENT_TYPE.register("explosion_storage_radius",
             () -> DataComponentType.<Float>builder().persistent(Codec.FLOAT).build());
 
+    public static final Supplier<DataComponentType<Integer>> EMERALD_NUM = DAI_DATA_COMPONENT_TYPE.register("emerald_num",
+            () -> DataComponentType.<Integer>builder().persistent(Codec.INT).build());
+
+    public static final Supplier<DataComponentType<Integer>> EMERALD_BLOCK_NUM = DAI_DATA_COMPONENT_TYPE.register("emerald_block_num",
+            () -> DataComponentType.<Integer>builder().persistent(Codec.INT).build());
+
     public static void register(IEventBus eventBus){DAI_DATA_COMPONENT_TYPE.register(eventBus);}
 }

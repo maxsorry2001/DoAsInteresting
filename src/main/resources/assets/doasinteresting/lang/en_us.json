@@ -1,5 +1,7 @@
 {
-  "radius": "explosion radius：",
+  "radius": "explosion radius: ",
+  "emerald_num" : "emerald number: ",
+  "emerald_block_num": "emerald block number: ",
 
   "creativetab.dai_tab": "make in fun",
 
@@ -14,7 +16,7 @@
   "item.doasinteresting.electric_charge": "electric charge",
   "item.doasinteresting.negative_charge": "negative charge",
   "item.doasinteresting.gravitation_bow": "gravitation_bow",
-
+  "item.doasinteresting.red_packet": "red packet",
 
   "effect.doasinteresting.iiiiiii": "ÌÌÌÌÌÌÌÌÌÌÌÌÌÌ",
   "effect.doasinteresting.electric_charge": "electric charge",

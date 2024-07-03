@@ -1,5 +1,7 @@
 {
   "radius": "爆炸威力：",
+  "emerald_num" : "绿宝石数量：",
+  "emerald_block_num": "绿宝石块数量：",
 
   "creativetab.dai_tab": "随便写来玩",
 
@@ -14,6 +16,7 @@
   "item.doasinteresting.electric_charge": "正电荷",
   "item.doasinteresting.negative_charge": "负电荷",
   "item.doasinteresting.gravitation_bow": "引力弓",
+  "item.doasinteresting.red_packet": "红包",
 
   "effect.doasinteresting.iiiiiii": "烫烫烫",
   "effect.doasinteresting.electric_charge": "正电荷",

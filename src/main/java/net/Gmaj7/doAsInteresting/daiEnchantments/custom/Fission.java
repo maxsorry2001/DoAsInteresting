@@ -27,7 +27,7 @@ public class Fission extends Enchantment {
             double rad = 2 * Math.PI * i / (10 * pLevel);
             float yRot = new Random().nextFloat(1.0F);
             float speed = new Random().nextFloat(2.0F);
-            arrow.shoot(3 * Math.sin(rad), yRot, 5 * Math.cos(rad), speed, 10.0F);
+            arrow.shoot(5 * Math.sin(rad), yRot, 5 * Math.cos(rad), speed, 10.0F);
             pTarget.level().addFreshEntity(arrow);
         }
     }

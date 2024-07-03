@@ -39,6 +39,7 @@ public class DoAsInterestingTabs {
                         pOutput.accept(daiItems.JISTGABBURASH_HOE.get());
                         pOutput.accept(daiItems.BLUE_ICE_BOOTS.get());
                         pOutput.accept(daiItems.GRAVITATION_BOW.get());
+                        pOutput.accept(daiItems.RED_PACKET.get());
 
                         pOutput.accept(daiBlocks.SCULK_TNT.get());
 
