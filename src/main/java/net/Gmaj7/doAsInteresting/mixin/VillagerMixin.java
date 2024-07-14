@@ -11,6 +11,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.gossip.GossipContainer;
 import net.minecraft.world.entity.ai.gossip.GossipType;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
@@ -18,6 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -25,6 +27,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Villager.class)
 public abstract class VillagerMixin extends Mob {
+
+    @Shadow public abstract GossipContainer getGossips();
     protected VillagerMixin(EntityType<? extends Villager> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
@@ -49,13 +53,10 @@ public abstract class VillagerMixin extends Mob {
                     int a = pPlayer.getItemInHand(pHand).getComponents().get(daiDataComponentTypes.EMERALD_NUM.get());
                     int b = pPlayer.getItemInHand(pHand).getComponents().get(daiDataComponentTypes.EMERALD_BLOCK_NUM.get());
                     if(a > 0) {
-                        Mob mob = this;
-                        if(mob instanceof Villager villager){
-                            villager.getGossips().add(pPlayer.getUUID(), GossipType.MAJOR_POSITIVE, 10 + Mth.floor(a / 6) + 1);
-                            villager.getGossips().add(pPlayer.getUUID(), GossipType.MINOR_POSITIVE, 15 + Mth.floor(a / 6) + 1);
-                        }
+                            this.getGossips().add(pPlayer.getUUID(), GossipType.MAJOR_POSITIVE, 10 + Mth.floor(a / 6) + 1);
+                            this.getGossips().add(pPlayer.getUUID(), GossipType.MINOR_POSITIVE, 15 + Mth.floor(a / 6) + 1);
                     }
-                    if(b > 0) pPlayer.addEffect(new MobEffectInstance(MobEffects.HERO_OF_THE_VILLAGE, b * 600, Mth.floor(b / 20) + 1));
+                    if(b > 0) pPlayer.addEffect(new MobEffectInstance(MobEffects.HERO_OF_THE_VILLAGE, b * 600, Mth.floor(b / 20) - 1));
                     pPlayer.getItemInHand(pHand).shrink(1);
                 }
                 callbackInfoReturnable.setReturnValue(InteractionResult.sidedSuccess(this.level().isClientSide()));

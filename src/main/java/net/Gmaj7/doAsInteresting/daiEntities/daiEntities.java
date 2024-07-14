@@ -45,6 +45,12 @@ public class daiEntities {
                     .sized(0.5F, 0.5F)
                     .clientTrackingRange(4)
                     .build("negative_charge_entity"));
+    public static final Supplier<EntityType<IronShootEntity>> IRON_SHOOT_ENTITY =
+            ENTITY_TYPES.register("iron_shoot_entity", () -> EntityType.Builder.<IronShootEntity>of(IronShootEntity::new, MobCategory.MISC)
+                    .sized(0.5F, 0.5F)
+                    .clientTrackingRange(4)
+                    .build("iron_shoot_entity"));
+
 
     public static void register(IEventBus eventBus){ENTITY_TYPES.register(eventBus);}
 }

@@ -7,10 +7,11 @@ import net.minecraft.world.item.Item;
 
 public class daiItemProperties {
     public static void addCustomItemProperties(){
-        makeGravitationBow(daiItems.GRAVITATION_BOW.get());
+        makeBow(daiItems.GRAVITATION_BOW.get());
+        makeBow(daiItems.ELECTROMAGNETIC_BOW.get());
     }
 
-    private static void makeGravitationBow(Item item){
+    private static void makeBow(Item item){
         ItemProperties.register(item, new ResourceLocation("pull"), (pStack, pLevel, pEntity, pSeed) -> {
             if(pEntity == null){
                 return 0.0F;

@@ -1,5 +1,6 @@
 package net.Gmaj7.doAsInteresting.daiItems.custom;
 
+import net.Gmaj7.doAsInteresting.daiEntities.custom.IronShootEntity;
 import net.Gmaj7.doAsInteresting.daiInit.daiDataComponentTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;

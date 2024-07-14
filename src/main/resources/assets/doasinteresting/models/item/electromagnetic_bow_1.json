@@ -1,0 +1,6 @@
+{
+  "parent": "doasinteresting:item/electromagnetic_bow",
+  "textures": {
+    "layer0": "doasinteresting:item/electromagnetic_bow_1"
+  }
+}
