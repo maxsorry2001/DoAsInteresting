@@ -41,6 +41,7 @@ public class DoAsInterestingTabs {
                         pOutput.accept(daiItems.GRAVITATION_BOW.get());
                         pOutput.accept(daiItems.ELECTROMAGNETIC_BOW.get());
                         pOutput.accept(daiItems.RED_PACKET.get());
+                        pOutput.accept(daiItems.THUNDER_SWORD.get());
 
                         pOutput.accept(daiBlocks.SCULK_TNT.get());
 
@@ -49,7 +50,8 @@ public class DoAsInterestingTabs {
                                 daiTags.daiItemTags.CHEST_ARMOR_ENCHANTABLE,
                                 daiTags.daiItemTags.SHIELD_ENCHANTABLE,
                                 daiTags.daiItemTags.TOTEM_ENCHANTABLE,
-                                daiTags.daiItemTags.BOW_ENCHANTABLE
+                                daiTags.daiItemTags.BOW_ENCHANTABLE,
+                                daiTags.daiItemTags.FLYING_SHADOWS_ENCHANTABLE
                         );
                         pParameters.holders()
                                 .lookup(Registries.ENCHANTMENT)

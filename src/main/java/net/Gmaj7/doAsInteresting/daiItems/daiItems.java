@@ -39,6 +39,8 @@ public class daiItems {
             () -> new GravitationBow(new Item.Properties().stacksTo(1).durability(255)));
     public static final Supplier<Item> ELECTROMAGNETIC_BOW = DAI_ITEMS.register("electromagnetic_bow",
             () -> new ElectromagneticBow(new Item.Properties().stacksTo(1).durability(255)));
+    public static final Supplier<Item> THUNDER_SWORD = DAI_ITEMS.register("thunder_shadow_sword",
+            () -> new ThunderShadowSword(new Item.Properties().stacksTo(1).attributes(ThunderShadowSword.createAttributes()).durability(255)));
 
     public static final Supplier<BlockItem> SCULK_TNT = DAI_ITEMS.registerSimpleBlockItem("sculk_tnt", daiBlocks.SCULK_TNT);
 }

@@ -50,6 +50,11 @@ public class daiEntities {
                     .sized(0.5F, 0.5F)
                     .clientTrackingRange(4)
                     .build("iron_shoot_entity"));
+    public static final Supplier<EntityType<ThunderWedgeEntity>> THUNDER_WEDGE_ENTITY =
+            ENTITY_TYPES.register("thunder_wedge_entity", () -> EntityType.Builder.<ThunderWedgeEntity>of(ThunderWedgeEntity::new, MobCategory.MISC)
+                    .sized(0.5F, 0.5F)
+                    .clientTrackingRange(4)
+                    .build("thunder_wedge_entity"));
 
 
     public static void register(IEventBus eventBus){ENTITY_TYPES.register(eventBus);}

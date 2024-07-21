@@ -9,6 +9,7 @@ public class daiItemProperties {
     public static void addCustomItemProperties(){
         makeBow(daiItems.GRAVITATION_BOW.get());
         makeBow(daiItems.ELECTROMAGNETIC_BOW.get());
+        makeThunderSword(daiItems.THUNDER_SWORD.get());
     }
 
     private static void makeBow(Item item){
@@ -22,6 +23,15 @@ public class daiItemProperties {
         });
         ItemProperties.register(item, new ResourceLocation("pulling"), (pStack, pLevel, pEntity, pSeed) -> {
             return pEntity != null && pEntity.isUsingItem() && pEntity.getUseItem() == pStack ? 1.0F : 0.0F;
+        });
+    }
+
+    private static void makeThunderSword(Item item){
+        ItemProperties.register(item, new ResourceLocation("cannot_shoot"), (pStack, pLevel, pEntity, pSeed) -> {
+            return pStack.has(daiDataComponentTypes.CANNOT_SHOOT) ? 1.0F : 0.0F;
+        });
+        ItemProperties.register(item, new ResourceLocation("block_pos"), (pStack, pLevel, pEntity, pSeed) -> {
+            return pStack.has(daiDataComponentTypes.BLOCKPOS) ? 1.0F : 0.0F;
         });
     }
 }

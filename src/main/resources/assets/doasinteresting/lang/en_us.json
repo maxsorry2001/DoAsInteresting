@@ -2,6 +2,7 @@
   "radius": "explosion radius: ",
   "emerald_num" : "emerald number: ",
   "emerald_block_num": "emerald block number: ",
+  "pos": "pos",
 
   "creativetab.dai_tab": "make in fun",
 
@@ -18,6 +19,7 @@
   "item.doasinteresting.gravitation_bow": "gravitation_bow",
   "item.doasinteresting.electromagnetic_bow": "electromagnetic_bow",
   "item.doasinteresting.red_packet": "red packet",
+  "item.doasinteresting.thunder_shadow_sword": "thunder_shadow sword",
 
   "effect.doasinteresting.iiiiiii": "ÌÌÌÌÌÌÌÌÌÌÌÌÌÌ",
   "effect.doasinteresting.electric_charge": "electric charge",
@@ -29,5 +31,6 @@
   "enchantment.doasinteresting.shield_strike": "shield strike",
   "enchantment.doasinteresting.plunder": "plunder",
   "enchantment.doasinteresting.electrification_by_friction" : "electrification by friction",
-  "enchantment.doasinteresting.fission" : "fission"
+  "enchantment.doasinteresting.fission" : "fission",
+  "enchantment.doasinteresting.flying_shadows" : "flying_shadows"
 }

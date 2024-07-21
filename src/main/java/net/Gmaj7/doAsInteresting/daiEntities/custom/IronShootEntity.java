@@ -64,7 +64,6 @@ public class IronShootEntity extends AbstractArrow {
         }
     }
 
-
     @Override
     protected ItemStack getDefaultPickupItem() {
         return this.shootItem;

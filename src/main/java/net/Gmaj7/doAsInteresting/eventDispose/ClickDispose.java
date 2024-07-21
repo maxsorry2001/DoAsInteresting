@@ -20,6 +20,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.block.Blocks;
@@ -78,31 +79,33 @@ public class ClickDispose {
                 ItemEntity itemEntity = new ItemEntity(player.level(), player.getX(), player.getY(), player.getZ(), new ItemStack(item));
                 player.level().addFreshEntity(itemEntity);
             }
-        }/*
-        Vec3 vec3 = new Vec3(1, 1, 1).normalize().scale(3);
-        double d0 = vec3.horizontalDistance();
-        SculkTntEntity sculkTntEntity = new SculkTntEntity(player.level(), player.getX(), player.getY() + 2, player.getZ(), player);
-        sculkTntEntity.setDeltaMovement(vec3);
-        sculkTntEntity.setXRot((float)(Mth.atan2(vec3.x, vec3.z) * 180.0F / (float)Math.PI));
-        sculkTntEntity.setXRot((float)(Mth.atan2(vec3.y, d0) * 180.0F / (float)Math.PI));
-        sculkTntEntity.yRotO = sculkTntEntity.getYRot();
-        sculkTntEntity.xRotO = sculkTntEntity.getXRot();
-        player.level().addFreshEntity(sculkTntEntity);*/
+        }
+    }
+    @SubscribeEvent
+    public static void RightClickItem(PlayerInteractEvent.RightClickItem event){
+        Player player = event.getEntity();
+        if (player.getItemInHand(event.getHand()).is(Items.GOLDEN_SWORD) && EnchantmentHelper.getEnchantmentLevel(daiEnchantments.ELECTRIFICATION_BY_FRICTION.get(), player) > 0 && !event.getLevel().isClientSide()){
+            ItemStack itemStack = new ItemStack(daiItems.THUNDER_SWORD.get());
+            EnchantmentHelper.setEnchantments(itemStack, player.getItemInHand(event.getHand()).getAllEnchantments());
+            player.setItemInHand(event.getHand(), itemStack);
+        }
     }
 
     @SubscribeEvent
     public static void breakBlock(BlockEvent.BreakEvent event){
         Player player = event.getPlayer();
         BlockPos blockPos = event.getPos();
-        if(player.getMainHandItem().getItem() instanceof TieredItem && ((TieredItem) player.getMainHandItem().getItem()).getTier() == daiTiers.JISTGABBURASH){
-            event.setCanceled(true);
-            getJistgabburash(blockPos, player);
-        }
-        else {
-            int flag = new Random().nextInt(10);
-            if(flag == 1){
+        if(!player.isCreative()){
+            if(player.getMainHandItem().getItem() instanceof TieredItem && ((TieredItem) player.getMainHandItem().getItem()).getTier() == daiTiers.JISTGABBURASH){
                 event.setCanceled(true);
                 getJistgabburash(blockPos, player);
+            }
+            else {
+                int flag = new Random().nextInt(10);
+                if(flag == 1){
+                    event.setCanceled(true);
+                    getJistgabburash(blockPos, player);
+                }
             }
         }
     }

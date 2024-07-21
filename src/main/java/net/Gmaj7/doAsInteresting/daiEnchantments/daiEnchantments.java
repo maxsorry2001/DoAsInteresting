@@ -79,6 +79,19 @@ public class daiEnchantments {
                     )
             )
     );
+    public static final DeferredHolder<Enchantment, Enchantment> FLYING_SHADOWS = dai_ENCHANTMENTS.register("flying_shadows",
+            () -> new FlyingShadows(
+                    Enchantment.definition(
+                            daiTags.daiItemTags.FLYING_SHADOWS_ENCHANTABLE,
+                            1,
+                            3,
+                            Enchantment.dynamicCost(1, 10),
+                            Enchantment.dynamicCost(10, 10),
+                            1,
+                            EquipmentSlot.MAINHAND
+                    )
+            )
+    );
 
 
     public static void register(IEventBus eventBus){dai_ENCHANTMENTS.register(eventBus);}

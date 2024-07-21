@@ -1,0 +1,21 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "doasinteresting:item/thunder_shadow_sword"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "cannot_shoot": 1
+      },
+      "model": "doasinteresting:item/thunder_shadow_sword_0"
+    },
+    {
+      "predicate": {
+        "cannot_shoot": 1,
+        "block_pos": 1
+      },
+      "model": "doasinteresting:item/thunder_shadow_sword_1"
+    }
+  ]
+}
