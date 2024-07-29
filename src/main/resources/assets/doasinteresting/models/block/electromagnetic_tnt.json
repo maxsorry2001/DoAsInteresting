@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "doasinteresting:block/electromagnetic_tnt_bottom",
+    "side": "doasinteresting:block/electromagnetic_tnt_side",
+    "top": "doasinteresting:block/electromagnetic_tnt_top"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "death_message_type": "default",
+  "exhaustion": 0.2,
+  "scaling": "never",
+  "message_id": "dai_radiation"
+}

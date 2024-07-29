@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_21",
   "refmap": "doAsInteresting.refmap.json",
   "mixins": [
+    "LivingEntityMixin",
     "VillagerMixin"
   ],
   "client": [

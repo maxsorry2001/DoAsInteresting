@@ -24,6 +24,7 @@ public class daiTags {
 
     public class daiBlockTags{
         public static final TagKey<Block> JISTGABBURASH_CANT_BREAK = creat("tier/jistgabburash_cant_break");
+        public static final TagKey<Block> ELECTROMAGNETIC_BREAK = creat("electromagnetic_break");
         public static TagKey<Block> creat(String name) {
             return BlockTags.create(new ResourceLocation(DoAsInteresting.MODID, name));
         }
