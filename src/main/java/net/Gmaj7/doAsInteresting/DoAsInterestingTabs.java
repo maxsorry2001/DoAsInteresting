@@ -44,6 +44,7 @@ public class DoAsInterestingTabs {
                         pOutput.accept(daiItems.THUNDER_SWORD.get());
 
                         pOutput.accept(daiBlocks.SCULK_TNT.get());
+                        pOutput.accept(daiBlocks.ELECTROMAGNETIC_TNT.get());
 
 
                         Set<TagKey<Item>> set = Set.of(

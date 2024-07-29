@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XaX",
+    "#X#",
+    "XbX"
+  ],
+  "key": {
+    "#": { "item": "minecraft:iron_ingot" },
+    "X": { "item": "minecraft:gunpowder"},
+    "a": {"item": "doasinteresting:electric_charge"},
+    "b": {"item": "doasinteresting:negative_charge"}
+  },
+  "result": {
+    "count": 1,
+    "id": "doasinteresting:electromagnetic_tnt"
+  }
+}

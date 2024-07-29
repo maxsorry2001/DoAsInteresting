@@ -6,6 +6,7 @@ import net.Gmaj7.doAsInteresting.daiEffects.daiMobEffects;
 import net.Gmaj7.doAsInteresting.daiEnchantments.daiEnchantments;
 import net.Gmaj7.doAsInteresting.daiEntities.daiEntities;
 import net.Gmaj7.doAsInteresting.daiEntities.model.ThunderWedgeRender;
+import net.Gmaj7.doAsInteresting.daiEntities.renderer.ElectromagneticTntRenderer;
 import net.Gmaj7.doAsInteresting.daiEntities.renderer.IronShootEntityRenderer;
 import net.Gmaj7.doAsInteresting.daiEntities.renderer.SculkTntRenderer;
 import net.Gmaj7.doAsInteresting.daiInit.daiArmorMaterials;
@@ -93,6 +94,7 @@ public class DoAsInteresting
             EntityRenderers.register(daiEntities.NEGATIVE_CHARGE_ENTITY.get(), ThrownItemRenderer::new);
             EntityRenderers.register(daiEntities.ELECTRIC_CHARGE_ENTITY.get(), ThrownItemRenderer::new);
             EntityRenderers.register(daiEntities.SCULK_TNT.get(), SculkTntRenderer::new);
+            EntityRenderers.register(daiEntities.ELECTROMAGNET_TNT_ENTITY.get(), ElectromagneticTntRenderer::new);
             EntityRenderers.register(daiEntities.JISTGABBURASH_ENTITY.get(), ThrownItemRenderer::new);
             EntityRenderers.register(daiEntities.IRON_SHOOT_ENTITY.get(), IronShootEntityRenderer::new);
             EntityRenderers.register(daiEntities.THUNDER_WEDGE_ENTITY.get(), ThunderWedgeRender::new);

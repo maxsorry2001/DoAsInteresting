@@ -1,6 +1,7 @@
 package net.Gmaj7.doAsInteresting.daiBlocks;
 
 import net.Gmaj7.doAsInteresting.DoAsInteresting;
+import net.Gmaj7.doAsInteresting.daiBlocks.custom.ElectromagneticTNT;
 import net.Gmaj7.doAsInteresting.daiBlocks.custom.SculkTNT;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -16,4 +17,7 @@ public class daiBlocks {
 
     public static final Supplier<Block> SCULK_TNT = DAI_BLOCKS.register("sculk_tnt",
             () -> new SculkTNT(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).sound(SoundType.SCULK_SENSOR)));
+
+    public static final Supplier<Block> ELECTROMAGNETIC_TNT = DAI_BLOCKS.register("electromagnetic_tnt",
+            () -> new ElectromagneticTNT(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).sound(SoundType.LODESTONE)));
 }

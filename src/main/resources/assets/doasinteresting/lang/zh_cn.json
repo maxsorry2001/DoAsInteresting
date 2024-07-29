@@ -24,13 +24,21 @@
   "effect.doasinteresting.iiiiiii": "烫烫烫",
   "effect.doasinteresting.electric_charge": "正电荷",
   "effect.doasinteresting.negative_charge": "负电荷",
+  "effect.doasinteresting.radiation": "辐射",
 
   "block.doasinteresting.sculk_tnt": "幽匿TNT",
+  "block.doasinteresting.electromagnetic_tnt": "电磁TNT",
+
+  "entity.doasinteresting.sculk_tnt_entity": "幽匿TNT",
+  "entity.doasinteresting.electromagnetic_tnt_entity": "电磁TNT",
 
   "enchantment.doasinteresting.explosion_get": "爆炸吸收",
   "enchantment.doasinteresting.shield_strike": "盾击",
   "enchantment.doasinteresting.plunder": "掠夺",
   "enchantment.doasinteresting.electrification_by_friction" : "摩擦起电",
   "enchantment.doasinteresting.fission" : "裂变",
-  "enchantment.doasinteresting.flying_shadows" : "飞影"
+  "enchantment.doasinteresting.flying_shadows" : "飞影",
+
+  "death.attack.dai_radiation" : "%1s由于电磁辐射而全身溃烂",
+  "death.attack.dai_radiation.player" : "%1s由于%2s发射的电磁辐射而全身溃烂"
 }
