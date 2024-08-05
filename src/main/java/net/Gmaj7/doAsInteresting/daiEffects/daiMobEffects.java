@@ -22,5 +22,9 @@ public class daiMobEffects {
     public static final DeferredHolder<MobEffect, MobEffect> RADIATION = DAI_EFFECTS.register("radiation",
             () -> new RadiationEffect(MobEffectCategory.HARMFUL, 11827736)
                     .addAttributeModifier(Attributes.ARMOR, "98AC77DC-77DD-CCAD-BC54-1665DC7EAF54", -4.0F, AttributeModifier.Operation.ADD_VALUE));
+    public static final DeferredHolder<MobEffect, MobEffect> INTERNAL_INJURY = DAI_EFFECTS.register("interal_injury",
+            () -> new InternalInjuryEffect(MobEffectCategory.HARMFUL, 11823376)
+                    .addAttributeModifier(Attributes.ATTACK_SPEED,"98AC77DC-77DD-CCAD-BC54-1665DC7EAF55", -1.0F, AttributeModifier.Operation.ADD_VALUE)
+                    .addAttributeModifier(Attributes.MOVEMENT_SPEED, "98AC77DC-77DD-CCAD-BC54-1665DC7EAF56", -0.2F, AttributeModifier.Operation.ADD_VALUE));
     public static void register(IEventBus eventBus){DAI_EFFECTS.register(eventBus);}
 }
