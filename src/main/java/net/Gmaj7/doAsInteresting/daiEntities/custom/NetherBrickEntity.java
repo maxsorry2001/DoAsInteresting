@@ -45,32 +45,36 @@ public class NetherBrickEntity extends ThrowableItemProjectile {
     protected void onHitEntity(EntityHitResult pResult) {
         super.onHitEntity(pResult);
         Entity entity = pResult.getEntity();
-        if(entity instanceof LivingEntity target){
-            int i = new Random().nextInt(3) + 1;
-            target.setRemainingFireTicks(i * 150);
-            target.hurt(new DamageSource(target.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.PLAYER_ATTACK), this.getOwner()), this.getHitDamage() * i);
-            target.addEffect(new MobEffectInstance(daiMobEffects.INTERNAL_INJURY, 120 * i));
-            switch (i){
-                case 1 -> this.level().playSound(this, target.getOnPos(), SoundEvents.ITEM_BREAK, SoundSource.NEUTRAL, i, i);
-                case 2 -> this.level().playSound(this, target.getOnPos(), SoundEvents.IRON_GOLEM_ATTACK, SoundSource.NEUTRAL, i, i);
-                case 3 -> this.level().playSound(this, target.getOnPos(), SoundEvents.WARDEN_SONIC_BOOM, SoundSource.NEUTRAL, i, i);
+        if(!this.level().isClientSide){
+            if(entity instanceof LivingEntity target){
+                int i = new Random().nextInt(3) + 1;
+                target.setRemainingFireTicks(i * 150);
+                target.hurt(new DamageSource(target.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.PLAYER_ATTACK), this.getOwner()), this.getHitDamage() * i);
+                target.addEffect(new MobEffectInstance(daiMobEffects.INTERNAL_INJURY, 120 * i));
+                switch (i){
+                    case 1 -> this.level().playSound(this, target.getOnPos(), SoundEvents.ITEM_BREAK, SoundSource.NEUTRAL, i, i);
+                    case 2 -> this.level().playSound(this, target.getOnPos(), SoundEvents.IRON_GOLEM_ATTACK, SoundSource.NEUTRAL, i, i);
+                    case 3 -> this.level().playSound(this, target.getOnPos(), SoundEvents.WARDEN_SONIC_BOOM, SoundSource.NEUTRAL, i, i);
+                }
+                target.knockback(punch, this.getOwner().getX() - target.getX(), this.getOwner().getZ() - target.getZ());
             }
-            target.knockback(punch, this.getOwner().getX() - target.getX(), this.getOwner().getZ() - target.getZ());
-        }
-        if(this.piercing > 1) this.piercing -= 1;
-        else {
-            ItemEntity itemEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), this.itemStack);
-            this.level().addFreshEntity(itemEntity);
-            this.discard();
+            if(this.piercing > 1) this.piercing -= 1;
+            else {
+                ItemEntity itemEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), this.itemStack);
+                this.level().addFreshEntity(itemEntity);
+                this.discard();
+            }
         }
     }
 
     @Override
     protected void onHitBlock(BlockHitResult pResult) {
         super.onHitBlock(pResult);
-        ItemEntity itemEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), this.itemStack);
-        this.level().addFreshEntity(itemEntity);
-        this.discard();
+        if(!this.level().isClientSide){
+            ItemEntity itemEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), this.itemStack);
+            this.level().addFreshEntity(itemEntity);
+            this.discard();
+        }
     }
 
     @Override
