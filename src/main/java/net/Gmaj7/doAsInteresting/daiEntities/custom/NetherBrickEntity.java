@@ -27,6 +27,7 @@ public class NetherBrickEntity extends ThrowableItemProjectile {
     private float hit_damage = 15F;
     private int piercing = 0;
     private float punch = 0F;
+    private ItemStack itemStack = new ItemStack(Items.NETHER_BRICK);
     public NetherBrickEntity(EntityType<? extends ThrowableItemProjectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
@@ -35,8 +36,9 @@ public class NetherBrickEntity extends ThrowableItemProjectile {
         super(daiEntities.NETHER_BRICK_ENTITY.get(), pLevel);
     }
 
-    public NetherBrickEntity(LivingEntity pShooter, Level pLevel) {
+    public NetherBrickEntity(LivingEntity pShooter, Level pLevel, ItemStack itemStack) {
         super(daiEntities.NETHER_BRICK_ENTITY.get(), pShooter, pLevel);
+        this.setItemStack(itemStack);
     }
 
     @Override
@@ -57,7 +59,7 @@ public class NetherBrickEntity extends ThrowableItemProjectile {
         }
         if(this.piercing > 1) this.piercing -= 1;
         else {
-            ItemEntity itemEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), new ItemStack(this.getDefaultItem()));
+            ItemEntity itemEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), this.itemStack);
             this.level().addFreshEntity(itemEntity);
             this.discard();
         }
@@ -66,7 +68,7 @@ public class NetherBrickEntity extends ThrowableItemProjectile {
     @Override
     protected void onHitBlock(BlockHitResult pResult) {
         super.onHitBlock(pResult);
-        ItemEntity itemEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), new ItemStack(this.getDefaultItem()));
+        ItemEntity itemEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), this.itemStack);
         this.level().addFreshEntity(itemEntity);
         this.discard();
     }
@@ -88,12 +90,14 @@ public class NetherBrickEntity extends ThrowableItemProjectile {
     public void addAdditionalSaveData(CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
         pCompound.putFloat("hit_damage", this.hit_damage);
+        pCompound.put("item", this.itemStack.save(this.registryAccess()));
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
         this.hit_damage = pCompound.getFloat("hit_damage");
+        this.setItemStack(ItemStack.parse(this.registryAccess(), pCompound.getCompound("item")).get());
     }
 
     public void setPiercing(int piercing) {
@@ -102,5 +106,9 @@ public class NetherBrickEntity extends ThrowableItemProjectile {
 
     public void setPunch(float punch) {
         this.punch = punch;
+    }
+
+    public void setItemStack(ItemStack itemStack) {
+        this.itemStack = itemStack;
     }
 }
