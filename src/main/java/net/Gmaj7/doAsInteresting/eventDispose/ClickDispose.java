@@ -110,9 +110,7 @@ public class ClickDispose {
             player.level().playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.EGG_THROW, SoundSource.PLAYERS);
         }
         if (player.getItemInHand(event.getHand()).is(Items.NETHER_BRICK)){
-            ItemStack itemStack = player.getItemInHand(event.getHand()).copy();
-            itemStack.setCount(1);
-            NetherBrickEntity brickEntity = new NetherBrickEntity(player, player.level(), itemStack);
+            NetherBrickEntity brickEntity = new NetherBrickEntity(player, player.level());
             int i = player.getItemInHand(event.getHand()).getEnchantmentLevel(Enchantments.PUNCH);
             if(i > 0) brickEntity.setPunch(i);
             int j = player.getItemInHand(event.getHand()).getEnchantmentLevel(Enchantments.PIERCING);
