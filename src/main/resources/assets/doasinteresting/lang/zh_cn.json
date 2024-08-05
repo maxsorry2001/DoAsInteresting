@@ -25,6 +25,7 @@
   "effect.doasinteresting.electric_charge": "正电荷",
   "effect.doasinteresting.negative_charge": "负电荷",
   "effect.doasinteresting.radiation": "辐射",
+  "effect.doasinteresting.interal_injury": "内伤",
 
   "block.doasinteresting.sculk_tnt": "幽匿TNT",
   "block.doasinteresting.electromagnetic_tnt": "电磁TNT",
@@ -39,6 +40,9 @@
   "enchantment.doasinteresting.fission" : "裂变",
   "enchantment.doasinteresting.flying_shadows" : "飞影",
 
-  "death.attack.dai_radiation" : "%1s由于电磁辐射而全身溃烂",
-  "death.attack.dai_radiation.player" : "%1s由于%2s发射的电磁辐射而全身溃烂"
+  "death.attack.dai_radiation" : "%1$s由于电磁辐射而全身溃烂",
+  "death.attack.dai_radiation.player" : "%1$s由于%2$s发射的电磁辐射而全身溃烂",
+
+  "you_know_damage": "你知道这玩意儿的伤害",
+  "you_know_damage_and_from_nether": "你知道这玩意儿的伤害，而且现在这个是来自下界的"
 }

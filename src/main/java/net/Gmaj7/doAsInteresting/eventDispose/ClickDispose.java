@@ -3,6 +3,8 @@ package net.Gmaj7.doAsInteresting.eventDispose;
 import net.Gmaj7.doAsInteresting.DoAsInteresting;
 import net.Gmaj7.doAsInteresting.daiEffects.daiMobEffects;
 import net.Gmaj7.doAsInteresting.daiEnchantments.daiEnchantments;
+import net.Gmaj7.doAsInteresting.daiEntities.custom.BrickEntity;
+import net.Gmaj7.doAsInteresting.daiEntities.custom.NetherBrickEntity;
 import net.Gmaj7.doAsInteresting.daiInit.daiTiers;
 import net.Gmaj7.doAsInteresting.daiItems.daiItems;
 import net.minecraft.core.BlockPos;
@@ -23,6 +25,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.Vec3;
@@ -88,6 +91,35 @@ public class ClickDispose {
             ItemStack itemStack = new ItemStack(daiItems.THUNDER_SWORD.get());
             EnchantmentHelper.setEnchantments(itemStack, player.getItemInHand(event.getHand()).getAllEnchantments());
             player.setItemInHand(event.getHand(), itemStack);
+            player.swing(event.getHand());
+        }
+        if (player.getItemInHand(event.getHand()).is(Items.BRICK)){
+            BrickEntity brickEntity = new BrickEntity(player, player.level());
+            brickEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 1.0F, 0.1F);
+            int i = player.getItemInHand(event.getHand()).getEnchantmentLevel(Enchantments.PUNCH);
+            if(i > 0) brickEntity.setPunch(i);
+            int j = player.getItemInHand(event.getHand()).getEnchantmentLevel(Enchantments.PIERCING);
+            if(j > 0) brickEntity.setPiercing(j);
+            int k = player.getItemInHand(event.getHand()).getEnchantmentLevel(Enchantments.POWER);
+            if(j > 0) brickEntity.setHitDamage(k);
+            player.level().addFreshEntity(brickEntity);
+            if (!player.isCreative()) player.getItemInHand(event.getHand()).shrink(1);
+            player.swing(event.getHand());
+            player.level().playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.EGG_THROW, SoundSource.PLAYERS);
+        }
+        if (player.getItemInHand(event.getHand()).is(Items.NETHER_BRICK)){
+            NetherBrickEntity brickEntity = new NetherBrickEntity(player, player.level());
+            int i = player.getItemInHand(event.getHand()).getEnchantmentLevel(Enchantments.PUNCH);
+            if(i > 0) brickEntity.setPunch(i);
+            int j = player.getItemInHand(event.getHand()).getEnchantmentLevel(Enchantments.PIERCING);
+            if(j > 0) brickEntity.setPiercing(j);
+            int k = player.getItemInHand(event.getHand()).getEnchantmentLevel(Enchantments.POWER);
+            if(j > 0) brickEntity.setHitDamage(k);
+            brickEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 1.5F, 0.1F);
+            player.level().addFreshEntity(brickEntity);
+            if (!player.isCreative()) player.getItemInHand(event.getHand()).shrink(1);
+            player.swing(event.getHand());
+            player.level().playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.EGG_THROW, SoundSource.PLAYERS);
         }
     }
 

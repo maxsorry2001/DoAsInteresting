@@ -66,6 +66,20 @@ public class daiEntities {
                     .clientTrackingRange(10)
                     .build("electromagnetic_tnt_entity"));
 
+    public static final Supplier<EntityType<BrickEntity>> BRICK_ENTITY =
+            ENTITY_TYPES.register("nether_brick_entity", () -> EntityType.Builder.<BrickEntity>of(BrickEntity::new, MobCategory.MISC)
+                    .fireImmune()
+                    .sized(0.98F, 0.98F)
+                    .clientTrackingRange(4)
+                    .build("nether_brick_entity"));
+
+    public static final Supplier<EntityType<NetherBrickEntity>> NETHER_BRICK_ENTITY =
+            ENTITY_TYPES.register("brick_entity", () -> EntityType.Builder.<NetherBrickEntity>of(NetherBrickEntity::new, MobCategory.MISC)
+                    .fireImmune()
+                    .sized(0.98F, 0.98F)
+                    .clientTrackingRange(4)
+                    .build("brick_entity"));
+
 
     public static void register(IEventBus eventBus){ENTITY_TYPES.register(eventBus);}
 }

@@ -25,6 +25,7 @@
   "effect.doasinteresting.electric_charge": "electric charge",
   "effect.doasinteresting.negative_charge": "negative charge",
   "effect.doasinteresting.radiation": "radiation",
+  "effect.doasinteresting.interal_injury": "interal injury",
 
   "block.doasinteresting.sculk_tnt": "sculk TNT",
   "block.doasinteresting.electromagnetic_tnt": "electromagnetic TNT",
@@ -39,6 +40,9 @@
   "enchantment.doasinteresting.fission" : "fission",
   "enchantment.doasinteresting.flying_shadows" : "flying_shadows",
 
-  "death.attack.dai_radiation" : "%1s is festering from the radiation",
-  "death.attack.dai_radiation.player" : "%1s is festering from the radiation which is made by %s2"
+  "death.attack.dai_radiation" : "%1$s is festering from the radiation",
+  "death.attack.dai_radiation.player" : "%1$s is festering from the radiation which is made by %s$2",
+
+  "you_know_damage": "You know the damage of it",
+  "you_know_damage_and_from_nether": "You know the damage of it, and it come from The Nether now"
 }
