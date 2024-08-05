@@ -94,7 +94,9 @@ public class ClickDispose {
             player.swing(event.getHand());
         }
         if (player.getItemInHand(event.getHand()).is(Items.BRICK)){
-            BrickEntity brickEntity = new BrickEntity(player, player.level());
+            ItemStack itemStack = player.getItemInHand(event.getHand()).copy();
+            itemStack.setCount(1);
+            BrickEntity brickEntity = new BrickEntity(player, player.level(), itemStack);
             brickEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 1.0F, 0.1F);
             int i = player.getItemInHand(event.getHand()).getEnchantmentLevel(Enchantments.PUNCH);
             if(i > 0) brickEntity.setPunch(i);
@@ -102,13 +104,16 @@ public class ClickDispose {
             if(j > 0) brickEntity.setPiercing(j);
             int k = player.getItemInHand(event.getHand()).getEnchantmentLevel(Enchantments.POWER);
             if(j > 0) brickEntity.setHitDamage(k);
+            brickEntity.setItemStack(player.getItemInHand(event.getHand()));
             player.level().addFreshEntity(brickEntity);
             if (!player.isCreative()) player.getItemInHand(event.getHand()).shrink(1);
             player.swing(event.getHand());
             player.level().playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.EGG_THROW, SoundSource.PLAYERS);
         }
         if (player.getItemInHand(event.getHand()).is(Items.NETHER_BRICK)){
-            NetherBrickEntity brickEntity = new NetherBrickEntity(player, player.level());
+            ItemStack itemStack = player.getItemInHand(event.getHand()).copy();
+            itemStack.setCount(1);
+            NetherBrickEntity brickEntity = new NetherBrickEntity(player, player.level(), itemStack);
             int i = player.getItemInHand(event.getHand()).getEnchantmentLevel(Enchantments.PUNCH);
             if(i > 0) brickEntity.setPunch(i);
             int j = player.getItemInHand(event.getHand()).getEnchantmentLevel(Enchantments.PIERCING);

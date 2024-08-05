@@ -27,6 +27,7 @@ public class BrickEntity extends ThrowableItemProjectile {
     private float hit_damage = 10F;
     private int piercing = 0;
     private float punch = 0F;
+    private ItemStack itemStack;
     public BrickEntity(EntityType<? extends ThrowableItemProjectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
@@ -35,8 +36,9 @@ public class BrickEntity extends ThrowableItemProjectile {
         super(daiEntities.BRICK_ENTITY.get(), pLevel);
     }
 
-    public BrickEntity(LivingEntity pShooter, Level pLevel) {
+    public BrickEntity(LivingEntity pShooter, Level pLevel, ItemStack itemStack) {
         super(daiEntities.BRICK_ENTITY.get(), pShooter, pLevel);
+        this.setItemStack(itemStack);
     }
 
     @Override
@@ -56,7 +58,7 @@ public class BrickEntity extends ThrowableItemProjectile {
         }
         if(this.piercing > 1) this.piercing -= 1;
         else {
-            ItemEntity itemEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), new ItemStack(this.getDefaultItem()));
+            ItemEntity itemEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), this.itemStack);
             this.level().addFreshEntity(itemEntity);
             this.discard();
         }
@@ -65,7 +67,7 @@ public class BrickEntity extends ThrowableItemProjectile {
     @Override
     protected void onHitBlock(BlockHitResult pResult) {
         super.onHitBlock(pResult);
-        ItemEntity itemEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), new ItemStack(this.getDefaultItem()));
+        ItemEntity itemEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), this.itemStack);
         this.level().addFreshEntity(itemEntity);
         this.discard();
     }
@@ -87,12 +89,14 @@ public class BrickEntity extends ThrowableItemProjectile {
     public void addAdditionalSaveData(CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
         pCompound.putFloat("hit_damage", this.hit_damage);
+        pCompound.put("item", this.itemStack.save(this.registryAccess()));
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
         this.hit_damage = pCompound.getFloat("hit_damage");
+        this.setItemStack(ItemStack.parse(this.registryAccess(), pCompound.getCompound("item")).get());
     }
 
     public void setPiercing(int piercing) {
@@ -101,5 +105,9 @@ public class BrickEntity extends ThrowableItemProjectile {
 
     public void setPunch(float punch) {
         this.punch = punch;
+    }
+
+    public void setItemStack(ItemStack itemStack) {
+        this.itemStack = itemStack;
     }
 }
