@@ -34,5 +34,35 @@ public class daiArmorMaterials {
                     0.0F,
                     0.0F));
 
+    public static final DeferredHolder<ArmorMaterial, ArmorMaterial> BRICK = ARMOR_MATERIAL.register("brick",
+            () -> new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), p -> {
+                p.put(ArmorItem.Type.BOOTS, 2);
+                p.put(ArmorItem.Type.LEGGINGS, 4);
+                p.put(ArmorItem.Type.CHESTPLATE, 5);
+                p.put(ArmorItem.Type.HELMET, 2);
+                p.put(ArmorItem.Type.BODY, 5);
+            }),
+                    15,
+                    SoundEvents.ARMOR_EQUIP_ELYTRA,
+                    () -> Ingredient.of(Items.BRICK),
+                    List.of(new ArmorMaterial.Layer(new ResourceLocation(DoAsInteresting.MODID, "brick"))),
+                    0.0F,
+                    5.0F));
+
+    public static final DeferredHolder<ArmorMaterial, ArmorMaterial> NETHER_BRICK = ARMOR_MATERIAL.register("nether_brick",
+            () -> new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), p -> {
+                p.put(ArmorItem.Type.BOOTS, 2);
+                p.put(ArmorItem.Type.LEGGINGS, 4);
+                p.put(ArmorItem.Type.CHESTPLATE, 5);
+                p.put(ArmorItem.Type.HELMET, 2);
+                p.put(ArmorItem.Type.BODY, 5);
+            }),
+                    20,
+                    SoundEvents.ARMOR_EQUIP_ELYTRA,
+                    () -> Ingredient.of(Items.NETHER_BRICK),
+                    List.of(new ArmorMaterial.Layer(new ResourceLocation(DoAsInteresting.MODID, "nether_brick"))),
+                    2.0F,
+                    10.0F));
+
     public static void register(IEventBus eventBus){ARMOR_MATERIAL.register(eventBus);}
 }

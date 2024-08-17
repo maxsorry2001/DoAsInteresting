@@ -28,8 +28,14 @@ public class BrickEntity extends ThrowableItemProjectile {
     private int piercing = 0;
     private float punch = 0F;
     private ItemStack itemStack;
+    private boolean can_get = true;
     public BrickEntity(EntityType<? extends ThrowableItemProjectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+    }
+
+    public BrickEntity(Level plevel, double pX, double pY, double pZ, ItemStack pPickupItemStack){
+        super(daiEntities.BRICK_ENTITY.get(), pX, pY, pZ, plevel);
+        this.setItemStack(pPickupItemStack);
     }
 
     public BrickEntity(Level pLevel) {
@@ -59,9 +65,11 @@ public class BrickEntity extends ThrowableItemProjectile {
             }
             if(this.piercing > 1) this.piercing -= 1;
             else {
-                ItemEntity itemEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), this.itemStack);
-                this.level().addFreshEntity(itemEntity);
-                this.discard();
+                if(this.can_get){
+                    ItemEntity itemEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), this.itemStack);
+                    this.level().addFreshEntity(itemEntity);
+                    this.discard();
+                }
             }
         }
     }
@@ -69,7 +77,7 @@ public class BrickEntity extends ThrowableItemProjectile {
     @Override
     protected void onHitBlock(BlockHitResult pResult) {
         super.onHitBlock(pResult);
-        if(!this.level().isClientSide){
+        if(!this.level().isClientSide && this.can_get){
             ItemEntity itemEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), this.itemStack);
             this.level().addFreshEntity(itemEntity);
             this.discard();
@@ -93,6 +101,7 @@ public class BrickEntity extends ThrowableItemProjectile {
     public void addAdditionalSaveData(CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
         pCompound.putFloat("hit_damage", this.hit_damage);
+        pCompound.putBoolean("can_get", this.can_get);
         pCompound.put("item", this.itemStack.save(this.registryAccess()));
     }
 
@@ -100,7 +109,12 @@ public class BrickEntity extends ThrowableItemProjectile {
     public void readAdditionalSaveData(CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
         this.hit_damage = pCompound.getFloat("hit_damage");
+        this.can_get = pCompound.getBoolean("can_get");
         this.setItemStack(ItemStack.parse(this.registryAccess(), pCompound.getCompound("item")).get());
+    }
+
+    public void setCan_get(boolean can_get) {
+        this.can_get = can_get;
     }
 
     public void setPiercing(int piercing) {

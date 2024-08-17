@@ -20,6 +20,23 @@ public class daiItems {
     public static final Supplier<Item> BLUE_ICE_BOOTS = DAI_ITEMS.register("blue_ice_boots",
             () -> new ArmorItem(daiArmorMaterials.BLUE_ICE, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).durability(128)));
 
+    public static final Supplier<Item> BRICK_HELMET = DAI_ITEMS.register("brick_helmet",
+            () -> new ArmorItem(daiArmorMaterials.BRICK, ArmorItem.Type.HELMET, new Item.Properties().durability(64)));
+    public static final Supplier<Item> BRICK_CHESTPLATE = DAI_ITEMS.register("brick_chestplate",
+            () -> new ArmorItem(daiArmorMaterials.BRICK, ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(96)));
+    public static final Supplier<Item> BRICK_LEGGINGS = DAI_ITEMS.register("brick_leggings",
+            () -> new ArmorItem(daiArmorMaterials.BRICK, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(80)));
+    public static final Supplier<Item> BRICK_BOOTS = DAI_ITEMS.register("brick_boots",
+            () -> new ArmorItem(daiArmorMaterials.BRICK, ArmorItem.Type.BOOTS, new Item.Properties().durability(64)));
+    public static final Supplier<Item> NETHER_BRICK_HELMET = DAI_ITEMS.register("nether_brick_helmet",
+            () -> new ArmorItem(daiArmorMaterials.NETHER_BRICK, ArmorItem.Type.HELMET, new Item.Properties().durability(80)));
+    public static final Supplier<Item> NETHER_BRICK_CHESTPLATE = DAI_ITEMS.register("nether_brick_chestplate",
+            () -> new ArmorItem(daiArmorMaterials.NETHER_BRICK, ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(203)));
+    public static final Supplier<Item> NETHER_BRICK_LEGGINGS = DAI_ITEMS.register("nether_brick_leggings",
+            () -> new ArmorItem(daiArmorMaterials.NETHER_BRICK, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(96)));
+    public static final Supplier<Item> NETHER_BRICK_BOOTS = DAI_ITEMS.register("nether_brick_boots",
+            () -> new ArmorItem(daiArmorMaterials.NETHER_BRICK, ArmorItem.Type.BOOTS, new Item.Properties().durability(80)));
+
     public static final Supplier<Item> JISTGABBURASH = DAI_ITEMS.registerItem("jistgabburash", Jistgabburash::new);
     public static final Supplier<Item> ELECTRIC_CHARGE = DAI_ITEMS.registerItem("electric_charge", ElectricCharge::new);
     public static final Supplier<Item> NEGATIVE_CHARGE = DAI_ITEMS.registerItem("negative_charge", NegativeCharge::new);

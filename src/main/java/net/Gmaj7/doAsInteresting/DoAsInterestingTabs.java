@@ -38,6 +38,14 @@ public class DoAsInterestingTabs {
                         pOutput.accept(daiItems.JISTGABBURASH_SHOVEL.get());
                         pOutput.accept(daiItems.JISTGABBURASH_HOE.get());
                         pOutput.accept(daiItems.BLUE_ICE_BOOTS.get());
+                        pOutput.accept(daiItems.BRICK_HELMET.get());
+                        pOutput.accept(daiItems.BRICK_CHESTPLATE.get());
+                        pOutput.accept(daiItems.BRICK_LEGGINGS.get());
+                        pOutput.accept(daiItems.BRICK_BOOTS.get());
+                        pOutput.accept(daiItems.NETHER_BRICK_HELMET.get());
+                        pOutput.accept(daiItems.NETHER_BRICK_CHESTPLATE.get());
+                        pOutput.accept(daiItems.NETHER_BRICK_LEGGINGS.get());
+                        pOutput.accept(daiItems.NETHER_BRICK_BOOTS.get());
                         pOutput.accept(daiItems.GRAVITATION_BOW.get());
                         pOutput.accept(daiItems.ELECTROMAGNETIC_BOW.get());
                         pOutput.accept(daiItems.RED_PACKET.get());
