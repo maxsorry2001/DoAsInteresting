@@ -59,6 +59,9 @@ public class daiItems {
     public static final Supplier<Item> THUNDER_SWORD = DAI_ITEMS.register("thunder_shadow_sword",
             () -> new ThunderShadowSword(new Item.Properties().stacksTo(1).attributes(ThunderShadowSword.createAttributes()).durability(255)));
 
+    public static final Supplier<Item> EDIBLE_FLINT_AND_STEEL = DAI_ITEMS.register("edible_flint_and_steel",
+            () -> new EdibleFlintAndSteel(new Item.Properties().stacksTo(1).food(daiFoods.EDIBLE_FLINT_AND_STEEL).durability(64)));
+
     public static final Supplier<BlockItem> SCULK_TNT = DAI_ITEMS.registerSimpleBlockItem("sculk_tnt", daiBlocks.SCULK_TNT);
     public static final Supplier<BlockItem> ELECTROMAGNETIC_TNT = DAI_ITEMS.registerSimpleBlockItem("electromagnetic_tnt", daiBlocks.ELECTROMAGNETIC_TNT);
 }

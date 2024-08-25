@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#a",
+    " &"
+  ],
+  "key": {
+    "#":  {"item": "minecraft:iron_ingot"},
+    "&":  {"item": "minecraft:flint"},
+    "a":  {"item": "minecraft:sweet_berries"}
+  },
+  "result": {
+    "count": 1,
+    "id": "doasinteresting:edible_flint_and_steel"
+  }
+}

@@ -1,4 +1,4 @@
-package net.Gmaj7.doAsInteresting.daiEffects;
+package net.Gmaj7.doAsInteresting.daiEffects.custom;
 
 import net.Gmaj7.doAsInteresting.daiInit.daiDamageTypes;
 import net.minecraft.core.registries.Registries;
@@ -8,7 +8,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 
 public class InternalInjuryEffect extends MobEffect {
-    protected InternalInjuryEffect(MobEffectCategory pCategory, int pColor) {
+    public InternalInjuryEffect(MobEffectCategory pCategory, int pColor) {
         super(pCategory, pColor);
     }
 

@@ -37,7 +37,7 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
         if(this.hasEffect(daiMobEffects.RADIATION)) temperatureAdd += 0.0005F;
         if(temperatureAdd > 0) this.setData(daiAttachmentTypes.TEMPERATURE, this.getData(daiAttachmentTypes.TEMPERATURE) + temperatureAdd);
         else this.setData(daiAttachmentTypes.TEMPERATURE, Math.max(20F, this.getData(daiAttachmentTypes.TEMPERATURE) - 0.001F));
-        if(this.getData(daiAttachmentTypes.TEMPERATURE) > 40F) this.setRemainingFireTicks(100);
+        if(this.getData(daiAttachmentTypes.TEMPERATURE) > 60F) this.setRemainingFireTicks(100);
     }
 
     @Inject(method = "hurt", at = @At("HEAD"))

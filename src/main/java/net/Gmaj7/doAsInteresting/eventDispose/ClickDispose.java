@@ -144,6 +144,10 @@ public class ClickDispose {
                 }
             }
         }
+        if(player.hasEffect(daiMobEffects.MELTING)){
+            event.setCanceled(true);
+            player.level().setBlockAndUpdate(blockPos, Blocks.LAVA.defaultBlockState());
+        }
     }
 
     private static void getJistgabburash(BlockPos blockPos, Player player){
