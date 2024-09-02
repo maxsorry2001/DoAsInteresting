@@ -20,10 +20,13 @@ public class Oxygen extends Item {
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         ItemStack itemStack = pPlayer.getItemInHand(pUsedHand);
         if(!pLevel.isClientSide()){
-            ThrownOxygenEntity thrownOxygenEntity = new ThrownOxygenEntity(pLevel, pPlayer);
-            thrownOxygenEntity.setItem(itemStack);
-            thrownOxygenEntity.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 1.5F, 1.0F);
-            pLevel.addFreshEntity(thrownOxygenEntity);
+            if(pPlayer.isInWater()) pPlayer.setAirSupply(Math.min(pPlayer.getAirSupply() + 150, pPlayer.getMaxAirSupply()));
+            else {
+                ThrownOxygenEntity thrownOxygenEntity = new ThrownOxygenEntity(pLevel, pPlayer);
+                thrownOxygenEntity.setItem(itemStack);
+                thrownOxygenEntity.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 1.5F, 1.0F);
+                pLevel.addFreshEntity(thrownOxygenEntity);
+            }
         }
         pPlayer.awardStat(Stats.ITEM_USED.get(this));
         pPlayer.swing(pUsedHand, true);
