@@ -95,9 +95,11 @@ public class DoAsInteresting
             EntityRenderers.register(daiEntities.ELECTRIC_CHARGE_ENTITY.get(), ThrownItemRenderer::new);
             EntityRenderers.register(daiEntities.BRICK_ENTITY.get(), ThrownItemRenderer::new);
             EntityRenderers.register(daiEntities.NETHER_BRICK_ENTITY.get(), ThrownItemRenderer::new);
-            EntityRenderers.register(daiEntities.SCULK_TNT.get(), SculkTntRenderer::new);
-            EntityRenderers.register(daiEntities.ELECTROMAGNET_TNT_ENTITY.get(), ElectromagneticTntRenderer::new);
+            EntityRenderers.register(daiEntities.THROWN_HYDROGEN_ENTITY.get(), ThrownItemRenderer::new);
+            EntityRenderers.register(daiEntities.THROWN_OXYGEN_ENTITY.get(), ThrownItemRenderer::new);
             EntityRenderers.register(daiEntities.JISTGABBURASH_ENTITY.get(), ThrownItemRenderer::new);
+            EntityRenderers.register(daiEntities.SCULK_TNT_ENTITY.get(), SculkTntRenderer::new);
+            EntityRenderers.register(daiEntities.ELECTROMAGNET_TNT_ENTITY.get(), ElectromagneticTntRenderer::new);
             EntityRenderers.register(daiEntities.IRON_SHOOT_ENTITY.get(), IronShootEntityRenderer::new);
             EntityRenderers.register(daiEntities.THUNDER_WEDGE_ENTITY.get(), ThunderWedgeRender::new);
 

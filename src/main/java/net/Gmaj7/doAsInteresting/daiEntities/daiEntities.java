@@ -20,13 +20,6 @@ public class daiEntities {
                     .clientTrackingRange(4)
                     .build("explode_storage_entity"));
 
-    public static final Supplier<EntityType<SculkTntEntity>> SCULK_TNT =
-            ENTITY_TYPES.register("sculk_tnt", () -> EntityType.Builder.<SculkTntEntity>of(SculkTntEntity::new, MobCategory.MISC)
-                    .fireImmune()
-                    .sized(0.98F, 0.98F)
-                    .eyeHeight(0.15F)
-                    .clientTrackingRange(10)
-                    .build("sculk_tnt"));
 
     public static final Supplier<EntityType<JistgabburashEntity>> JISTGABBURASH_ENTITY =
             ENTITY_TYPES.register("jistgabburash_entity", () -> EntityType.Builder.<JistgabburashEntity>of(JistgabburashEntity::new, MobCategory.MISC)
@@ -45,6 +38,32 @@ public class daiEntities {
                     .sized(0.5F, 0.5F)
                     .clientTrackingRange(4)
                     .build("negative_charge_entity"));
+
+    public static final Supplier<EntityType<BrickEntity>> BRICK_ENTITY =
+            ENTITY_TYPES.register("nether_brick_entity", () -> EntityType.Builder.<BrickEntity>of(BrickEntity::new, MobCategory.MISC)
+                    .fireImmune()
+                    .sized(0.98F, 0.98F)
+                    .clientTrackingRange(4)
+                    .build("nether_brick_entity"));
+
+    public static final Supplier<EntityType<NetherBrickEntity>> NETHER_BRICK_ENTITY =
+            ENTITY_TYPES.register("brick_entity", () -> EntityType.Builder.<NetherBrickEntity>of(NetherBrickEntity::new, MobCategory.MISC)
+                    .fireImmune()
+                    .sized(0.98F, 0.98F)
+                    .clientTrackingRange(4)
+                    .build("brick_entity"));
+
+    public static final Supplier<EntityType<ThrownHydrogenEntity>> THROWN_HYDROGEN_ENTITY =
+            ENTITY_TYPES.register("thrown_hydrogen_entity", () -> EntityType.Builder.<ThrownHydrogenEntity>of(ThrownHydrogenEntity::new, MobCategory.MISC)
+                    .sized(0.98F, 0.98F)
+                    .clientTrackingRange(4)
+                    .build("thrown_hydrogen_entity"));
+
+    public static final Supplier<EntityType<ThrownOxygenEntity>> THROWN_OXYGEN_ENTITY =
+            ENTITY_TYPES.register("thrown_oxygen_entity", () -> EntityType.Builder.<ThrownOxygenEntity>of(ThrownOxygenEntity::new, MobCategory.MISC)
+                    .sized(0.98F, 0.98F)
+                    .clientTrackingRange(4)
+                    .build("thrown_oxygen_entity"));
 
     public static final Supplier<EntityType<IronShootEntity>> IRON_SHOOT_ENTITY =
             ENTITY_TYPES.register("iron_shoot_entity", () -> EntityType.Builder.<IronShootEntity>of(IronShootEntity::new, MobCategory.MISC)
@@ -66,19 +85,14 @@ public class daiEntities {
                     .clientTrackingRange(10)
                     .build("electromagnetic_tnt_entity"));
 
-    public static final Supplier<EntityType<BrickEntity>> BRICK_ENTITY =
-            ENTITY_TYPES.register("nether_brick_entity", () -> EntityType.Builder.<BrickEntity>of(BrickEntity::new, MobCategory.MISC)
+    public static final Supplier<EntityType<SculkTntEntity>> SCULK_TNT_ENTITY =
+            ENTITY_TYPES.register("sculk_tnt", () -> EntityType.Builder.<SculkTntEntity>of(SculkTntEntity::new, MobCategory.MISC)
                     .fireImmune()
                     .sized(0.98F, 0.98F)
-                    .clientTrackingRange(4)
-                    .build("nether_brick_entity"));
+                    .eyeHeight(0.15F)
+                    .clientTrackingRange(10)
+                    .build("sculk_tnt"));
 
-    public static final Supplier<EntityType<NetherBrickEntity>> NETHER_BRICK_ENTITY =
-            ENTITY_TYPES.register("brick_entity", () -> EntityType.Builder.<NetherBrickEntity>of(NetherBrickEntity::new, MobCategory.MISC)
-                    .fireImmune()
-                    .sized(0.98F, 0.98F)
-                    .clientTrackingRange(4)
-                    .build("brick_entity"));
 
 
     public static void register(IEventBus eventBus){ENTITY_TYPES.register(eventBus);}

@@ -40,7 +40,8 @@ public class daiItems {
     public static final Supplier<Item> JISTGABBURASH = DAI_ITEMS.registerItem("jistgabburash", Jistgabburash::new);
     public static final Supplier<Item> ELECTRIC_CHARGE = DAI_ITEMS.registerItem("electric_charge", ElectricCharge::new);
     public static final Supplier<Item> NEGATIVE_CHARGE = DAI_ITEMS.registerItem("negative_charge", NegativeCharge::new);
-
+    public static final Supplier<Item> HYDROGEN = DAI_ITEMS.registerItem("hydrogen", Hydrogen::new);
+    public static final Supplier<Item> OXYGEN = DAI_ITEMS.registerItem("oxygen", Oxygen::new);
     public static final Supplier<SwordItem> JISTGABBURASH_SWORD = DAI_ITEMS.register("jistgabburash_sword",
             () -> new SwordItem(daiTiers.JISTGABBURASH, new Item.Properties().attributes(SwordItem.createAttributes(daiTiers.JISTGABBURASH, 0, 6))));
     public static final Supplier<PickaxeItem> JISTGABBURASH_PICKAXE = DAI_ITEMS.register("jistgabburash_pickaxe",
@@ -58,6 +59,7 @@ public class daiItems {
             () -> new ElectromagneticBow(new Item.Properties().stacksTo(1).durability(255)));
     public static final Supplier<Item> THUNDER_SWORD = DAI_ITEMS.register("thunder_shadow_sword",
             () -> new ThunderShadowSword(new Item.Properties().stacksTo(1).attributes(ThunderShadowSword.createAttributes()).durability(255)));
+
 
     public static final Supplier<BlockItem> SCULK_TNT = DAI_ITEMS.registerSimpleBlockItem("sculk_tnt", daiBlocks.SCULK_TNT);
     public static final Supplier<BlockItem> ELECTROMAGNETIC_TNT = DAI_ITEMS.registerSimpleBlockItem("electromagnetic_tnt", daiBlocks.ELECTROMAGNETIC_TNT);

@@ -41,7 +41,7 @@ public class SculkTntEntity extends Entity implements TraceableEntity {
     }
 
     public SculkTntEntity(Level pLevel, double pX, double pY, double pZ, @Nullable LivingEntity pOwner) {
-        this(daiEntities.SCULK_TNT.get(), pLevel);
+        this(daiEntities.SCULK_TNT_ENTITY.get(), pLevel);
         this.setPos(pX, pY, pZ);
         double d0 = pLevel.random.nextDouble() * (float) (Math.PI * 2);
         this.setDeltaMovement(-Math.sin(d0) * 0.02, 0.2F, -Math.cos(d0) * 0.02);
@@ -52,7 +52,7 @@ public class SculkTntEntity extends Entity implements TraceableEntity {
         this.owner = pOwner;
     }
     public SculkTntEntity(Level pLevel) {
-        super(daiEntities.SCULK_TNT.get(), pLevel);
+        super(daiEntities.SCULK_TNT_ENTITY.get(), pLevel);
     }
 
     @Override
