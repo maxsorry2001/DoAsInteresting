@@ -14,6 +14,7 @@ import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
@@ -52,10 +53,13 @@ public class ElectricChargeEntity extends ThrowableItemProjectile {
         this.discard();
         BlockPos blockPos = pResult.getBlockPos().relative(pResult.getDirection());
         BlockState blockState = this.level().getBlockState(blockPos);
-        if(blockState.is(BlockTags.WART_BLOCKS)){
+        if((blockState.is(Blocks.WATER) || blockState.is(Blocks.WATER_CAULDRON)) && !this.isInWater()){
             ItemStack itemStack = new ItemStack(daiItems.OXYGEN.get());
             ItemEntity itemEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), itemStack);
             this.level().addFreshEntity(itemEntity);
+        }
+        else if (this.isInWater()){
+            this.discard();
         }
         else {
             ItemEntity itemEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), new ItemStack(this.getDefaultItem()));
