@@ -53,10 +53,13 @@ public class NegativeChargeEntity extends ThrowableItemProjectile {
         this.discard();
         BlockPos blockPos = pResult.getBlockPos().relative(pResult.getDirection());
         BlockState blockState = this.level().getBlockState(blockPos);
-        if(blockState.is(BlockTags.WART_BLOCKS)){
+        if(blockState.is(Blocks.WATER) || blockState.is(Blocks.WATER_CAULDRON) && !this.isInWater()){
             ItemStack itemStack = new ItemStack(daiItems.HYDROGEN.get(), 2);
             ItemEntity itemEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), itemStack);
             this.level().addFreshEntity(itemEntity);
+        }
+        else if (this.isInWater()){
+            this.discard();
         }
         else {
             ItemEntity itemEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), new ItemStack(this.getDefaultItem()));
@@ -71,6 +74,7 @@ public class NegativeChargeEntity extends ThrowableItemProjectile {
             ItemStack itemStack = new ItemStack(daiItems.HYDROGEN.get(), 2);
             ItemEntity itemEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), itemStack);
             this.level().addFreshEntity(itemEntity);
+            this.discard();
         }
     }
 }
