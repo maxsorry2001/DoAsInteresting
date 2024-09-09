@@ -30,7 +30,7 @@ public class daiArmorMaterials {
                     15,
                     SoundEvents.ARMOR_EQUIP_ELYTRA,
                     () -> Ingredient.of(Items.BLUE_ICE),
-                    List.of(new ArmorMaterial.Layer(new ResourceLocation(DoAsInteresting.MODID, "blueice"))),
+                    List.of(new ArmorMaterial.Layer(ResourceLocation.fromNamespaceAndPath(DoAsInteresting.MODID, "blueice"))),
                     0.0F,
                     0.0F));
 
@@ -45,7 +45,7 @@ public class daiArmorMaterials {
                     15,
                     SoundEvents.ARMOR_EQUIP_ELYTRA,
                     () -> Ingredient.of(Items.BRICK),
-                    List.of(new ArmorMaterial.Layer(new ResourceLocation(DoAsInteresting.MODID, "brick"))),
+                    List.of(new ArmorMaterial.Layer(ResourceLocation.fromNamespaceAndPath(DoAsInteresting.MODID, "brick"))),
                     0.0F,
                     5.0F));
 
@@ -60,7 +60,7 @@ public class daiArmorMaterials {
                     20,
                     SoundEvents.ARMOR_EQUIP_ELYTRA,
                     () -> Ingredient.of(Items.NETHER_BRICK),
-                    List.of(new ArmorMaterial.Layer(new ResourceLocation(DoAsInteresting.MODID, "nether_brick"))),
+                    List.of(new ArmorMaterial.Layer(ResourceLocation.fromNamespaceAndPath(DoAsInteresting.MODID, "nether_brick"))),
                     2.0F,
                     10.0F));
 

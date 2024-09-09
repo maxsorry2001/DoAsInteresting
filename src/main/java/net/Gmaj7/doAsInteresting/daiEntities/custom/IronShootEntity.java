@@ -32,11 +32,14 @@ public class IronShootEntity extends AbstractArrow {
     }
 
     public IronShootEntity(Level pLevel,LivingEntity pOwner ,ItemStack pItemStack){
-        super(daiEntities.IRON_SHOOT_ENTITY.get(), pOwner, pLevel, pItemStack);
+        super(daiEntities.IRON_SHOOT_ENTITY.get(), pLevel);
         this.setShootItem(pItemStack);
+        this.setOwner(pOwner);
     }
     public IronShootEntity(LivingEntity pOwner, Level pLevel) {
-        super(daiEntities.IRON_SHOOT_ENTITY.get(), pOwner, pLevel, new ItemStack(Items.IRON_INGOT));
+        super(daiEntities.IRON_SHOOT_ENTITY.get(), pLevel);
+        this.setShootItem(new ItemStack(Items.IRON_INGOT));
+        this.setOwner(pOwner);
     }
 
     @Override

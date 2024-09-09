@@ -23,8 +23,9 @@ public class ThunderWedgeEntity extends AbstractArrow {
         super(daiEntities.THUNDER_WEDGE_ENTITY.get(), pLevel);
     }
     public ThunderWedgeEntity(Level pLevel, LivingEntity pOwner, ItemStack pPickupItemStack) {
-        super(daiEntities.THUNDER_WEDGE_ENTITY.get(), pOwner, pLevel, pPickupItemStack);
+        super(daiEntities.THUNDER_WEDGE_ENTITY.get(), pLevel);
         this.setFromItem(pPickupItemStack);
+        this.setOwner(pOwner);
     }
 
     @Override

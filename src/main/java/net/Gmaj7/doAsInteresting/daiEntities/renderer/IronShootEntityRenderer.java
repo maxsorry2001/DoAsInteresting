@@ -21,7 +21,7 @@ public class IronShootEntityRenderer extends EntityRenderer<IronShootEntity> {
 
     @Override
     public ResourceLocation getTextureLocation(IronShootEntity pEntity) {
-        return new ResourceLocation(DoAsInteresting.MODID, "textures/entity/iron_shoot_entity.png");
+        return ResourceLocation.fromNamespaceAndPath(DoAsInteresting.MODID, "textures/entity/iron_shoot_entity.png");
     }
 
     @Override

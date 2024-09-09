@@ -56,58 +56,5 @@ public class DoAsInterestingTabs {
 
                         pOutput.accept(daiBlocks.SCULK_TNT.get());
                         pOutput.accept(daiBlocks.ELECTROMAGNETIC_TNT.get());
-
-
-                        Set<TagKey<Item>> set = Set.of(
-                                daiTags.daiItemTags.CHEST_ARMOR_ENCHANTABLE,
-                                daiTags.daiItemTags.SHIELD_ENCHANTABLE,
-                                daiTags.daiItemTags.TOTEM_ENCHANTABLE,
-                                daiTags.daiItemTags.BOW_ENCHANTABLE,
-                                daiTags.daiItemTags.FLYING_SHADOWS_ENCHANTABLE
-                        );
-                        pParameters.holders()
-                                .lookup(Registries.ENCHANTMENT)
-                                .ifPresent(
-                                        p -> {
-                                            generateEnchantmentBookTypesOnlyMaxLevel(
-                                                    pOutput, p, set, CreativeModeTab.TabVisibility.PARENT_TAB_ONLY, pParameters.enabledFeatures()
-                                            );
-                                            generateEnchantmentBookTypesAllLevels(
-                                                    pOutput, p, set, CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY, pParameters.enabledFeatures()
-                                            );
-                                        }
-                                );
                     }).build());
-    private static void generateEnchantmentBookTypesOnlyMaxLevel(
-            CreativeModeTab.Output pOutput,
-            HolderLookup<Enchantment> pEnchantments,
-            Set<TagKey<Item>> pItems,
-            CreativeModeTab.TabVisibility pTabVisibility,
-            FeatureFlagSet pRequiredFeatures
-    ) {
-        pEnchantments.listElements()
-                .map(Holder::value)
-                .filter(p_337914_ -> p_337914_.isEnabled(pRequiredFeatures))
-                .filter(p_270008_ -> p_270008_.allowedInCreativeTab(Items.ENCHANTED_BOOK, pItems))
-                .map(p_270038_ -> EnchantedBookItem.createForEnchantment(new EnchantmentInstance(p_270038_, p_270038_.getMaxLevel())))
-                .forEach(p_269989_ -> pOutput.accept(p_269989_, pTabVisibility));
-    }
-
-    private static void generateEnchantmentBookTypesAllLevels(
-            CreativeModeTab.Output p_270961_,
-            HolderLookup<Enchantment> pEnchantments,
-            Set<TagKey<Item>> pItems,
-            CreativeModeTab.TabVisibility pTabVisibility,
-            FeatureFlagSet pRequiredFeatures
-    ) {
-        pEnchantments.listElements()
-                .map(Holder::value)
-                .filter(p_337930_ -> p_337930_.isEnabled(pRequiredFeatures))
-                .filter(p_269991_ -> p_269991_.allowedInCreativeTab(Items.ENCHANTED_BOOK, pItems))
-                .flatMap(
-                        p_270024_ -> IntStream.rangeClosed(p_270024_.getMinLevel(), p_270024_.getMaxLevel())
-                                .mapToObj(p_270006_ -> EnchantedBookItem.createForEnchantment(new EnchantmentInstance(p_270024_, p_270006_)))
-                )
-                .forEach(p_270017_ -> p_270961_.accept(p_270017_, pTabVisibility));
-    }
 }

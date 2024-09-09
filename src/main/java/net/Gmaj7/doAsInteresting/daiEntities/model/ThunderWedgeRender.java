@@ -13,6 +13,6 @@ public class ThunderWedgeRender extends ArrowRenderer<AbstractArrow> {
 
     @Override
     public ResourceLocation getTextureLocation(AbstractArrow pEntity) {
-        return new ResourceLocation(DoAsInteresting.MODID, "textures/entity/thunder_wedge.png");
+        return ResourceLocation.fromNamespaceAndPath(DoAsInteresting.MODID, "textures/entity/thunder_wedge.png");
     }
 }

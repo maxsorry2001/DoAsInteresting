@@ -16,7 +16,7 @@ import net.minecraft.world.entity.Entity;
 
 public class IronShootEntityModel<T extends Entity> extends EntityModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(DoAsInteresting.MODID, "iron_shoot_entity"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(DoAsInteresting.MODID, "iron_shoot_entity"), "main");
 	private final ModelPart bone;
 
 	public IronShootEntityModel(ModelPart root) {
@@ -55,7 +55,7 @@ public class IronShootEntityModel<T extends Entity> extends EntityModel<T> {
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		bone.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int pColor) {
+		bone.render(poseStack, vertexConsumer, packedLight, packedOverlay, pColor);
 	}
 }

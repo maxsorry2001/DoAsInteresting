@@ -18,7 +18,7 @@ public class daiTags {
         public static final TagKey<Item> CAN_SHOOT_IRON = create("item/can_shoot_iron");
 
         public static TagKey<Item> create(String name) {
-            return ItemTags.create(new ResourceLocation(DoAsInteresting.MODID, name));
+            return ItemTags.create(ResourceLocation.fromNamespaceAndPath(DoAsInteresting.MODID, name));
         }
     }
 
@@ -26,7 +26,7 @@ public class daiTags {
         public static final TagKey<Block> JISTGABBURASH_CANT_BREAK = creat("tier/jistgabburash_cant_break");
         public static final TagKey<Block> ELECTROMAGNETIC_BREAK = creat("electromagnetic_break");
         public static TagKey<Block> creat(String name) {
-            return BlockTags.create(new ResourceLocation(DoAsInteresting.MODID, name));
+            return BlockTags.create(ResourceLocation.fromNamespaceAndPath(DoAsInteresting.MODID, name));
         }
     }
 }
