@@ -3,6 +3,7 @@ package net.Gmaj7.doAsInteresting.eventDispose;
 import net.Gmaj7.doAsInteresting.daiEnchantments.daiEnchantments;
 import net.Gmaj7.doAsInteresting.daiInit.daiAttachmentTypes;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -28,7 +29,7 @@ public class EntityDispose {
     public static void TotemDeal(LivingUseTotemEvent event){
         LivingEntity livingEntity = event.getEntity();
         ItemStack totem = event.getTotem();
-        if(livingEntity instanceof Player && totem.getEnchantmentLevel(daiEnchantments.PLUNDER.get()) > 0){
+        if(livingEntity instanceof Player && totem.getEnchantmentLevel(livingEntity.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(daiEnchantments.PLUNDER)) > 0){
             totem.shrink(1);
             BlockPos blockPosLeft = new BlockPos(livingEntity.getBlockX(), livingEntity.getBlockY(), livingEntity.getBlockZ());
             BlockPos blockPosRight = new BlockPos(livingEntity.getBlockX() + 1, livingEntity.getBlockY(), livingEntity.getBlockZ());

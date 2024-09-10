@@ -7,6 +7,7 @@ import net.Gmaj7.doAsInteresting.daiEntities.custom.BrickEntity;
 import net.Gmaj7.doAsInteresting.daiEntities.custom.NetherBrickEntity;
 import net.Gmaj7.doAsInteresting.daiInit.daiArmorMaterials;
 import net.Gmaj7.doAsInteresting.daiInit.daiTiers;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -33,13 +34,13 @@ public class DamageDispose {
     }
 
     @SubscribeEvent
-    public static void damageDeal(LivingDamageEvent event){
+    public static void damageDeal(LivingDamageEvent.Pre event){
         DamageSource damageSource = event.getSource();
         LivingEntity target = event.getEntity();
         Entity source = damageSource.getEntity();
         if(!target.level().isClientSide()){
-            if(damageSource.is(DamageTypeTags.IS_EXPLOSION) && target.getItemBySlot(EquipmentSlot.CHEST).getEnchantmentLevel(daiEnchantments.EXPLOSION_GET.get()) > 0)
-                event.setCanceled(true);
+            if(damageSource.is(DamageTypeTags.IS_EXPLOSION) && target.getItemBySlot(EquipmentSlot.CHEST).getEnchantmentLevel(source.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(daiEnchantments.EXPLOSION_GET)) > 0)
+                event.setNewDamage(0);
             EquipmentSlot[] equipmentSlot = {EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET};
             int count = 0, nether_count = 0;
             for (int i = 0; i < equipmentSlot.length; i++){

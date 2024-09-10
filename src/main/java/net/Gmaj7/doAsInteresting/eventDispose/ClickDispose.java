@@ -45,7 +45,7 @@ public class ClickDispose {
         Player player = event.getEntity();
         Entity target = event.getTarget();
         for (InteractionHand hand : InteractionHand.values()){
-            int i = player.getItemInHand(hand).getEnchantmentLevel(daiEnchantments.SHIELD_STRIKE.get());
+            int i = player.getItemInHand(hand).getEnchantmentLevel(player.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(daiEnchantments.SHIELD_STRIKE));
             if(i > 0 && !player.getCooldowns().isOnCooldown(player.getItemInHand(hand).getItem())){
                 if(target instanceof LivingEntity){
                     List<LivingEntity> list = target.level().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(1, 1, 1));
@@ -68,7 +68,7 @@ public class ClickDispose {
         Player player = event.getEntity();
         BlockEntity blockEntity = player.level().getBlockEntity(event.getHitVec().getBlockPos());
         EntityDispose.totemChestSummon(player, blockEntity);
-        if(EnchantmentHelper.getEnchantmentLevel(daiEnchantments.ELECTRIFICATION_BY_FRICTION.get(), player) > 0 && event.getHand() == InteractionHand.MAIN_HAND && player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty()){
+        if(EnchantmentHelper.getEnchantmentLevel(player.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(daiEnchantments.ELECTRIFICATION_BY_FRICTION), player) > 0 && event.getHand() == InteractionHand.MAIN_HAND && player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty()){
             if(player.level().isClientSide())
                 player.swing(InteractionHand.MAIN_HAND);
             else {
@@ -87,9 +87,9 @@ public class ClickDispose {
     @SubscribeEvent
     public static void RightClickItem(PlayerInteractEvent.RightClickItem event){
         Player player = event.getEntity();
-        if (player.getItemInHand(event.getHand()).is(Items.GOLDEN_SWORD) && EnchantmentHelper.getEnchantmentLevel(daiEnchantments.ELECTRIFICATION_BY_FRICTION.get(), player) > 0 && !event.getLevel().isClientSide()){
+        if (player.getItemInHand(event.getHand()).is(Items.GOLDEN_SWORD) && EnchantmentHelper.getEnchantmentLevel(player.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(daiEnchantments.ELECTRIFICATION_BY_FRICTION), player) > 0 && !event.getLevel().isClientSide()){
             ItemStack itemStack = new ItemStack(daiItems.THUNDER_SWORD.get());
-            EnchantmentHelper.setEnchantments(itemStack, player.getItemInHand(event.getHand()).getAllEnchantments());
+            EnchantmentHelper.setEnchantments(itemStack, player.getItemInHand(event.getHand()).getAllEnchantments(player.registryAccess().lookupOrThrow(Registries.ENCHANTMENT)));
             player.setItemInHand(event.getHand(), itemStack);
             player.swing(event.getHand());
         }
@@ -97,11 +97,11 @@ public class ClickDispose {
             ItemStack itemStack = player.getItemInHand(event.getHand()).copy();
             itemStack.setCount(1);
             BrickEntity brickEntity = new BrickEntity(player, player.level(), itemStack);
-            int i = player.getItemInHand(event.getHand()).getEnchantmentLevel(Enchantments.PUNCH);
+            int i = player.getItemInHand(event.getHand()).getEnchantmentLevel(player.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.PUNCH));
             if(i > 0) brickEntity.setPunch(i);
-            int j = player.getItemInHand(event.getHand()).getEnchantmentLevel(Enchantments.PIERCING);
+            int j = player.getItemInHand(event.getHand()).getEnchantmentLevel(player.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.PIERCING));
             if(j > 0) brickEntity.setPiercing(j);
-            int k = player.getItemInHand(event.getHand()).getEnchantmentLevel(Enchantments.POWER);
+            int k = player.getItemInHand(event.getHand()).getEnchantmentLevel(player.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.POWER));
             if(j > 0) brickEntity.setHitDamage(k);
             brickEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 1.0F, 0.1F);
             player.level().addFreshEntity(brickEntity);
@@ -113,11 +113,11 @@ public class ClickDispose {
             ItemStack itemStack = player.getItemInHand(event.getHand()).copy();
             itemStack.setCount(1);
             NetherBrickEntity brickEntity = new NetherBrickEntity(player, player.level(), itemStack);
-            int i = player.getItemInHand(event.getHand()).getEnchantmentLevel(Enchantments.PUNCH);
+            int i = player.getItemInHand(event.getHand()).getEnchantmentLevel(player.level().registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.PUNCH));
             if(i > 0) brickEntity.setPunch(i);
-            int j = player.getItemInHand(event.getHand()).getEnchantmentLevel(Enchantments.PIERCING);
+            int j = player.getItemInHand(event.getHand()).getEnchantmentLevel(player.level().registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.PIERCING));
             if(j > 0) brickEntity.setPiercing(j);
-            int k = player.getItemInHand(event.getHand()).getEnchantmentLevel(Enchantments.POWER);
+            int k = player.getItemInHand(event.getHand()).getEnchantmentLevel(player.level().registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.POWER));
             if(j > 0) brickEntity.setHitDamage(k);
             brickEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 1.5F, 0.1F);
             player.level().addFreshEntity(brickEntity);

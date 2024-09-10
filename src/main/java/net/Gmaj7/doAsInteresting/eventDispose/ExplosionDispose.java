@@ -4,6 +4,7 @@ import net.Gmaj7.doAsInteresting.DoAsInteresting;
 import net.Gmaj7.doAsInteresting.daiEnchantments.daiEnchantments;
 import net.Gmaj7.doAsInteresting.daiInit.daiDataComponentTypes;
 import net.Gmaj7.doAsInteresting.daiItems.daiItems;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -28,7 +29,7 @@ public class ExplosionDispose {
         List<Player> list = start.getLevel().getEntitiesOfClass(Player.class, new AABB(new Vec3(vec3.x() - radius * 2 , vec3.y() - radius * 2, vec3.z() - radius * 2), new Vec3(vec3.x() + radius * 2, vec3.y() + radius * 2, vec3.z() + radius * 2)));
         if(!list.isEmpty()){
             for (Player player : list){
-                if(player.getItemBySlot(EquipmentSlot.CHEST).getEnchantmentLevel(daiEnchantments.EXPLOSION_GET.get()) > 0
+                if(player.getItemBySlot(EquipmentSlot.CHEST).getEnchantmentLevel(player.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(daiEnchantments.EXPLOSION_GET)) > 0
                     && Math.sqrt(Math.pow((player.getX() - vec3.x()), 2) + Math.pow((player.getY() - vec3.y()), 2) + Math.pow((player.getZ() - vec3.z()), 2)) < radius * 2
                     && !player.isShiftKeyDown()) {
                     ItemStack itemStack = new ItemStack(daiItems.EXPLOSION_STORAGE.get());

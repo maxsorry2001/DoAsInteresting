@@ -29,7 +29,7 @@ public class IronShootEntityRenderer extends EntityRenderer<IronShootEntity> {
         super.render(pEntity, pEntityYaw, pPartialTicks, pPoseStack, pBuffer, pPackedLight);
         pPoseStack.pushPose();
         VertexConsumer buffer = pBuffer.getBuffer(this.ironShootEntityModel.renderType(this.getTextureLocation(pEntity)));
-        this.ironShootEntityModel.renderToBuffer(pPoseStack, buffer, pPackedLight, OverlayTexture.NO_OVERLAY, 1F, 1F, 1F, 1F);
+        this.ironShootEntityModel.renderToBuffer(pPoseStack, buffer, pPackedLight, OverlayTexture.NO_OVERLAY, 88263371);
         pPoseStack.popPose();
     }
 }

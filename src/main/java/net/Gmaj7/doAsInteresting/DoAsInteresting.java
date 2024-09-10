@@ -50,7 +50,6 @@ public class DoAsInteresting
         daiBlocks.DAI_BLOCKS.register(modEventBus);
         DoAsInterestingTabs.DAI_CREATIVE_MODE_TABS.register(modEventBus);
         daiEntities.register(modEventBus);
-        daiEnchantments.register(modEventBus);
         daiMobEffects.register(modEventBus);
         daiAttachmentTypes.register(modEventBus);
         daiDataComponentTypes.register(modEventBus);
