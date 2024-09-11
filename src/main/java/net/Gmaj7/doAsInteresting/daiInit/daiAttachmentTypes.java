@@ -18,5 +18,8 @@ public class daiAttachmentTypes {
     public static final Supplier<AttachmentType<Float>> TEMPERATURE = DAI_ATTCHMENT_TYPE.register("temperature",
             () -> AttachmentType.builder(() -> 1.0F).serialize(Codec.FLOAT).build());
 
+    public static final Supplier<AttachmentType<Integer>> FISSION_ARROW = DAI_ATTCHMENT_TYPE.register("fission_arrow",
+            () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build());
+
     public static void register(IEventBus eventBus){DAI_ATTCHMENT_TYPE.register(eventBus);}
 }
