@@ -29,5 +29,8 @@ public class daiDataComponentTypes {
     public static final Supplier<DataComponentType<Integer>> CANNOT_SHOOT = DAI_DATA_COMPONENT_TYPE.register("can_shoot",
             () -> DataComponentType.<Integer>builder().persistent(Codec.INT).build());
 
+    public static final Supplier<DataComponentType<Integer>> HEAT_BY_FRICTION = DAI_DATA_COMPONENT_TYPE.register("heat_by_briction",
+            () -> DataComponentType.<Integer>builder().persistent(Codec.INT).build());
+
     public static void register(IEventBus eventBus){DAI_DATA_COMPONENT_TYPE.register(eventBus);}
 }

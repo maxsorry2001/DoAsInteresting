@@ -5,6 +5,7 @@ import net.Gmaj7.doAsInteresting.daiEffects.daiMobEffects;
 import net.Gmaj7.doAsInteresting.daiEnchantments.daiEnchantments;
 import net.Gmaj7.doAsInteresting.daiEntities.custom.BrickEntity;
 import net.Gmaj7.doAsInteresting.daiEntities.custom.NetherBrickEntity;
+import net.Gmaj7.doAsInteresting.daiInit.daiDataComponentTypes;
 import net.Gmaj7.doAsInteresting.daiInit.daiTiers;
 import net.Gmaj7.doAsInteresting.daiItems.daiItems;
 import net.minecraft.core.BlockPos;
@@ -87,13 +88,16 @@ public class ClickDispose {
     @SubscribeEvent
     public static void RightClickItem(PlayerInteractEvent.RightClickItem event){
         Player player = event.getEntity();
-        if (player.getItemInHand(event.getHand()).is(Items.GOLDEN_SWORD) && EnchantmentHelper.getEnchantmentLevel(player.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(daiEnchantments.ELECTRIFICATION_BY_FRICTION), player) > 0 && !event.getLevel().isClientSide()){
+        ItemStack itemStackHand = player.getItemInHand(event.getHand());
+        if (itemStackHand.is(Items.GOLDEN_SWORD) && EnchantmentHelper.getEnchantmentLevel(player.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(daiEnchantments.ELECTRIFICATION_BY_FRICTION), player) > 0 && !event.getLevel().isClientSide()){
             ItemStack itemStack = new ItemStack(daiItems.THUNDER_SWORD.get());
             EnchantmentHelper.setEnchantments(itemStack, player.getItemInHand(event.getHand()).getAllEnchantments(player.registryAccess().lookupOrThrow(Registries.ENCHANTMENT)));
             player.setItemInHand(event.getHand(), itemStack);
             player.swing(event.getHand());
         }
-        if (player.getItemInHand(event.getHand()).is(Items.BRICK)){
+        if (itemStackHand.getEnchantmentLevel(player.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(daiEnchantments.HEAT_BY_FRICTION)) > 0)
+            itemStackHand.set(daiDataComponentTypes.HEAT_BY_FRICTION.get(), 300);
+        if (itemStackHand.is(Items.BRICK)){
             ItemStack itemStack = player.getItemInHand(event.getHand()).copy();
             itemStack.setCount(1);
             BrickEntity brickEntity = new BrickEntity(player, player.level(), itemStack);
@@ -109,7 +113,7 @@ public class ClickDispose {
             player.swing(event.getHand());
             player.level().playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.EGG_THROW, SoundSource.PLAYERS);
         }
-        if (player.getItemInHand(event.getHand()).is(Items.NETHER_BRICK)){
+        if (itemStackHand.is(Items.NETHER_BRICK)){
             ItemStack itemStack = player.getItemInHand(event.getHand()).copy();
             itemStack.setCount(1);
             NetherBrickEntity brickEntity = new NetherBrickEntity(player, player.level(), itemStack);

@@ -6,6 +6,7 @@
   "refmap": "doAsInteresting.refmap.json",
   "mixins": [
     "AbstractArrowMixin",
+    "ItemMixin",
     "LivingEntityMixin",
     "ProjectileWeaponItemMixin",
     "VillagerMixin"
