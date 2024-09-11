@@ -6,6 +6,7 @@ import net.Gmaj7.doAsInteresting.daiEnchantments.daiEnchantments;
 import net.Gmaj7.doAsInteresting.daiEntities.custom.BrickEntity;
 import net.Gmaj7.doAsInteresting.daiEntities.custom.NetherBrickEntity;
 import net.Gmaj7.doAsInteresting.daiInit.daiArmorMaterials;
+import net.Gmaj7.doAsInteresting.daiInit.daiDataComponentTypes;
 import net.Gmaj7.doAsInteresting.daiInit.daiTiers;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.DamageTypeTags;
@@ -29,17 +30,22 @@ public class DamageDispose {
         DamageSource damageSource = event.getSource();
         LivingEntity target = event.getEntity();
         Entity source = damageSource.getEntity();
-        if(!target.level().isClientSide()){if(source instanceof LivingEntity && ((LivingEntity) source).getMainHandItem().getItem() instanceof TieredItem && ((TieredItem) ((LivingEntity) source).getMainHandItem().getItem()).getTier() == daiTiers.JISTGABBURASH)
-            target.addEffect(new MobEffectInstance(daiMobEffects.IIIIII, 300));
-            if(damageSource.is(DamageTypeTags.IS_EXPLOSION) && target.getItemBySlot(EquipmentSlot.CHEST).getEnchantmentLevel(source.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(daiEnchantments.EXPLOSION_GET)) > 0)
+        Entity direct = damageSource.getDirectEntity();
+        if(!target.level().isClientSide()){
+            if(source instanceof LivingEntity && ((LivingEntity) source).getMainHandItem().getItem() instanceof TieredItem && ((TieredItem) ((LivingEntity) source).getMainHandItem().getItem()).getTier() == daiTiers.JISTGABBURASH)
+                target.addEffect(new MobEffectInstance(daiMobEffects.IIIIII, 300));
+            if(damageSource.is(DamageTypeTags.IS_EXPLOSION) && target.getItemBySlot(EquipmentSlot.CHEST).getEnchantmentLevel(target.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(daiEnchantments.EXPLOSION_GET)) > 0)
                 event.setNewDamage(0);
+            if(source instanceof LivingEntity && direct == source && ((LivingEntity) source).getMainHandItem().has(daiDataComponentTypes.HEAT_BY_FRICTION)){
+                event.setNewDamage(event.getOriginalDamage() * 1.5F);
+            }
             EquipmentSlot[] equipmentSlot = {EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET};
             int count = 0, nether_count = 0;
-            for (int i = 0; i < equipmentSlot.length; i++){
-                if (target.getItemBySlot(equipmentSlot[i]).getItem() instanceof ArmorItem armorItem && armorItem.getMaterial().is(daiArmorMaterials.BRICK))
-                    count ++ ;
-                if (target.getItemBySlot(equipmentSlot[i]).getItem() instanceof ArmorItem armorItem && armorItem.getMaterial().is(daiArmorMaterials.NETHER_BRICK))
-                    nether_count ++ ;
+            for (EquipmentSlot slot : equipmentSlot) {
+                if (target.getItemBySlot(slot).getItem() instanceof ArmorItem armorItem && armorItem.getMaterial().is(daiArmorMaterials.BRICK))
+                    count++;
+                if (target.getItemBySlot(slot).getItem() instanceof ArmorItem armorItem && armorItem.getMaterial().is(daiArmorMaterials.NETHER_BRICK))
+                    nether_count++;
             }
             if (source != null) {
                 if(count > 0){

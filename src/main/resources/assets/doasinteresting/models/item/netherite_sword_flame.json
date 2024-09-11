@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "doasinteresting:item/netherite_sword_flame"
+  }
+}

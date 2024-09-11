@@ -2,14 +2,14 @@ package net.Gmaj7.doAsInteresting.eventDispose;
 
 import net.Gmaj7.doAsInteresting.DoAsInteresting;
 import net.Gmaj7.doAsInteresting.daiEffects.daiMobEffects;
+import net.Gmaj7.doAsInteresting.daiInit.daiDataComponentTypes;
 import net.Gmaj7.doAsInteresting.daiItems.daiItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
@@ -60,6 +60,12 @@ public class TickDispose {
         }
         if(itemStack.is(Items.NETHER_BRICK)){
             event.getToolTip().add(Component.translatable("you_know_damage_and_from_nether"));
+        }
+        if(itemStack.has(daiDataComponentTypes.HEAT_BY_FRICTION) && itemStack.getItem() instanceof TieredItem){
+            TieredItem item = (TieredItem) itemStack.getItem();
+            if(item.getTier() == Tiers.WOOD || item.getTier() == Tiers.DIAMOND)
+                event.getToolTip().add(Component.translatable("quick_use"));
+            else event.getToolTip().add(Component.translatable("high temperature"));
         }
     }
 

@@ -4,12 +4,19 @@ import net.Gmaj7.doAsInteresting.daiItems.daiItems;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 
 public class daiItemProperties {
     public static void addCustomItemProperties(){
         makeBow(daiItems.GRAVITATION_BOW.get());
         makeBow(daiItems.ELECTROMAGNETIC_BOW.get());
         makeThunderSword(daiItems.THUNDER_SWORD.get());
+        makeFlame(Items.WOODEN_SWORD);
+        makeFlame(Items.STONE_SWORD);
+        makeFlame(Items.IRON_SWORD);
+        makeFlame(Items.GOLDEN_SWORD);
+        makeFlame(Items.DIAMOND_SWORD);
+        makeFlame(Items.NETHERITE_SWORD);
     }
 
     private static void makeBow(Item item){
@@ -33,5 +40,11 @@ public class daiItemProperties {
         ItemProperties.register(item, ResourceLocation.parse("block_pos"), (pStack, pLevel, pEntity, pSeed) -> {
             return pStack.has(daiDataComponentTypes.BLOCKPOS) ? 1.0F : 0.0F;
         });
+    }
+
+    private static void makeFlame(Item item){
+        ItemProperties.register(item, ResourceLocation.parse("flame"), ((pStack, pLevel, pEntity, pSeed) -> {
+            return pStack.has(daiDataComponentTypes.HEAT_BY_FRICTION) ? 1.0F : 0.0F;
+        }));
     }
 }

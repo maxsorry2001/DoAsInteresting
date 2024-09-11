@@ -29,8 +29,9 @@
   "item.doasinteresting.nether_brick_leggings": "nether brick leggings",
   "item.doasinteresting.nether_brick_boots": "nether brick boots",
   "item.doasinteresting.edible_flint_and_steel": "Edible Flint and Steel",
-  "item.doasinteresting.hydrogen": "Hydrogen",
-  "item.doasinteresting.oxygen": "Oxygen",
+  "item.doasinteresting.hydrogen": "hydrogen",
+  "item.doasinteresting.oxygen": "oxygen",
+  "item.doasinteresting.carbon_dioxide": "carbon dioxide",
 
   "effect.doasinteresting.iiiiiii": "ÌÌÌÌÌÌÌÌÌÌÌÌÌÌ",
   "effect.doasinteresting.electric_charge": "electric charge",
@@ -52,6 +53,7 @@
   "enchantment.doasinteresting.electrification_by_friction" : "electrification by friction",
   "enchantment.doasinteresting.fission" : "fission",
   "enchantment.doasinteresting.flying_shadows" : "flying_shadows",
+  "enchantment.doasinteresting.heat_by_friction": "heat by friction",
 
   "death.attack.dai_radiation" : "%1$s is festering from the radiation",
   "death.attack.dai_radiation.player" : "%1$s is festering from the radiation which is made by %s$2",
@@ -60,5 +62,7 @@
 
   "you_know_damage": "You know the damage of it",
   "you_know_damage_and_from_nether": "You know the damage of it, and it come from The Nether now",
-  "edible_flint_and_steel_message": "It seem to be more delicious with the sweet berries"
+  "edible_flint_and_steel_message": "It seem to be more delicious with the sweet berries",
+  "quick_use": "It will be burn out in few seconds",
+  "high temperature": "It has a high temperature"
 }
