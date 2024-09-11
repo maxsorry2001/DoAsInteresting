@@ -2,6 +2,7 @@ package net.Gmaj7.doAsInteresting.daiItems.custom;
 
 import net.Gmaj7.doAsInteresting.daiEntities.custom.IronShootEntity;
 import net.Gmaj7.doAsInteresting.daiInit.daiSerchItem;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
@@ -29,21 +30,21 @@ public class ElectromagneticBow extends Item {
             itemStack1.setCount(1);
             itemStack.shrink(1);
             IronShootEntity ironShootEntity = new IronShootEntity(pLevel, pLivingEntity, itemStack1);
-            int k = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER, pStack);
+            int k = EnchantmentHelper.getItemEnchantmentLevel(pLevel.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.POWER), pStack);
             if (k > 0) {
                 ironShootEntity.setBaseDamage(ironShootEntity.getBaseDamage() + (double)k * 0.5 + 0.5);
             }
 
-            int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PUNCH, pStack);
+            int i = EnchantmentHelper.getItemEnchantmentLevel(pLevel.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.PUNCH), pStack);
             if (i > 0) {
                 ironShootEntity.setKnockback(i);
             }
 
-            if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FLAME, pStack) > 0) {
+            if (EnchantmentHelper.getItemEnchantmentLevel(pLevel.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.FLAME), pStack) > 0) {
                 ironShootEntity.igniteForSeconds(100);
             }
 
-            int j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PIERCING, pStack);
+            int j = EnchantmentHelper.getItemEnchantmentLevel(pLevel.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.PIERCING), pStack);
             if (j > 0) {
                 ironShootEntity.setPierceLevel((byte)j);
             }
