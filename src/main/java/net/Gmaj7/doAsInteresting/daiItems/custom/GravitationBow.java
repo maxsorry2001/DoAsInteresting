@@ -10,6 +10,7 @@ import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
@@ -34,12 +35,12 @@ public class GravitationBow extends Item {
             for(Entity target : list){
                 if(target == pPlayer) continue;
                 Vec3 vec3 = new Vec3(target.getX() - pPlayer.getX(), target.getY() - pPlayer.getY(), target.getZ() - pPlayer.getZ()).normalize();
-                int i = this.getUseDuration(pStack) - pTimeCharged;
-                float f = getPowerForTime(i) + pStack.getEnchantmentLevel(Enchantments.PUNCH);
+                int i = this.getUseDuration(pStack, pLivingEntity) - pTimeCharged;
+                float f = getPowerForTime(i) + pStack.getEnchantmentLevel(pLevel.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.PUNCH));
                 target.setDeltaMovement(vec3.x() * 5 * f, vec3.y() * 5 * f, vec3.z() * 5 * f);
-                int k = pStack.getEnchantmentLevel(Enchantments.FIRE_ASPECT);
+                int k = pStack.getEnchantmentLevel(pLevel.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.FLAME));
                 if(k > 0 && target instanceof LivingEntity) target.igniteForSeconds(k * 5);
-                int j = pStack.getEnchantmentLevel(Enchantments.POWER);
+                int j = pStack.getEnchantmentLevel(pLevel.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.POWER));
                 if(j > 0) target.hurt(new DamageSource(pLevel.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.PLAYER_ATTACK), pPlayer), j);
                 pStack.hurtAndBreak(1, pPlayer, Player.getSlotForHand(pPlayer.getUsedItemHand()));
             }
@@ -49,18 +50,12 @@ public class GravitationBow extends Item {
     }
 
     @Override
-    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        return enchantment == Enchantments.POWER || enchantment == Enchantments.PUNCH
-                || enchantment == Enchantments.FIRE_ASPECT;
-    }
-
-    @Override
     public UseAnim getUseAnimation(ItemStack pStack) {
         return UseAnim.BOW;
     }
 
     @Override
-    public int getUseDuration(ItemStack pStack) {
+    public int getUseDuration(ItemStack pStack, LivingEntity pEntity) {
         return 72000;
     }
 

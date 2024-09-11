@@ -7,6 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -66,7 +67,6 @@ public class ThunderShadowSword extends Item {
             else if(!itemStack.has(daiDataComponentTypes.BLOCKPOS) && !itemStack.has(daiDataComponentTypes.CANNOT_SHOOT)){
                 ThunderWedgeEntity thunderWedgeEntity = new ThunderWedgeEntity(pLevel, pPlayer, itemStack);
                 thunderWedgeEntity.pickup = AbstractArrow.Pickup.DISALLOWED;
-                thunderWedgeEntity.setPierceLevel((byte) 20);
                 thunderWedgeEntity.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0, 2.0F, 0.1F);
                 pLevel.addFreshEntity(thunderWedgeEntity);
                 itemStack.set(daiDataComponentTypes.CANNOT_SHOOT, 1);
@@ -74,7 +74,7 @@ public class ThunderShadowSword extends Item {
             }
             else if(itemStack.has(daiDataComponentTypes.BLOCKPOS)){
                 BlockPos blockPos = itemStack.get(daiDataComponentTypes.BLOCKPOS);
-                if(itemStack.get(daiDataComponentTypes.CANNOT_SHOOT) > itemStack.getEnchantmentLevel(daiEnchantments.FLYING_SHADOWS.get())){
+                if(itemStack.get(daiDataComponentTypes.CANNOT_SHOOT) > itemStack.getEnchantmentLevel(pLevel.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(daiEnchantments.FLYING_SHADOWS))){
                     itemStack.remove(daiDataComponentTypes.CANNOT_SHOOT);
                     itemStack.remove(daiDataComponentTypes.BLOCKPOS);
                 }
@@ -93,9 +93,9 @@ public class ThunderShadowSword extends Item {
                 for (LivingEntity target : list){
                     if(target == pPlayer) continue;
                     target.knockback(2, blockPos.getX() - target.getX(), blockPos.getZ() - target.getZ());
-                    target.hurt(new DamageSource(pLevel.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.LIGHTNING_BOLT), pPlayer), 8 + EnchantmentHelper.getDamageBonus(itemStack, pPlayer.getType()));
-                    EnchantmentHelper.doPostDamageEffects(pPlayer, target);
-                    EnchantmentHelper.doPostHurtEffects(pPlayer, target);
+                    DamageSource damageSource = new DamageSource(pLevel.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.LIGHTNING_BOLT), pPlayer);
+                    target.hurt(damageSource, this.getDamage(itemStack) + this.getAttackDamageBonus(target, this.getDamage(itemStack), damageSource));
+                    if (pLevel instanceof ServerLevel)EnchantmentHelper.doPostAttackEffects((ServerLevel) pLevel, target, damageSource);
                     target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100));
                     target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100));
                 }
@@ -129,12 +129,5 @@ public class ThunderShadowSword extends Item {
     @Override
     public int getEnchantmentValue(ItemStack stack) {
         return 22;
-    }
-
-    @Override
-    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        return enchantment == Enchantments.KNOCKBACK || enchantment == Enchantments.SHARPNESS
-                || enchantment == Enchantments.LOOTING || enchantment == Enchantments.BANE_OF_ARTHROPODS
-                || enchantment == Enchantments.SMITE;
     }
 }

@@ -2,6 +2,7 @@ package net.Gmaj7.doAsInteresting.daiItems.custom;
 
 import net.Gmaj7.doAsInteresting.daiEntities.custom.ExplosionStorageEntity;
 import net.Gmaj7.doAsInteresting.daiInit.daiDataComponentTypes;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -43,7 +44,7 @@ public class ExplosionStorage extends Item {
         pPlayer.awardStat(Stats.ITEM_USED.get(this));
         pPlayer.swing(pUsedHand, true);
         pPlayer.getCooldowns().addCooldown(this,10);
-        if(!pPlayer.getAbilities().instabuild && !(pPlayer.getItemInHand(pUsedHand).getEnchantmentLevel(Enchantments.INFINITY) > 0)){
+        if(!pPlayer.getAbilities().instabuild && !(pPlayer.getItemInHand(pUsedHand).getEnchantmentLevel(pLevel.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.INFINITY)) > 0)){
             itemStack.shrink(1);
         }
         return super.use(pLevel, pPlayer, pUsedHand);
@@ -55,10 +56,5 @@ public class ExplosionStorage extends Item {
             pStack.set(daiDataComponentTypes.ExplosionStorageRadius.get(), 4.0F);
         else pTooltipComponents.add(Component.translatable("radius").append(Component.literal(String.valueOf(pStack.getComponents().get(daiDataComponentTypes.ExplosionStorageRadius.get())))));
         super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
-    }
-
-    @Override
-    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        return stack.getItem() instanceof ExplosionStorage && enchantment == Enchantments.INFINITY;
     }
 }

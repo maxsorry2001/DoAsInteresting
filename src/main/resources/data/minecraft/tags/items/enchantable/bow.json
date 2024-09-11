@@ -1,6 +1,8 @@
 {
   "values": [
     "minecraft:brick",
-    "minecraft:nether_brick"
+    "minecraft:nether_brick",
+    "doasinteeresting:gravitation_bow",
+    "doasinteeresting:electromagnetic_bow"
   ]
 }

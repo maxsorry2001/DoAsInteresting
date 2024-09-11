@@ -20,25 +20,17 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TieredItem;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.living.LivingAttackEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 
 @EventBusSubscriber(modid = DoAsInteresting.MODID)
 public class DamageDispose {
     @SubscribeEvent
-    public static void attackDeal(LivingAttackEvent event){
-        Entity direct = event.getSource().getDirectEntity();
-        LivingEntity target = event.getEntity();
-        if(direct instanceof LivingEntity && ((LivingEntity) direct).getMainHandItem().getItem() instanceof TieredItem && ((TieredItem) ((LivingEntity) direct).getMainHandItem().getItem()).getTier() == daiTiers.JISTGABBURASH)
-            target.addEffect(new MobEffectInstance(daiMobEffects.IIIIII, 300));
-    }
-
-    @SubscribeEvent
     public static void damageDeal(LivingDamageEvent.Pre event){
         DamageSource damageSource = event.getSource();
         LivingEntity target = event.getEntity();
         Entity source = damageSource.getEntity();
-        if(!target.level().isClientSide()){
+        if(!target.level().isClientSide()){if(source instanceof LivingEntity && ((LivingEntity) source).getMainHandItem().getItem() instanceof TieredItem && ((TieredItem) ((LivingEntity) source).getMainHandItem().getItem()).getTier() == daiTiers.JISTGABBURASH)
+            target.addEffect(new MobEffectInstance(daiMobEffects.IIIIII, 300));
             if(damageSource.is(DamageTypeTags.IS_EXPLOSION) && target.getItemBySlot(EquipmentSlot.CHEST).getEnchantmentLevel(source.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(daiEnchantments.EXPLOSION_GET)) > 0)
                 event.setNewDamage(0);
             EquipmentSlot[] equipmentSlot = {EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET};

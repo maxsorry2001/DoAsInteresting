@@ -1,6 +1,7 @@
 package net.Gmaj7.doAsInteresting.daiItems.custom;
 
 import net.Gmaj7.doAsInteresting.daiEntities.custom.JistgabburashEntity;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -27,7 +28,7 @@ public class Jistgabburash extends Item {
         pPlayer.awardStat(Stats.ITEM_USED.get(this));
         pPlayer.swing(pUsedHand, true);
         pPlayer.getCooldowns().addCooldown(this,10);
-        if(!pPlayer.getAbilities().instabuild && !(pPlayer.getItemInHand(pUsedHand).getEnchantmentLevel(Enchantments.INFINITY) > 0)){
+        if(!pPlayer.getAbilities().instabuild && !(pPlayer.getItemInHand(pUsedHand).getEnchantmentLevel(pLevel.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.INFINITY)) > 0)){
             itemStack.shrink(1);
         }
         return super.use(pLevel, pPlayer, pUsedHand);

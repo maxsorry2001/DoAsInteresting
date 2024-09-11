@@ -1,7 +1,7 @@
 {
   "anvil_cost": 1,
   "description": {
-    "translate": "enchantment.doasinteresting.explosion_get"
+    "translate": "enchantment.doasinteresting.electrification_by_friction"
   },
   "max_cost": {
     "base": 10,

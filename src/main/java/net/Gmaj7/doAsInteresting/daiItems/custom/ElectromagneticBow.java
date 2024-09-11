@@ -35,30 +35,14 @@ public class ElectromagneticBow extends Item {
                 ironShootEntity.setBaseDamage(ironShootEntity.getBaseDamage() + (double)k * 0.5 + 0.5);
             }
 
-            int i = EnchantmentHelper.getItemEnchantmentLevel(pLevel.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.PUNCH), pStack);
-            if (i > 0) {
-                ironShootEntity.setKnockback(i);
-            }
-
             if (EnchantmentHelper.getItemEnchantmentLevel(pLevel.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.FLAME), pStack) > 0) {
                 ironShootEntity.igniteForSeconds(100);
             }
-
-            int j = EnchantmentHelper.getItemEnchantmentLevel(pLevel.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.PIERCING), pStack);
-            if (j > 0) {
-                ironShootEntity.setPierceLevel((byte)j);
-            }
-            ironShootEntity.setCharge(getPowerForTime(this.getUseDuration(pStack) - pTimeCharged));
-            ironShootEntity.shootFromRotation(pLivingEntity, pLivingEntity.getXRot(), pLivingEntity.getYRot(), 0, 5 * getPowerForTime(this.getUseDuration(pStack) - pTimeCharged), 0.1F);
+            ironShootEntity.setCharge(getPowerForTime(this.getUseDuration(pStack, pLivingEntity) - pTimeCharged));
+            ironShootEntity.shootFromRotation(pLivingEntity, pLivingEntity.getXRot(), pLivingEntity.getYRot(), 0, 5 * getPowerForTime(this.getUseDuration(pStack, pLivingEntity) - pTimeCharged), 0.1F);
             pLevel.addFreshEntity(ironShootEntity);
             pStack.hurtAndBreak(1, pPlayer, Player.getSlotForHand(pPlayer.getUsedItemHand()));
         }
-    }
-
-    @Override
-    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
-        return enchantment == Enchantments.POWER || enchantment == Enchantments.PUNCH
-                || enchantment == Enchantments.FLAME || enchantment == Enchantments.PIERCING;
     }
 
     @Override
@@ -67,7 +51,7 @@ public class ElectromagneticBow extends Item {
     }
 
     @Override
-    public int getUseDuration(ItemStack pStack) {
+    public int getUseDuration(ItemStack pStack, LivingEntity pEntity) {
         return 72000;
     }
 
