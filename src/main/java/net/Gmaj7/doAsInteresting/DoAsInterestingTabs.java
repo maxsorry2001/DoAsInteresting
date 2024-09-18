@@ -33,6 +33,8 @@ public class DoAsInterestingTabs {
                         pOutput.accept(daiItems.NEGATIVE_CHARGE.get());
                         pOutput.accept(daiItems.HYDROGEN.get());
                         pOutput.accept(daiItems.OXYGEN.get());
+                        pOutput.accept(daiItems.CARBON_MONOXIDE.get());
+                        pOutput.accept(daiItems.CARBON_DIOXIDE.get());
                         pOutput.accept(daiItems.JISTGABBURASH.get());
                         pOutput.accept(daiItems.JISTGABBURASH_SWORD.get());
                         pOutput.accept(daiItems.JISTGABBURASH_PICKAXE.get());

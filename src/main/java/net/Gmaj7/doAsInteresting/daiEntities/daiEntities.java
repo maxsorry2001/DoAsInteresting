@@ -72,6 +72,13 @@ public class daiEntities {
                     .clientTrackingRange(4)
                     .build("thrown_carbon_dioxide_entity"));
 
+    public static final Supplier<EntityType<ThrownCarbonMonoxideEntity>> THROWN_CARBON_MONOXIDE_ENTITY =
+            ENTITY_TYPES.register("thrown_carbon_monoxide_entity", () -> EntityType.Builder.<ThrownCarbonMonoxideEntity>of(ThrownCarbonMonoxideEntity::new, MobCategory.MISC)
+                    .sized(0.98F, 0.98F)
+                    .fireImmune()
+                    .clientTrackingRange(4)
+                    .build("thrown_carbon_monoxide_entity"));
+
     public static final Supplier<EntityType<IronShootEntity>> IRON_SHOOT_ENTITY =
             ENTITY_TYPES.register("iron_shoot_entity", () -> EntityType.Builder.<IronShootEntity>of(IronShootEntity::new, MobCategory.MISC)
                     .sized(0.5F, 0.5F)

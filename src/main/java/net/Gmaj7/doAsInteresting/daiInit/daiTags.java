@@ -10,12 +10,8 @@ import net.minecraft.world.level.block.Block;
 
 public class daiTags {
     public class daiItemTags{
-        public static final TagKey<Item> SHIELD_ENCHANTABLE = create("enchantable/dai_shield");
-        public static final TagKey<Item> TOTEM_ENCHANTABLE = create("enchantable/dai_totem");
-        public static final TagKey<Item> CHEST_ARMOR_ENCHANTABLE = create("enchantable/dai_chest_armor");
-        public static final TagKey<Item> BOW_ENCHANTABLE = create("enchantable/dai_bow");
-        public static final TagKey<Item> FLYING_SHADOWS_ENCHANTABLE = create("enchantable/flying_shadows");
-        public static final TagKey<Item> CAN_SHOOT_IRON = create("item/can_shoot_iron");
+        public static final TagKey<Item> CARBON = create("item/carbon");
+        public static final TagKey<Item> CAN_SHOOT_IRON = create("can_shoot_iron");
 
         public static TagKey<Item> create(String name) {
             return ItemTags.create(ResourceLocation.fromNamespaceAndPath(DoAsInteresting.MODID, name));

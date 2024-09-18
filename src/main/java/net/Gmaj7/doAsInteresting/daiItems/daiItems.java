@@ -42,7 +42,9 @@ public class daiItems {
     public static final Supplier<Item> NEGATIVE_CHARGE = DAI_ITEMS.registerItem("negative_charge", NegativeCharge::new);
     public static final Supplier<Item> HYDROGEN = DAI_ITEMS.registerItem("hydrogen", Hydrogen::new);
     public static final Supplier<Item> OXYGEN = DAI_ITEMS.registerItem("oxygen", Oxygen::new);
-    public static final Supplier<Item> CARBON_DIOXIDE = DAI_ITEMS.registerItem("carbon_dioxide", CarbonDioxide::new);
+    public static final Supplier<Item> CARBON_DIOXIDE = DAI_ITEMS.register("carbon_dioxide",
+            () -> new  CarbonDioxide(new Item.Properties().fireResistant()));
+    public static final Supplier<Item> CARBON_MONOXIDE = DAI_ITEMS.registerItem("carbon_monoxide", CarbonMonoxide::new);
 
     public static final Supplier<SwordItem> JISTGABBURASH_SWORD = DAI_ITEMS.register("jistgabburash_sword",
             () -> new SwordItem(daiTiers.JISTGABBURASH, new Item.Properties().attributes(SwordItem.createAttributes(daiTiers.JISTGABBURASH, 0, 6))));

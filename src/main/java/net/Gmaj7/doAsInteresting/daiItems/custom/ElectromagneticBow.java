@@ -29,7 +29,7 @@ public class ElectromagneticBow extends Item {
             ItemStack itemStack1 = itemStack.copy();
             itemStack1.setCount(1);
             itemStack.shrink(1);
-            IronShootEntity ironShootEntity = new IronShootEntity(pLevel, pLivingEntity, itemStack1);
+            IronShootEntity ironShootEntity = new IronShootEntity(pLevel, pPlayer, itemStack1);
             int k = EnchantmentHelper.getItemEnchantmentLevel(pLevel.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.POWER), pStack);
             if (k > 0) {
                 ironShootEntity.setBaseDamage(ironShootEntity.getBaseDamage() + (double)k * 0.5 + 0.5);
@@ -39,7 +39,7 @@ public class ElectromagneticBow extends Item {
                 ironShootEntity.igniteForSeconds(100);
             }
             ironShootEntity.setCharge(getPowerForTime(this.getUseDuration(pStack, pLivingEntity) - pTimeCharged));
-            ironShootEntity.shootFromRotation(pLivingEntity, pLivingEntity.getXRot(), pLivingEntity.getYRot(), 0, 5 * getPowerForTime(this.getUseDuration(pStack, pLivingEntity) - pTimeCharged), 0.1F);
+            ironShootEntity.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0, 5 * getPowerForTime(this.getUseDuration(pStack, pLivingEntity) - pTimeCharged), 0.1F);
             pLevel.addFreshEntity(ironShootEntity);
             pStack.hurtAndBreak(1, pPlayer, Player.getSlotForHand(pPlayer.getUsedItemHand()));
         }
@@ -67,8 +67,10 @@ public class ElectromagneticBow extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
-        if(!daiSerchItem.getIronShootItem(pPlayer).isEmpty())
+        if(!daiSerchItem.getIronShootItem(pPlayer).isEmpty()){
             pPlayer.startUsingItem(pHand);
-        return InteractionResultHolder.success(pPlayer.getItemInHand(pHand));
+            return InteractionResultHolder.success(pPlayer.getItemInHand(pHand));
+        }
+        else return InteractionResultHolder.fail(pPlayer.getItemInHand(pHand));
     }
 }

@@ -32,6 +32,7 @@
   "item.doasinteresting.hydrogen": "hydrogen",
   "item.doasinteresting.oxygen": "oxygen",
   "item.doasinteresting.carbon_dioxide": "carbon dioxide",
+  "item.doasinteresting.carbon_monoxide": "carbon monoxide",
 
   "effect.doasinteresting.iiiiiii": "ÌÌÌÌÌÌÌÌÌÌÌÌÌÌ",
   "effect.doasinteresting.electric_charge": "electric charge",
@@ -40,6 +41,7 @@
   "effect.doasinteresting.interal_injury": "interal injury",
   "effect.doasinteresting.melting": "Melting",
   "effect.doasinteresting.fire_ring": "Fire Ring",
+  "effect.doasinteresting.carbon_monoxide_poisoning": "carbon monoxide poisoning",
 
   "block.doasinteresting.sculk_tnt": "sculk TNT",
   "block.doasinteresting.electromagnetic_tnt": "electromagnetic TNT",

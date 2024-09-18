@@ -31,10 +31,11 @@ public class IronShootEntity extends AbstractArrow {
         super(daiEntities.IRON_SHOOT_ENTITY.get(), pLevel);
     }
 
-    public IronShootEntity(Level pLevel,LivingEntity pOwner ,ItemStack pItemStack){
+    public IronShootEntity(Level pLevel, LivingEntity pOwner, ItemStack itemStack){
         super(daiEntities.IRON_SHOOT_ENTITY.get(), pLevel);
-        this.setShootItem(pItemStack);
         this.setOwner(pOwner);
+        this.setPos(pOwner.getX(), pOwner.getEyeY() - 0.1, pOwner.getZ());
+        this.shootItem = itemStack;
     }
     public IronShootEntity(LivingEntity pOwner, Level pLevel) {
         super(daiEntities.IRON_SHOOT_ENTITY.get(), pLevel);
@@ -51,7 +52,7 @@ public class IronShootEntity extends AbstractArrow {
             ItemStack itemStack = this.getDefaultPickupItem();
             ItemEntity itemEntity = new ItemEntity(target.level(), target.getX(), target.getY(), target.getZ(), itemStack);
             this.level().addFreshEntity(itemEntity);
-            this.remove(RemovalReason.KILLED);
+            this.discard();
         }
     }
 
@@ -63,7 +64,7 @@ public class IronShootEntity extends AbstractArrow {
             this.level().explode(this, blockPos.getX(), blockPos.getY(), blockPos.getZ(), 3F * this.charge, false, Level.ExplosionInteraction.TNT);
             ItemEntity itemEntity = new ItemEntity(this.level(), blockPos.getX(), blockPos.getY(), blockPos.getZ(), shootItem);
             this.level().addFreshEntity(itemEntity);
-            this.remove(RemovalReason.DISCARDED);
+            this.discard();
         }
     }
 
@@ -97,5 +98,10 @@ public class IronShootEntity extends AbstractArrow {
 
     public void setCharge(float charge) {
         this.charge = charge;
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
     }
 }

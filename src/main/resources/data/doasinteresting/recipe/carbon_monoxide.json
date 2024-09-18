@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.3,
+  "ingredient": {
+    "item": "doasinteresting:carbon_dioxide"
+  },
+  "result": {
+    "id": "doasinteresting:carbon_monoxide"
+  }
+}

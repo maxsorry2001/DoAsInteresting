@@ -32,5 +32,7 @@ public class daiMobEffects {
             () -> new daiMobEffect(MobEffectCategory.NEUTRAL, 33287761));
     public static final DeferredHolder<MobEffect, MobEffect> FIRE_RING = DAI_EFFECTS.register("fire_ring",
             () -> new FireRingEffect(MobEffectCategory.BENEFICIAL, 33281156));
+    public static final DeferredHolder<MobEffect, MobEffect> CARBON_MONOXIDE_POISONING = DAI_EFFECTS.register("carbon_monoxide_poisoning",
+            () -> new CarbonMonoxidePosisoningEffect(MobEffectCategory.HARMFUL, 33762251));
     public static void register(IEventBus eventBus){DAI_EFFECTS.register(eventBus);}
 }

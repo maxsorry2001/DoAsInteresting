@@ -12,9 +12,12 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.neoforged.neoforge.common.Tags;
+
+import java.util.List;
 
 public class ThrownCarbonDioxideEntity extends ThrowableItemProjectile {
     public ThrownCarbonDioxideEntity(EntityType<? extends ThrowableItemProjectile> pEntityType, Level pLevel) {
@@ -37,38 +40,35 @@ public class ThrownCarbonDioxideEntity extends ThrowableItemProjectile {
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
         super.onHitEntity(pResult);
-        Entity entity = pResult.getEntity();
-        for (int dx = entity.blockPosition().getX() - 4; dx <= entity.blockPosition().getX() + 4; dx ++){
-            for (int dy = entity.blockPosition().getY() + 4; dy >= entity.blockPosition().getY() - 4; dy --){
-                for (int dz = entity.blockPosition().getZ() - 4; dz <= entity.blockPosition().getZ() + 4; dz++){
-                    BlockPos blockPos = new BlockPos(dx, dy, dz);
-                    if(this.level().getBlockState(blockPos).is(BlockTags.FIRE))
-                        this.level().setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
-                }
-            }
-        }
+        fireSuppression(pResult.getEntity().blockPosition());
         this.discard();
     }
 
     @Override
     protected void onHitBlock(BlockHitResult pResult) {
         super.onHitBlock(pResult);
-        BlockPos target = pResult.getBlockPos().relative(pResult.getDirection());
-        BlockState blockState = this.level().getBlockState(target);
-        for (int dx = target.getX() - 4; dx <= target.getX() + 4; dx ++){
-            for (int dy = target.getY() + 4; dy >= target.getY() - 4; dy --){
-                for (int dz = target.getZ() - 4; dz <= target.getZ() + 4; dz++){
-                    BlockPos blockPos = new BlockPos(dx, dy, dz);
-                    if(this.level().getBlockState(blockPos).is(BlockTags.FIRE))
-                        this.level().setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
-                }
-            }
-        }
+        fireSuppression(pResult.getBlockPos().relative(pResult.getDirection()));
         this.discard();
     }
 
     @Override
     public void tick() {
         super.tick();
+    }
+
+    private void fireSuppression(BlockPos blockPos){
+        for (int dx = blockPos.getX() - 4; dx <= blockPos.getX() + 4; dx ++){
+            for (int dy = blockPos.getY() + 4; dy >= blockPos.getY() - 4; dy --){
+                for (int dz = blockPos.getZ() - 4; dz <= blockPos.getZ() + 4; dz++){
+                    BlockPos firePos = new BlockPos(dx, dy, dz);
+                    if(this.level().getBlockState(firePos).is(BlockTags.FIRE))
+                        this.level().setBlockAndUpdate(firePos, Blocks.AIR.defaultBlockState());
+                }
+            }
+        }
+        List<LivingEntity> list = this.level().getEntitiesOfClass(LivingEntity.class, new AABB(blockPos).inflate(4));
+        for (LivingEntity target : list){
+            if (target.isOnFire()) target.clearFire();
+        }
     }
 }

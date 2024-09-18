@@ -10,4 +10,5 @@ import net.minecraft.world.damagesource.DamageTypes;
 public interface daiDamageTypes extends DamageTypes {
     ResourceKey<DamageType> RADIATION = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(DoAsInteresting.MODID, "dai_radiation"));
     ResourceKey<DamageType> INTERNAL_INJURY = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(DoAsInteresting.MODID, "internal_injury"));
+    ResourceKey<DamageType> CARBON_MONOXIDE_POISONING = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(DoAsInteresting.MODID, "carbon_monoxide_poisoning"));
 }

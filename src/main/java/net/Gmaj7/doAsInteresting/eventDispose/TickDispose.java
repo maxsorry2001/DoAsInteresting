@@ -3,12 +3,14 @@ package net.Gmaj7.doAsInteresting.eventDispose;
 import net.Gmaj7.doAsInteresting.DoAsInteresting;
 import net.Gmaj7.doAsInteresting.daiEffects.daiMobEffects;
 import net.Gmaj7.doAsInteresting.daiInit.daiDataComponentTypes;
+import net.Gmaj7.doAsInteresting.daiInit.daiTags;
 import net.Gmaj7.doAsInteresting.daiItems.daiItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -18,11 +20,13 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
+import java.util.List;
+
 @EventBusSubscriber(modid = DoAsInteresting.MODID)
 public class TickDispose {
 
     @SubscribeEvent
-    public static void LivingTick(EntityTickEvent.Pre event){
+    public static void EntityTickPreDeal(EntityTickEvent.Pre event){
         Entity entity = event.getEntity();
         if(entity instanceof LivingEntity){
             if(((LivingEntity) entity).getItemBySlot(EquipmentSlot.FEET).is(daiItems.BLUE_ICE_BOOTS.get())) {
@@ -70,7 +74,7 @@ public class TickDispose {
     }
 
     @SubscribeEvent
-    public static void deltaMove(EntityTickEvent.Post event){
+    public static void entityTickPostDeal(EntityTickEvent.Post event){
         Entity entity = event.getEntity();
         if(entity instanceof LivingEntity) {
             if (((LivingEntity) entity).getItemBySlot(EquipmentSlot.FEET).is(daiItems.BLUE_ICE_BOOTS.get()) && ((LivingEntity) entity).walkAnimation.isMoving() && entity.onGround())

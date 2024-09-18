@@ -97,6 +97,7 @@ public class DoAsInteresting
             EntityRenderers.register(daiEntities.THROWN_HYDROGEN_ENTITY.get(), ThrownItemRenderer::new);
             EntityRenderers.register(daiEntities.THROWN_OXYGEN_ENTITY.get(), ThrownItemRenderer::new);
             EntityRenderers.register(daiEntities.THROWN_CARBON_DIOXIDE_ENTITY.get(), ThrownItemRenderer::new);
+            EntityRenderers.register(daiEntities.THROWN_CARBON_MONOXIDE_ENTITY.get(), ThrownItemRenderer::new);
             EntityRenderers.register(daiEntities.JISTGABBURASH_ENTITY.get(), ThrownItemRenderer::new);
             EntityRenderers.register(daiEntities.SCULK_TNT_ENTITY.get(), SculkTntRenderer::new);
             EntityRenderers.register(daiEntities.ELECTROMAGNET_TNT_ENTITY.get(), ElectromagneticTntRenderer::new);
