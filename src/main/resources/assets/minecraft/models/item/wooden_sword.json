@@ -5,7 +5,7 @@
   },
   "overrides": [
     {
-      "model": "doasinteresting:item/wooden_sword_flame",
+      "model": "funny_world:item/wooden_sword_flame",
       "predicate": {
         "flame": 1
       }

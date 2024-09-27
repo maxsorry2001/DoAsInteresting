@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "funny_world:block/sculk_tnt_bottom",
+    "side": "funny_world:block/sculk_tnt_side",
+    "top": "funny_world:block/sculk_tnt_top"
+  }
+}

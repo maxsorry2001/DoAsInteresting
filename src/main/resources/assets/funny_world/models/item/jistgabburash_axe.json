@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "funny_world:item/jistgabburash_axe"
+  }
+}

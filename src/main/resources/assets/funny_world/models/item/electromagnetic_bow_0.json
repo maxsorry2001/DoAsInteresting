@@ -1,0 +1,6 @@
+{
+  "parent": "funny_world:item/electromagnetic_bow",
+  "textures": {
+    "layer0": "funny_world:item/electromagnetic_bow_0"
+  }
+}
