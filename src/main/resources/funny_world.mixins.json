@@ -1,0 +1,20 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.Gmaj7.funny_world.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "refmap": "funny_world.refmap.json",
+  "mixins": [
+    "AbstractArrowMixin",
+    "ItemMixin",
+    "LivingEntityMixin",
+    "ProjectileWeaponItemMixin",
+    "SwordItemMixin",
+    "VillagerMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

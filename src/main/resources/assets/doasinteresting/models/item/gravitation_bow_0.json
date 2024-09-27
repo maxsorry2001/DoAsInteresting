@@ -1,6 +1,0 @@
-{
-  "parent": "doasinteresting:item/gravitation_bow",
-  "textures": {
-    "layer0": "doasinteresting:item/gravitation_bow_0"
-  }
-}

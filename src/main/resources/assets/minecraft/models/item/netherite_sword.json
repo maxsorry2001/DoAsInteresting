@@ -5,7 +5,7 @@
   },
   "overrides": [
     {
-      "model": "doasinteresting:item/netherite_sword_flame",
+      "model": "funny_world:item/netherite_sword_flame",
       "predicate": {
         "flame": 1
       }
