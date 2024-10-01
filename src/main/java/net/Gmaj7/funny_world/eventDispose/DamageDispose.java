@@ -5,10 +5,7 @@ import net.Gmaj7.funny_world.daiEffects.daiMobEffects;
 import net.Gmaj7.funny_world.daiEnchantments.daiEnchantments;
 import net.Gmaj7.funny_world.daiEntities.custom.BrickEntity;
 import net.Gmaj7.funny_world.daiEntities.custom.NetherBrickEntity;
-import net.Gmaj7.funny_world.daiInit.daiArmorMaterials;
-import net.Gmaj7.funny_world.daiInit.daiDataComponentTypes;
-import net.Gmaj7.funny_world.daiInit.daiFunctions;
-import net.Gmaj7.funny_world.daiInit.daiTiers;
+import net.Gmaj7.funny_world.daiInit.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
@@ -43,7 +40,7 @@ public class DamageDispose {
                     float damageMul = 1,damageAdd = 0;
                     if(livingEntity.getMainHandItem().has(daiDataComponentTypes.HEAT_BY_FRICTION))
                         damageMul = damageMul * 1.5F;
-                    if (livingEntity.getMainHandItem().getEnchantmentLevel(daiFunctions.getHolder(livingEntity.level(), daiEnchantments.CONVINCE_PEOPLE_BY_REASON)) > 0){
+                    if (livingEntity.getMainHandItem().is(daiTags.daiItemTags.BOOKS_ENCHANTMENT) && livingEntity.getMainHandItem().getEnchantmentLevel(daiFunctions.getHolder(livingEntity.level(), daiEnchantments.CONVINCE_PEOPLE_BY_REASON)) > 0){
                         damageAdd += livingEntity.getMainHandItem().getCount();
                         damageMul = damageMul * livingEntity.getMainHandItem().getEnchantmentLevel(daiFunctions.getHolder(livingEntity.level(), daiEnchantments.CONVINCE_PEOPLE_BY_REASON));
                     }
