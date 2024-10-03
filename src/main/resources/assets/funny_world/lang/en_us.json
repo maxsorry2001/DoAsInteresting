@@ -64,6 +64,8 @@
   "death.attack.internal_injury.player" : "%1$s is dead because of the internal injury which is made by %s$2",
   "death.attack.carbon_monoxide_poisoning" : "%1$s dead because carbon monoxide poisoning",
   "death.attack.carbon_monoxide_poisoning.player" : "%1$s dead because carbon monoxide poisoning when attack with %s$2",
+  "death.attack.power_of_knowledge" : "%1$s felt the power of knowledge",
+  "death.attack.power_of_knowledge,player" : "%1$s felt the power of knowledge when fight %s$2",
 
   "you_know_damage": "You know the damage of it",
   "you_know_damage_and_from_nether": "You know the damage of it, and it come from The Nether now",

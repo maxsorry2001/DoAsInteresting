@@ -3,7 +3,6 @@ package net.Gmaj7.funny_world.daiItems.custom;
 import net.Gmaj7.funny_world.daiEntities.custom.ExplosionStorageEntity;
 import net.Gmaj7.funny_world.daiInit.daiDataComponentTypes;
 import net.Gmaj7.funny_world.daiInit.daiFunctions;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;

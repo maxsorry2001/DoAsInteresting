@@ -5,21 +5,19 @@ import net.Gmaj7.funny_world.daiEffects.daiMobEffects;
 import net.Gmaj7.funny_world.daiEnchantments.daiEnchantments;
 import net.Gmaj7.funny_world.daiEntities.custom.BrickEntity;
 import net.Gmaj7.funny_world.daiEntities.custom.NetherBrickEntity;
-import net.Gmaj7.funny_world.daiInit.*;
-import net.minecraft.core.registries.Registries;
+import net.Gmaj7.funny_world.daiInit.daiArmorMaterials;
+import net.Gmaj7.funny_world.daiInit.daiFunctions;
+import net.Gmaj7.funny_world.daiInit.daiTiers;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TieredItem;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
@@ -38,9 +36,9 @@ public class DamageDispose {
                     target.addEffect(new MobEffectInstance(daiMobEffects.IIIIII, 300));
                 if(direct == source){
                     float damageMul = 1,damageAdd = 0;
-                    if(livingEntity.getMainHandItem().has(daiDataComponentTypes.HEAT_BY_FRICTION))
-                        damageMul = damageMul * 1.5F;
-                    if (livingEntity.getMainHandItem().is(daiTags.daiItemTags.BOOKS_ENCHANTMENT) && livingEntity.getMainHandItem().getEnchantmentLevel(daiFunctions.getHolder(livingEntity.level(), daiEnchantments.CONVINCE_PEOPLE_BY_REASON)) > 0){
+                    if(livingEntity.getMainHandItem().getEnchantmentLevel(daiFunctions.getHolder(livingEntity.level(), daiEnchantments.CONVINCE_PEOPLE_BY_REASON)) > 0)
+                        damageMul = damageMul * livingEntity.getMainHandItem().getEnchantmentLevel(daiFunctions.getHolder(livingEntity.level(), daiEnchantments.CONVINCE_PEOPLE_BY_REASON));
+                    if (livingEntity.getMainHandItem().getEnchantmentLevel(daiFunctions.getHolder(livingEntity.level(), daiEnchantments.CONVINCE_PEOPLE_BY_REASON)) > 0){
                         damageAdd += livingEntity.getMainHandItem().getCount();
                         damageMul = damageMul * livingEntity.getMainHandItem().getEnchantmentLevel(daiFunctions.getHolder(livingEntity.level(), daiEnchantments.CONVINCE_PEOPLE_BY_REASON));
                     }
@@ -49,7 +47,6 @@ public class DamageDispose {
             }
             if(damageSource.is(DamageTypeTags.IS_EXPLOSION) && target.getItemBySlot(EquipmentSlot.CHEST).getEnchantmentLevel(daiFunctions.getHolder(target.level(), daiEnchantments.EXPLOSION_GET)) > 0)
                 event.setNewDamage(0);
-
             if (source != null) {
                 EquipmentSlot[] equipmentSlot = {EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET};
                 int count = 0, nether_count = 0;

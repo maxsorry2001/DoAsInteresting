@@ -64,6 +64,8 @@
   "death.attack.internal_injury.player" : "%1$s被%s$2造成的内伤过重而亡",
   "death.attack.carbon_monoxide_poisoning" : "%1$s一氧化碳中毒而亡",
   "death.attack.carbon_monoxide_poisoning.player" : "%1$s在与%s$2的战斗中因一氧化碳中毒而亡",
+  "death.attack.power_of_knowledge" : "%1$s获得大量知识而飞升",
+  "death.attack.power_of_knowledge,player" : "%1$s在与%s$2战斗时感受到大量知识而飞升",
 
   "you_know_damage": "你知道这玩意儿的伤害",
   "you_know_damage_and_from_nether": "你知道这玩意儿的伤害，而且现在这个是来自下界的",
