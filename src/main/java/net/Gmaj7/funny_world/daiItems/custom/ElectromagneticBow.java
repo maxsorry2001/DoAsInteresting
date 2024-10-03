@@ -2,7 +2,6 @@ package net.Gmaj7.funny_world.daiItems.custom;
 
 import net.Gmaj7.funny_world.daiEntities.custom.IronShootEntity;
 import net.Gmaj7.funny_world.daiInit.daiFunctions;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;

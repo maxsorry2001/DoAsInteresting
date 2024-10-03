@@ -1,5 +1,6 @@
 {
   "values": [
-    "minecraft:book"
+    "minecraft:book",
+    "minecraft:enchanted_book"
   ]
 }

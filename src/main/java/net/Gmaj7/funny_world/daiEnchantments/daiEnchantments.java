@@ -1,12 +1,10 @@
 package net.Gmaj7.funny_world.daiEnchantments;
 
 import net.Gmaj7.funny_world.FunnyWorld;
-import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.level.Level;
 
 public class daiEnchantments {
 

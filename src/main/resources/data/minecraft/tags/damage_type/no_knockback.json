@@ -1,5 +1,12 @@
 {
   "values": [
-    "doasinteresting:carbon_monoxide_poisoning"
+    {
+      "id":"funny_world:carbon_monoxide_poisoning",
+      "required": false
+    },
+    {
+      "id": "funny_world:power_of_knowledge",
+      "required": false
+    }
   ]
 }

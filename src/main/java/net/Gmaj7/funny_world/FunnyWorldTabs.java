@@ -4,7 +4,8 @@ import net.Gmaj7.funny_world.daiBlocks.daiBlocks;
 import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
