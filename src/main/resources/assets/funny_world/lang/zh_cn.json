@@ -57,6 +57,7 @@
   "enchantment.funny_world.flying_shadows" : "飞影",
   "enchantment.funny_world.heat_by_friction": "摩擦生热",
   "enchantment.funny_world.convince_people_by_reason": "以理服人",
+  "enchantment.funny_world.probation": "感化",
 
   "death.attack.dai_radiation" : "%1$s由于电磁辐射而全身溃烂",
   "death.attack.dai_radiation.player" : "%1$s由于%2$s发射的电磁辐射而全身溃烂",
@@ -71,5 +72,6 @@
   "you_know_damage_and_from_nether": "你知道这玩意儿的伤害，而且现在这个是来自下界的",
   "edible_flint_and_steel_message": "在甜浆果的辅助下，打火石貌似能下口了",
   "quick_use": "它快燃尽了",
-  "high temperature": "温度很高，小心烫手"
+  "high temperature": "温度很高，小心烫手",
+  "try_to_use_on_illager": "试试对灾厄村民使用"
 }
