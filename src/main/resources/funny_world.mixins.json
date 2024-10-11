@@ -6,10 +6,14 @@
   "refmap": "funny_world.refmap.json",
   "mixins": [
     "AbstractArrowMixin",
+    "EmeraldForItemsMixin",
+    "EmeraldsForVillagerTypeItemMixin",
     "ItemMixin",
+    "ItemsForEmeraldsMixin",
     "LivingEntityMixin",
     "ProjectileWeaponItemMixin",
     "SwordItemMixin",
+    "TypeSpecificTradeMixin",
     "VillagerMixin"
   ],
   "client": [

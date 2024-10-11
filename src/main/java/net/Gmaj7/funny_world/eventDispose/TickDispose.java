@@ -2,7 +2,9 @@ package net.Gmaj7.funny_world.eventDispose;
 
 import net.Gmaj7.funny_world.FunnyWorld;
 import net.Gmaj7.funny_world.daiEffects.daiMobEffects;
+import net.Gmaj7.funny_world.daiEnchantments.daiEnchantments;
 import net.Gmaj7.funny_world.daiInit.daiDataComponentTypes;
+import net.Gmaj7.funny_world.daiInit.daiFunctions;
 import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -69,6 +71,9 @@ public class TickDispose {
             if(item.getTier() == Tiers.WOOD || item.getTier() == Tiers.DIAMOND)
                 event.getToolTip().add(Component.translatable("quick_use"));
             else event.getToolTip().add(Component.translatable("high temperature"));
+        }
+        if(itemStack.getEnchantmentLevel(daiFunctions.getHolder(event.getContext().level(), daiEnchantments.PROBATION)) > 0 && itemStack.is(Items.EMERALD)){
+            event.getToolTip().add(Component.translatable("try_to_use_on_illager"));
         }
     }
 

@@ -13,6 +13,7 @@ import net.Gmaj7.funny_world.daiInit.daiAttachmentTypes;
 import net.Gmaj7.funny_world.daiInit.daiDataComponentTypes;
 import net.Gmaj7.funny_world.daiInit.daiItemProperties;
 import net.Gmaj7.funny_world.daiItems.daiItems;
+import net.Gmaj7.funny_world.villager.daiVillagers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.neoforged.api.distmarker.Dist;
@@ -53,6 +54,7 @@ public class FunnyWorld
         daiAttachmentTypes.register(modEventBus);
         daiDataComponentTypes.register(modEventBus);
         daiArmorMaterials.register(modEventBus);
+        daiVillagers.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (ExampleMod) to respond directly to events.

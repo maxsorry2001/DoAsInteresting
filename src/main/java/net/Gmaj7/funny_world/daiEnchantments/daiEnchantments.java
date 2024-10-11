@@ -16,6 +16,7 @@ public class daiEnchantments {
     public static final ResourceKey<Enchantment> FISSION = ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID,"fission"));
     public static final ResourceKey<Enchantment> FLYING_SHADOWS = ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "flying_shadows"));
     public static final ResourceKey<Enchantment> CONVINCE_PEOPLE_BY_REASON = ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "convince_people_by_reason"));
+    public static final ResourceKey<Enchantment> PROBATION = ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "probation"));
 
 
 }

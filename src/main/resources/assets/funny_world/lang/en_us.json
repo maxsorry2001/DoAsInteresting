@@ -57,6 +57,7 @@
   "enchantment.funny_world.flying_shadows" : "flying_shadows",
   "enchantment.funny_world.heat_by_friction": "heat by friction",
   "enchantment.funny_world.convince_people_by_reason": "convince people by reason",
+  "enchantment.funny_world.probation": "probation",
 
   "death.attack.dai_radiation" : "%1$s is festering from the radiation",
   "death.attack.dai_radiation.player" : "%1$s is festering from the radiation which is made by %s$2",
@@ -71,5 +72,6 @@
   "you_know_damage_and_from_nether": "You know the damage of it, and it come from The Nether now",
   "edible_flint_and_steel_message": "It seem to be more delicious with the sweet berries",
   "quick_use": "It will be burn out in few seconds",
-  "high temperature": "It has a high temperature"
+  "high temperature": "It has a high temperature",
+  "try_to_use_on_illager": "Try to use it on illagers"
 }

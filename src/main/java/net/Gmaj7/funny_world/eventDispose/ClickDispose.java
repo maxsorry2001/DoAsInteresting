@@ -9,18 +9,28 @@ import net.Gmaj7.funny_world.daiInit.daiDataComponentTypes;
 import net.Gmaj7.funny_world.daiInit.daiFunctions;
 import net.Gmaj7.funny_world.daiInit.daiTiers;
 import net.Gmaj7.funny_world.daiItems.daiItems;
+import net.Gmaj7.funny_world.villager.daiVillagers;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.gossip.GossipType;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.npc.VillagerData;
+import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.entity.npc.VillagerType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -46,7 +56,8 @@ public class ClickDispose {
     public static void entityDispose(PlayerInteractEvent.EntityInteractSpecific event){
         Player player = event.getEntity();
         Entity target = event.getTarget();
-        for (InteractionHand hand : InteractionHand.values()){
+        InteractionHand hand = event.getHand();
+        if(!player.level().isClientSide()){
             int i = player.getItemInHand(hand).getEnchantmentLevel(daiFunctions.getHolder(player.level(), daiEnchantments.SHIELD_STRIKE));
             if(i > 0 && !player.getCooldowns().isOnCooldown(player.getItemInHand(hand).getItem())){
                 if(target instanceof LivingEntity){
@@ -59,7 +70,23 @@ public class ClickDispose {
                     player.moveTo(new Vec3(target.getBoundingBox().getCenter().x(), target.getY(), target.getBoundingBox().getCenter().z()));
                     player.getItemInHand(hand).hurtAndBreak(1, player, hand == InteractionHand.MAIN_HAND? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
                     player.level().playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.IRON_GOLEM_DAMAGE, SoundSource.PLAYERS, 0.5F, 0.4F / (player.level().getRandom().nextFloat()*0.4F + 0.8F));
-                    break;
+                }
+            }
+            if(hand == InteractionHand.MAIN_HAND && player.getItemInHand(hand).getEnchantmentLevel(daiFunctions.getHolder(player.level(), daiEnchantments.PROBATION)) > 0 && target.getType().is(EntityTypeTags.ILLAGER)){
+                Villager villager = new Villager(EntityType.VILLAGER, player.level(), daiVillagers.ILLAGER_CHANGE.get());
+                villager.teleportTo(target.getX(), target.getY(), target.getZ());
+                villager.getGossips().add(player.getUUID(), GossipType.MINOR_POSITIVE, 15 + (player.getItemInHand(hand).getEnchantmentLevel(daiFunctions.getHolder(player.level(), daiEnchantments.PROBATION)) - 1) * 5);
+                villager.getGossips().add(player.getUUID(), GossipType.MAJOR_POSITIVE, 15 + (player.getItemInHand(hand).getEnchantmentLevel(daiFunctions.getHolder(player.level(), daiEnchantments.PROBATION)) - 1) * 5);
+                target.remove(Entity.RemovalReason.DISCARDED);
+                player.level().addFreshEntity(villager);
+            }
+        }
+        else if(player.level().isClientSide()){
+            if(hand == InteractionHand.MAIN_HAND && player.getItemInHand(hand).getEnchantmentLevel(daiFunctions.getHolder(player.level(), daiEnchantments.PROBATION)) > 0 && target.getType().is(EntityTypeTags.ILLAGER)){
+                player.swing(hand);
+                for (int j = 1; j < 45; j++){
+                    double r = j * 2 *Math.PI / 45;
+                    player.level().addParticle(ParticleTypes.HAPPY_VILLAGER, target.getX() + Math.sin(r), target.getY() + 1, target.getZ() + Math.cos(r), 0, 0, 0);
                 }
             }
         }
