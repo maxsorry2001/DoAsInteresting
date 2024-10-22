@@ -4,9 +4,9 @@
   "cookingtime": 100,
   "experience": 0.3,
   "ingredient": {
-    "item": "doasinteresting:carbon_dioxide"
+    "item": "funny_world:carbon_dioxide"
   },
   "result": {
-    "id": "doasinteresting:carbon_monoxide"
+    "id": "funny_world::carbon_monoxide"
   }
 }

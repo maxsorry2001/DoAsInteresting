@@ -6,13 +6,13 @@
     "b#@"
   ],
   "key": {
-    "a": {"item": "doasinteresting:electric_charge"},
-    "b": {"item": "doasinteresting:negative_charge"},
+    "a": {"item": "funny_world:electric_charge"},
+    "b": {"item": "funny_world:negative_charge"},
     "#": {"item": "minecraft:copper_ingot"},
     "@": {"item": "minecraft:string"}
   },
   "result": {
     "count": 1,
-    "id": "doasinteresting:electromagnetic_bow"
+    "id": "funny_world:electromagnetic_bow"
   }
 }

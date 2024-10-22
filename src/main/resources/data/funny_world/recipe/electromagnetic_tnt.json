@@ -8,11 +8,11 @@
   "key": {
     "#": { "item": "minecraft:iron_ingot" },
     "X": { "item": "minecraft:gunpowder"},
-    "a": {"item": "doasinteresting:electric_charge"},
-    "b": {"item": "doasinteresting:negative_charge"}
+    "a": {"item": "funny_world:electric_charge"},
+    "b": {"item": "funny_world:negative_charge"}
   },
   "result": {
     "count": 1,
-    "id": "doasinteresting:electromagnetic_tnt"
+    "id": "funny_world:electromagnetic_tnt"
   }
 }
