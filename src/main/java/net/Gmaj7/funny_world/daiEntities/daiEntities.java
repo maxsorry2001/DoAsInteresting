@@ -107,6 +107,13 @@ public class daiEntities {
                     .clientTrackingRange(10)
                     .build("sculk_tnt"));
 
+    public static final Supplier<EntityType<ThunderBallEntity>> THUNDER_BALL_ENTITY =
+            ENTITY_TYPES.register("thunder_ball", () -> EntityType.Builder.<ThunderBallEntity>of(ThunderBallEntity::new, MobCategory.MISC)
+                    .fireImmune()
+                    .sized(0.5F, 0.5F)
+                    .clientTrackingRange(2)
+                    .build("thunder_ball"));
+
 
 
     public static void register(IEventBus eventBus){ENTITY_TYPES.register(eventBus);}

@@ -1,4 +1,4 @@
-package net.Gmaj7.funny_world.daiEntities.model;
+package net.Gmaj7.funny_world.daiEntities.renderer;
 
 import net.Gmaj7.funny_world.FunnyWorld;
 import net.minecraft.client.renderer.entity.ArrowRenderer;

@@ -32,7 +32,6 @@ public class ElectromagneticBow extends Item {
             if (k > 0) {
                 ironShootEntity.setBaseDamage(ironShootEntity.getBaseDamage() + (double)k * 0.5 + 0.5);
             }
-
             if (EnchantmentHelper.getItemEnchantmentLevel(daiFunctions.getHolder(pLevel, Enchantments.FLAME), pStack) > 0) {
                 ironShootEntity.igniteForSeconds(100);
             }

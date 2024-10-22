@@ -4,10 +4,7 @@ import com.mojang.logging.LogUtils;
 import net.Gmaj7.funny_world.daiBlocks.daiBlocks;
 import net.Gmaj7.funny_world.daiEffects.daiMobEffects;
 import net.Gmaj7.funny_world.daiEntities.daiEntities;
-import net.Gmaj7.funny_world.daiEntities.model.ThunderWedgeRender;
-import net.Gmaj7.funny_world.daiEntities.renderer.ElectromagneticTntRenderer;
-import net.Gmaj7.funny_world.daiEntities.renderer.IronShootEntityRenderer;
-import net.Gmaj7.funny_world.daiEntities.renderer.SculkTntRenderer;
+import net.Gmaj7.funny_world.daiEntities.renderer.*;
 import net.Gmaj7.funny_world.daiInit.daiArmorMaterials;
 import net.Gmaj7.funny_world.daiInit.daiAttachmentTypes;
 import net.Gmaj7.funny_world.daiInit.daiDataComponentTypes;
@@ -104,6 +101,7 @@ public class FunnyWorld
             EntityRenderers.register(daiEntities.ELECTROMAGNET_TNT_ENTITY.get(), ElectromagneticTntRenderer::new);
             EntityRenderers.register(daiEntities.IRON_SHOOT_ENTITY.get(), IronShootEntityRenderer::new);
             EntityRenderers.register(daiEntities.THUNDER_WEDGE_ENTITY.get(), ThunderWedgeRender::new);
+            EntityRenderers.register(daiEntities.THUNDER_BALL_ENTITY.get(), ThunderBallRender::new);
 
             daiItemProperties.addCustomItemProperties();
         }

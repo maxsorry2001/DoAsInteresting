@@ -25,10 +25,12 @@ public class IronShootEntity extends AbstractArrow {
     private float charge;
     public IronShootEntity(EntityType<? extends AbstractArrow> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+        shootItem = new ItemStack(Items.IRON_INGOT);
     }
 
     public IronShootEntity(Level pLevel) {
         super(daiEntities.IRON_SHOOT_ENTITY.get(), pLevel);
+        shootItem = new ItemStack(Items.IRON_INGOT);
     }
 
     public IronShootEntity(Level pLevel, LivingEntity pOwner, ItemStack itemStack){

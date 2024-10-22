@@ -43,6 +43,7 @@ public class FunnyWorldTabs {
                         pOutput.accept(daiItems.NETHER_BRICK_BOOTS.get());
                         pOutput.accept(daiItems.GRAVITATION_BOW.get());
                         pOutput.accept(daiItems.ELECTROMAGNETIC_BOW.get());
+                        pOutput.accept(daiItems.ROD_OF_LIGHTING.get());
                         pOutput.accept(daiItems.RED_PACKET.get());
                         pOutput.accept(daiItems.THUNDER_SWORD.get());
                         pOutput.accept(daiItems.EDIBLE_FLINT_AND_STEEL.get());
