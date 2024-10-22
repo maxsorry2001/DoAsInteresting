@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "funny_world:item/rod_of_lighting",
-		"particle": "funny_world:item/rod_of_lighting"
+		"0": "funny_world:item/lighting_bolt_rod",
+		"particle": "funny_world:item/lighting_bolt_rod"
 	},
 	"elements": [
 		{

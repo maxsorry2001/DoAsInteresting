@@ -21,5 +21,8 @@ public class daiAttachmentTypes {
     public static final Supplier<AttachmentType<Integer>> FISSION_ARROW = DAI_ATTCHMENT_TYPE.register("fission_arrow",
             () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build());
 
+    public static final Supplier<AttachmentType<Integer>> THUNDER_HIT = DAI_ATTCHMENT_TYPE.register("thunder_hit",
+            () -> AttachmentType.builder(() -> 1).serialize(Codec.INT).build());
+
     public static void register(IEventBus eventBus){DAI_ATTCHMENT_TYPE.register(eventBus);}
 }

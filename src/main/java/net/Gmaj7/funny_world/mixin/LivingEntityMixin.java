@@ -11,10 +11,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.entity.Attackable;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -66,6 +63,12 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
         }
         if(lv > 0)
             this.hurt(new DamageSource(this.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(daiDamageTypes.POWER_OF_KNOWLEDGE)), lv);
+        if(this.hasData(daiAttachmentTypes.THUNDER_HIT) && this.getData(daiAttachmentTypes.THUNDER_HIT) == 4){
+            LightningBolt lightningBolt = new LightningBolt(EntityType.LIGHTNING_BOLT, this.level());
+            lightningBolt.teleportTo(this.getX(), this.getY(), this.getZ());
+            this.level().addFreshEntity(lightningBolt);
+            this.removeData(daiAttachmentTypes.THUNDER_HIT);
+        }
     }
 
     @Inject(method = "hurt", at = @At("HEAD"))
