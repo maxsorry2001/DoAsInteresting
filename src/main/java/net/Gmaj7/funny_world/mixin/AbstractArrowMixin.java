@@ -9,12 +9,14 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.List;
 import java.util.Random;
 
 @Mixin(AbstractArrow.class)
@@ -27,6 +29,10 @@ public abstract class AbstractArrowMixin extends Projectile {
     public void onHitEntity(EntityHitResult pResult, CallbackInfo ci){
         if(this.hasData(daiAttachmentTypes.FISSION_ARROW) && this.getData(daiAttachmentTypes.FISSION_ARROW) > 0 && this.getOwner() != null){
             Entity pTarget = pResult.getEntity();
+            List<Arrow> list = this.level().getEntitiesOfClass(Arrow.class, new AABB(this.getOnPos()).inflate(5));
+            if(!list.isEmpty()){
+                for (Arrow clear : list) clear.discard();
+            }
             int pLevel = this.getData(daiAttachmentTypes.FISSION_ARROW);
             Entity pAttacker = this.getOwner();
             for (int i = 1 ; i <= 10 * pLevel; i++){

@@ -5,12 +5,14 @@ import net.Gmaj7.funny_world.daiEffects.daiMobEffects;
 import net.Gmaj7.funny_world.daiEnchantments.daiEnchantments;
 import net.Gmaj7.funny_world.daiInit.daiDataComponentTypes;
 import net.Gmaj7.funny_world.daiInit.daiFunctions;
+import net.Gmaj7.funny_world.daiInit.daiTags;
 import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TieredItem;
@@ -22,6 +24,8 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
+
+import static net.Gmaj7.funny_world.daiInit.daiFunctions.attrackEntity;
 
 @EventBusSubscriber(modid = FunnyWorld.MODID)
 public class TickDispose {
@@ -80,10 +84,19 @@ public class TickDispose {
     @SubscribeEvent
     public static void entityTickPostDeal(EntityTickEvent.Post event){
         Entity entity = event.getEntity();
-        if(entity instanceof LivingEntity) {
-            if (((LivingEntity) entity).getItemBySlot(EquipmentSlot.FEET).is(daiItems.BLUE_ICE_BOOTS.get()) && ((LivingEntity) entity).walkAnimation.isMoving() && entity.onGround())
-                entity.setDeltaMovement(entity.getDeltaMovement().add(entity.getDeltaMovement().normalize().x() * 0.1, 0 ,entity.getDeltaMovement().normalize().z() * 0.1));
-            if(((LivingEntity) entity).walkAnimation.isMoving() && ((LivingEntity) entity).hasEffect(daiMobEffects.IIIIII)) entity.setDeltaMovement(entity.getDeltaMovement().add(0, 0.1 ,0));
+        BlockPos blockPos = entity.blockPosition();
+        if(entity instanceof LivingEntity livingEntity) {
+            if (livingEntity.getItemBySlot(EquipmentSlot.FEET).is(daiItems.BLUE_ICE_BOOTS.get()) && ((LivingEntity) entity).walkAnimation.isMoving() && entity.onGround())
+                livingEntity.setDeltaMovement(entity.getDeltaMovement().add(entity.getDeltaMovement().normalize().x() * 0.1, 0 ,entity.getDeltaMovement().normalize().z() * 0.1));
+            if(livingEntity.walkAnimation.isMoving() && ((LivingEntity) entity).hasEffect(daiMobEffects.IIIIII)) entity.setDeltaMovement(entity.getDeltaMovement().add(0, 0.1 ,0));
+            if(daiFunctions.withIronOut(livingEntity)){
+                attrackEntity(livingEntity, blockPos);
+            }
+        }
+        if(entity.getType().is(daiTags.daiEntityTypeTags.IRON_ENTITY) || (entity instanceof ItemEntity && ((ItemEntity) entity).getItem().is(daiTags.daiItemTags.IRON_ITEM))){
+            attrackEntity(entity, blockPos);
         }
     }
+
+
 }

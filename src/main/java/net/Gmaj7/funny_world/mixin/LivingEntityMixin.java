@@ -1,6 +1,5 @@
 package net.Gmaj7.funny_world.mixin;
 
-import net.Gmaj7.funny_world.daiEffects.daiMobEffects;
 import net.Gmaj7.funny_world.daiEnchantments.daiEnchantments;
 import net.Gmaj7.funny_world.daiInit.daiAttachmentTypes;
 import net.Gmaj7.funny_world.daiInit.daiDamageTypes;
@@ -8,7 +7,6 @@ import net.Gmaj7.funny_world.daiInit.daiFunctions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.*;
@@ -21,7 +19,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Optional;
 
@@ -35,15 +32,6 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
 
     @Inject(method = "tick", at = @At("HEAD"))
     public void tickMixin(CallbackInfo info){
-        if(!this.hasData(daiAttachmentTypes.TEMPERATURE)){
-            this.setData(daiAttachmentTypes.TEMPERATURE, 20.0F);
-        }
-        float temperatureAdd = 0F;
-        if(this.isOnFire()) temperatureAdd += 0.00025F;
-        if(this.hasEffect(daiMobEffects.RADIATION)) temperatureAdd += 0.0005F;
-        if(temperatureAdd > 0) this.setData(daiAttachmentTypes.TEMPERATURE, this.getData(daiAttachmentTypes.TEMPERATURE) + temperatureAdd);
-        else this.setData(daiAttachmentTypes.TEMPERATURE, Math.max(20F, this.getData(daiAttachmentTypes.TEMPERATURE) - 0.001F));
-        if(this.getData(daiAttachmentTypes.TEMPERATURE) > 60F) this.setRemainingFireTicks(100);
         int lv = 0;
         for (int i = -2; i <= 2; i++){
             for (int j = -2; j<= 2; j++){
@@ -68,15 +56,6 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
             lightningBolt.teleportTo(this.getX(), this.getY(), this.getZ());
             this.level().addFreshEntity(lightningBolt);
             this.removeData(daiAttachmentTypes.THUNDER_HIT);
-        }
-    }
-
-    @Inject(method = "hurt", at = @At("HEAD"))
-    public void hurtMixin(DamageSource pSource, float pAmount, CallbackInfoReturnable<InteractionResult> callbackInfoReturnable){
-        if(pSource.is(daiDamageTypes.RADIATION)){
-            if(this.hasData(daiAttachmentTypes.TEMPERATURE))
-                this.setData(daiAttachmentTypes.TEMPERATURE, this.getData(daiAttachmentTypes.TEMPERATURE) + 0.1F);
-            else this.setData(daiAttachmentTypes.TEMPERATURE, 20.1F);
         }
     }
 }

@@ -13,18 +13,18 @@
           "type": "minecraft:item",
           "conditions": [
             {
-              "block": "doasinteresting:sculk_tnt",
+              "block": "funny_world:sculk_tnt",
               "condition": "minecraft:block_state_property",
               "properties": {
                 "unstable": "false"
               }
             }
           ],
-          "name": "doasinteresting:sculk_tnt"
+          "name": "funny_world:sculk_tnt"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "doasinteresting:blocks/sculk_tnt"
+  "random_sequence": "funny_world:blocks/sculk_tnt"
 }

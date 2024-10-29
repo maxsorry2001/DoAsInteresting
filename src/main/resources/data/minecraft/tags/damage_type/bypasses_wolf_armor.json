@@ -1,12 +1,8 @@
 {
+  "replace": false,
   "values": [
-    {
-      "id": "funny_world:internal_injury",
-      "required": false
-    },
-    {
-      "id": "funny_world:carbon_monoxide_poisoning",
-      "required": false
-    }
+    "funny_world:internal_injury",
+    "funny_world:carbon_monoxide_poisoning",
+    "funny_world:dai_radiation"
   ]
 }

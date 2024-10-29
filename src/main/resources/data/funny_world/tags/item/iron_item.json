@@ -53,6 +53,7 @@
     "minecraft:damaged_anvil",
     "minecraft:cauldron",
     "minecraft:lantern",
-    "minecraft:soul_lantern"
+    "minecraft:soul_lantern",
+    "funny_world:redstone_magnet"
   ]
 }
