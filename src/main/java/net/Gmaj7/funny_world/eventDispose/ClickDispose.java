@@ -8,13 +8,18 @@ import net.Gmaj7.funny_world.daiEntities.custom.NetherBrickEntity;
 import net.Gmaj7.funny_world.daiInit.daiDataComponentTypes;
 import net.Gmaj7.funny_world.daiInit.daiFunctions;
 import net.Gmaj7.funny_world.daiInit.daiTiers;
+import net.Gmaj7.funny_world.daiItems.daiFoods;
 import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.Gmaj7.funny_world.villager.daiVillagers;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
@@ -96,7 +101,7 @@ public class ClickDispose {
         BlockEntity blockEntity = player.level().getBlockEntity(blockPos);
         BlockState blockState = player.level().getBlockState(blockPos);
         EntityDispose.totemChestSummon(player, blockEntity);
-        if(EnchantmentHelper.getEnchantmentLevel(player.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(daiEnchantments.ELECTRIFICATION_BY_FRICTION), player) > 0 && event.getHand() == InteractionHand.MAIN_HAND && player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty()){
+        if(EnchantmentHelper.getEnchantmentLevel(daiFunctions.getHolder(player.level(), daiEnchantments.ELECTRIFICATION_BY_FRICTION), player) > 0 && event.getHand() == InteractionHand.MAIN_HAND && player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty()){
             if(player.level().isClientSide())
                 player.swing(InteractionHand.MAIN_HAND);
             else {
@@ -111,6 +116,59 @@ public class ClickDispose {
                 player.level().addFreshEntity(itemEntity);
             }
         }
+        int EOW = EnchantmentHelper.getEnchantmentLevel(daiFunctions.getHolder(player.level(), daiEnchantments.EATER_OF_WORLDS), player);
+        int hunger = (int) Math.ceil((double) player.getFoodData().getFoodLevel() / 5);
+        if(EOW > 0 && player.getMainHandItem().isEmpty()) {
+            ItemStack itemStack = new ItemStack(blockState.getBlock().asItem());
+            switch (EOW){
+                case 1 -> itemStack.set(DataComponents.FOOD, daiFoods.EAT_OF_WORLDS_LV1);
+                case 2 -> itemStack.set(DataComponents.FOOD, daiFoods.EAT_OF_WORLDS_LV2);
+                case 3 -> itemStack.set(DataComponents.FOOD, daiFoods.EAT_OF_WORLDS_LV3);
+            }
+            switch (hunger) {
+                case 0 -> {
+                    player.level().setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
+                    ItemEntity itemEntity = new ItemEntity(player.level(), player.getX(), player.getY(), player.getZ(), itemStack);
+                    player.level().addFreshEntity(itemEntity);
+                    player.swing(InteractionHand.MAIN_HAND);
+                }
+                case 1 -> {
+                    if(blockState.getBlock().defaultDestroyTime() > 0){
+                        player.level().setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
+                        ItemEntity itemEntity = new ItemEntity(player.level(), player.getX(), player.getY(), player.getZ(), itemStack);
+                        player.level().addFreshEntity(itemEntity);
+                        player.swing(InteractionHand.MAIN_HAND);
+                    }
+                }
+                case 2 -> {
+                    if(blockState.getBlock().defaultDestroyTime() > 0 && !blockState.is(BlockTags.NEEDS_DIAMOND_TOOL)){
+                        player.level().setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
+                        ItemEntity itemEntity = new ItemEntity(player.level(), player.getX(), player.getY(), player.getZ(), itemStack);
+                        player.level().addFreshEntity(itemEntity);
+                        player.swing(InteractionHand.MAIN_HAND);
+                    }
+                }
+                case 3 -> {
+                    if(blockState.getBlock().defaultDestroyTime() > 0 && !blockState.is(BlockTags.NEEDS_DIAMOND_TOOL) && !blockState.is(BlockTags.NEEDS_IRON_TOOL)){
+                        player.level().setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
+                        ItemEntity itemEntity = new ItemEntity(player.level(), player.getX(), player.getY(), player.getZ(), itemStack);
+                        player.level().addFreshEntity(itemEntity);
+                        player.swing(InteractionHand.MAIN_HAND);
+                    }
+                }
+                case 4 -> {
+                    if(blockState.getBlock().defaultDestroyTime() > 0 && !blockState.is(BlockTags.NEEDS_DIAMOND_TOOL) && !blockState.is(BlockTags.NEEDS_IRON_TOOL) && !blockState.is(BlockTags.NEEDS_STONE_TOOL)){
+                        player.level().setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
+                        ItemEntity itemEntity = new ItemEntity(player.level(), player.getX(), player.getY(), player.getZ(), itemStack);
+                        player.level().addFreshEntity(itemEntity);
+                        player.swing(InteractionHand.MAIN_HAND);
+                    }
+                }
+                default -> {
+                }
+            }
+        }
+
     }
     @SubscribeEvent
     public static void RightClickItem(PlayerInteractEvent.RightClickItem event){

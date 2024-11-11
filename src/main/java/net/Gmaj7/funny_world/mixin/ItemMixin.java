@@ -1,7 +1,11 @@
 package net.Gmaj7.funny_world.mixin;
 
+import net.Gmaj7.funny_world.daiEnchantments.daiEnchantments;
 import net.Gmaj7.funny_world.daiInit.daiDataComponentTypes;
+import net.Gmaj7.funny_world.daiInit.daiFunctions;
+import net.Gmaj7.funny_world.daiItems.daiFoods;
 import net.Gmaj7.funny_world.daiItems.daiItems;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -10,8 +14,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.Tags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -31,6 +37,18 @@ public abstract class ItemMixin implements FeatureElement, ItemLike, net.neoforg
                 if (pStack.getDamageValue() >= pStack.getMaxDamage()){
                     ((Player) pEntity).addItem(new ItemStack(daiItems.CARBON_DIOXIDE.get()));
                 }
+            }
+        }
+        if(pEntity instanceof Player player && EnchantmentHelper.getEnchantmentLevel(daiFunctions.getHolder(pLevel, daiEnchantments.EATER_OF_WORLDS), player) > 0 && !pStack.is(Tags.Items.FOODS)){
+            switch (EnchantmentHelper.getEnchantmentLevel(daiFunctions.getHolder(pLevel, daiEnchantments.EATER_OF_WORLDS), player)){
+                case 1 -> pStack.set(DataComponents.FOOD, daiFoods.EAT_OF_WORLDS_LV1);
+                case 2 -> pStack.set(DataComponents.FOOD, daiFoods.EAT_OF_WORLDS_LV2);
+                case 3 -> pStack.set(DataComponents.FOOD, daiFoods.EAT_OF_WORLDS_LV3);
+            }
+        }
+        else {
+            if(!pStack.is(Tags.Items.FOODS) && pStack.has(DataComponents.FOOD)){
+                pStack.remove(DataComponents.FOOD);
             }
         }
     }
