@@ -64,5 +64,20 @@ public class daiArmorMaterials {
                     2.0F,
                     10.0F));
 
+    public static final DeferredHolder<ArmorMaterial, ArmorMaterial> BELL = ARMOR_MATERIAL.register("bell",
+            () -> new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), p -> {
+                p.put(ArmorItem.Type.BOOTS, 2);
+                p.put(ArmorItem.Type.LEGGINGS, 4);
+                p.put(ArmorItem.Type.CHESTPLATE, 5);
+                p.put(ArmorItem.Type.HELMET, 2);
+                p.put(ArmorItem.Type.BODY, 5);
+            }),
+                    20,
+                    SoundEvents.ARMOR_EQUIP_GOLD,
+                    () -> Ingredient.of(Items.BELL),
+                    List.of(new ArmorMaterial.Layer(ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "bell"))),
+                    0.0F,
+                    0.0F));
+
     public static void register(IEventBus eventBus){ARMOR_MATERIAL.register(eventBus);}
 }

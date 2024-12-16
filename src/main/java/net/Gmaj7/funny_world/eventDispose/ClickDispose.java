@@ -17,6 +17,7 @@ import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
@@ -31,6 +32,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.gossip.GossipType;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -91,6 +93,12 @@ public class ClickDispose {
                     player.level().addParticle(ParticleTypes.HAPPY_VILLAGER, target.getX() + Math.sin(r), target.getY() + 1, target.getZ() + Math.cos(r), 0, 0, 0);
                 }
             }
+        }
+        if (player.getItemInHand(hand).is(daiItems.BELL_HELMET.get()) && target instanceof Enemy){
+            ItemStack itemStack = player.getItemInHand(hand).copy();
+            if(!player.isCreative()) player.getItemInHand(hand).shrink(1);
+            ((LivingEntity) target).setItemSlot(EquipmentSlot.HEAD, itemStack);
+            event.setCanceled(true);
         }
     }
 

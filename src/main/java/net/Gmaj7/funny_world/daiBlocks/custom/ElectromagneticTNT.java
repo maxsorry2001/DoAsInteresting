@@ -9,9 +9,11 @@ import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.Equipable;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -28,7 +30,7 @@ import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.Nullable;
 
-public class ElectromagneticTNT extends Block {
+public class ElectromagneticTNT extends Block  implements Equipable {
     public static final MapCodec<ElectromagneticTNT> CODEC = simpleCodec(ElectromagneticTNT::new);
     public static final BooleanProperty UNSTABLE = BlockStateProperties.UNSTABLE;
     public ElectromagneticTNT(Properties p_49795_) {
@@ -147,5 +149,10 @@ public class ElectromagneticTNT extends Block {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(UNSTABLE);
+    }
+
+    @Override
+    public EquipmentSlot getEquipmentSlot() {
+        return EquipmentSlot.CHEST;
     }
 }

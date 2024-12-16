@@ -14,7 +14,8 @@
     "ProjectileWeaponItemMixin",
     "SwordItemMixin",
     "TypeSpecificTradeMixin",
-    "VillagerMixin"
+    "VillagerMixin",
+    "BellBlockMixin"
   ],
   "client": [
   ],

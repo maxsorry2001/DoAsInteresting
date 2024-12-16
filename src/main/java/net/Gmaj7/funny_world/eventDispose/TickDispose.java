@@ -3,12 +3,16 @@ package net.Gmaj7.funny_world.eventDispose;
 import net.Gmaj7.funny_world.FunnyWorld;
 import net.Gmaj7.funny_world.daiEffects.daiMobEffects;
 import net.Gmaj7.funny_world.daiEnchantments.daiEnchantments;
+import net.Gmaj7.funny_world.daiInit.daiBellHelmetPacket;
 import net.Gmaj7.funny_world.daiInit.daiDataComponentTypes;
 import net.Gmaj7.funny_world.daiInit.daiFunctions;
 import net.Gmaj7.funny_world.daiInit.daiTags;
 import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -22,8 +26,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.living.LivingEvent;
+import net.neoforged.neoforge.event.entity.player.CanPlayerSleepEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
+
+import java.util.Random;
 
 import static net.Gmaj7.funny_world.daiInit.daiFunctions.attrackEntity;
 
@@ -98,5 +107,26 @@ public class TickDispose {
         }
     }
 
-
+    @SubscribeEvent
+    public static void jumpDeal(LivingEvent.LivingJumpEvent event){
+        LivingEntity livingEntity = event.getEntity();
+        if(livingEntity.getItemBySlot(EquipmentSlot.HEAD).is(daiItems.BELL_HELMET.get()) && livingEntity.level().isClientSide()){
+            BlockPos blockPos = livingEntity.getOnPos().above(3);
+            if(!livingEntity.level().getBlockState(blockPos).is(Blocks.AIR)){
+                BlockState blockState = livingEntity.level().getBlockState(blockPos);
+                float time = blockState.getBlock().defaultDestroyTime();
+                if(time > 0){
+                    boolean flag = true;
+                    int x = new Random().nextInt(8);
+                    if(blockState.is(BlockTags.NEEDS_STONE_TOOL) && x < 4) flag = false;
+                    else if (blockState.is(BlockTags.NEEDS_IRON_TOOL ) && x < 6) flag = false;
+                    else if (blockState.is(BlockTags.NEEDS_DIAMOND_TOOL) && x < 7) flag = false;
+                    if(flag){
+                        PacketDistributor.sendToServer(new daiBellHelmetPacket(blockPos));
+                        livingEntity.level().playSound(livingEntity, blockPos, SoundEvents.BELL_BLOCK, SoundSource.BLOCKS, 2.0F, 2.0F);
+                    }
+                }
+            }
+        }
+    }
 }

@@ -8,12 +8,14 @@ import net.Gmaj7.funny_world.daiEntities.custom.NetherBrickEntity;
 import net.Gmaj7.funny_world.daiInit.daiArmorMaterials;
 import net.Gmaj7.funny_world.daiInit.daiFunctions;
 import net.Gmaj7.funny_world.daiInit.daiTiers;
+import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -21,6 +23,7 @@ import net.minecraft.world.item.TieredItem;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 
 @EventBusSubscriber(modid = FunnyWorld.MODID)
 public class DamageDispose {
@@ -42,7 +45,7 @@ public class DamageDispose {
                         damageAdd += livingEntity.getMainHandItem().getCount();
                         damageMul = damageMul * livingEntity.getMainHandItem().getEnchantmentLevel(daiFunctions.getHolder(livingEntity.level(), daiEnchantments.CONVINCE_PEOPLE_BY_REASON));
                     }
-                    event.setNewDamage((event.getOriginalDamage() + damageAdd) * damageMul);
+                    event.setNewDamage((event.getNewDamage() + damageAdd) * damageMul);
                 }
             }
             if(damageSource.is(DamageTypeTags.IS_EXPLOSION) && target.getItemBySlot(EquipmentSlot.CHEST).getEnchantmentLevel(daiFunctions.getHolder(target.level(), daiEnchantments.EXPLOSION_GET)) > 0)
@@ -73,6 +76,14 @@ public class DamageDispose {
                     target.level().addFreshEntity(brickEntity);
                 }
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void deathDeal(LivingDeathEvent event){
+        LivingEntity livingEntity = event.getEntity();
+        if(livingEntity.getItemBySlot(EquipmentSlot.HEAD).is(daiItems.BELL_HELMET.get())){
+            livingEntity.level().addFreshEntity(new ItemEntity(livingEntity.level(), livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), new ItemStack(daiItems.BELL_HELMET.get())));
         }
     }
 }

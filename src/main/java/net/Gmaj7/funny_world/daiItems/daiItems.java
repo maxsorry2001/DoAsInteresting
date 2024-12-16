@@ -36,6 +36,9 @@ public class daiItems {
             () -> new ArmorItem(daiArmorMaterials.NETHER_BRICK, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(96)));
     public static final Supplier<Item> NETHER_BRICK_BOOTS = DAI_ITEMS.register("nether_brick_boots",
             () -> new ArmorItem(daiArmorMaterials.NETHER_BRICK, ArmorItem.Type.BOOTS, new Item.Properties().durability(80)));
+    public static final Supplier<Item> BELL_HELMET = DAI_ITEMS.register("bell_helmet",
+            () -> new ArmorItem(daiArmorMaterials.BELL, ArmorItem.Type.HELMET, new Item.Properties().durability(127)));
+
 
     public static final Supplier<Item> JISTGABBURASH = DAI_ITEMS.registerItem("jistgabburash", Jistgabburash::new);
     public static final Supplier<Item> ELECTRIC_CHARGE = DAI_ITEMS.registerItem("electric_charge", ElectricCharge::new);

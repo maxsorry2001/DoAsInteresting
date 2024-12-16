@@ -4,12 +4,17 @@ import net.Gmaj7.funny_world.daiEnchantments.daiEnchantments;
 import net.Gmaj7.funny_world.daiInit.daiAttachmentTypes;
 import net.Gmaj7.funny_world.daiInit.daiDamageTypes;
 import net.Gmaj7.funny_world.daiInit.daiFunctions;
+import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -29,6 +34,8 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
     }
 
     @Shadow public abstract boolean hasEffect(Holder<MobEffect> pEffect);
+    @Shadow public abstract ItemStack getItemBySlot(EquipmentSlot pSlot);
+    @Shadow public abstract float getMaxHealth();
 
     @Inject(method = "tick", at = @At("HEAD"))
     public void tickMixin(CallbackInfo info){
@@ -56,6 +63,10 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
             lightningBolt.teleportTo(this.getX(), this.getY(), this.getZ());
             this.level().addFreshEntity(lightningBolt);
             this.removeData(daiAttachmentTypes.THUNDER_HIT);
+        }
+        if(this instanceof Enemy && this.getItemBySlot(EquipmentSlot.HEAD).is(daiItems.BELL_HELMET.get()) && this.tickCount % 40 == 0){
+            this.hurt(new DamageSource(level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(daiDamageTypes.BELL_HELMET)), Math.max(5F, this.getMaxHealth() / 7));
+            level().playSound(this, this.getOnPos().above(2), SoundEvents.BELL_BLOCK, SoundSource.NEUTRAL, 2, 1);
         }
     }
 }

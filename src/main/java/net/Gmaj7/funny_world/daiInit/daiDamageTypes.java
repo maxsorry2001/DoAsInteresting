@@ -12,4 +12,5 @@ public interface daiDamageTypes extends DamageTypes {
     ResourceKey<DamageType> INTERNAL_INJURY = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "internal_injury"));
     ResourceKey<DamageType> CARBON_MONOXIDE_POISONING = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "carbon_monoxide_poisoning"));
     ResourceKey<DamageType> POWER_OF_KNOWLEDGE = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "power_of_knowledge"));
+    ResourceKey<DamageType> BELL_HELMET = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "bell_helmet"));
 }
