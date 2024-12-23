@@ -68,6 +68,8 @@ public class daiItems {
             () -> new ThunderShadowSword(new Item.Properties().stacksTo(1).attributes(ThunderShadowSword.createAttributes()).durability(255)));
     public static final Supplier<Item> ROD_OF_LIGHTING = DAI_ITEMS.register("lighting_bolt_rod",
             () -> new LightingBoltRod(new Item.Properties().stacksTo(1).durability(255).attributes(LightingBoltRod.createAttributes())));
+    public static final Supplier<Item> CONVEX = DAI_ITEMS.register("convex",
+            () -> new Convex(new Item.Properties().stacksTo(1)));
 
     public static final Supplier<Item> EDIBLE_FLINT_AND_STEEL = DAI_ITEMS.register("edible_flint_and_steel",
             () -> new EdibleFlintAndSteel(new Item.Properties().stacksTo(1).food(daiFoods.EDIBLE_FLINT_AND_STEEL).durability(64)));

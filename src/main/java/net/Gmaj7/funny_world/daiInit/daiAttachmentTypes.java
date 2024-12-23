@@ -21,5 +21,8 @@ public class daiAttachmentTypes {
     public static final Supplier<AttachmentType<Integer>> THUNDER_HIT = DAI_ATTCHMENT_TYPE.register("thunder_hit",
             () -> AttachmentType.builder(() -> 1).serialize(Codec.INT).build());
 
+    public static final Supplier<AttachmentType<Float>> RENDER_SCALE = DAI_ATTCHMENT_TYPE.register("render_scale",
+            () -> AttachmentType.builder(() -> 1F).build());
+
     public static void register(IEventBus eventBus){DAI_ATTCHMENT_TYPE.register(eventBus);}
 }

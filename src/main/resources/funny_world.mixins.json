@@ -6,6 +6,7 @@
   "refmap": "funny_world.refmap.json",
   "mixins": [
     "AbstractArrowMixin",
+    "BellBlockMixin",
     "EmeraldForItemsMixin",
     "EmeraldsForVillagerTypeItemMixin",
     "ItemMixin",
@@ -14,8 +15,7 @@
     "ProjectileWeaponItemMixin",
     "SwordItemMixin",
     "TypeSpecificTradeMixin",
-    "VillagerMixin",
-    "BellBlockMixin"
+    "VillagerMixin"
   ],
   "client": [
   ],

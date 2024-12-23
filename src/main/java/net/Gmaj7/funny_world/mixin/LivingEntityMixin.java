@@ -8,6 +8,7 @@ import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -67,6 +68,11 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
         if(this instanceof Enemy && this.getItemBySlot(EquipmentSlot.HEAD).is(daiItems.BELL_HELMET.get()) && this.tickCount % 40 == 0){
             this.hurt(new DamageSource(level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(daiDamageTypes.BELL_HELMET)), Math.max(5F, this.getMaxHealth() / 7));
             level().playSound(this, this.getOnPos().above(2), SoundEvents.BELL_BLOCK, SoundSource.NEUTRAL, 2, 1);
+        }
+        if(this.hasData(daiAttachmentTypes.RENDER_SCALE)){
+            float a = this.getData(daiAttachmentTypes.RENDER_SCALE);
+            if(Math.abs(a - 1) < 10E-6) this.removeData(daiAttachmentTypes.RENDER_SCALE);
+            else this.setData(daiAttachmentTypes.RENDER_SCALE, a > 1 ? a - (a - 1) / 20 : a + (1 - a) / 20);
         }
     }
 }

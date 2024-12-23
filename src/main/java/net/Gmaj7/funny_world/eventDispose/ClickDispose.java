@@ -5,6 +5,7 @@ import net.Gmaj7.funny_world.daiEffects.daiMobEffects;
 import net.Gmaj7.funny_world.daiEnchantments.daiEnchantments;
 import net.Gmaj7.funny_world.daiEntities.custom.BrickEntity;
 import net.Gmaj7.funny_world.daiEntities.custom.NetherBrickEntity;
+import net.Gmaj7.funny_world.daiInit.daiAttachmentTypes;
 import net.Gmaj7.funny_world.daiInit.daiDataComponentTypes;
 import net.Gmaj7.funny_world.daiInit.daiFunctions;
 import net.Gmaj7.funny_world.daiInit.daiTiers;
@@ -26,6 +27,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -98,6 +100,25 @@ public class ClickDispose {
             ItemStack itemStack = player.getItemInHand(hand).copy();
             if(!player.isCreative()) player.getItemInHand(hand).shrink(1);
             ((LivingEntity) target).setItemSlot(EquipmentSlot.HEAD, itemStack);
+            event.setCanceled(true);
+        }
+        if(player.getItemInHand(hand).is(daiItems.CONVEX.get()) && target instanceof LivingEntity){
+            if (target.isCurrentlyGlowing()) {
+                Vec3 vec3 = new Vec3(player.getX() - target.getX(), player.getY() - target.getY(), player.getZ() - target.getZ());
+                Vec3 vec31 = vec3;
+                double u = vec3.length();
+                double f = 1.5;
+                if (u > f) {
+                    if (u < 1.8) u = 1.8;
+                    vec31.scale(f / (u - f));
+                    float scaleNum = (float) (f / (u - f));
+                    if(target.hasData(daiAttachmentTypes.RENDER_SCALE)) scaleNum = scaleNum * target.getData(daiAttachmentTypes.RENDER_SCALE);
+                    target.setData(daiAttachmentTypes.RENDER_SCALE, scaleNum);
+                    target.teleportTo(player.getX() + vec31.x(), vec31.y() < 0 ? player.getY() : player.getY() + vec31.y(), player.getZ() + vec31.z());
+                }
+            }
+            else if (target.level().isDay() && !target.isCurrentlyGlowing()) ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.GLOWING, 500));
+                player.swing(hand);
             event.setCanceled(true);
         }
     }
