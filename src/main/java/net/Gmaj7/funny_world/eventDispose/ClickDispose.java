@@ -114,6 +114,8 @@ public class ClickDispose {
                     float scaleNum = (float) (f / (u - f));
                     if(target.hasData(daiAttachmentTypes.RENDER_SCALE)) scaleNum = scaleNum * target.getData(daiAttachmentTypes.RENDER_SCALE);
                     target.setData(daiAttachmentTypes.RENDER_SCALE, scaleNum);
+                    if(target.hasData(daiAttachmentTypes.RENDER_UP_DOWN)) target.setData(daiAttachmentTypes.RENDER_UP_DOWN, !target.getData(daiAttachmentTypes.RENDER_UP_DOWN));
+                    else target.setData(daiAttachmentTypes.RENDER_UP_DOWN, true);
                     target.teleportTo(player.getX() + vec31.x(), vec31.y() < 0 ? player.getY() : player.getY() + vec31.y(), player.getZ() + vec31.z());
                 }
             }

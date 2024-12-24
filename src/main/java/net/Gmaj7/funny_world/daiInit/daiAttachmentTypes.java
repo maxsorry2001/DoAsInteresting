@@ -24,5 +24,8 @@ public class daiAttachmentTypes {
     public static final Supplier<AttachmentType<Float>> RENDER_SCALE = DAI_ATTCHMENT_TYPE.register("render_scale",
             () -> AttachmentType.builder(() -> 1F).build());
 
+    public static final Supplier<AttachmentType<Boolean>> RENDER_UP_DOWN = DAI_ATTCHMENT_TYPE.register("render_up_down",
+            () -> AttachmentType.builder(() -> false).build());
+
     public static void register(IEventBus eventBus){DAI_ATTCHMENT_TYPE.register(eventBus);}
 }

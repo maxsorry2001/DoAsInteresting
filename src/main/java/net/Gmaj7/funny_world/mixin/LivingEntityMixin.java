@@ -71,7 +71,11 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
         }
         if(this.hasData(daiAttachmentTypes.RENDER_SCALE)){
             float a = this.getData(daiAttachmentTypes.RENDER_SCALE);
-            if(Math.abs(a - 1) < 10E-6) this.removeData(daiAttachmentTypes.RENDER_SCALE);
+            if(Math.abs(a - 1) < 10E-2) {
+                this.removeData(daiAttachmentTypes.RENDER_SCALE);
+                if(this.hasData(daiAttachmentTypes.RENDER_UP_DOWN))
+                    this.removeData(daiAttachmentTypes.RENDER_UP_DOWN);
+            }
             else this.setData(daiAttachmentTypes.RENDER_SCALE, a > 1 ? a - (a - 1) / 100 : a + (1 - a) / 100);
         }
     }

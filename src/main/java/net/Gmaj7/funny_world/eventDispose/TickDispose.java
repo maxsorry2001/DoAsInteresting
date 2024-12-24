@@ -5,6 +5,7 @@ import net.Gmaj7.funny_world.daiEffects.daiMobEffects;
 import net.Gmaj7.funny_world.daiEnchantments.daiEnchantments;
 import net.Gmaj7.funny_world.daiInit.*;
 import net.Gmaj7.funny_world.daiItems.daiItems;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -132,7 +133,11 @@ public class TickDispose {
     public static void RenderDeal(RenderLivingEvent.Pre event){
         if(event.getEntity().hasData(daiAttachmentTypes.RENDER_SCALE)){
             float i = event.getEntity().getData(daiAttachmentTypes.RENDER_SCALE);
-            event.getPoseStack().scale(i, i, i);
+            if(event.getEntity().getData(daiAttachmentTypes.RENDER_UP_DOWN)) {
+                event.getPoseStack().scale(i, -i, i);
+                event.getPoseStack().translate(0, -event.getEntity().getBoundingBox().getYsize(), 0);
+            }
+            else event.getPoseStack().scale(i, i, i);
         }
     }
 }
