@@ -36,6 +36,7 @@
   "item.funny_world.lighting_bolt_rod": "雷霆之杖",
   "item.funny_world.bell_helmet": "金钟盔",
   "item.funny_world.convex": "凸透镜",
+  "item.funny_world.mahjong": "麻将牌",
 
   "effect.funny_world.iiiiiii": "烫烫烫",
   "effect.funny_world.electric_charge": "正电荷",
@@ -52,6 +53,7 @@
 
   "entity.funny_world.sculk_tnt_entity": "幽匿TNT",
   "entity.funny_world.electromagnetic_tnt_entity": "电磁TNT",
+  "entity.funny_world.mahjong_entity": "麻将牌",
 
   "enchantment.funny_world.explosion_get": "爆炸吸收",
   "enchantment.funny_world.shield_strike": "盾击",
@@ -63,6 +65,7 @@
   "enchantment.funny_world.convince_people_by_reason": "以理服人",
   "enchantment.funny_world.probation": "感化",
   "enchantment.funny_world.eater_of_worlds": "世界吞噬者",
+  "enchantment.funny_world.all_of_same": "清一色",
 
   "death.attack.dai_radiation" : "%1$s由于电磁辐射而全身溃烂",
   "death.attack.dai_radiation.player" : "%1$s由于%2$s发射的电磁辐射而全身溃烂",

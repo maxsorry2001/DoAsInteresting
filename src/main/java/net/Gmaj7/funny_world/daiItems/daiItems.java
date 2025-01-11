@@ -3,6 +3,7 @@ package net.Gmaj7.funny_world.daiItems;
 import net.Gmaj7.funny_world.FunnyWorld;
 import net.Gmaj7.funny_world.daiBlocks.daiBlocks;
 import net.Gmaj7.funny_world.daiInit.daiArmorMaterials;
+import net.Gmaj7.funny_world.daiInit.daiDataComponentTypes;
 import net.Gmaj7.funny_world.daiInit.daiTiers;
 import net.Gmaj7.funny_world.daiItems.custom.*;
 import net.minecraft.world.item.*;
@@ -16,6 +17,8 @@ public class daiItems {
     public static final Supplier<Item> EXPLOSION_STORAGE = DAI_ITEMS.registerItem("explosion_storage", ExplosionStorage::new);
     public static final Supplier<Item> RED_PACKET = DAI_ITEMS.register("red_packet",
             () -> new RedPacket(new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> MAHJONG = DAI_ITEMS.register("mahjong",
+            () -> new MahjongItem(new Item.Properties().stacksTo(1).durability(108).component(daiDataComponentTypes.MAHJONG_PATTERN, 0).component(daiDataComponentTypes.MAHJONG_POINTS, 0)));
 
     public static final Supplier<Item> BLUE_ICE_BOOTS = DAI_ITEMS.register("blue_ice_boots",
             () -> new ArmorItem(daiArmorMaterials.BLUE_ICE, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).durability(128)));

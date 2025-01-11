@@ -18,5 +18,6 @@ public class daiEnchantments {
     public static final ResourceKey<Enchantment> CONVINCE_PEOPLE_BY_REASON = ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "convince_people_by_reason"));
     public static final ResourceKey<Enchantment> PROBATION = ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "probation"));
     public static final ResourceKey<Enchantment> EATER_OF_WORLDS = ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "eater_of_worlds"));
+    public static final ResourceKey<Enchantment> ALL_OF_SAME = ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "all_of_same"));
 
 }

@@ -36,6 +36,7 @@
   "item.funny_world.lighting_bolt_rod": "lighting bolt rod",
   "item.funny_world.bell_helmet": "bell helmet",
   "item.funny_world.convex": "convex",
+  "item.funny_world.mahjong": "mahjong",
 
   "effect.funny_world.iiiiiii": "ÌÌÌÌÌÌÌÌÌÌÌÌÌÌ",
   "effect.funny_world.electric_charge": "electric charge",
@@ -52,6 +53,7 @@
 
   "entity.funny_world.sculk_tnt_entity": "sculk TNT entity",
   "entity.funny_world.electromagnetic_tnt_entity": "electromagnetic TNT entity",
+  "entity.funny_world.mahjong_entity": "mahjong",
 
   "enchantment.funny_world.explosion_get": "explosion get",
   "enchantment.funny_world.shield_strike": "shield strike",
@@ -63,6 +65,7 @@
   "enchantment.funny_world.convince_people_by_reason": "convince people by reason",
   "enchantment.funny_world.probation": "probation",
   "enchantment.funny_world.eater_of_worlds": "eater of worlds",
+  "enchantment.funny_world.all_of_same": "eater of worlds",
 
   "death.attack.dai_radiation" : "%1$s is festering from the radiation",
   "death.attack.dai_radiation.player" : "%1$s is festering from the radiation which is made by %s$2",

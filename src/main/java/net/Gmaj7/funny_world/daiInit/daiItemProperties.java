@@ -17,6 +17,7 @@ public class daiItemProperties {
         makeFlame(Items.GOLDEN_SWORD);
         makeFlame(Items.DIAMOND_SWORD);
         makeFlame(Items.NETHERITE_SWORD);
+        makeMahjong(daiItems.MAHJONG.get());
     }
 
     private static void makeBow(Item item){
@@ -45,6 +46,13 @@ public class daiItemProperties {
     private static void makeFlame(Item item){
         ItemProperties.register(item, ResourceLocation.parse("flame"), ((pStack, pLevel, pEntity, pSeed) -> {
             return pStack.has(daiDataComponentTypes.HEAT_BY_FRICTION) ? 1.0F : 0.0F;
+        }));
+    }
+
+    private static void makeMahjong(Item item){
+        ItemProperties.register(item, ResourceLocation.parse("mahjong"), ((pStack, pLevel, pEntity, pSeed) -> {
+            return pStack.get(daiDataComponentTypes.MAHJONG_POINTS) > 0 && pStack.get(daiDataComponentTypes.MAHJONG_PATTERN) > 0 ?
+                    pStack.get(daiDataComponentTypes.MAHJONG_PATTERN) + 0.1F * pStack.get(daiDataComponentTypes.MAHJONG_POINTS) : 0.0F;
         }));
     }
 }

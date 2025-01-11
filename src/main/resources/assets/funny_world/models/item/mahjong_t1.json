@@ -1,0 +1,6 @@
+{
+  "parent": "funny_world:item/mahjong",
+  "textures": {
+    "layer0": "funny_world:item/mahjong_t1"
+  }
+}

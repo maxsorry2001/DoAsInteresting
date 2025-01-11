@@ -32,5 +32,11 @@ public class daiDataComponentTypes {
     public static final Supplier<DataComponentType<Integer>> HEAT_BY_FRICTION = DAI_DATA_COMPONENT_TYPE.register("heat_by_briction",
             () -> DataComponentType.<Integer>builder().persistent(Codec.INT).build());
 
+    public static final Supplier<DataComponentType<Integer>> MAHJONG_PATTERN = DAI_DATA_COMPONENT_TYPE.register("mahjong_pattern",
+            () -> DataComponentType.<Integer>builder().persistent(Codec.INT).build());
+
+    public static final Supplier<DataComponentType<Integer>> MAHJONG_POINTS = DAI_DATA_COMPONENT_TYPE.register("mahjong_points",
+            () -> DataComponentType.<Integer>builder().persistent(Codec.INT).build());
+
     public static void register(IEventBus eventBus){DAI_DATA_COMPONENT_TYPE.register(eventBus);}
 }
