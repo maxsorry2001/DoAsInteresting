@@ -46,10 +46,4 @@ public class MahjongItem extends Item {
         pPlayer.swing(pUsedHand, true);
         return super.use(pLevel, pPlayer, pUsedHand);
     }
-
-    @Override
-    public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
-        super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
-        pTooltipComponents.add(Component.literal(pStack.get(daiDataComponentTypes.MAHJONG_PATTERN) + "," + pStack.get(daiDataComponentTypes.MAHJONG_POINTS)));
-    }
 }
