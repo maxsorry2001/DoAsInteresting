@@ -50,6 +50,7 @@ public class FunnyWorldTabs {
                         pOutput.accept(daiItems.EDIBLE_FLINT_AND_STEEL.get());
                         pOutput.accept(daiItems.BELL_HELMET.get());
                         pOutput.accept(daiItems.MAHJONG.get());
+                        pOutput.accept(daiItems.TT_DISC.get());
 
                         pOutput.accept(daiBlocks.SCULK_TNT.get());
                         pOutput.accept(daiBlocks.ELECTROMAGNETIC_TNT.get());

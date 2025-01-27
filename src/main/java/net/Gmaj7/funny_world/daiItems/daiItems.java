@@ -6,6 +6,7 @@ import net.Gmaj7.funny_world.daiInit.daiArmorMaterials;
 import net.Gmaj7.funny_world.daiInit.daiDataComponentTypes;
 import net.Gmaj7.funny_world.daiInit.daiTiers;
 import net.Gmaj7.funny_world.daiItems.custom.*;
+import net.Gmaj7.funny_world.daiSounds.daiJukeboxSongs;
 import net.minecraft.world.item.*;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -76,6 +77,9 @@ public class daiItems {
 
     public static final Supplier<Item> EDIBLE_FLINT_AND_STEEL = DAI_ITEMS.register("edible_flint_and_steel",
             () -> new EdibleFlintAndSteel(new Item.Properties().stacksTo(1).food(daiFoods.EDIBLE_FLINT_AND_STEEL).durability(64)));
+
+    public static final Supplier<Item> TT_DISC = DAI_ITEMS.register("tt_disc",
+            () -> new Item(new Item.Properties().stacksTo(1).jukeboxPlayable(daiJukeboxSongs.GXFC)));
 
 
     public static final Supplier<BlockItem> SCULK_TNT = DAI_ITEMS.registerSimpleBlockItem("sculk_tnt", daiBlocks.SCULK_TNT);
