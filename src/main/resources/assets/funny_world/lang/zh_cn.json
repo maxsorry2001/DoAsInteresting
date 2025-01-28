@@ -37,6 +37,7 @@
   "item.funny_world.bell_helmet": "金钟盔",
   "item.funny_world.convex": "凸透镜",
   "item.funny_world.mahjong": "麻将牌",
+  "item.funny_world.spring_festival_overture_disc": "音乐唱片",
 
   "effect.funny_world.iiiiiii": "烫烫烫",
   "effect.funny_world.electric_charge": "正电荷",
@@ -81,5 +82,6 @@
   "edible_flint_and_steel_message": "在甜浆果的辅助下，打火石貌似能下口了",
   "quick_use": "它快燃尽了",
   "high temperature": "温度很高，小心烫手",
-  "try_to_use_on_illager": "试试对灾厄村民使用"
+  "try_to_use_on_illager": "试试对灾厄村民使用",
+  "daisongs_spring_festival_overture": "春节序曲"
 }

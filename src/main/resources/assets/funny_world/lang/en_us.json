@@ -37,6 +37,7 @@
   "item.funny_world.bell_helmet": "bell helmet",
   "item.funny_world.convex": "convex",
   "item.funny_world.mahjong": "mahjong",
+  "item.funny_world.spring_festival_overture_disc": "music disc",
 
   "effect.funny_world.iiiiiii": "ÌÌÌÌÌÌÌÌÌÌÌÌÌÌ",
   "effect.funny_world.electric_charge": "electric charge",
@@ -81,5 +82,6 @@
   "edible_flint_and_steel_message": "It seem to be more delicious with the sweet berries",
   "quick_use": "It will be burn out in few seconds",
   "high temperature": "It has a high temperature",
-  "try_to_use_on_illager": "Try to use it on illagers"
+  "try_to_use_on_illager": "Try to use it on illagers",
+  "daisongs_spring_festival_overture": "Spring Festival Overture"
 }

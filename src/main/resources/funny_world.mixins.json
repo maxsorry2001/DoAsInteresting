@@ -11,6 +11,7 @@
     "EmeraldsForVillagerTypeItemMixin",
     "ItemMixin",
     "ItemsForEmeraldsMixin",
+    "JukeboxBlockEntityMixin",
     "LivingEntityMixin",
     "ProjectileWeaponItemMixin",
     "SwordItemMixin",

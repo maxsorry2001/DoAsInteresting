@@ -78,8 +78,8 @@ public class daiItems {
     public static final Supplier<Item> EDIBLE_FLINT_AND_STEEL = DAI_ITEMS.register("edible_flint_and_steel",
             () -> new EdibleFlintAndSteel(new Item.Properties().stacksTo(1).food(daiFoods.EDIBLE_FLINT_AND_STEEL).durability(64)));
 
-    public static final Supplier<Item> TT_DISC = DAI_ITEMS.register("tt_disc",
-            () -> new Item(new Item.Properties().stacksTo(1).jukeboxPlayable(daiJukeboxSongs.GXFC)));
+    public static final Supplier<Item> SPRING_FESTIVAL_OVERTURE_DISC = DAI_ITEMS.register("spring_festival_overture_disc",
+            () -> new Item(new Item.Properties().stacksTo(1).jukeboxPlayable(daiJukeboxSongs.SPRING_FESTIVAL_OVERTURE).rarity(Rarity.RARE)));
 
 
     public static final Supplier<BlockItem> SCULK_TNT = DAI_ITEMS.registerSimpleBlockItem("sculk_tnt", daiBlocks.SCULK_TNT);
