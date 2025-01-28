@@ -55,9 +55,6 @@ public abstract class JukeboxBlockEntityMixin extends BlockEntity implements Cle
                         villager.getGossips().add(pTarget.getUUID(), GossipType.MAJOR_POSITIVE, 20);
                     }
                 }
-                if(pLevel instanceof ServerLevel serverLevel){
-                    serverLevel.getServer().overworld().setWeatherParameters(65535, 65535, false, false);
-                }
             }
             if(pJukebox.getSongPlayer().getTicksSinceSongStarted() % 34 == 0){
                 ItemStack itemStack = new ItemStack(Items.FIREWORK_ROCKET);
