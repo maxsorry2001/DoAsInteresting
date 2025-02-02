@@ -105,6 +105,7 @@ public class FunnyWorld
             EntityRenderers.register(daiEntities.THUNDER_WEDGE_ENTITY.get(), ThunderWedgeRender::new);
             EntityRenderers.register(daiEntities.THUNDER_BALL_ENTITY.get(), ThunderBallRender::new);
             EntityRenderers.register(daiEntities.MAHJONG_ENTITY.get(), MahjongEntityRenderer::new);
+            EntityRenderers.register(daiEntities.MOMENTUM_ARROW_ENTITY.get(), MomentumArrowRenderer::new);
 
             daiItemProperties.addCustomItemProperties();
         }

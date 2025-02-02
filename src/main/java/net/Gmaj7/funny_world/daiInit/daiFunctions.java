@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -30,8 +31,12 @@ public class daiFunctions {
         return itemStack;
     }
 
-    public static Holder<Enchantment> getHolder(Level level, ResourceKey<Enchantment> resourceKey){
+    public static Holder<Enchantment> getEnchantmentHolder(Level level, ResourceKey<Enchantment> resourceKey){
         return level.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(resourceKey);
+    }
+
+    public static Holder<DamageType> getDamagementHolder(Level level, ResourceKey<DamageType> resourceKey){
+        return level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(resourceKey);
     }
 
     public static boolean withIronOut(LivingEntity plivingEntity){

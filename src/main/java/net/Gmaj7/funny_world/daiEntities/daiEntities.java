@@ -120,6 +120,11 @@ public class daiEntities {
                     .clientTrackingRange(4)
                     .build("mahjong_entity"));
 
+    public static final Supplier<EntityType<MahjongEntity>> MOMENTUM_ARROW_ENTITY =
+            ENTITY_TYPES.register("momentum_arrow_entity", () -> EntityType.Builder.<MahjongEntity>of(MahjongEntity::new, MobCategory.MISC)
+                    .sized(0.5F, 0.5F)
+                    .clientTrackingRange(4)
+                    .build("momentum_arrow_entity"));
 
 
     public static void register(IEventBus eventBus){ENTITY_TYPES.register(eventBus);}

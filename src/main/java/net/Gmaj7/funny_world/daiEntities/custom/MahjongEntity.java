@@ -5,7 +5,6 @@ import net.Gmaj7.funny_world.daiEntities.daiEntities;
 import net.Gmaj7.funny_world.daiInit.daiDataComponentTypes;
 import net.Gmaj7.funny_world.daiInit.daiFunctions;
 import net.Gmaj7.funny_world.daiItems.daiItems;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
@@ -14,12 +13,10 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
@@ -57,7 +54,7 @@ public class MahjongEntity extends AbstractArrow {
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
         if(!shootItem.isEmpty()){
-            if(shootItem.getEnchantmentLevel(daiFunctions.getHolder(level(), daiEnchantments.ALL_OF_SAME)) <= 0)
+            if(shootItem.getEnchantmentLevel(daiFunctions.getEnchantmentHolder(level(), daiEnchantments.ALL_OF_SAME)) <= 0)
                 shootItem.set(daiDataComponentTypes.MAHJONG_PATTERN, 0);
             shootItem.set(daiDataComponentTypes.MAHJONG_POINTS, 0);
             level().addFreshEntity(new ItemEntity(level(), getOwner().getX(), getOwner().getY(), getOwner().getZ(), shootItem));

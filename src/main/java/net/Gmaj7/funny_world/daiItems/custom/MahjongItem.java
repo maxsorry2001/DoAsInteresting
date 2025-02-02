@@ -2,10 +2,8 @@ package net.Gmaj7.funny_world.daiItems.custom;
 
 import net.Gmaj7.funny_world.daiEnchantments.daiEnchantments;
 import net.Gmaj7.funny_world.daiEntities.custom.MahjongEntity;
-import net.Gmaj7.funny_world.daiEntities.custom.ThrownHydrogenEntity;
 import net.Gmaj7.funny_world.daiInit.daiDataComponentTypes;
 import net.Gmaj7.funny_world.daiInit.daiFunctions;
-import net.minecraft.network.chat.Component;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -13,10 +11,8 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 
-import java.util.List;
 import java.util.Random;
 
 public class MahjongItem extends Item {
@@ -29,7 +25,7 @@ public class MahjongItem extends Item {
         ItemStack itemStack = pPlayer.getItemInHand(pUsedHand);
         if(!pLevel.isClientSide()) {
             if (pPlayer.isShiftKeyDown()) {
-                if(itemStack.get(daiDataComponentTypes.MAHJONG_PATTERN) == 0 || itemStack.getEnchantmentLevel(daiFunctions.getHolder(pLevel, daiEnchantments.ALL_OF_SAME)) <= 0)
+                if(itemStack.get(daiDataComponentTypes.MAHJONG_PATTERN) == 0 || itemStack.getEnchantmentLevel(daiFunctions.getEnchantmentHolder(pLevel, daiEnchantments.ALL_OF_SAME)) <= 0)
                     itemStack.set(daiDataComponentTypes.MAHJONG_PATTERN, new Random().nextInt(3) + 1);
                 itemStack.set(daiDataComponentTypes.MAHJONG_POINTS, new Random().nextInt(9) + 1);
             } else if (itemStack.get(daiDataComponentTypes.MAHJONG_PATTERN) > 0 && itemStack.get(daiDataComponentTypes.MAHJONG_POINTS) > 0) {

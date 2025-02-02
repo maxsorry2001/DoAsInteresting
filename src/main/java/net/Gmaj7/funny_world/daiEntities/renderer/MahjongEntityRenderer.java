@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.Gmaj7.funny_world.FunnyWorld;
-import net.Gmaj7.funny_world.daiEntities.custom.IronShootEntity;
 import net.Gmaj7.funny_world.daiEntities.custom.MahjongEntity;
 import net.Gmaj7.funny_world.daiEntities.model.MahjongEntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;

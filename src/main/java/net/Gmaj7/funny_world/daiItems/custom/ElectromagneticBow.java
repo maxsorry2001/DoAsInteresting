@@ -28,11 +28,11 @@ public class ElectromagneticBow extends Item {
             itemStack1.setCount(1);
             itemStack.shrink(1);
             IronShootEntity ironShootEntity = new IronShootEntity(pLevel, pPlayer, itemStack1);
-            int k = EnchantmentHelper.getItemEnchantmentLevel(daiFunctions.getHolder(pLevel, Enchantments.POWER), pStack);
+            int k = EnchantmentHelper.getItemEnchantmentLevel(daiFunctions.getEnchantmentHolder(pLevel, Enchantments.POWER), pStack);
             if (k > 0) {
                 ironShootEntity.setBaseDamage(ironShootEntity.getBaseDamage() + (double)k * 0.5 + 0.5);
             }
-            if (EnchantmentHelper.getItemEnchantmentLevel(daiFunctions.getHolder(pLevel, Enchantments.FLAME), pStack) > 0) {
+            if (EnchantmentHelper.getItemEnchantmentLevel(daiFunctions.getEnchantmentHolder(pLevel, Enchantments.FLAME), pStack) > 0) {
                 ironShootEntity.igniteForSeconds(100);
             }
             ironShootEntity.setCharge(getPowerForTime(this.getUseDuration(pStack, pLivingEntity) - pTimeCharged));

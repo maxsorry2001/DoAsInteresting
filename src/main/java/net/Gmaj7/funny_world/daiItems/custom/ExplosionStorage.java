@@ -43,7 +43,7 @@ public class ExplosionStorage extends Item {
         pPlayer.awardStat(Stats.ITEM_USED.get(this));
         pPlayer.swing(pUsedHand, true);
         pPlayer.getCooldowns().addCooldown(this,10);
-        if(!pPlayer.getAbilities().instabuild && !(pPlayer.getItemInHand(pUsedHand).getEnchantmentLevel(daiFunctions.getHolder(pLevel, Enchantments.INFINITY)) > 0)){
+        if(!pPlayer.getAbilities().instabuild && !(pPlayer.getItemInHand(pUsedHand).getEnchantmentLevel(daiFunctions.getEnchantmentHolder(pLevel, Enchantments.INFINITY)) > 0)){
             itemStack.shrink(1);
         }
         return super.use(pLevel, pPlayer, pUsedHand);

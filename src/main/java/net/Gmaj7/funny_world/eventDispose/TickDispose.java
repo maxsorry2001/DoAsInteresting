@@ -5,7 +5,6 @@ import net.Gmaj7.funny_world.daiEffects.daiMobEffects;
 import net.Gmaj7.funny_world.daiEnchantments.daiEnchantments;
 import net.Gmaj7.funny_world.daiInit.*;
 import net.Gmaj7.funny_world.daiItems.daiItems;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -26,7 +25,6 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderLivingEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
-import net.neoforged.neoforge.event.entity.player.CanPlayerSleepEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -84,7 +82,7 @@ public class TickDispose {
                 event.getToolTip().add(Component.translatable("quick_use"));
             else event.getToolTip().add(Component.translatable("high temperature"));
         }
-        if(event.getEntity() != null && itemStack.getEnchantmentLevel(daiFunctions.getHolder(event.getEntity().level(), daiEnchantments.PROBATION)) > 0 && itemStack.is(Items.EMERALD)){
+        if(event.getEntity() != null && itemStack.getEnchantmentLevel(daiFunctions.getEnchantmentHolder(event.getEntity().level(), daiEnchantments.PROBATION)) > 0 && itemStack.is(Items.EMERALD)){
             event.getToolTip().add(Component.translatable("try_to_use_on_illager"));
         }
     }

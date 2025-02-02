@@ -29,7 +29,7 @@ public class EntityDispose {
     public static void TotemDeal(LivingUseTotemEvent event){
         LivingEntity livingEntity = event.getEntity();
         ItemStack totem = event.getTotem();
-        if(livingEntity instanceof Player && totem.getEnchantmentLevel(daiFunctions.getHolder(livingEntity.level(), daiEnchantments.PLUNDER)) > 0){
+        if(livingEntity instanceof Player && totem.getEnchantmentLevel(daiFunctions.getEnchantmentHolder(livingEntity.level(), daiEnchantments.PLUNDER)) > 0){
             totem.shrink(1);
             BlockPos blockPosLeft = new BlockPos(livingEntity.getBlockX(), livingEntity.getBlockY(), livingEntity.getBlockZ());
             BlockPos blockPosRight = new BlockPos(livingEntity.getBlockX() + 1, livingEntity.getBlockY(), livingEntity.getBlockZ());

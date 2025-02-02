@@ -8,11 +8,9 @@ import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.monster.Enemy;
@@ -50,8 +48,8 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
                         ChiseledBookShelfBlockEntity blockEntity = optional.get();
                         for (int n = 0; n < blockEntity.count(); n++){
                             ItemStack itemStack = blockEntity.getItem(n);
-                            if(itemStack.getEnchantmentLevel(daiFunctions.getHolder(this.level(), daiEnchantments.CONVINCE_PEOPLE_BY_REASON)) > 0)
-                                lv += itemStack.getEnchantmentLevel(daiFunctions.getHolder(this.level(), daiEnchantments.CONVINCE_PEOPLE_BY_REASON));
+                            if(itemStack.getEnchantmentLevel(daiFunctions.getEnchantmentHolder(this.level(), daiEnchantments.CONVINCE_PEOPLE_BY_REASON)) > 0)
+                                lv += itemStack.getEnchantmentLevel(daiFunctions.getEnchantmentHolder(this.level(), daiEnchantments.CONVINCE_PEOPLE_BY_REASON));
                         }
                     }
                 }

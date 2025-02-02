@@ -75,6 +75,9 @@ public class daiItems {
     public static final Supplier<Item> CONVEX = DAI_ITEMS.register("convex",
             () -> new Convex(new Item.Properties().stacksTo(1)));
 
+    public static final Supplier<Item> MOMENTUM_ARROW = DAI_ITEMS.register("momentum_arrow",
+            () -> new MomentumArrowItem(new Item.Properties()));
+
     public static final Supplier<Item> EDIBLE_FLINT_AND_STEEL = DAI_ITEMS.register("edible_flint_and_steel",
             () -> new EdibleFlintAndSteel(new Item.Properties().stacksTo(1).food(daiFoods.EDIBLE_FLINT_AND_STEEL).durability(64)));
 

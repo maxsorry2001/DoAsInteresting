@@ -25,7 +25,7 @@ public abstract class ProjectileWeaponItemMixin extends Item {
 
     @Inject(at = @At("RETURN"), method = "createProjectile", locals = LocalCapture.CAPTURE_FAILSOFT)
     public void createProjectileMixin(Level pLevel, LivingEntity pShooter, ItemStack pWeapon, ItemStack pAmmo, boolean pIsCrit, CallbackInfoReturnable ci, ArrowItem arrowitem, AbstractArrow abstractarrow){
-        if(pWeapon.getEnchantmentLevel(daiFunctions.getHolder(pShooter.level(), daiEnchantments.FISSION)) > 0){
+        if(pWeapon.getEnchantmentLevel(daiFunctions.getEnchantmentHolder(pShooter.level(), daiEnchantments.FISSION)) > 0){
             abstractarrow.setData(daiAttachmentTypes.FISSION_ARROW, pWeapon.getEnchantmentLevel(pShooter.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(daiEnchantments.FISSION)));
         }
     }

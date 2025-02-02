@@ -13,12 +13,9 @@ import net.Gmaj7.funny_world.daiItems.daiFoods;
 import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.Gmaj7.funny_world.villager.daiVillagers;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.component.DataComponentMap;
-import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
@@ -64,7 +61,7 @@ public class ClickDispose {
         Entity target = event.getTarget();
         InteractionHand hand = event.getHand();
         if(!player.level().isClientSide()){
-            int i = player.getItemInHand(hand).getEnchantmentLevel(daiFunctions.getHolder(player.level(), daiEnchantments.SHIELD_STRIKE));
+            int i = player.getItemInHand(hand).getEnchantmentLevel(daiFunctions.getEnchantmentHolder(player.level(), daiEnchantments.SHIELD_STRIKE));
             if(i > 0 && !player.getCooldowns().isOnCooldown(player.getItemInHand(hand).getItem())){
                 if(target instanceof LivingEntity){
                     List<LivingEntity> list = target.level().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(1, 1, 1));
@@ -78,17 +75,17 @@ public class ClickDispose {
                     player.level().playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.IRON_GOLEM_DAMAGE, SoundSource.PLAYERS, 0.5F, 0.4F / (player.level().getRandom().nextFloat()*0.4F + 0.8F));
                 }
             }
-            if(hand == InteractionHand.MAIN_HAND && player.getItemInHand(hand).getEnchantmentLevel(daiFunctions.getHolder(player.level(), daiEnchantments.PROBATION)) > 0 && target.getType().is(EntityTypeTags.ILLAGER)){
+            if(hand == InteractionHand.MAIN_HAND && player.getItemInHand(hand).getEnchantmentLevel(daiFunctions.getEnchantmentHolder(player.level(), daiEnchantments.PROBATION)) > 0 && target.getType().is(EntityTypeTags.ILLAGER)){
                 Villager villager = new Villager(EntityType.VILLAGER, player.level(), daiVillagers.ILLAGER_CHANGE.get());
                 villager.teleportTo(target.getX(), target.getY(), target.getZ());
-                villager.getGossips().add(player.getUUID(), GossipType.MINOR_POSITIVE, 15 + (player.getItemInHand(hand).getEnchantmentLevel(daiFunctions.getHolder(player.level(), daiEnchantments.PROBATION)) - 1) * 5);
-                villager.getGossips().add(player.getUUID(), GossipType.MAJOR_POSITIVE, 15 + (player.getItemInHand(hand).getEnchantmentLevel(daiFunctions.getHolder(player.level(), daiEnchantments.PROBATION)) - 1) * 5);
+                villager.getGossips().add(player.getUUID(), GossipType.MINOR_POSITIVE, 15 + (player.getItemInHand(hand).getEnchantmentLevel(daiFunctions.getEnchantmentHolder(player.level(), daiEnchantments.PROBATION)) - 1) * 5);
+                villager.getGossips().add(player.getUUID(), GossipType.MAJOR_POSITIVE, 15 + (player.getItemInHand(hand).getEnchantmentLevel(daiFunctions.getEnchantmentHolder(player.level(), daiEnchantments.PROBATION)) - 1) * 5);
                 target.remove(Entity.RemovalReason.DISCARDED);
                 player.level().addFreshEntity(villager);
             }
         }
         else if(player.level().isClientSide()){
-            if(hand == InteractionHand.MAIN_HAND && player.getItemInHand(hand).getEnchantmentLevel(daiFunctions.getHolder(player.level(), daiEnchantments.PROBATION)) > 0 && target.getType().is(EntityTypeTags.ILLAGER)){
+            if(hand == InteractionHand.MAIN_HAND && player.getItemInHand(hand).getEnchantmentLevel(daiFunctions.getEnchantmentHolder(player.level(), daiEnchantments.PROBATION)) > 0 && target.getType().is(EntityTypeTags.ILLAGER)){
                 player.swing(hand);
                 for (int j = 1; j < 45; j++){
                     double r = j * 2 *Math.PI / 45;
@@ -132,7 +129,7 @@ public class ClickDispose {
         BlockEntity blockEntity = player.level().getBlockEntity(blockPos);
         BlockState blockState = player.level().getBlockState(blockPos);
         EntityDispose.totemChestSummon(player, blockEntity);
-        if(EnchantmentHelper.getEnchantmentLevel(daiFunctions.getHolder(player.level(), daiEnchantments.ELECTRIFICATION_BY_FRICTION), player) > 0 && event.getHand() == InteractionHand.MAIN_HAND && player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty()){
+        if(EnchantmentHelper.getEnchantmentLevel(daiFunctions.getEnchantmentHolder(player.level(), daiEnchantments.ELECTRIFICATION_BY_FRICTION), player) > 0 && event.getHand() == InteractionHand.MAIN_HAND && player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty()){
             if(player.level().isClientSide())
                 player.swing(InteractionHand.MAIN_HAND);
             else {
@@ -147,7 +144,7 @@ public class ClickDispose {
                 player.level().addFreshEntity(itemEntity);
             }
         }
-        int EOW = EnchantmentHelper.getEnchantmentLevel(daiFunctions.getHolder(player.level(), daiEnchantments.EATER_OF_WORLDS), player);
+        int EOW = EnchantmentHelper.getEnchantmentLevel(daiFunctions.getEnchantmentHolder(player.level(), daiEnchantments.EATER_OF_WORLDS), player);
         int hunger = (int) Math.ceil((double) player.getFoodData().getFoodLevel() / 5);
         if(EOW > 0 && player.getMainHandItem().isEmpty()) {
             ItemStack itemStack = new ItemStack(blockState.getBlock().asItem());
