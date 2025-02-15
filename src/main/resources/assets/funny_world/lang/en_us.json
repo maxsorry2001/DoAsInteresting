@@ -68,7 +68,8 @@
   "enchantment.funny_world.convince_people_by_reason": "convince people by reason",
   "enchantment.funny_world.probation": "probation",
   "enchantment.funny_world.eater_of_worlds": "eater of worlds",
-  "enchantment.funny_world.all_of_same": "eater of worlds",
+  "enchantment.funny_world.all_of_same": "all of same",
+  "enchantment.funny_world.entropy": "entropy",
 
   "death.attack.dai_radiation" : "%1$s is festering from the radiation",
   "death.attack.dai_radiation.player" : "%1$s is festering from the radiation which is made by %s$2",

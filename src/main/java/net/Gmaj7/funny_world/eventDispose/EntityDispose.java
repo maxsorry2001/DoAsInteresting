@@ -22,6 +22,8 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingUseTotemEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 
+import javax.annotation.Nullable;
+
 @EventBusSubscriber
 public class EntityDispose {
 
@@ -63,7 +65,7 @@ public class EntityDispose {
         totemChestSummon(player, blockEntity);
     }
 
-    protected static void totemChestSummon(Player player, BlockEntity blockEntity) {
+    protected static void totemChestSummon(Player player,@Nullable BlockEntity blockEntity) {
         if(blockEntity != null && blockEntity.hasData(daiAttachmentTypes.DAI_TOTEM)){
             Vindicator vindicator = new Vindicator(EntityType.VINDICATOR, player.level());
             vindicator.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.IRON_AXE));

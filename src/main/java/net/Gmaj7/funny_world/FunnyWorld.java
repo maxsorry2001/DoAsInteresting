@@ -3,6 +3,7 @@ package net.Gmaj7.funny_world;
 import com.mojang.logging.LogUtils;
 import net.Gmaj7.funny_world.daiBlocks.daiBlocks;
 import net.Gmaj7.funny_world.daiEffects.daiMobEffects;
+import net.Gmaj7.funny_world.daiEnchantments.daiEnchantmentEffects;
 import net.Gmaj7.funny_world.daiEntities.daiEntities;
 import net.Gmaj7.funny_world.daiEntities.renderer.*;
 import net.Gmaj7.funny_world.daiInit.daiArmorMaterials;
@@ -54,6 +55,7 @@ public class FunnyWorld
         daiArmorMaterials.register(modEventBus);
         daiVillagers.register(modEventBus);
         daiSounds.register(modEventBus);
+        daiEnchantmentEffects.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (ExampleMod) to respond directly to events.

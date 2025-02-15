@@ -15,6 +15,7 @@ public class daiTags {
         public static final TagKey<Item> CARBON = create("carbon");
         public static final TagKey<Item> IRON_ITEM = create("iron_item");
         public static final TagKey<Item> BOOKS_ENCHANTMENT = create("enchantment/books");
+        public static final TagKey<Item> WIND_CHARGE_ENCHANTMENT = create("enchantment/wind_charge");
 
         public static TagKey<Item> create(String name) {
             return ItemTags.create(ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, name));
