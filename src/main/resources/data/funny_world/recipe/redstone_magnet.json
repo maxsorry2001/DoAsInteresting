@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#&#",
+    "###"
+  ],
+  "key": {
+    "#":  {
+      "item": "minecraft:redstone"
+    },
+    "&": {
+      "item": "minecraft:iron_block"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "funny_world:redstone_magnet"
+  }
+}

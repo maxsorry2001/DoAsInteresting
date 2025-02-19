@@ -1,0 +1,20 @@
+{
+  "anvil_cost": 1,
+  "description": {
+    "translate": "enchantment.funny_world.all_of_same"
+  },
+  "max_cost": {
+    "base": 10,
+    "per_level_above_first": 10
+  },
+  "max_level": 1,
+  "min_cost": {
+    "base": 1,
+    "per_level_above_first": 10
+  },
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "funny_world:mahjong",
+  "weight": 2
+}

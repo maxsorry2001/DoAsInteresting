@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "minecraft:item/golden_sword"
+  },
+  "overrides": [
+    {
+      "model": "funny_world:item/golden_sword_flame",
+      "predicate": {
+        "flame": 1
+      }
+    }
+  ]
+}

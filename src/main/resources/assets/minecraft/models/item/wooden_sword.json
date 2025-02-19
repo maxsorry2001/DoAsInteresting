@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "minecraft:item/wooden_sword"
+  },
+  "overrides": [
+    {
+      "model": "funny_world:item/wooden_sword_flame",
+      "predicate": {
+        "flame": 1
+      }
+    }
+  ]
+}

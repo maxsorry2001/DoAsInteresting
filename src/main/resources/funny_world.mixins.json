@@ -1,0 +1,30 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.Gmaj7.funny_world.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "refmap": "funny_world.refmap.json",
+  "mixins": [
+    "AbstractArrowMixin",
+    "AbstractWindChargeMixin",
+    "BellBlockMixin",
+    "EmeraldForItemsMixin",
+    "EmeraldsForVillagerTypeItemMixin",
+    "ItemMixin",
+    "ItemsForEmeraldsMixin",
+    "JukeboxBlockEntityMixin",
+    "LivingEntityMixin",
+    "ProjectileWeaponItemMixin",
+    "SwordItemMixin",
+    "TypeSpecificTradeMixin",
+    "VillagerMixin",
+    "WindChargeItemMixin"
+  ],
+  "client": [
+  ],
+  "server": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

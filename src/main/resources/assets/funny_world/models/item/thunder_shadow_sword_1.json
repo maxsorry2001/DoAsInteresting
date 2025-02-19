@@ -1,0 +1,6 @@
+{
+  "parent": "funny_world:item/thunder_shadow_sword",
+  "textures": {
+    "layer0": "funny_world:item/thunder_shadow_sword_1"
+  }
+}

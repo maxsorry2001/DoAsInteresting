@@ -1,0 +1,35 @@
+{
+  "anvil_cost": 2,
+  "description": {
+    "translate": "enchantment.funny_world.entropy"
+  },
+  "effects": {
+    "minecraft:hit_block": [
+      {
+        "effect": {
+          "type": "minecraft:all_of",
+          "effects": [
+            {
+              "type": "funny_world:entropy"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "max_cost": {
+    "base": 5,
+    "per_level_above_first": 3
+  },
+  "max_level": 3,
+  "min_cost": {
+    "base": 1,
+    "per_level_above_first": 3
+  },
+  "primary_items": "#funny_world:enchantment/wind_charge",
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#funny_world:enchantment/wind_charge",
+  "weight": 5
+}

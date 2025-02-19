@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "$",
+    "%"
+  ],
+  "key": {
+    "#":  {
+        "item": "minecraft:nether_star"
+      },
+    "$":  {
+      "item": "minecraft:breeze_rod"
+    },
+    "%":  {
+      "item": "minecraft:feather"
+    }
+  },
+  "result": {
+    "count": 4,
+    "id": "funny_world:momentum_arrow"
+  }
+}
+

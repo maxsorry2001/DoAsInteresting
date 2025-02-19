@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " #@",
+    " ab",
+    "a  "
+  ],
+  "key": {
+    "a": {"item": "minecraft:stick"},
+    "b": {"item": "minecraft:string"},
+    "#": {"item": "minecraft:slime_ball"},
+    "@": {"item": "minecraft:lightning_rod"}
+  },
+  "result": {
+    "count": 1,
+    "id": "funny_world:lighting_bolt_rod"
+  }
+}

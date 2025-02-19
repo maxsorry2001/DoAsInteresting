@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "c:music_discs"
+    },
+    {
+      "item": "funny_world:red_packet"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "funny_world:spring_festival_overture_disc"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "a#@",
+    "# #",
+    "b#@"
+  ],
+  "key": {
+    "a": {"item": "funny_world:electric_charge"},
+    "b": {"item": "funny_world:negative_charge"},
+    "#": {"item": "minecraft:copper_ingot"},
+    "@": {"item": "minecraft:string"}
+  },
+  "result": {
+    "count": 1,
+    "id": "funny_world:electromagnetic_bow"
+  }
+}

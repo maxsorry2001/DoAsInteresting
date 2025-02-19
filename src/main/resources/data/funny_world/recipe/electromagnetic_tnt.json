@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XaX",
+    "#X#",
+    "XbX"
+  ],
+  "key": {
+    "#": { "item": "minecraft:iron_ingot" },
+    "X": { "item": "minecraft:gunpowder"},
+    "a": {"item": "funny_world:electric_charge"},
+    "b": {"item": "funny_world:negative_charge"}
+  },
+  "result": {
+    "count": 1,
+    "id": "funny_world:electromagnetic_tnt"
+  }
+}

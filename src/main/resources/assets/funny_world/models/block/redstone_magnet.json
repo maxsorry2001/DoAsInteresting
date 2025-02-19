@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "funny_world:block/redstone_magnet_top",
+    "side": "funny_world:block/redstone_magnet_side"
+  }
+}

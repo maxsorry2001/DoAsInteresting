@@ -1,0 +1,54 @@
+{
+  "variants": {
+    "facing=south,powered=false": {
+      "model": "funny_world:block/redstone_magnet",
+      "x": 90
+    },
+    "facing=north,powered=false": {
+      "model": "funny_world:block/redstone_magnet",
+      "x": 270
+    },
+    "facing=east,powered=false": {
+      "model": "funny_world:block/redstone_magnet",
+      "x": 90,
+      "y": 90
+    },
+    "facing=west,powered=false": {
+      "model": "funny_world:block/redstone_magnet",
+      "x": 270,
+      "y": 270
+    },
+    "facing=up,powered=false": {
+      "model": "funny_world:block/redstone_magnet"
+    },
+    "facing=down,powered=false": {
+      "model": "funny_world:block/redstone_magnet",
+      "x": 180
+    },
+    "facing=south,powered=true": {
+      "model": "funny_world:block/redstone_magnet_on",
+      "x": 90
+    },
+    "facing=north,powered=true": {
+      "model": "funny_world:block/redstone_magnet_on",
+      "x": 270
+    },
+    "facing=east,powered=true": {
+      "model": "funny_world:block/redstone_magnet_on",
+      "x": 90,
+      "y": 90
+    },
+    "facing=west,powered=true": {
+      "model": "funny_world:block/redstone_magnet_on",
+      "x": 270,
+      "y": 270
+    },
+    "facing=up,powered=true": {
+      "model": "funny_world:block/redstone_magnet_on"
+    },
+    "facing=down,powered=true": {
+      "model": "funny_world:block/redstone_magnet_on",
+      "x": 180
+    }
+  }
+}

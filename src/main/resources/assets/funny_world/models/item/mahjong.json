@@ -1,0 +1,144 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "funny_world:item/mahjong_0"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "mahjong": 1.1
+      },
+      "model": "funny_world:item/mahjong_w1"
+    },{
+      "predicate": {
+        "mahjong": 1.2
+      },
+      "model": "funny_world:item/mahjong_w2"
+    },{
+      "predicate": {
+        "mahjong": 1.3
+      },
+      "model": "funny_world:item/mahjong_w3"
+    },{
+      "predicate": {
+        "mahjong": 1.4
+      },
+      "model": "funny_world:item/mahjong_w4"
+    },{
+      "predicate": {
+        "mahjong": 1.5
+      },
+      "model": "funny_world:item/mahjong_w5"
+    },{
+      "predicate": {
+        "mahjong": 1.6
+      },
+      "model": "funny_world:item/mahjong_w6"
+    },{
+      "predicate": {
+        "mahjong": 1.7
+      },
+      "model": "funny_world:item/mahjong_w7"
+    },{
+      "predicate": {
+        "mahjong": 1.8
+      },
+      "model": "funny_world:item/mahjong_w8"
+    },{
+      "predicate": {
+        "mahjong": 1.9
+      },
+      "model": "funny_world:item/mahjong_w9"
+    },{
+      "predicate": {
+        "mahjong": 2.1
+      },
+      "model": "funny_world:item/mahjong_b1"
+    },{
+      "predicate": {
+        "mahjong": 2.2
+      },
+      "model": "funny_world:item/mahjong_b2"
+    },{
+      "predicate": {
+        "mahjong": 2.3
+      },
+      "model": "funny_world:item/mahjong_b3"
+    },{
+      "predicate": {
+        "mahjong": 2.4
+      },
+      "model": "funny_world:item/mahjong_b4"
+    },{
+      "predicate": {
+        "mahjong": 2.5
+      },
+      "model": "funny_world:item/mahjong_b5"
+    },{
+      "predicate": {
+        "mahjong": 2.6
+      },
+      "model": "funny_world:item/mahjong_b6"
+    },{
+      "predicate": {
+        "mahjong": 2.7
+      },
+      "model": "funny_world:item/mahjong_b7"
+    },{
+      "predicate": {
+        "mahjong": 2.8
+      },
+      "model": "funny_world:item/mahjong_b8"
+    },{
+      "predicate": {
+        "mahjong": 2.9
+      },
+      "model": "funny_world:item/mahjong_b9"
+    },{
+      "predicate": {
+        "mahjong": 3.1
+      },
+      "model": "funny_world:item/mahjong_t1"
+    },{
+      "predicate": {
+        "mahjong": 3.2
+      },
+      "model": "funny_world:item/mahjong_t2"
+    },{
+      "predicate": {
+        "mahjong": 3.3
+      },
+      "model": "funny_world:item/mahjong_t3"
+    },{
+      "predicate": {
+        "mahjong": 3.4
+      },
+      "model": "funny_world:item/mahjong_t4"
+    },{
+      "predicate": {
+        "mahjong": 3.5
+      },
+      "model": "funny_world:item/mahjong_t5"
+    },{
+      "predicate": {
+        "mahjong": 3.6
+      },
+      "model": "funny_world:item/mahjong_t6"
+    },{
+      "predicate": {
+        "mahjong": 3.7
+      },
+      "model": "funny_world:item/mahjong_t7"
+    },{
+      "predicate": {
+        "mahjong": 3.8
+      },
+      "model": "funny_world:item/mahjong_t8"
+    },{
+      "predicate": {
+        "mahjong": 3.9
+      },
+      "model": "funny_world:item/mahjong_t9"
+    }
+  ]
+}
