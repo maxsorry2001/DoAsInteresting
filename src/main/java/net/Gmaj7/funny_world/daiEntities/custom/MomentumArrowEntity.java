@@ -3,6 +3,7 @@ package net.Gmaj7.funny_world.daiEntities.custom;
 import net.Gmaj7.funny_world.daiEntities.daiEntities;
 import net.Gmaj7.funny_world.daiInit.daiFunctions;
 import net.Gmaj7.funny_world.daiItems.daiItems;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -48,7 +49,7 @@ public class MomentumArrowEntity extends AbstractArrow {
                     (m * vec3.z() * power + mT * vec31.z()) / (m + mT));
             target.setDeltaMovement(vec32);
             double f = (Math.abs(vec32.length() * (m + mT) - vec31.length() * mT - vec3.length() * m) / 0.02);
-            target.hurt(new DamageSource(daiFunctions.getDamagementHolder(this.level(), DamageTypes.GENERIC)), (float) f);
+            target.hurt(new DamageSource(daiFunctions.getHolder(this.level(), Registries.DAMAGE_TYPE, DamageTypes.GENERIC)), (float) f);
             this.discard();
         }
     }

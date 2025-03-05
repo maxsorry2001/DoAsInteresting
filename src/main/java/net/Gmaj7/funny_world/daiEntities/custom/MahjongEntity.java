@@ -54,7 +54,7 @@ public class MahjongEntity extends AbstractArrow {
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
         if(!shootItem.isEmpty()){
-            if(shootItem.getEnchantmentLevel(daiFunctions.getEnchantmentHolder(level(), daiEnchantments.ALL_OF_SAME)) <= 0)
+            if(shootItem.getEnchantmentLevel(daiFunctions.getHolder(level(), Registries.ENCHANTMENT, daiEnchantments.ALL_OF_SAME)) <= 0)
                 shootItem.set(daiDataComponentTypes.MAHJONG_PATTERN, 0);
             shootItem.set(daiDataComponentTypes.MAHJONG_POINTS, 0);
             level().addFreshEntity(new ItemEntity(level(), getOwner().getX(), getOwner().getY(), getOwner().getZ(), shootItem));

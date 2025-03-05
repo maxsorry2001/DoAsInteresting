@@ -10,7 +10,7 @@
           "type": "minecraft:all_of",
           "effects": [
             {
-              "type": "funny_world:entropy"
+              "type": "funny_world:entropy_effect"
             }
           ]
         }
@@ -26,10 +26,10 @@
     "base": 1,
     "per_level_above_first": 3
   },
-  "primary_items": "#funny_world:enchantment/wind_charge",
+  "primary_items": "#funny_world:enchantable/wind_charge",
   "slots": [
     "mainhand"
   ],
-  "supported_items": "#funny_world:enchantment/wind_charge",
+  "supported_items": "#funny_world:enchantable/wind_charge",
   "weight": 5
 }

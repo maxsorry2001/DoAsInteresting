@@ -4,6 +4,7 @@ import net.Gmaj7.funny_world.daiEnchantments.daiEnchantments;
 import net.Gmaj7.funny_world.daiEntities.custom.MahjongEntity;
 import net.Gmaj7.funny_world.daiInit.daiDataComponentTypes;
 import net.Gmaj7.funny_world.daiInit.daiFunctions;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -25,7 +26,7 @@ public class MahjongItem extends Item {
         ItemStack itemStack = pPlayer.getItemInHand(pUsedHand);
         if(!pLevel.isClientSide()) {
             if (pPlayer.isShiftKeyDown()) {
-                if(itemStack.get(daiDataComponentTypes.MAHJONG_PATTERN) == 0 || itemStack.getEnchantmentLevel(daiFunctions.getEnchantmentHolder(pLevel, daiEnchantments.ALL_OF_SAME)) <= 0)
+                if(itemStack.get(daiDataComponentTypes.MAHJONG_PATTERN) == 0 || itemStack.getEnchantmentLevel(daiFunctions.getHolder(pLevel, Registries.ENCHANTMENT, daiEnchantments.ALL_OF_SAME)) <= 0)
                     itemStack.set(daiDataComponentTypes.MAHJONG_PATTERN, new Random().nextInt(3) + 1);
                 itemStack.set(daiDataComponentTypes.MAHJONG_POINTS, new Random().nextInt(9) + 1);
             } else if (itemStack.get(daiDataComponentTypes.MAHJONG_PATTERN) > 0 && itemStack.get(daiDataComponentTypes.MAHJONG_POINTS) > 0) {

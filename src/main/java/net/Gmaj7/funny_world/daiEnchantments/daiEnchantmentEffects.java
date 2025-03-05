@@ -15,7 +15,7 @@ public class daiEnchantmentEffects {
             DeferredRegister.create(Registries.ENCHANTMENT_ENTITY_EFFECT_TYPE, FunnyWorld.MODID);
 
     public static final Supplier<MapCodec<? extends EnchantmentEntityEffect>> ENTROPY =
-            DAI_ENCHANTMENT_EFFECTS.register("entropy", () -> EntropyEnchantmentEffect.CODEC);
+            DAI_ENCHANTMENT_EFFECTS.register("entropy_effect", () -> EntropyEnchantmentEffect.CODEC);
 
     public static void register(IEventBus eventBus){
         DAI_ENCHANTMENT_EFFECTS.register(eventBus);

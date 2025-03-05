@@ -9,6 +9,7 @@ import net.Gmaj7.funny_world.daiInit.daiArmorMaterials;
 import net.Gmaj7.funny_world.daiInit.daiFunctions;
 import net.Gmaj7.funny_world.daiInit.daiTiers;
 import net.Gmaj7.funny_world.daiItems.daiItems;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -39,16 +40,16 @@ public class DamageDispose {
                     target.addEffect(new MobEffectInstance(daiMobEffects.IIIIII, 300));
                 if(direct == source){
                     float damageMul = 1,damageAdd = 0;
-                    if(livingEntity.getMainHandItem().getEnchantmentLevel(daiFunctions.getEnchantmentHolder(livingEntity.level(), daiEnchantments.CONVINCE_PEOPLE_BY_REASON)) > 0)
-                        damageMul = damageMul * livingEntity.getMainHandItem().getEnchantmentLevel(daiFunctions.getEnchantmentHolder(livingEntity.level(), daiEnchantments.CONVINCE_PEOPLE_BY_REASON));
-                    if (livingEntity.getMainHandItem().getEnchantmentLevel(daiFunctions.getEnchantmentHolder(livingEntity.level(), daiEnchantments.CONVINCE_PEOPLE_BY_REASON)) > 0){
+                    if(livingEntity.getMainHandItem().getEnchantmentLevel(daiFunctions.getHolder(livingEntity.level(), Registries.ENCHANTMENT, daiEnchantments.CONVINCE_PEOPLE_BY_REASON)) > 0)
+                        damageMul = damageMul * livingEntity.getMainHandItem().getEnchantmentLevel(daiFunctions.getHolder(livingEntity.level(), Registries.ENCHANTMENT, daiEnchantments.CONVINCE_PEOPLE_BY_REASON));
+                    if (livingEntity.getMainHandItem().getEnchantmentLevel(daiFunctions.getHolder(livingEntity.level(), Registries.ENCHANTMENT, daiEnchantments.CONVINCE_PEOPLE_BY_REASON)) > 0){
                         damageAdd += livingEntity.getMainHandItem().getCount();
-                        damageMul = damageMul * livingEntity.getMainHandItem().getEnchantmentLevel(daiFunctions.getEnchantmentHolder(livingEntity.level(), daiEnchantments.CONVINCE_PEOPLE_BY_REASON));
+                        damageMul = damageMul * livingEntity.getMainHandItem().getEnchantmentLevel(daiFunctions.getHolder(livingEntity.level(), Registries.ENCHANTMENT, daiEnchantments.CONVINCE_PEOPLE_BY_REASON));
                     }
                     event.setNewDamage((event.getNewDamage() + damageAdd) * damageMul);
                 }
             }
-            if(damageSource.is(DamageTypeTags.IS_EXPLOSION) && target.getItemBySlot(EquipmentSlot.CHEST).getEnchantmentLevel(daiFunctions.getEnchantmentHolder(target.level(), daiEnchantments.EXPLOSION_GET)) > 0)
+            if(damageSource.is(DamageTypeTags.IS_EXPLOSION) && target.getItemBySlot(EquipmentSlot.CHEST).getEnchantmentLevel(daiFunctions.getHolder(target.level(), Registries.ENCHANTMENT, daiEnchantments.EXPLOSION_GET)) > 0)
                 event.setNewDamage(0);
             if (source != null) {
                 EquipmentSlot[] equipmentSlot = {EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET};

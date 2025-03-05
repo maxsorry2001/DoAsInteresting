@@ -35,11 +35,11 @@ public class GravitationBow extends Item {
                 if(target == pPlayer) continue;
                 Vec3 vec3 = new Vec3(target.getX() - pPlayer.getX(), target.getY() - pPlayer.getY(), target.getZ() - pPlayer.getZ()).normalize();
                 int i = this.getUseDuration(pStack, pLivingEntity) - pTimeCharged;
-                float f = getPowerForTime(i) + pStack.getEnchantmentLevel(daiFunctions.getEnchantmentHolder(pLevel, Enchantments.PUNCH));
+                float f = getPowerForTime(i) + pStack.getEnchantmentLevel(daiFunctions.getHolder(pLevel, Registries.ENCHANTMENT, Enchantments.PUNCH));
                 target.setDeltaMovement(vec3.x() * 5 * f, vec3.y() * 5 * f, vec3.z() * 5 * f);
-                int k = pStack.getEnchantmentLevel(daiFunctions.getEnchantmentHolder(pLevel, Enchantments.FLAME));
+                int k = pStack.getEnchantmentLevel(daiFunctions.getHolder(pLevel, Registries.ENCHANTMENT, Enchantments.FLAME));
                 if(k > 0 && target instanceof LivingEntity) target.igniteForSeconds(k * 5);
-                int j = pStack.getEnchantmentLevel(daiFunctions.getEnchantmentHolder(pLevel, Enchantments.POWER));
+                int j = pStack.getEnchantmentLevel(daiFunctions.getHolder(pLevel, Registries.ENCHANTMENT, Enchantments.POWER));
                 if(j > 0) target.hurt(new DamageSource(pLevel.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.PLAYER_ATTACK), pPlayer), j);
                 pStack.hurtAndBreak(1, pPlayer, Player.getSlotForHand(pPlayer.getUsedItemHand()));
             }

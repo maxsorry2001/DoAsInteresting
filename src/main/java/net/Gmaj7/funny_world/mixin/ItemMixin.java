@@ -6,6 +6,7 @@ import net.Gmaj7.funny_world.daiInit.daiFunctions;
 import net.Gmaj7.funny_world.daiItems.daiFoods;
 import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -39,8 +40,8 @@ public abstract class ItemMixin implements FeatureElement, ItemLike, net.neoforg
                 }
             }
         }
-        if(pEntity instanceof Player player && EnchantmentHelper.getEnchantmentLevel(daiFunctions.getEnchantmentHolder(pLevel, daiEnchantments.EATER_OF_WORLDS), player) > 0 && !pStack.is(Tags.Items.FOODS)){
-            switch (EnchantmentHelper.getEnchantmentLevel(daiFunctions.getEnchantmentHolder(pLevel, daiEnchantments.EATER_OF_WORLDS), player)){
+        if(pEntity instanceof Player player && EnchantmentHelper.getEnchantmentLevel(daiFunctions.getHolder(pLevel, Registries.ENCHANTMENT, daiEnchantments.EATER_OF_WORLDS), player) > 0 && !pStack.is(Tags.Items.FOODS)){
+            switch (EnchantmentHelper.getEnchantmentLevel(daiFunctions.getHolder(pLevel, Registries.ENCHANTMENT, daiEnchantments.EATER_OF_WORLDS), player)){
                 case 1 -> pStack.set(DataComponents.FOOD, daiFoods.EAT_OF_WORLDS_LV1);
                 case 2 -> pStack.set(DataComponents.FOOD, daiFoods.EAT_OF_WORLDS_LV2);
                 case 3 -> pStack.set(DataComponents.FOOD, daiFoods.EAT_OF_WORLDS_LV3);

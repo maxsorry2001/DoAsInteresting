@@ -10,7 +10,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
-import net.minecraft.world.item.enchantment.EnchantmentTarget;
 import net.minecraft.world.item.enchantment.effects.AllOf;
 
 public class daiEnchantments {
@@ -27,6 +26,7 @@ public class daiEnchantments {
     public static final ResourceKey<Enchantment> EATER_OF_WORLDS = ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "eater_of_worlds"));
     public static final ResourceKey<Enchantment> ALL_OF_SAME = ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "all_of_same"));
     public static final ResourceKey<Enchantment> ENTROPY = ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "entropy"));
+    public static final ResourceKey<Enchantment> ABSORB_HONEY = ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "absorb_honey"));
 
     public static void bootstrap(BootstrapContext<Enchantment> context){
         var enchantments = context.lookup(Registries.ENCHANTMENT);
@@ -42,6 +42,15 @@ public class daiEnchantments {
                 2,
                 EquipmentSlotGroup.MAINHAND))
                 .withEffect(EnchantmentEffectComponents.HIT_BLOCK, AllOf.entityEffects(new EntropyEnchantmentEffect())));
+
+        register(context, ABSORB_HONEY, Enchantment.enchantment(Enchantment.definition(
+                items.getOrThrow(daiTags.daiItemTags.HONEY_ENCHANTMENT),
+                5,
+                1,
+                Enchantment.dynamicCost(1, 3),
+                Enchantment.dynamicCost(5, 3),
+                4,
+                EquipmentSlotGroup.MAINHAND)));
     }
     private static void register(BootstrapContext<Enchantment> registry, ResourceKey<Enchantment> key, Enchantment.Builder builder){
         registry.register(key, builder.build(key.location()));

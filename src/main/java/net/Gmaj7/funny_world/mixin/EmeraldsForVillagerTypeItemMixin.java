@@ -37,15 +37,6 @@ public class EmeraldsForVillagerTypeItemMixin {
     @Final
     private int villagerXp;
 
-    @Shadow
-    @Final
-    private Map<VillagerType, Item> trades;
-
-    @WrapOperation(method = "<init>", at = @At(value = "INVOKE", target = "Ljava/util/stream/Stream;filter(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;"))
-    private Stream<VillagerType> wrapFilter(Stream<VillagerType> instance, Predicate<? super VillagerType> predicate, Operation<Stream<VillagerType>> original) {
-        return original.call(instance, (Predicate<? super VillagerType>)(it) -> it != daiVillagers.ILLAGER_CHANGE.get() && predicate.test(it));
-    }
-
     @Inject(method = "getOffer", at = @At("HEAD"), cancellable = true)
     private void getOfferMixin(Entity pTrader, RandomSource randomSource, CallbackInfoReturnable<MerchantOffer> cir){
         if(pTrader instanceof VillagerDataHolder villager && villager.getVariant() == daiVillagers.ILLAGER_CHANGE.get()){

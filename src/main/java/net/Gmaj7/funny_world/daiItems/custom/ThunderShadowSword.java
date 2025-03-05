@@ -73,7 +73,7 @@ public class ThunderShadowSword extends Item {
             }
             else if(itemStack.has(daiDataComponentTypes.BLOCKPOS)){
                 BlockPos blockPos = itemStack.get(daiDataComponentTypes.BLOCKPOS);
-                if(itemStack.get(daiDataComponentTypes.CANNOT_SHOOT) > itemStack.getEnchantmentLevel(daiFunctions.getEnchantmentHolder(pLevel, daiEnchantments.FLYING_SHADOWS))){
+                if(itemStack.get(daiDataComponentTypes.CANNOT_SHOOT) > itemStack.getEnchantmentLevel(daiFunctions.getHolder(pLevel, Registries.ENCHANTMENT, daiEnchantments.FLYING_SHADOWS))){
                     itemStack.remove(daiDataComponentTypes.CANNOT_SHOOT);
                     itemStack.remove(daiDataComponentTypes.BLOCKPOS);
                 }

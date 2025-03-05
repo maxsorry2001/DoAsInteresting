@@ -4,6 +4,7 @@ import net.Gmaj7.funny_world.daiBlocks.custom.RedstoneMagnet;
 import net.Gmaj7.funny_world.daiBlocks.daiBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.damagesource.DamageType;
@@ -12,6 +13,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
@@ -31,12 +33,8 @@ public class daiFunctions {
         return itemStack;
     }
 
-    public static Holder<Enchantment> getEnchantmentHolder(Level level, ResourceKey<Enchantment> resourceKey){
-        return level.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(resourceKey);
-    }
-
-    public static Holder<DamageType> getDamagementHolder(Level level, ResourceKey<DamageType> resourceKey){
-        return level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(resourceKey);
+    public static <T> Holder<T> getHolder(Level level, ResourceKey<Registry<T>> registry, ResourceKey<T> resourceKey){
+        return level.registryAccess().registryOrThrow(registry).getHolderOrThrow(resourceKey);
     }
 
     public static boolean withIronOut(LivingEntity plivingEntity){

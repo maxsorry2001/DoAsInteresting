@@ -6,6 +6,7 @@ import net.Gmaj7.funny_world.daiEnchantments.daiEnchantments;
 import net.Gmaj7.funny_world.daiInit.*;
 import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -82,7 +83,7 @@ public class TickDispose {
                 event.getToolTip().add(Component.translatable("quick_use"));
             else event.getToolTip().add(Component.translatable("high temperature"));
         }
-        if(event.getEntity() != null && itemStack.getEnchantmentLevel(daiFunctions.getEnchantmentHolder(event.getEntity().level(), daiEnchantments.PROBATION)) > 0 && itemStack.is(Items.EMERALD)){
+        if(event.getEntity() != null && itemStack.getEnchantmentLevel(daiFunctions.getHolder(event.getEntity().level(), Registries.ENCHANTMENT, daiEnchantments.PROBATION)) > 0 && itemStack.is(Items.EMERALD)){
             event.getToolTip().add(Component.translatable("try_to_use_on_illager"));
         }
     }

@@ -38,5 +38,8 @@ public class daiDataComponentTypes {
     public static final Supplier<DataComponentType<Integer>> MAHJONG_POINTS = DAI_DATA_COMPONENT_TYPE.register("mahjong_points",
             () -> DataComponentType.<Integer>builder().persistent(Codec.INT).build());
 
+    public static final Supplier<DataComponentType<daiHoneyEffects>> HONEY_EFFECTS = DAI_DATA_COMPONENT_TYPE.register("honey_effects",
+            () -> DataComponentType.<daiHoneyEffects>builder().persistent(daiHoneyEffects.CODEC).networkSynchronized(daiHoneyEffects.STREAM_CODEC).build());
+
     public static void register(IEventBus eventBus){DAI_DATA_COMPONENT_TYPE.register(eventBus);}
 }

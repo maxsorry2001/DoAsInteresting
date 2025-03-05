@@ -4,6 +4,7 @@ import net.Gmaj7.funny_world.daiEntities.custom.MomentumArrowEntity;
 import net.Gmaj7.funny_world.daiInit.daiFunctions;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -23,7 +24,7 @@ public class MomentumArrowItem extends ArrowItem {
     public AbstractArrow createArrow(Level pLevel, ItemStack pAmmo, LivingEntity pShooter, @Nullable ItemStack pWeapon) {
         MomentumArrowEntity momentumArrowEntity = new MomentumArrowEntity(pLevel, pShooter, pAmmo.copyWithCount(1));
         if(pWeapon != null)
-            momentumArrowEntity.setPower(EnchantmentHelper.getEnchantmentLevel(daiFunctions.getEnchantmentHolder(pLevel, Enchantments.POWER), pShooter));
+            momentumArrowEntity.setPower(EnchantmentHelper.getEnchantmentLevel(daiFunctions.getHolder(pLevel, Registries.ENCHANTMENT, Enchantments.POWER), pShooter));
         return momentumArrowEntity;
     }
 

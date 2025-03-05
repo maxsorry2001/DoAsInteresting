@@ -48,8 +48,8 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
                         ChiseledBookShelfBlockEntity blockEntity = optional.get();
                         for (int n = 0; n < blockEntity.count(); n++){
                             ItemStack itemStack = blockEntity.getItem(n);
-                            if(itemStack.getEnchantmentLevel(daiFunctions.getEnchantmentHolder(this.level(), daiEnchantments.CONVINCE_PEOPLE_BY_REASON)) > 0)
-                                lv += itemStack.getEnchantmentLevel(daiFunctions.getEnchantmentHolder(this.level(), daiEnchantments.CONVINCE_PEOPLE_BY_REASON));
+                            if(itemStack.getEnchantmentLevel(daiFunctions.getHolder(this.level(), Registries.ENCHANTMENT, daiEnchantments.CONVINCE_PEOPLE_BY_REASON)) > 0)
+                                lv += itemStack.getEnchantmentLevel(daiFunctions.getHolder(this.level(), Registries.ENCHANTMENT, daiEnchantments.CONVINCE_PEOPLE_BY_REASON));
                         }
                     }
                 }
