@@ -1,14 +1,14 @@
 package net.Gmaj7.funny_world.eventDispose;
 
 import net.Gmaj7.funny_world.FunnyWorld;
+import net.Gmaj7.funny_world.daiBlocks.daiBlocks;
 import net.Gmaj7.funny_world.daiEffects.daiMobEffects;
 import net.Gmaj7.funny_world.daiEnchantments.daiEnchantments;
 import net.Gmaj7.funny_world.daiEntities.custom.BrickEntity;
 import net.Gmaj7.funny_world.daiEntities.custom.NetherBrickEntity;
-import net.Gmaj7.funny_world.daiInit.daiAttachmentTypes;
-import net.Gmaj7.funny_world.daiInit.daiDataComponentTypes;
-import net.Gmaj7.funny_world.daiInit.daiFunctions;
-import net.Gmaj7.funny_world.daiInit.daiTiers;
+import net.Gmaj7.funny_world.daiInit.*;
+import net.Gmaj7.funny_world.daiInit.daiUniqueData.HoneyAbsorbEffect;
+import net.Gmaj7.funny_world.daiInit.daiUniqueData.daiUniqueDataGet;
 import net.Gmaj7.funny_world.daiItems.daiFoods;
 import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.Gmaj7.funny_world.villager.daiVillagers;
@@ -41,6 +41,7 @@ import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -129,7 +130,8 @@ public class ClickDispose {
         BlockEntity blockEntity = player.level().getBlockEntity(blockPos);
         BlockState blockState = player.level().getBlockState(blockPos);
         EntityDispose.totemChestSummon(player, blockEntity);
-        if(EnchantmentHelper.getEnchantmentLevel(daiFunctions.getHolder(player.level(), Registries.ENCHANTMENT, daiEnchantments.ELECTRIFICATION_BY_FRICTION), player) > 0 && event.getHand() == InteractionHand.MAIN_HAND && player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty()){
+        ItemStack mainHandItem = player.getItemInHand(InteractionHand.MAIN_HAND);
+        if(EnchantmentHelper.getEnchantmentLevel(daiFunctions.getHolder(player.level(), Registries.ENCHANTMENT, daiEnchantments.ELECTRIFICATION_BY_FRICTION), player) > 0 && event.getHand() == InteractionHand.MAIN_HAND && mainHandItem.isEmpty()){
             if(player.level().isClientSide())
                 player.swing(InteractionHand.MAIN_HAND);
             else {
@@ -196,7 +198,24 @@ public class ClickDispose {
                 }
             }
         }
-
+        if(event.getHand() == InteractionHand.MAIN_HAND && mainHandItem.is(Items.HONEY_BOTTLE)){
+            if(player.level().isClientSide()) {
+                player.swing(InteractionHand.MAIN_HAND);
+                player.playSound(SoundType.HONEY_BLOCK.getPlaceSound());
+            }
+            else {
+                BlockState honey_floor = daiBlocks.HONEY_FLOOR.get().defaultBlockState();
+                if (mainHandItem.has(daiDataComponentTypes.HONEY_EFFECTS)) {
+                    List<daiHoneyEffects.Entry> list = player.getItemInHand(InteractionHand.MAIN_HAND).get(daiDataComponentTypes.HONEY_EFFECTS).effects();
+                    if (list != null && !list.isEmpty())
+                        for (daiHoneyEffects.Entry entry : list) {
+                            ((daiUniqueDataGet) honey_floor).getHoneyAbsorbEffect().addEffect(entry);
+                        }
+                }
+                player.level().setBlockAndUpdate(blockPos.above(), honey_floor);
+                if(!player.isCreative()) mainHandItem.shrink(1);
+            }
+        }
     }
     @SubscribeEvent
     public static void RightClickItem(PlayerInteractEvent.RightClickItem event){

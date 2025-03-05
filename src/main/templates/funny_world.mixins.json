@@ -18,7 +18,8 @@
     "SwordItemMixin",
     "TypeSpecificTradeMixin",
     "VillagerMixin",
-    "WindChargeItemMixin"
+    "WindChargeItemMixin",
+    "BlockStateMixin"
   ],
   "client": [
   ],

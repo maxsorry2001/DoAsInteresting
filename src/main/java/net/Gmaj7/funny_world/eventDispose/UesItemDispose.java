@@ -32,7 +32,7 @@ public class UesItemDispose {
                 if (!itemStack.has(daiDataComponentTypes.HONEY_EFFECTS))
                     itemStack.set(daiDataComponentTypes.HONEY_EFFECTS, daiHoneyEffects.EMPTY);
                 if (!mobEffectInstance.is(MobEffects.POISON))
-                    itemStack.get(daiDataComponentTypes.HONEY_EFFECTS).effects().add(new daiHoneyEffects.Entry(mobEffectInstance.getEffect(), mobEffectInstance.getDuration(), mobEffectInstance.getAmplifier()));
+                    itemStack.get(daiDataComponentTypes.HONEY_EFFECTS).addEffect(new daiHoneyEffects.Entry(mobEffectInstance.getEffect(), mobEffectInstance.getDuration(), mobEffectInstance.getAmplifier()));
             }
             livingEntity.removeAllEffects();
         }

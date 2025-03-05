@@ -30,6 +30,20 @@ public record daiHoneyEffects(List<Entry> effects) {
         return this.effects;
     }
 
+    public void addEffect(Entry entry){
+        if(this.effects().isEmpty()) {
+            this.effects().add(entry);
+        }
+        else
+            for (Entry target : this.effects()){
+                if(entry.effect() == target.effect()){
+                    if(entry.effectLevel() > target.effectLevel() || entry.duration() > target.duration())
+                        this.effects().set(this.effects().indexOf(target), entry);
+                    break;
+            }
+        }
+    }
+
     static {
         CODEC = daiHoneyEffects.Entry.CODEC.listOf().xmap(daiHoneyEffects::new, daiHoneyEffects::effects);
         STREAM_CODEC = daiHoneyEffects.Entry.STREAM_CODEC.apply(ByteBufCodecs.list()).map(daiHoneyEffects::new, daiHoneyEffects::effects);
