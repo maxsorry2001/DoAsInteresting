@@ -1,6 +1,7 @@
 package net.Gmaj7.funny_world;
 
 import com.mojang.logging.LogUtils;
+import net.Gmaj7.funny_world.daiBlocks.daiBlockEntities;
 import net.Gmaj7.funny_world.daiBlocks.daiBlocks;
 import net.Gmaj7.funny_world.daiEffects.daiMobEffects;
 import net.Gmaj7.funny_world.daiEnchantments.daiEnchantmentEffects;
@@ -47,6 +48,7 @@ public class FunnyWorld
 
         daiItems.DAI_ITEMS.register(modEventBus);
         daiBlocks.DAI_BLOCKS.register(modEventBus);
+        daiBlockEntities.register(modEventBus);
         FunnyWorldTabs.DAI_CREATIVE_MODE_TABS.register(modEventBus);
         daiEntities.register(modEventBus);
         daiMobEffects.register(modEventBus);

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "funny_world:item/honey_bottle_absorbed"
+  }
+}

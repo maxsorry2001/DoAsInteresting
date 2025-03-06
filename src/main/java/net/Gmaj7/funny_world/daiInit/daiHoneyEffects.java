@@ -34,13 +34,15 @@ public record daiHoneyEffects(List<Entry> effects) {
         if(this.effects().isEmpty()) {
             this.effects().add(entry);
         }
-        else
-            for (Entry target : this.effects()){
-                if(entry.effect() == target.effect()){
-                    if(entry.effectLevel() > target.effectLevel() || entry.duration() > target.duration())
+        else {
+            for (Entry target : this.effects()) {
+                if (entry.effect() == target.effect()) {
+                    if (entry.effectLevel() > target.effectLevel() || entry.duration() > target.duration())
                         this.effects().set(this.effects().indexOf(target), entry);
-                    break;
+                    return;
+                }
             }
+            this.effects().add(entry);
         }
     }
 

@@ -52,6 +52,7 @@
   "block.funny_world.sculk_tnt": "sculk TNT",
   "block.funny_world.electromagnetic_tnt": "electromagnetic TNT",
   "block.funny_world.redstone_magnet": "redstone magnet",
+  "block.funny_world.honey_floor": "honey floor",
 
   "entity.funny_world.sculk_tnt_entity": "sculk TNT entity",
   "entity.funny_world.electromagnetic_tnt_entity": "electromagnetic TNT entity",

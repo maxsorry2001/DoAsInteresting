@@ -1,14 +1,13 @@
 package net.Gmaj7.funny_world.eventDispose;
 
 import net.Gmaj7.funny_world.FunnyWorld;
+import net.Gmaj7.funny_world.daiBlocks.blockEntity.HoneyFloorBlockEntity;
 import net.Gmaj7.funny_world.daiBlocks.daiBlocks;
 import net.Gmaj7.funny_world.daiEffects.daiMobEffects;
 import net.Gmaj7.funny_world.daiEnchantments.daiEnchantments;
 import net.Gmaj7.funny_world.daiEntities.custom.BrickEntity;
 import net.Gmaj7.funny_world.daiEntities.custom.NetherBrickEntity;
 import net.Gmaj7.funny_world.daiInit.*;
-import net.Gmaj7.funny_world.daiInit.daiUniqueData.HoneyAbsorbEffect;
-import net.Gmaj7.funny_world.daiInit.daiUniqueData.daiUniqueDataGet;
 import net.Gmaj7.funny_world.daiItems.daiFoods;
 import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.Gmaj7.funny_world.villager.daiVillagers;
@@ -205,14 +204,10 @@ public class ClickDispose {
             }
             else {
                 BlockState honey_floor = daiBlocks.HONEY_FLOOR.get().defaultBlockState();
-                if (mainHandItem.has(daiDataComponentTypes.HONEY_EFFECTS)) {
-                    List<daiHoneyEffects.Entry> list = player.getItemInHand(InteractionHand.MAIN_HAND).get(daiDataComponentTypes.HONEY_EFFECTS).effects();
-                    if (list != null && !list.isEmpty())
-                        for (daiHoneyEffects.Entry entry : list) {
-                            ((daiUniqueDataGet) honey_floor).getHoneyAbsorbEffect().addEffect(entry);
-                        }
-                }
                 player.level().setBlockAndUpdate(blockPos.above(), honey_floor);
+                BlockEntity blockEntity1 = player.level().getBlockEntity(blockPos.above());
+                if(blockEntity1 instanceof HoneyFloorBlockEntity honeyFloorBlockEntity)
+                    honeyFloorBlockEntity.setHoney_bottle(mainHandItem.copyWithCount(1));
                 if(!player.isCreative()) mainHandItem.shrink(1);
             }
         }

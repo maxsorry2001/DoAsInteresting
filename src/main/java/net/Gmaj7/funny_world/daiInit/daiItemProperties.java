@@ -18,6 +18,7 @@ public class daiItemProperties {
         makeFlame(Items.DIAMOND_SWORD);
         makeFlame(Items.NETHERITE_SWORD);
         makeMahjong(daiItems.MAHJONG.get());
+        makeHoneyBottle(Items.HONEY_BOTTLE);
     }
 
     private static void makeBow(Item item){
@@ -53,6 +54,13 @@ public class daiItemProperties {
         ItemProperties.register(item, ResourceLocation.parse("mahjong"), ((pStack, pLevel, pEntity, pSeed) -> {
             return pStack.get(daiDataComponentTypes.MAHJONG_POINTS) > 0 && pStack.get(daiDataComponentTypes.MAHJONG_PATTERN) > 0 ?
                     pStack.get(daiDataComponentTypes.MAHJONG_PATTERN) + 0.1F * pStack.get(daiDataComponentTypes.MAHJONG_POINTS) : 0.0F;
+        }));
+    }
+
+    private static void makeHoneyBottle(Item item){
+        ItemProperties.register(item, ResourceLocation.parse("absorbed"), ((pStack, pLevel, pEntity, pSpeed) -> {
+            return pStack.has(daiDataComponentTypes.HONEY_EFFECTS) && !pStack.get(daiDataComponentTypes.HONEY_EFFECTS).effects().isEmpty() ?
+                    1.0F : 0.0F;
         }));
     }
 }
