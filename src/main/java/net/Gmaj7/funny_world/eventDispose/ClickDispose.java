@@ -8,6 +8,7 @@ import net.Gmaj7.funny_world.daiEnchantments.daiEnchantments;
 import net.Gmaj7.funny_world.daiEntities.custom.BrickEntity;
 import net.Gmaj7.funny_world.daiEntities.custom.NetherBrickEntity;
 import net.Gmaj7.funny_world.daiInit.*;
+import net.Gmaj7.funny_world.daiInit.daiUniqueData.daiUniqueDataGet;
 import net.Gmaj7.funny_world.daiItems.daiFoods;
 import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.Gmaj7.funny_world.villager.daiVillagers;
@@ -197,7 +198,7 @@ public class ClickDispose {
                 }
             }
         }
-        if(event.getHand() == InteractionHand.MAIN_HAND && mainHandItem.is(Items.HONEY_BOTTLE)){
+        if(event.getHand() == InteractionHand.MAIN_HAND && mainHandItem.is(Items.HONEY_BOTTLE) && !((daiUniqueDataGet)blockState.getBlock()).isBlockUsePass(blockState, player.level(), blockPos, player, event.getHitVec())){
             if(player.level().isClientSide()) {
                 player.swing(InteractionHand.MAIN_HAND);
                 player.playSound(SoundType.HONEY_BLOCK.getPlaceSound());
