@@ -71,20 +71,25 @@ public class TickDispose {
     @SubscribeEvent
     public static void Text(ItemTooltipEvent event){
         ItemStack itemStack = event.getItemStack();
-        if(itemStack.is(Items.BRICK)){
-            event.getToolTip().add(Component.translatable("you_know_damage"));
-        }
-        if(itemStack.is(Items.NETHER_BRICK)){
-            event.getToolTip().add(Component.translatable("you_know_damage_and_from_nether"));
-        }
-        if(itemStack.has(daiDataComponentTypes.HEAT_BY_FRICTION) && itemStack.getItem() instanceof TieredItem){
-            TieredItem item = (TieredItem) itemStack.getItem();
-            if(item.getTier() == Tiers.WOOD || item.getTier() == Tiers.DIAMOND)
-                event.getToolTip().add(Component.translatable("quick_use"));
-            else event.getToolTip().add(Component.translatable("high temperature"));
-        }
-        if(event.getEntity() != null && itemStack.getEnchantmentLevel(daiFunctions.getHolder(event.getEntity().level(), Registries.ENCHANTMENT, daiEnchantments.PROBATION)) > 0 && itemStack.is(Items.EMERALD)){
-            event.getToolTip().add(Component.translatable("try_to_use_on_illager"));
+        if(event.getEntity() != null){
+            if (itemStack.is(Items.BRICK)) {
+                event.getToolTip().add(Component.translatable("you_know_damage"));
+            }
+            if (itemStack.is(Items.NETHER_BRICK)) {
+                event.getToolTip().add(Component.translatable("you_know_damage_and_from_nether"));
+            }
+            if (itemStack.has(daiDataComponentTypes.HEAT_BY_FRICTION) && itemStack.getItem() instanceof TieredItem) {
+                TieredItem item = (TieredItem) itemStack.getItem();
+                if (item.getTier() == Tiers.WOOD || item.getTier() == Tiers.DIAMOND)
+                    event.getToolTip().add(Component.translatable("quick_use"));
+                else event.getToolTip().add(Component.translatable("high temperature"));
+            }
+            if (itemStack.getEnchantmentLevel(daiFunctions.getHolder(event.getEntity().level(), Registries.ENCHANTMENT, daiEnchantments.PROBATION)) > 0 && itemStack.is(Items.EMERALD)) {
+                event.getToolTip().add(Component.translatable("try_to_use_on_illager"));
+            }
+            if(itemStack.is(Items.HONEY_BOTTLE) && itemStack.has(daiDataComponentTypes.HONEY_EFFECTS) && !itemStack.get(daiDataComponentTypes.HONEY_EFFECTS).effects().isEmpty()){
+                event.getToolTip().add(Component.translatable("honey_has_effect"));
+            }
         }
     }
 

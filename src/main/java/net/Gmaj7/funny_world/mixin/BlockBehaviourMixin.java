@@ -19,6 +19,7 @@ public abstract class BlockBehaviourMixin implements FeatureElement, daiUniqueDa
 
     @Override
     public boolean isBlockUsePass(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        if(player.isShiftKeyDown()) return false;
         return useWithoutItem(state, level, pos, player, hitResult).consumesAction();
     }
 }
