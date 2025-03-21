@@ -12,6 +12,7 @@ import net.Gmaj7.funny_world.daiInit.daiAttachmentTypes;
 import net.Gmaj7.funny_world.daiInit.daiDataComponentTypes;
 import net.Gmaj7.funny_world.daiInit.daiItemProperties;
 import net.Gmaj7.funny_world.daiItems.daiItems;
+import net.Gmaj7.funny_world.daiItems.daiPotions;
 import net.Gmaj7.funny_world.daiSounds.daiSounds;
 import net.Gmaj7.funny_world.villager.daiVillagers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -48,6 +49,7 @@ public class FunnyWorld
 
         daiItems.DAI_ITEMS.register(modEventBus);
         daiBlocks.DAI_BLOCKS.register(modEventBus);
+        daiPotions.register(modEventBus);
         daiBlockEntities.register(modEventBus);
         FunnyWorldTabs.DAI_CREATIVE_MODE_TABS.register(modEventBus);
         daiEntities.register(modEventBus);

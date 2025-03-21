@@ -16,6 +16,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class UesItemDispose {
         if(itemStack.is(Items.HONEY_BOTTLE) && EnchantmentHelper.getEnchantmentLevel(daiFunctions.getHolder(livingEntity.level(), Registries.ENCHANTMENT, daiEnchantments.ABSORB_HONEY), livingEntity) > 0 && livingEntity.isShiftKeyDown()){
             for (MobEffectInstance mobEffectInstance : effects) {
                 if (!itemStack.has(daiDataComponentTypes.HONEY_EFFECTS))
-                    itemStack.set(daiDataComponentTypes.HONEY_EFFECTS, daiHoneyEffects.EMPTY);
+                    itemStack.set(daiDataComponentTypes.HONEY_EFFECTS, new daiHoneyEffects(new ArrayList<>()));
                 if (!mobEffectInstance.is(MobEffects.POISON))
                     itemStack.get(daiDataComponentTypes.HONEY_EFFECTS).addEffect(new daiHoneyEffects.Entry(mobEffectInstance.getEffect(), mobEffectInstance.getDuration(), mobEffectInstance.getAmplifier()));
             }

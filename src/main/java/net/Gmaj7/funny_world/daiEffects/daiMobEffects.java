@@ -21,6 +21,8 @@ public class daiMobEffects {
             () -> new ElectricChargeEffect(MobEffectCategory.NEUTRAL, 1190028));
     public static final DeferredHolder<MobEffect, MobEffect> NEGATIVE_CHARGE = DAI_EFFECTS.register("negative_charge",
             () -> new NegativeChargeEffect(MobEffectCategory.NEUTRAL,  77261198));
+    public static final DeferredHolder<MobEffect, MobEffect> GENE_MUTATION = DAI_EFFECTS.register("gene_mutation",
+            () -> new daiMobEffect(MobEffectCategory.NEUTRAL, 0x00DC34));
     public static final DeferredHolder<MobEffect, MobEffect> RADIATION = DAI_EFFECTS.register("radiation",
             () -> new RadiationEffect(MobEffectCategory.HARMFUL, 11827736)
                     .addAttributeModifier(Attributes.ARMOR, ResourceLocation.parse("doasinteresting.effect.radiation"), -4.0F, AttributeModifier.Operation.ADD_VALUE));
