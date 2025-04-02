@@ -7,6 +7,12 @@ import net.Gmaj7.funny_world.daiEffects.daiMobEffects;
 import net.Gmaj7.funny_world.daiEnchantments.daiEnchantmentEffects;
 import net.Gmaj7.funny_world.daiEntities.daiEntities;
 import net.Gmaj7.funny_world.daiEntities.renderer.*;
+import net.Gmaj7.funny_world.daiFluids.BaseFluidType;
+import net.Gmaj7.funny_world.daiFluids.daiFluidTypes;
+import net.Gmaj7.funny_world.daiFluids.daiFluids;
+import net.Gmaj7.funny_world.daiFluids.BaseFluidType;
+import net.Gmaj7.funny_world.daiFluids.daiFluidTypes;
+import net.Gmaj7.funny_world.daiFluids.daiFluids;
 import net.Gmaj7.funny_world.daiInit.daiArmorMaterials;
 import net.Gmaj7.funny_world.daiInit.daiAttachmentTypes;
 import net.Gmaj7.funny_world.daiInit.daiDataComponentTypes;
@@ -15,6 +21,8 @@ import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.Gmaj7.funny_world.daiItems.daiPotions;
 import net.Gmaj7.funny_world.daiSounds.daiSounds;
 import net.Gmaj7.funny_world.villager.daiVillagers;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.neoforged.api.distmarker.Dist;
@@ -26,6 +34,8 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
@@ -60,6 +70,8 @@ public class FunnyWorld
         daiVillagers.register(modEventBus);
         daiSounds.register(modEventBus);
         daiEnchantmentEffects.register(modEventBus);
+        daiFluidTypes.register(modEventBus);
+        daiFluids.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (ExampleMod) to respond directly to events.
@@ -113,7 +125,17 @@ public class FunnyWorld
             EntityRenderers.register(daiEntities.MAHJONG_ENTITY.get(), MahjongEntityRenderer::new);
             EntityRenderers.register(daiEntities.MOMENTUM_ARROW_ENTITY.get(), MomentumArrowRenderer::new);
 
+            event.enqueueWork(() -> {
+                ItemBlockRenderTypes.setRenderLayer(daiFluids.EXTRACTANT_STILL.get(), RenderType.translucent());
+                ItemBlockRenderTypes.setRenderLayer(daiFluids.EXTRACTANT_FLOW.get(), RenderType.translucent());
+            });
+
             daiItemProperties.addCustomItemProperties();
+        }
+
+        @SubscribeEvent
+        public static void fluidRegister(RegisterClientExtensionsEvent event){
+            event.registerFluidType(((BaseFluidType) daiFluidTypes.EXTRACTANT_FLUID.get()).getExtensions(), daiFluidTypes.EXTRACTANT_FLUID.get());
         }
     }
 }

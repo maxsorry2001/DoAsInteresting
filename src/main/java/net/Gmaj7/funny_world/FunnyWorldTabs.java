@@ -56,5 +56,7 @@ public class FunnyWorldTabs {
                         pOutput.accept(daiBlocks.SCULK_TNT.get());
                         pOutput.accept(daiBlocks.ELECTROMAGNETIC_TNT.get());
                         pOutput.accept(daiBlocks.REDSTONE_MAGNET.get());
+
+                        pOutput.accept(daiItems.EXTRACTANT_FLUID_BUCKET.get());
                     }).build());
 }

@@ -5,7 +5,10 @@ import net.Gmaj7.funny_world.daiBlocks.custom.ElectromagneticTNT;
 import net.Gmaj7.funny_world.daiBlocks.custom.HoneyFloorBlock;
 import net.Gmaj7.funny_world.daiBlocks.custom.RedstoneMagnet;
 import net.Gmaj7.funny_world.daiBlocks.custom.SculkTNT;
+import net.Gmaj7.funny_world.daiFluids.daiFluids;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -29,4 +32,7 @@ public class daiBlocks {
 
     public static final Supplier<Block> HONEY_FLOOR = DAI_BLOCKS.register("honey_floor",
             () -> new HoneyFloorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).sound(SoundType.HONEY_BLOCK)));
+
+    public static final Supplier<LiquidBlock> EXTRACTANT_FLUID_BLOCK = DAI_BLOCKS.register("extractant_fluid_block",
+            () -> new LiquidBlock(daiFluids.EXTRACTANT_STILL.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));
 }

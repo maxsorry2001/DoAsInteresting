@@ -2,6 +2,7 @@ package net.Gmaj7.funny_world.daiItems;
 
 import net.Gmaj7.funny_world.FunnyWorld;
 import net.Gmaj7.funny_world.daiBlocks.daiBlocks;
+import net.Gmaj7.funny_world.daiFluids.daiFluids;
 import net.Gmaj7.funny_world.daiInit.daiArmorMaterials;
 import net.Gmaj7.funny_world.daiInit.daiDataComponentTypes;
 import net.Gmaj7.funny_world.daiInit.daiTiers;
@@ -42,6 +43,8 @@ public class daiItems {
             () -> new ArmorItem(daiArmorMaterials.NETHER_BRICK, ArmorItem.Type.BOOTS, new Item.Properties().durability(80)));
     public static final Supplier<Item> BELL_HELMET = DAI_ITEMS.register("bell_helmet",
             () -> new ArmorItem(daiArmorMaterials.BELL, ArmorItem.Type.HELMET, new Item.Properties().durability(127)));
+    public static final Supplier<Item> EXTRACTANT_FLUID_BUCKET = DAI_ITEMS.register("extractant_fluid_bucket",
+            () -> new BucketItem(daiFluids.EXTRACTANT_STILL.get(), new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
 
 
     public static final Supplier<Item> JISTGABBURASH = DAI_ITEMS.registerItem("jistgabburash", Jistgabburash::new);
