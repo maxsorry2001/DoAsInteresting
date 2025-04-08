@@ -126,8 +126,8 @@ public class FunnyWorld
             EntityRenderers.register(daiEntities.MOMENTUM_ARROW_ENTITY.get(), MomentumArrowRenderer::new);
 
             event.enqueueWork(() -> {
-                ItemBlockRenderTypes.setRenderLayer(daiFluids.EXTRACTANT_STILL.get(), RenderType.translucent());
                 ItemBlockRenderTypes.setRenderLayer(daiFluids.EXTRACTANT_FLOW.get(), RenderType.translucent());
+                ItemBlockRenderTypes.setRenderLayer(daiFluids.EXTRACTANT_STILL.get(), RenderType.translucent());
             });
 
             daiItemProperties.addCustomItemProperties();
@@ -135,7 +135,7 @@ public class FunnyWorld
 
         @SubscribeEvent
         public static void fluidRegister(RegisterClientExtensionsEvent event){
-            event.registerFluidType(((BaseFluidType) daiFluidTypes.EXTRACTANT_FLUID.get()).getExtensions(), daiFluidTypes.EXTRACTANT_FLUID.get());
+            event.registerFluidType(daiFluidTypes.EXTRACTANT_FLUID.get().getExtensions(), daiFluidTypes.EXTRACTANT_FLUID);
         }
     }
 }

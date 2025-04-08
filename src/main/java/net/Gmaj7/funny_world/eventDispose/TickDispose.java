@@ -1,20 +1,31 @@
 package net.Gmaj7.funny_world.eventDispose;
 
 import net.Gmaj7.funny_world.FunnyWorld;
+import net.Gmaj7.funny_world.daiBlocks.daiBlocks;
 import net.Gmaj7.funny_world.daiEffects.daiMobEffects;
 import net.Gmaj7.funny_world.daiEnchantments.daiEnchantments;
+import net.Gmaj7.funny_world.daiFluids.daiFluidTypes;
 import net.Gmaj7.funny_world.daiInit.*;
 import net.Gmaj7.funny_world.daiItems.daiItems;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.EntityTypeTags;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TieredItem;
@@ -22,6 +33,10 @@ import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderLivingEvent;
@@ -39,9 +54,30 @@ public class TickDispose {
 
     @SubscribeEvent
     public static void EntityTickPreDeal(EntityTickEvent.Pre event){
-        Entity entity = event.getEntity();
-        if(entity instanceof LivingEntity){
-            if(((LivingEntity) entity).getItemBySlot(EquipmentSlot.FEET).is(daiItems.BLUE_ICE_BOOTS.get())) {
+        Entity target = event.getEntity();
+        if(target instanceof LivingEntity entity){
+            if(entity.isInFluidType(daiFluidTypes.EXTRACTANT_FLUID.get()) && entity.level().getServer() != null & entity.tickCount % 20 == 0){
+                if(entity.getType().is(EntityTypeTags.ILLAGER) || entity instanceof Villager){
+                    entity.level().addFreshEntity(new ItemEntity(entity.level(), entity.getX(), entity.getY(), entity.getZ(), new ItemStack(Items.EMERALD)));
+                }
+                else{
+                    Player player = entity.level().getNearestPlayer(entity, 30);
+                    entity.setLastHurtByPlayer(player);
+                    ResourceKey<LootTable> resourcekey = entity.getLootTable();
+                    LootTable loottable = entity.level().getServer().reloadableRegistries().getLootTable(resourcekey);
+                    LootParams.Builder lootparams$builder = new LootParams.Builder((ServerLevel) entity.level())
+                            .withParameter(LootContextParams.THIS_ENTITY, entity)
+                            .withParameter(LootContextParams.ORIGIN, entity.position())
+                            .withOptionalParameter(LootContextParams.ATTACKING_ENTITY, entity.getLastAttacker())
+                            .withOptionalParameter(LootContextParams.DIRECT_ATTACKING_ENTITY, entity.getLastAttacker())
+                            .withParameter(LootContextParams.DAMAGE_SOURCE, new DamageSource(daiFunctions.getHolder(entity.level(), Registries.DAMAGE_TYPE, DamageTypes.MAGIC), entity.level().getNearestPlayer(entity, 30)));
+                    lootparams$builder = lootparams$builder.withLuck(2048F);
+                    LootParams lootparams = lootparams$builder.create(LootContextParamSets.ENTITY);
+                    loottable.getRandomItems(lootparams, entity.getLootTableSeed(), entity::spawnAtLocation);
+                }
+                entity.hurt(new DamageSource(daiFunctions.getHolder(entity.level(), Registries.DAMAGE_TYPE, DamageTypes.MAGIC)), entity.getMaxHealth() / 10);
+            }
+            if(entity.getItemBySlot(EquipmentSlot.FEET).is(daiItems.BLUE_ICE_BOOTS.get())) {
                 BlockPos blockPos = entity.blockPosition().below();
                 BlockState blockState = entity.level().getBlockState(blockPos);
                 BlockPos[] blockPoses = {blockPos, blockPos.east(), blockPos.west(), blockPos.north(), blockPos.south()};
@@ -54,16 +90,22 @@ public class TickDispose {
                     if(entity.level().getFluidState(blockPos).is(Fluids.LAVA))
                         entity.level().setBlockAndUpdate(blockPos, Blocks.OBSIDIAN.defaultBlockState());
                     else entity.level().setBlockAndUpdate(blockPos, Blocks.COBBLESTONE.defaultBlockState());
-                    ((LivingEntity) entity).setItemSlot(EquipmentSlot.FEET, ItemStack.EMPTY);
+                    entity.setItemSlot(EquipmentSlot.FEET, ItemStack.EMPTY);
                 }
                 if (blockState.is(Blocks.MAGMA_BLOCK)){
                     entity.level().setBlockAndUpdate(blockPos, Blocks.OBSIDIAN.defaultBlockState());
-                    ((LivingEntity) entity).getItemBySlot(EquipmentSlot.FEET).hurtAndBreak(1, (LivingEntity) entity, EquipmentSlot.FEET);
+                    entity.getItemBySlot(EquipmentSlot.FEET).hurtAndBreak(1, entity, EquipmentSlot.FEET);
                 }
                 if (entity.isOnFire()){
                     entity.clearFire();
-                    ((LivingEntity) entity).getItemBySlot(EquipmentSlot.FEET).hurtAndBreak(1, (LivingEntity) entity, EquipmentSlot.FEET);
+                    entity.getItemBySlot(EquipmentSlot.FEET).hurtAndBreak(1, entity, EquipmentSlot.FEET);
                 }
+            }
+        }
+        else if (target instanceof ItemEntity itemEntity){
+            if(itemEntity.getItem().is(Items.GLOWSTONE_DUST) && itemEntity.isInWater()){
+                itemEntity.level().setBlockAndUpdate(itemEntity.getOnPos(), daiBlocks.EXTRACTANT_FLUID_BLOCK.get().defaultBlockState());
+                itemEntity.discard();
             }
         }
     }
@@ -78,8 +120,7 @@ public class TickDispose {
             if (itemStack.is(Items.NETHER_BRICK)) {
                 event.getToolTip().add(Component.translatable("you_know_damage_and_from_nether"));
             }
-            if (itemStack.has(daiDataComponentTypes.HEAT_BY_FRICTION) && itemStack.getItem() instanceof TieredItem) {
-                TieredItem item = (TieredItem) itemStack.getItem();
+            if (itemStack.has(daiDataComponentTypes.HEAT_BY_FRICTION) && itemStack.getItem() instanceof TieredItem item) {
                 if (item.getTier() == Tiers.WOOD || item.getTier() == Tiers.DIAMOND)
                     event.getToolTip().add(Component.translatable("quick_use"));
                 else event.getToolTip().add(Component.translatable("high temperature"));

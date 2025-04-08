@@ -39,6 +39,7 @@
   "item.funny_world.mahjong": "麻将牌",
   "item.funny_world.spring_festival_overture_disc": "音乐唱片",
   "item.funny_world.momentum_arrow": "动量矢",
+  "item.funny_world.extractant_fluid_bucket": "萃取液桶",
   "item.minecraft.potion.effect.gene_mutation_potion": "基因突变药水",
   "item.minecraft.splash_potion.effect.gene_mutation_potion": "喷溅型基因突变药水",
   "item.minecraft.lingering_potion.effect.gene_mutation_potion": "滞留型基因突变药水",
@@ -57,6 +58,7 @@
   "block.funny_world.electromagnetic_tnt": "电磁TNT",
   "block.funny_world.redstone_magnet": "红石磁铁",
   "block.funny_world.honey_floor": "蜂蜜层",
+  "block.funny_world.extractant_fluid": "萃取液",
 
   "entity.funny_world.sculk_tnt_entity": "幽匿TNT",
   "entity.funny_world.electromagnetic_tnt_entity": "电磁TNT",

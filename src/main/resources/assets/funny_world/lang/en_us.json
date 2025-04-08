@@ -39,6 +39,7 @@
   "item.funny_world.mahjong": "mahjong",
   "item.funny_world.spring_festival_overture_disc": "music disc",
   "item.funny_world.momentum_arrow": "momentum arrow",
+  "item.funny_world.extractant_fluid_bucket": "extractant fluid bucket",
   "item.minecraft.potion.effect.gene_mutation_potion": "gene mutation potion",
   "item.minecraft.splash_potion.effect.gene_mutation_potion": "splash gene mutation potion",
   "item.minecraft.lingering_potion.effect.gene_mutation_potion": "lingering gene mutation potion",
@@ -57,6 +58,7 @@
   "block.funny_world.electromagnetic_tnt": "electromagnetic TNT",
   "block.funny_world.redstone_magnet": "redstone magnet",
   "block.funny_world.honey_floor": "honey floor",
+  "block.funny_world.extractant_fluid": "extractant fluid",
 
   "entity.funny_world.sculk_tnt_entity": "sculk TNT entity",
   "entity.funny_world.electromagnetic_tnt_entity": "electromagnetic TNT entity",
