@@ -124,6 +124,7 @@ public class FunnyWorld
             EntityRenderers.register(daiEntities.THUNDER_BALL_ENTITY.get(), ThunderBallRender::new);
             EntityRenderers.register(daiEntities.MAHJONG_ENTITY.get(), MahjongEntityRenderer::new);
             EntityRenderers.register(daiEntities.MOMENTUM_ARROW_ENTITY.get(), MomentumArrowRenderer::new);
+            EntityRenderers.register(daiEntities.ENTITIES_ARROW_ENTITY.get(), EntitiesArrowRenderer::new);
 
             event.enqueueWork(() -> {
                 ItemBlockRenderTypes.setRenderLayer(daiFluids.EXTRACTANT_FLOW.get(), RenderType.translucent());

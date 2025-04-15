@@ -20,7 +20,7 @@ import net.minecraft.world.phys.Vec3;
 public class MomentumArrowEntity extends AbstractArrow {
     private final double m = 1.5;
     private double power = 1;
-    protected MomentumArrowEntity(EntityType<? extends AbstractArrow> pEntityType, Level pLevel) {
+    public MomentumArrowEntity(EntityType<? extends AbstractArrow> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 

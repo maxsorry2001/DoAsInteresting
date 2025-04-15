@@ -27,6 +27,7 @@ public class daiEnchantments {
     public static final ResourceKey<Enchantment> ALL_OF_SAME = ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "all_of_same"));
     public static final ResourceKey<Enchantment> ENTROPY = ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "entropy"));
     public static final ResourceKey<Enchantment> ABSORB_HONEY = ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "absorb_honey"));
+    public static final ResourceKey<Enchantment> ENTITY_ARROWS = ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "entity_arrows"));
 
     public static void bootstrap(BootstrapContext<Enchantment> context){
         var enchantments = context.lookup(Registries.ENCHANTMENT);

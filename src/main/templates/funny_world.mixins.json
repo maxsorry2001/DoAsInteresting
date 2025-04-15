@@ -8,6 +8,7 @@
     "AbstractArrowMixin",
     "AbstractWindChargeMixin",
     "BellBlockMixin",
+    "BowMixin",
     "EmeraldForItemsMixin",
     "EmeraldsForVillagerTypeItemMixin",
     "ItemMixin",
