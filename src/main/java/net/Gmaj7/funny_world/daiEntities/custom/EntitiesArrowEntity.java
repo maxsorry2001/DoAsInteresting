@@ -2,19 +2,25 @@ package net.Gmaj7.funny_world.daiEntities.custom;
 
 import net.Gmaj7.funny_world.daiEntities.daiEntities;
 import net.Gmaj7.funny_world.daiInit.daiFunctions;
+import net.Gmaj7.funny_world.daiItems.daiItems;
+import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import org.joml.Vector3f;
+
+import java.util.List;
 
 public class EntitiesArrowEntity extends AbstractArrow {
     private float entityHealth;
@@ -52,15 +58,16 @@ public class EntitiesArrowEntity extends AbstractArrow {
 
     @Override
     protected void onHitBlock(BlockHitResult result) {
-        super.onHitBlock(result);
+        makeDamage();
+        makeParticleAndSound();
+        this.discard();
     }
 
     @Override
     protected void onHitEntity(EntityHitResult result) {
-        Entity entity = result.getEntity();
-        if(entity instanceof LivingEntity target){
-            if(this.entityHealth > 0)
-                target.hurt(new DamageSource(daiFunctions.getHolder(level(), Registries.DAMAGE_TYPE, DamageTypes.SONIC_BOOM), getOwner()), entityHealth);
+        if(result.getEntity() instanceof LivingEntity){
+            makeDamage();
+            makeParticleAndSound();
             this.discard();
         }
     }
@@ -71,6 +78,24 @@ public class EntitiesArrowEntity extends AbstractArrow {
 
     @Override
     protected ItemStack getDefaultPickupItem() {
-        return new ItemStack(Items.ARROW);
+        return new ItemStack(daiItems.ENTITIES_ARROW.get());
+    }
+
+    protected void makeDamage(){
+        List<LivingEntity> list = level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(5));
+        if(list.equals(getOwner())) list.remove(getOwner());
+        if(this.entityHealth > 0 && !list.isEmpty()) {
+            for (LivingEntity target : list)
+                target.hurt(new DamageSource(daiFunctions.getHolder(level(), Registries.DAMAGE_TYPE, DamageTypes.SONIC_BOOM), getOwner()), entityHealth);
+        }
+    }
+
+    protected void makeParticleAndSound(){
+       if(level() instanceof ServerLevel serverLevel){
+           serverLevel.sendParticles(new DustParticleOptions(new Vector3f(1f, 1f,1f), 2), getX(), getY(), getZ(), 800, 5, 5, 5, 0.5);
+           serverLevel.sendParticles(new DustParticleOptions(new Vector3f(1f, 0, 0), 2), getX(), getY(), getZ(), 800, 5, 5, 5, 0.5);
+           serverLevel.sendParticles(new DustParticleOptions(new Vector3f(0, 0, 1f), 2), getX(), getY(), getZ(), 800, 5, 5, 5, 0.5);
+           serverLevel.playSound(this, this.getOnPos(), SoundEvents.WARDEN_SONIC_BOOM, SoundSource.NEUTRAL, 5, 5);
+       }
     }
 }
