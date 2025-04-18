@@ -15,12 +15,10 @@ import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -36,7 +34,7 @@ public abstract class BowMixin extends ProjectileWeaponItem {
 
     @Inject(method = "releaseUsing", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;isEmpty()Z"), locals = LocalCapture.CAPTURE_FAILSOFT, cancellable = true)
     public void releaseUsingMixin(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft, CallbackInfo ci, Player player, ItemStack itemstack){
-        if(itemstack.isEmpty() && EnchantmentHelper.getEnchantmentLevel(daiFunctions.getHolder(level, Registries.ENCHANTMENT, daiEnchantments.ENTITY_ARROWS), player) > 0){
+        if(itemstack.isEmpty() && EnchantmentHelper.getEnchantmentLevel(daiFunctions.getHolder(level, Registries.ENCHANTMENT, daiEnchantments.SACRIFICE_ARROWS), player) > 0){
             int i = this.getUseDuration(stack, entityLiving) - timeLeft;
             if (i < 0) ci.cancel();
             LivingEntity livingEntity = player.level().getNearestEntity(LivingEntity.class, TargetingConditions.forNonCombat().range(6), player, player.getX(), player.getY(), player.getZ(), player.getBoundingBox().inflate(6));
@@ -58,6 +56,8 @@ public abstract class BowMixin extends ProjectileWeaponItem {
                         1.0F / (level.getRandom().nextFloat() * 0.4F + 1.2F) +  0.5F
                 );
                 player.awardStat(Stats.ITEM_USED.get(this));
+                if(!player.isCreative())
+                    stack.hurtAndBreak(5, player, player.getEquipmentSlotForItem(stack));
             }
         }
     }

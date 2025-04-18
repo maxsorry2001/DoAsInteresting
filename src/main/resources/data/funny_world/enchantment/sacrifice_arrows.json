@@ -1,7 +1,7 @@
 {
   "anvil_cost": 4,
   "description": {
-    "translate": "enchantment.funny_world.entity_arrows"
+    "translate": "enchantment.funny_world.sacrifice_arrows"
   },
   "max_cost": {
     "base": 5,

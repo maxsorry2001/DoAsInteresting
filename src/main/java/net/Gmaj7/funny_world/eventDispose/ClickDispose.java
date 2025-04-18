@@ -226,7 +226,7 @@ public class ClickDispose {
     public static void RightClickItem(PlayerInteractEvent.RightClickItem event){
         Player player = event.getEntity();
         ItemStack itemStackHand = player.getItemInHand(event.getHand());
-        if (itemStackHand.is(Items.BOW) && EnchantmentHelper.getEnchantmentLevel(daiFunctions.getHolder(player.level(), Registries.ENCHANTMENT, daiEnchantments.ENTITY_ARROWS), player) > 0){
+        if (itemStackHand.is(Items.BOW) && EnchantmentHelper.getEnchantmentLevel(daiFunctions.getHolder(player.level(), Registries.ENCHANTMENT, daiEnchantments.SACRIFICE_ARROWS), player) > 0){
             LivingEntity livingEntity = player.level().getNearestEntity(LivingEntity.class, TargetingConditions.forNonCombat().range(6), player, player.getX(), player.getY(), player.getZ(), player.getBoundingBox().inflate(6));
             if(livingEntity != null && livingEntity != player) player.startUsingItem(event.getHand());
         }

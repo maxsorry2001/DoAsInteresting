@@ -83,10 +83,10 @@ public class EntitiesArrowEntity extends AbstractArrow {
 
     protected void makeDamage(){
         List<LivingEntity> list = level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(5));
-        if(list.equals(getOwner())) list.remove(getOwner());
         if(this.entityHealth > 0 && !list.isEmpty()) {
             for (LivingEntity target : list)
-                target.hurt(new DamageSource(daiFunctions.getHolder(level(), Registries.DAMAGE_TYPE, DamageTypes.SONIC_BOOM), getOwner()), entityHealth);
+                if(target != getOwner())
+                    target.hurt(new DamageSource(daiFunctions.getHolder(level(), Registries.DAMAGE_TYPE, DamageTypes.SONIC_BOOM), getOwner()), entityHealth);
         }
     }
 
@@ -95,7 +95,7 @@ public class EntitiesArrowEntity extends AbstractArrow {
            serverLevel.sendParticles(new DustParticleOptions(new Vector3f(1f, 1f,1f), 2), getX(), getY(), getZ(), 800, 5, 5, 5, 0.5);
            serverLevel.sendParticles(new DustParticleOptions(new Vector3f(1f, 0, 0), 2), getX(), getY(), getZ(), 800, 5, 5, 5, 0.5);
            serverLevel.sendParticles(new DustParticleOptions(new Vector3f(0, 0, 1f), 2), getX(), getY(), getZ(), 800, 5, 5, 5, 0.5);
-           serverLevel.playSound(this, this.getOnPos(), SoundEvents.WARDEN_SONIC_BOOM, SoundSource.NEUTRAL, 5, 5);
+           serverLevel.playSound(this, this.getOnPos(), SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.NEUTRAL, 5, 5);
        }
     }
 }

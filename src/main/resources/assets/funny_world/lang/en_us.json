@@ -78,6 +78,7 @@
   "enchantment.funny_world.all_of_same": "all of same",
   "enchantment.funny_world.entropy": "entropy",
   "enchantment.funny_world.absorb_honey": "absorb",
+  "enchantment.funny_world.sacrifice_arrows": "sacrifice",
 
   "death.attack.dai_radiation" : "%1$s is festering from the radiation",
   "death.attack.dai_radiation.player" : "%1$s is festering from the radiation which is made by %s$2",

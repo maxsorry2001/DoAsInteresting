@@ -78,6 +78,7 @@
   "enchantment.funny_world.all_of_same": "清一色",
   "enchantment.funny_world.entropy": "熵增",
   "enchantment.funny_world.absorb_honey": "吸收",
+  "enchantment.funny_world.sacrifice_arrows": "献祭",
 
   "death.attack.dai_radiation" : "%1$s由于电磁辐射而全身溃烂",
   "death.attack.dai_radiation.player" : "%1$s由于%2$s发射的电磁辐射而全身溃烂",
