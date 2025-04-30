@@ -132,6 +132,15 @@ public class daiEntities {
                     .clientTrackingRange(4)
                     .build("entities_arrow_entity"));
 
+    public static final Supplier<EntityType<SlimeFishingHookEntity>> SLIME_FISHING_HOOK_ENTITY =
+            ENTITY_TYPES.register("slime_fishing_hook_entity", () -> EntityType.Builder.<SlimeFishingHookEntity>of(SlimeFishingHookEntity::new, MobCategory.MISC)
+                    .noSave()
+                    .noSummon()
+                    .sized(0.25F, 0.25F)
+                    .clientTrackingRange(4)
+                    .updateInterval(5)
+                    .build("slime_fishing_hook_entity"));
+
 
     public static void register(IEventBus eventBus){ENTITY_TYPES.register(eventBus);}
 }

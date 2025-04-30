@@ -8,15 +8,18 @@ import net.Gmaj7.funny_world.daiEnchantments.daiEnchantments;
 import net.Gmaj7.funny_world.daiEntities.custom.BrickEntity;
 import net.Gmaj7.funny_world.daiEntities.custom.EntitiesArrowEntity;
 import net.Gmaj7.funny_world.daiEntities.custom.NetherBrickEntity;
+import net.Gmaj7.funny_world.daiEntities.custom.SlimeFishingHookEntity;
 import net.Gmaj7.funny_world.daiInit.*;
 import net.Gmaj7.funny_world.daiInit.daiUniqueData.daiUniqueDataGet;
 import net.Gmaj7.funny_world.daiItems.daiFoods;
 import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.Gmaj7.funny_world.villager.daiVillagers;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
@@ -34,6 +37,7 @@ import net.minecraft.world.entity.ai.gossip.GossipType;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -123,12 +127,6 @@ public class ClickDispose {
             else if (target.level().isDay() && !target.isCurrentlyGlowing()) ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.GLOWING, 500));
                 player.swing(hand);
             event.setCanceled(true);
-        }
-        if(handStack.isEmpty() && target instanceof LivingEntity){
-            EntitiesArrowEntity entitiesArrowEntity = new EntitiesArrowEntity(player.level(), player);
-            entitiesArrowEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 1, 1);
-            entitiesArrowEntity.setEntityHealth(((LivingEntity) target).getHealth());
-            player.level().addFreshEntity(entitiesArrowEntity);
         }
     }
 
@@ -269,6 +267,18 @@ public class ClickDispose {
             if (!player.isCreative()) player.getItemInHand(event.getHand()).shrink(1);
             player.swing(event.getHand());
             player.level().playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.EGG_THROW, SoundSource.PLAYERS);
+        }
+        if(itemStackHand.is(Items.FISHING_ROD) && player.fishing != null && player.fishing.getHookedIn() instanceof Slime){
+            ItemStack itemStack = new ItemStack(daiItems.SLIME_ROD.get());
+            player.fishing.getHookedIn().discard();
+            DataComponentMap dataComponentMap = itemStackHand.getComponents();
+            itemStack.applyComponents(dataComponentMap);
+            if(!player.isCreative())
+                itemStackHand.shrink(1);
+            player.addItem(itemStack);
+        }
+        if(itemStackHand.is(daiItems.SLIME_ROD.get()) && player.fishing != null && player.fishing instanceof SlimeFishingHookEntity){
+            player.setDeltaMovement(player.getDeltaMovement().add(3,3,3));
         }
     }
 

@@ -21,6 +21,8 @@ public class daiItems {
             () -> new RedPacket(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> MAHJONG = DAI_ITEMS.register("mahjong",
             () -> new MahjongItem(new Item.Properties().stacksTo(1).durability(108).component(daiDataComponentTypes.MAHJONG_PATTERN, 0).component(daiDataComponentTypes.MAHJONG_POINTS, 0)));
+    public static final Supplier<Item> SLIME_ROD = DAI_ITEMS.register("slime_rod",
+            () -> new SlimeRod(new Item.Properties().stacksTo(1).durability(64)));
 
     public static final Supplier<Item> BLUE_ICE_BOOTS = DAI_ITEMS.register("blue_ice_boots",
             () -> new ArmorItem(daiArmorMaterials.BLUE_ICE, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).durability(128)));

@@ -24,6 +24,7 @@ import net.Gmaj7.funny_world.villager.daiVillagers;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.FishingHookRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -125,6 +126,7 @@ public class FunnyWorld
             EntityRenderers.register(daiEntities.MAHJONG_ENTITY.get(), MahjongEntityRenderer::new);
             EntityRenderers.register(daiEntities.MOMENTUM_ARROW_ENTITY.get(), MomentumArrowRenderer::new);
             EntityRenderers.register(daiEntities.ENTITIES_ARROW_ENTITY.get(), EntitiesArrowRenderer::new);
+            EntityRenderers.register(daiEntities.SLIME_FISHING_HOOK_ENTITY.get(), FishingHookRenderer::new);
 
             event.enqueueWork(() -> {
                 ItemBlockRenderTypes.setRenderLayer(daiFluids.EXTRACTANT_FLOW.get(), RenderType.translucent());

@@ -52,6 +52,7 @@ public class FunnyWorldTabs {
                         pOutput.accept(daiItems.MAHJONG.get());
                         pOutput.accept(daiItems.SPRING_FESTIVAL_OVERTURE_DISC.get());
                         pOutput.accept(daiItems.MOMENTUM_ARROW.get());
+                        pOutput.accept(daiItems.SLIME_ROD.get());
 
                         pOutput.accept(daiBlocks.SCULK_TNT.get());
                         pOutput.accept(daiBlocks.ELECTROMAGNETIC_TNT.get());
