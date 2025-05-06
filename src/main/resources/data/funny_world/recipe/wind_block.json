@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:wind_charge"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "funny_world:wind_block"
+  }
+}

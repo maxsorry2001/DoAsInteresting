@@ -7,12 +7,10 @@ import net.Gmaj7.funny_world.daiEnchantments.daiEnchantments;
 import net.Gmaj7.funny_world.daiFluids.daiFluidTypes;
 import net.Gmaj7.funny_world.daiInit.*;
 import net.Gmaj7.funny_world.daiItems.daiItems;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -44,10 +42,10 @@ import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
+import net.Gmaj7.funny_world.daiInit.daiFunctions;
 
 import java.util.Random;
 
-import static net.Gmaj7.funny_world.daiInit.daiFunctions.attrackEntity;
 
 @EventBusSubscriber(modid = FunnyWorld.MODID)
 public class TickDispose {
@@ -138,16 +136,18 @@ public class TickDispose {
     public static void entityTickPostDeal(EntityTickEvent.Post event){
         Entity entity = event.getEntity();
         BlockPos blockPos = entity.blockPosition();
+        daiFunctions.windBlockAttractEntity(entity, blockPos);
         if(entity instanceof LivingEntity livingEntity) {
             if (livingEntity.getItemBySlot(EquipmentSlot.FEET).is(daiItems.BLUE_ICE_BOOTS.get()) && ((LivingEntity) entity).walkAnimation.isMoving() && entity.onGround())
                 livingEntity.setDeltaMovement(entity.getDeltaMovement().add(entity.getDeltaMovement().normalize().x() * 0.1, 0 ,entity.getDeltaMovement().normalize().z() * 0.1));
             if(livingEntity.walkAnimation.isMoving() && ((LivingEntity) entity).hasEffect(daiMobEffects.IIIIII)) entity.setDeltaMovement(entity.getDeltaMovement().add(0, 0.1 ,0));
             if(daiFunctions.withIronOut(livingEntity)){
-                attrackEntity(livingEntity, blockPos);
+                daiFunctions.redstoneMagnetAttractEntity(livingEntity, blockPos);
             }
+
         }
         if(entity.getType().is(daiTags.daiEntityTypeTags.IRON_ENTITY) || (entity instanceof ItemEntity && ((ItemEntity) entity).getItem().is(daiTags.daiItemTags.IRON_ITEM))){
-            attrackEntity(entity, blockPos);
+            daiFunctions.redstoneMagnetAttractEntity(entity, blockPos);
         }
     }
 

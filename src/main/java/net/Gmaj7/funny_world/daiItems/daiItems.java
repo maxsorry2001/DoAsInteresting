@@ -96,4 +96,5 @@ public class daiItems {
     public static final Supplier<BlockItem> ELECTROMAGNETIC_TNT = DAI_ITEMS.registerSimpleBlockItem("electromagnetic_tnt", daiBlocks.ELECTROMAGNETIC_TNT);
     public static final Supplier<BlockItem> REDSTONE_MAGNET = DAI_ITEMS.registerSimpleBlockItem("redstone_magnet", daiBlocks.REDSTONE_MAGNET);
     public static final Supplier<BlockItem> HONEY_FLOOR = DAI_ITEMS.registerSimpleBlockItem("honey_floor", daiBlocks.HONEY_FLOOR);
+    public static final Supplier<BlockItem> WIND_BLOCK = DAI_ITEMS.registerSimpleBlockItem("wind_block", daiBlocks.WIND_BLOCK);
 }
