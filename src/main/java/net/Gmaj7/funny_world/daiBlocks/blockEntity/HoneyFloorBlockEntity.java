@@ -1,7 +1,6 @@
 package net.Gmaj7.funny_world.daiBlocks.blockEntity;
 
 import net.Gmaj7.funny_world.daiBlocks.daiBlockEntities;
-import net.Gmaj7.funny_world.daiInit.daiHoneyEffects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -9,10 +8,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.ItemStackHandler;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class HoneyFloorBlockEntity extends BlockEntity {
     public ItemStack honey_bottle = new ItemStack(Items.HONEY_BOTTLE);

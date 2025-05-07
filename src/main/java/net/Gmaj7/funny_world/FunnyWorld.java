@@ -131,7 +131,6 @@ public class FunnyWorld
             event.enqueueWork(() -> {
                 ItemBlockRenderTypes.setRenderLayer(daiFluids.EXTRACTANT_FLOW.get(), RenderType.translucent());
                 ItemBlockRenderTypes.setRenderLayer(daiFluids.EXTRACTANT_STILL.get(), RenderType.translucent());
-
             });
 
             daiItemProperties.addCustomItemProperties();

@@ -42,7 +42,6 @@ import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
-import net.Gmaj7.funny_world.daiInit.daiFunctions;
 
 import java.util.Random;
 

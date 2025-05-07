@@ -1,7 +1,6 @@
 package net.Gmaj7.funny_world.mixin;
 
 import net.Gmaj7.funny_world.daiInit.daiUniqueData.daiUniqueDataGet;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;

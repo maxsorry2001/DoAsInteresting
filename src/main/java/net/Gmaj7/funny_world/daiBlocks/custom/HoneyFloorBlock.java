@@ -4,7 +4,6 @@ import com.mojang.serialization.MapCodec;
 import net.Gmaj7.funny_world.daiBlocks.blockEntity.HoneyFloorBlockEntity;
 import net.Gmaj7.funny_world.daiInit.daiDataComponentTypes;
 import net.Gmaj7.funny_world.daiInit.daiHoneyEffects;
-import net.Gmaj7.funny_world.daiInit.daiUniqueData.daiUniqueDataGet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;

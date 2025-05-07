@@ -13,8 +13,6 @@ import net.minecraft.world.level.material.MapColor;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.function.Supplier;
-
 public class daiBlocks {
     public static final DeferredRegister.Blocks DAI_BLOCKS = DeferredRegister.createBlocks(FunnyWorld.MODID);
 
