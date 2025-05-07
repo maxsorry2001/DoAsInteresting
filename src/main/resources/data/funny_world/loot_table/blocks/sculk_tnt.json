@@ -11,15 +11,6 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "conditions": [
-            {
-              "block": "funny_world:sculk_tnt",
-              "condition": "minecraft:block_state_property",
-              "properties": {
-                "unstable": "false"
-              }
-            }
-          ],
           "name": "funny_world:sculk_tnt"
         }
       ],

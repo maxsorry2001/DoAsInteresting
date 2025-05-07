@@ -141,6 +141,14 @@ public class daiEntities {
                     .updateInterval(5)
                     .build("slime_fishing_hook_entity"));
 
+    public static final Supplier<EntityType<WindTntEntity>> WIND_TNT_ENTITY =
+            ENTITY_TYPES.register("wind_tnt_entity", () -> EntityType.Builder.<WindTntEntity>of(WindTntEntity::new, MobCategory.MISC)
+                    .fireImmune()
+                    .sized(0.98F, 0.98F)
+                    .eyeHeight(0.15F)
+                    .clientTrackingRange(10)
+                    .build("wind_tnt_entity"));
+
 
     public static void register(IEventBus eventBus){ENTITY_TYPES.register(eventBus);}
 }

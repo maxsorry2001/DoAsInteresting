@@ -56,13 +56,15 @@
 
   "block.funny_world.sculk_tnt": "sculk TNT",
   "block.funny_world.electromagnetic_tnt": "electromagnetic TNT",
+  "block.funny_world.wind_tnt": "wind TNT",
   "block.funny_world.redstone_magnet": "redstone magnet",
   "block.funny_world.honey_floor": "honey floor",
   "block.funny_world.extractant_fluid": "extractant fluid",
   "block.funny_world.wind_block": "wind block",
 
-  "entity.funny_world.sculk_tnt_entity": "sculk TNT entity",
-  "entity.funny_world.electromagnetic_tnt_entity": "electromagnetic TNT entity",
+  "entity.funny_world.sculk_tnt_entity": "sculk TNT",
+  "entity.funny_world.electromagnetic_tnt_entity": "electromagnetic TNT",
+  "entity.funny_world.wind_tnt_entity": "wind TNT",
   "entity.funny_world.mahjong_entity": "mahjong",
   "entity.funny_world.momentum_arrow_entity": "momentum arrow",
 

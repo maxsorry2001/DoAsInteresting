@@ -13,6 +13,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.AnvilBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
@@ -67,11 +68,11 @@ public class daiFunctions {
 
     public static void windBlockAttractEntity(Entity entity, BlockPos blockPos) {
         for (int i = -4; i <= 4; i++){
-            for (int j = 0; j<= 4; j++){
+            for (int j = -4; j<= 4; j++){
                 for (int k = -4; k <= 4; k++){
                     BlockPos blockPos1 = new BlockPos(blockPos.getX() + i, blockPos.getY() + j, blockPos.getZ() + k);
                     BlockState blockState = entity.level().getBlockState(blockPos1);
-                    if(blockState.is(daiBlocks.WIND_BLOCK.get())) {
+                    if(blockState.is(daiBlocks.WIND_BLOCK.get()) && !(entity.level().getBlockState(blockPos1.above()).getBlock() instanceof AnvilBlock)) {
                         Vec3 vec3 = new Vec3(blockPos1.getX() - entity.getX(), blockPos1.getY() - entity.getY(), blockPos1.getZ() - entity.getZ());
                         Vec3 vec31 = vec3;
                         if (vec3.length() > 1) {
