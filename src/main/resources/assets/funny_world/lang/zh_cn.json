@@ -40,6 +40,7 @@
   "item.funny_world.spring_festival_overture_disc": "音乐唱片",
   "item.funny_world.momentum_arrow": "动量矢",
   "item.funny_world.extractant_fluid_bucket": "萃取液桶",
+  "item.funny_world.humanity_pocket": "人性口袋",
   "item.minecraft.potion.effect.gene_mutation_potion": "基因突变药水",
   "item.minecraft.splash_potion.effect.gene_mutation_potion": "喷溅型基因突变药水",
   "item.minecraft.lingering_potion.effect.gene_mutation_potion": "滞留型基因突变药水",
@@ -99,5 +100,6 @@
   "high temperature": "温度很高，小心烫手",
   "try_to_use_on_illager": "试试对灾厄村民使用",
   "daisongs_spring_festival_overture": "春节序曲",
-  "honey_has_effect": "这瓶蜂蜜貌似吸收了点啥效果"
+  "honey_has_effect": "这瓶蜂蜜貌似吸收了点啥效果",
+  "humanity": "人性:"
 }

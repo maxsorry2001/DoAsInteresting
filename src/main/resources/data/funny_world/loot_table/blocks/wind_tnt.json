@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "funny_world:wind_tnt"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "funny_world:blocks/wind_tnt"
+}

@@ -1,15 +1,14 @@
 package net.Gmaj7.funny_world.eventDispose;
 
 import net.Gmaj7.funny_world.FunnyWorld;
-import net.Gmaj7.funny_world.daiBlocks.custom.WindBlock;
 import net.Gmaj7.funny_world.daiBlocks.daiBlocks;
 import net.Gmaj7.funny_world.daiEffects.daiMobEffects;
 import net.Gmaj7.funny_world.daiEnchantments.daiEnchantments;
 import net.Gmaj7.funny_world.daiFluids.daiFluidTypes;
 import net.Gmaj7.funny_world.daiInit.*;
+import net.Gmaj7.funny_world.daiInit.daiUniqueData.daiUniqueDataGet;
 import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -18,9 +17,10 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.EntityTypeTags;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -38,7 +38,6 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-import net.minecraft.world.phys.AABB;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderLivingEvent;
@@ -47,7 +46,6 @@ import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-import java.util.List;
 import java.util.Random;
 
 
@@ -57,6 +55,23 @@ public class TickDispose {
     @SubscribeEvent
     public static void EntityTickPreDeal(EntityTickEvent.Pre event){
         Entity target = event.getEntity();
+        if(target instanceof Player player){
+            int humanity = ((daiUniqueDataGet)player).getHumanitySet().getHumanity();
+            if(player.tickCount % 100 == 0){
+                if (humanity < 0) {
+                    player.hurt(new DamageSource(daiFunctions.getHolder(player.level(), Registries.DAMAGE_TYPE, DamageTypes.OUTSIDE_BORDER)), (0.5F * (-humanity + 25)) / 25);
+                    if(!player.hasEffect(MobEffects.RAID_OMEN))
+                        player.addEffect(new MobEffectInstance(MobEffects.BAD_OMEN, 400));
+                    player.removeEffect(MobEffects.HERO_OF_THE_VILLAGE);
+                }
+                else if (humanity > 100) {
+                    player.heal( (humanity - 75) / 25);
+                    player.addEffect(new MobEffectInstance(MobEffects.HERO_OF_THE_VILLAGE, 400, 4));
+                    player.removeEffect(MobEffects.BAD_OMEN);
+                    player.removeEffect(MobEffects.RAID_OMEN);
+                }
+            }
+        }
         if(target instanceof LivingEntity entity){
             if(entity.isInFluidType(daiFluidTypes.EXTRACTANT_FLUID.get()) && entity.level().getServer() != null & entity.tickCount % 20 == 0){
                 if(entity.getType().is(EntityTypeTags.ILLAGER) || entity instanceof Villager){

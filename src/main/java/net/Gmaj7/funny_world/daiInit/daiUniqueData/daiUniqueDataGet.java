@@ -9,5 +9,7 @@ import net.minecraft.world.phys.BlockHitResult;
 public interface daiUniqueDataGet {
     WindChargeSet getWindChargeSet();
 
+    HumanitySet getHumanitySet();
+
     boolean isBlockUsePass(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult);
 }

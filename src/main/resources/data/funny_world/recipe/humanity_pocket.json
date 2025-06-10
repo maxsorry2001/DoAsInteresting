@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "minecraft:string"
+    },
+    "b": {
+      "item": "minecraft:rotten_flesh"
+    }
+  },
+  "pattern": [
+    "a a",
+    "aba",
+    "aaa"
+  ],
+  "result": {
+    "count": 1,
+    "id": "funny_world:humanity_pocket"
+  }
+}

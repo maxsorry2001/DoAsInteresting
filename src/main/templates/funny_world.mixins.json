@@ -20,7 +20,8 @@
     "TypeSpecificTradeMixin",
     "VillagerMixin",
     "WindChargeItemMixin",
-    "BlockBehaviourMixin"
+    "BlockBehaviourMixin",
+    "PlayerMixin"
   ],
   "client": [
   ],

@@ -40,6 +40,7 @@
   "item.funny_world.spring_festival_overture_disc": "music disc",
   "item.funny_world.momentum_arrow": "momentum arrow",
   "item.funny_world.extractant_fluid_bucket": "extractant fluid bucket",
+  "item.funny_world.humanity_pocket": "Humanity Pocket",
   "item.minecraft.potion.effect.gene_mutation_potion": "gene mutation potion",
   "item.minecraft.splash_potion.effect.gene_mutation_potion": "splash gene mutation potion",
   "item.minecraft.lingering_potion.effect.gene_mutation_potion": "lingering gene mutation potion",
@@ -99,5 +100,6 @@
   "high temperature": "It has a high temperature",
   "try_to_use_on_illager": "Try to use it on illagers",
   "daisongs_spring_festival_overture": "Spring Festival Overture",
-  "honey_has_effect": "The honey looks like has absorbed some effects"
+  "honey_has_effect": "The honey looks like has absorbed some effects",
+  "humanity": "humanity:"
 }

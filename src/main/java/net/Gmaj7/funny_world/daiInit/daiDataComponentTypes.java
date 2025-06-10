@@ -29,13 +29,16 @@ public class daiDataComponentTypes {
     public static final Supplier<DataComponentType<Integer>> CANNOT_SHOOT = DAI_DATA_COMPONENT_TYPE.register("can_shoot",
             () -> DataComponentType.<Integer>builder().persistent(Codec.INT).build());
 
-    public static final Supplier<DataComponentType<Integer>> HEAT_BY_FRICTION = DAI_DATA_COMPONENT_TYPE.register("heat_by_briction",
+    public static final Supplier<DataComponentType<Integer>> HEAT_BY_FRICTION = DAI_DATA_COMPONENT_TYPE.register("heat_by_friction",
             () -> DataComponentType.<Integer>builder().persistent(Codec.INT).build());
 
     public static final Supplier<DataComponentType<Integer>> MAHJONG_PATTERN = DAI_DATA_COMPONENT_TYPE.register("mahjong_pattern",
             () -> DataComponentType.<Integer>builder().persistent(Codec.INT).build());
 
     public static final Supplier<DataComponentType<Integer>> MAHJONG_POINTS = DAI_DATA_COMPONENT_TYPE.register("mahjong_points",
+            () -> DataComponentType.<Integer>builder().persistent(Codec.INT).build());
+
+    public static final Supplier<DataComponentType<Integer>> HUMANITY = DAI_DATA_COMPONENT_TYPE.register("humanity",
             () -> DataComponentType.<Integer>builder().persistent(Codec.INT).build());
 
     public static final Supplier<DataComponentType<daiHoneyEffects>> HONEY_EFFECTS = DAI_DATA_COMPONENT_TYPE.register("honey_effects",

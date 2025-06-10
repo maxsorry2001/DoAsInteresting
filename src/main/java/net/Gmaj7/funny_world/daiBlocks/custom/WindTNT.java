@@ -1,7 +1,6 @@
 package net.Gmaj7.funny_world.daiBlocks.custom;
 
 import com.mojang.serialization.MapCodec;
-import net.Gmaj7.funny_world.daiEntities.custom.SculkTntEntity;
 import net.Gmaj7.funny_world.daiEntities.custom.WindTntEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;

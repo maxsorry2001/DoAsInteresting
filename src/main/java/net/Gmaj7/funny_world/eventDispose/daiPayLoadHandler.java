@@ -14,5 +14,6 @@ public class daiPayLoadHandler {
         final PayloadRegistrar payloadRegistrar = event.registrar(FunnyWorld.MODID).versioned("1.0.0").optional();
 
         payloadRegistrar.playToServer(daiPackets.daiBellHelmetPacket.TYPE, daiPackets.daiBellHelmetPacket.STREAM_CODEC, daiPackets.daiBellHelmetPacket::handle);
+        payloadRegistrar.playToClient(daiPackets.daiHumanityPacket.TYPE, daiPackets.daiHumanityPacket.STREAM_CODEC, daiPackets.daiHumanityPacket::handle);
     }
 }

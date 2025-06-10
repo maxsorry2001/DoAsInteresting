@@ -79,6 +79,8 @@ public class daiItems {
             () -> new LightingBoltRod(new Item.Properties().stacksTo(1).durability(255).attributes(LightingBoltRod.createAttributes())));
     public static final Supplier<Item> CONVEX = DAI_ITEMS.register("convex",
             () -> new Convex(new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> HUMANITY_POCKET = DAI_ITEMS.register("humanity_pocket",
+            () -> new HumanityPocket(new Item.Properties().stacksTo(1).component(daiDataComponentTypes.HUMANITY, 50)));
 
     public static final Supplier<Item> MOMENTUM_ARROW = DAI_ITEMS.register("momentum_arrow",
             () -> new MomentumArrowItem(new Item.Properties()));

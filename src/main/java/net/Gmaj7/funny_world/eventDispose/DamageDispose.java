@@ -7,7 +7,9 @@ import net.Gmaj7.funny_world.daiEntities.custom.BrickEntity;
 import net.Gmaj7.funny_world.daiEntities.custom.NetherBrickEntity;
 import net.Gmaj7.funny_world.daiInit.daiArmorMaterials;
 import net.Gmaj7.funny_world.daiInit.daiFunctions;
+import net.Gmaj7.funny_world.daiInit.daiPackets;
 import net.Gmaj7.funny_world.daiInit.daiTiers;
+import net.Gmaj7.funny_world.daiInit.daiUniqueData.daiUniqueDataGet;
 import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.DamageTypeTags;
@@ -17,6 +19,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -25,6 +29,10 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
+
+import java.util.Collection;
 
 @EventBusSubscriber(modid = FunnyWorld.MODID)
 public class DamageDispose {
@@ -48,6 +56,16 @@ public class DamageDispose {
                     }
                     event.setNewDamage((event.getNewDamage() + damageAdd) * damageMul);
                 }
+            }
+            if(source instanceof Player player){
+                int humanity = ((daiUniqueDataGet)player).getHumanitySet().getHumanity();
+                if(humanity > 50)
+                    event.setNewDamage(event.getNewDamage() * (1 + 0.25F * (humanity - 25) / 25));
+            }
+            if(target instanceof Player player){
+                int humanity = ((daiUniqueDataGet)player).getHumanitySet().getHumanity();
+                if(humanity > 50) event.setNewDamage((float) (event.getNewDamage() * Math.pow (0.9, (humanity - 25) / 25)));
+
             }
             if(damageSource.is(DamageTypeTags.IS_EXPLOSION) && target.getItemBySlot(EquipmentSlot.CHEST).getEnchantmentLevel(daiFunctions.getHolder(target.level(), Registries.ENCHANTMENT, daiEnchantments.EXPLOSION_GET)) > 0)
                 event.setNewDamage(0);
@@ -83,8 +101,33 @@ public class DamageDispose {
     @SubscribeEvent
     public static void deathDeal(LivingDeathEvent event){
         LivingEntity livingEntity = event.getEntity();
+        Entity source = event.getSource().getEntity();
         if(livingEntity.getItemBySlot(EquipmentSlot.HEAD).is(daiItems.BELL_HELMET.get())){
             livingEntity.level().addFreshEntity(new ItemEntity(livingEntity.level(), livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), new ItemStack(daiItems.BELL_HELMET.get())));
+        }
+        if(source instanceof Player && !source.level().isClientSide()) {
+            if(livingEntity instanceof Enemy) {
+                ((daiUniqueDataGet) source).getHumanitySet().addHumanity();
+                PacketDistributor.sendToAllPlayers(new daiPackets.daiHumanityPacket(((daiUniqueDataGet) source).getHumanitySet().getHumanity()));
+            }
+            else {
+                ((daiUniqueDataGet) source).getHumanitySet().decreaseHumanity();
+                PacketDistributor.sendToAllPlayers(new daiPackets.daiHumanityPacket(((daiUniqueDataGet) source).getHumanitySet().getHumanity()));
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void dropDeal(LivingDropsEvent event){
+        Entity source = event.getSource().getEntity();
+        if(source instanceof Player && ((daiUniqueDataGet)source).getHumanitySet().getHumanity() < 0){
+            Collection<ItemEntity> drops = event.getDrops();
+            if(!drops.isEmpty()) {
+                int a = (-((daiUniqueDataGet) source).getHumanitySet().getHumanity() + 50) / 50;
+                for (int i = 0; i < a; i++)
+                    for (ItemEntity item : drops)
+                        source.level().addFreshEntity(item.copy());
+            }
         }
     }
 }

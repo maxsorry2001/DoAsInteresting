@@ -2,7 +2,6 @@ package net.Gmaj7.funny_world.daiEntities.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.Gmaj7.funny_world.daiEntities.custom.SculkTntEntity;
 import net.Gmaj7.funny_world.daiEntities.custom.WindTntEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;

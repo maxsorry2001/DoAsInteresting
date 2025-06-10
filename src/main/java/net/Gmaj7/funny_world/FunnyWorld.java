@@ -9,10 +9,8 @@ import net.Gmaj7.funny_world.daiEntities.daiEntities;
 import net.Gmaj7.funny_world.daiEntities.renderer.*;
 import net.Gmaj7.funny_world.daiFluids.daiFluidTypes;
 import net.Gmaj7.funny_world.daiFluids.daiFluids;
-import net.Gmaj7.funny_world.daiInit.daiArmorMaterials;
-import net.Gmaj7.funny_world.daiInit.daiAttachmentTypes;
-import net.Gmaj7.funny_world.daiInit.daiDataComponentTypes;
-import net.Gmaj7.funny_world.daiInit.daiItemProperties;
+import net.Gmaj7.funny_world.daiInit.*;
+import net.Gmaj7.funny_world.daiInit.daiUniqueData.daiUniqueDataGet;
 import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.Gmaj7.funny_world.daiItems.daiPotions;
 import net.Gmaj7.funny_world.daiSounds.daiSounds;
@@ -22,7 +20,8 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.FishingHookRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.client.renderer.entity.TntRenderer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -35,7 +34,9 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
@@ -95,6 +96,15 @@ public class FunnyWorld
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event)
     {
+    }
+
+    @SubscribeEvent
+    public void entityJoin(EntityJoinLevelEvent event){
+        if(!event.getLevel().isClientSide()) {
+            Entity entity = event.getEntity();
+            if(entity instanceof Player)
+                PacketDistributor.sendToAllPlayers(new daiPackets.daiHumanityPacket(((daiUniqueDataGet)entity).getHumanitySet().getHumanity()));
+        }
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
