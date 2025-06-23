@@ -1,7 +1,6 @@
 package net.Gmaj7.funny_world.mixin;
 
 
-import net.Gmaj7.funny_world.daiInit.daiPackets;
 import net.Gmaj7.funny_world.daiInit.daiUniqueData.HumanitySet;
 import net.Gmaj7.funny_world.daiInit.daiUniqueData.daiUniqueDataGet;
 import net.minecraft.nbt.CompoundTag;
@@ -10,7 +9,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.extensions.IPlayerExtension;
-import net.neoforged.neoforge.network.PacketDistributor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;

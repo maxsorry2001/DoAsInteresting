@@ -149,6 +149,13 @@ public class daiEntities {
                     .clientTrackingRange(10)
                     .build("wind_tnt_entity"));
 
+    public static final Supplier<EntityType<IceBoatEntity>> ICE_BOAT_ENTITY =
+            ENTITY_TYPES.register("ice_boat_entity", () -> EntityType.Builder.<IceBoatEntity>of(IceBoatEntity::new, MobCategory.MISC)
+                    .sized(1.375F, 0.5625F)
+                    .eyeHeight(0.5625F)
+                    .clientTrackingRange(10)
+                    .build("ice_boat_entity"));
+
 
     public static void register(IEventBus eventBus){ENTITY_TYPES.register(eventBus);}
 }

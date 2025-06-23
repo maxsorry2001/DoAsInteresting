@@ -1,11 +1,15 @@
 package net.Gmaj7.funny_world.eventDispose;
 
 import net.Gmaj7.funny_world.FunnyWorld;
+import net.Gmaj7.funny_world.daiEntities.daiModelLayers;
 import net.Gmaj7.funny_world.daiEntities.model.IronShootEntityModel;
 import net.Gmaj7.funny_world.daiEntities.model.MahjongEntityModel;
 import net.Gmaj7.funny_world.daiEntities.model.ThunderBallModel;
 import net.Gmaj7.funny_world.daiGui.hud.ShowHumanityHud;
+import net.minecraft.client.model.BoatModel;
+import net.minecraft.client.model.RaftModel;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.vehicle.Boat;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -19,6 +23,11 @@ public class ClientEventHandler {
         event.registerLayerDefinition(IronShootEntityModel.LAYER_LOCATION, IronShootEntityModel::createBodyLayer);
         event.registerLayerDefinition(ThunderBallModel.LAYER_LOCATION, ThunderBallModel::createBodyLayer);
         event.registerLayerDefinition(MahjongEntityModel.LAYER_LOCATION, MahjongEntityModel::createBodyLayer);
+
+        for (Boat.Type type : Boat.Type.values()){
+            if(type == Boat.Type.BAMBOO) event.registerLayerDefinition(daiModelLayers.createRaftModelName(type), RaftModel::createBodyModel);
+            else event.registerLayerDefinition(daiModelLayers.createIceBoatModelName(type), BoatModel::createBodyModel);
+        }
     }
     @SubscribeEvent
     public static void registerHud(RegisterGuiLayersEvent event){

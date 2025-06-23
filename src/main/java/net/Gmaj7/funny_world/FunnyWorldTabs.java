@@ -61,6 +61,16 @@ public class FunnyWorldTabs {
                         pOutput.accept(daiBlocks.WIND_BLOCK.get());
                         pOutput.accept(daiBlocks.WIND_TNT.get());
 
+                        pOutput.accept(daiItems.OAK_ICE_BOAT.get());
+                        pOutput.accept(daiItems.SPRUCE_ICE_BOAT.get());
+                        pOutput.accept(daiItems.BIRCH_ICE_BOAT.get());
+                        pOutput.accept(daiItems.JUNGLE_ICE_BOAT.get());
+                        pOutput.accept(daiItems.ACACIA_ICE_BOAT.get());
+                        pOutput.accept(daiItems.CHERRY_ICE_BOAT.get());
+                        pOutput.accept(daiItems.DARK_OAK_ICE_BOAT.get());
+                        pOutput.accept(daiItems.MANGROVE_ICE_BOAT.get());
+                        pOutput.accept(daiItems.BAMBOO_ICE_RAFT.get());
+
                         pOutput.accept(daiItems.EXTRACTANT_FLUID_BUCKET.get());
                     }).build());
 }

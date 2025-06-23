@@ -1,6 +1,7 @@
 package net.Gmaj7.funny_world.daiGui.hud;
 
 import net.Gmaj7.funny_world.daiInit.daiUniqueData.daiUniqueDataGet;
+import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -12,6 +13,7 @@ public class ShowHumanityHud implements LayeredDraw.Layer {
     @Override
     public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
         Player player = Minecraft.getInstance().player;
+        if(!player.getMainHandItem().is(daiItems.HUMANITY_POCKET.get()) && !player.getOffhandItem().is(daiItems.HUMANITY_POCKET.get())) return;
         int humanity = ((daiUniqueDataGet)player).getHumanitySet().getHumanity();
         var screenWidth = guiGraphics.guiWidth();
         var screenHeight = guiGraphics.guiHeight();

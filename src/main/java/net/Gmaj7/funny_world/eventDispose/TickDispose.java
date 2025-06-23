@@ -155,7 +155,8 @@ public class TickDispose {
     public static void entityTickPostDeal(EntityTickEvent.Post event){
         Entity entity = event.getEntity();
         BlockPos blockPos = entity.blockPosition();
-        daiFunctions.windBlockAttractEntity(entity, blockPos);
+        if(!(entity instanceof Player && ((Player) entity).isCreative()))
+            daiFunctions.windBlockAttractEntity(entity, blockPos);
         if(entity instanceof LivingEntity livingEntity) {
             if (livingEntity.getItemBySlot(EquipmentSlot.FEET).is(daiItems.BLUE_ICE_BOOTS.get()) && ((LivingEntity) entity).walkAnimation.isMoving() && entity.onGround())
                 livingEntity.setDeltaMovement(entity.getDeltaMovement().add(entity.getDeltaMovement().normalize().x() * 0.1, 0 ,entity.getDeltaMovement().normalize().z() * 0.1));

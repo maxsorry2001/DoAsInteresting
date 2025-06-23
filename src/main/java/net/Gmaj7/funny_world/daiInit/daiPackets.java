@@ -10,6 +10,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class daiPackets {
@@ -43,6 +44,7 @@ public class daiPackets {
             return TYPE;
         }
     }
+
     public static class daiHumanityPacket implements CustomPacketPayload {
         private final int dHumanity;
 
@@ -66,6 +68,49 @@ public class daiPackets {
                 if (context.player().level().isClientSide()){
                     HumanitySet humanitySet = ((daiUniqueDataGet)context.player()).getHumanitySet();
                     humanitySet.setHumanity(packet.dHumanity);
+                }
+            });
+        }
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
+    public static class daiIceBoatPacket implements CustomPacketPayload {
+        double x;
+        double y;
+        double z;
+        float r;
+
+        public static final CustomPacketPayload.Type<daiIceBoatPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "ice_boat"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, daiIceBoatPacket> STREAM_CODEC = CustomPacketPayload.codec(daiIceBoatPacket::write, daiIceBoatPacket::new);
+
+        public daiIceBoatPacket(double x, double y, double z, float r){
+            this.x = x;
+            this.y = y;
+            this.z = z;
+            this.r = r;
+        }
+
+        public daiIceBoatPacket(FriendlyByteBuf buf){
+            this.x = buf.readDouble();
+            this.y = buf.readDouble();
+            this.z = buf.readDouble();
+            this.r = buf.readFloat();
+        }
+
+        public void write(FriendlyByteBuf buf){
+            buf.writeDouble(x);
+            buf.writeDouble(y);
+            buf.writeDouble(z);
+            buf.writeFloat(r);
+        }
+
+        public static void handle(daiIceBoatPacket packet, IPayloadContext context){
+            context.enqueueWork(() -> {
+                if (context.player() instanceof ServerPlayer serverPlayer){
+                    serverPlayer.level().explode(null, packet.x, packet.y, packet.z, packet.r, false, Level.ExplosionInteraction.BLOCK);
                 }
             });
         }

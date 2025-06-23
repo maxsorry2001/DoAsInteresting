@@ -8,6 +8,7 @@ import net.Gmaj7.funny_world.daiInit.daiDataComponentTypes;
 import net.Gmaj7.funny_world.daiInit.daiTiers;
 import net.Gmaj7.funny_world.daiItems.custom.*;
 import net.Gmaj7.funny_world.daiSounds.daiJukeboxSongs;
+import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.*;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -92,6 +93,25 @@ public class daiItems {
 
     public static final Supplier<Item> SPRING_FESTIVAL_OVERTURE_DISC = DAI_ITEMS.register("spring_festival_overture_disc",
             () -> new Item(new Item.Properties().stacksTo(1).jukeboxPlayable(daiJukeboxSongs.SPRING_FESTIVAL_OVERTURE).rarity(Rarity.RARE)));
+
+    public static final Supplier<Item> OAK_ICE_BOAT = DAI_ITEMS.register("oak_ice_boat",
+            () -> new IceBoatItem(false, Boat.Type.OAK, new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> SPRUCE_ICE_BOAT = DAI_ITEMS.register("spruce_ice_boat",
+            () -> new IceBoatItem(false, Boat.Type.SPRUCE, new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> BIRCH_ICE_BOAT = DAI_ITEMS.register("birch_ice_boat",
+            () -> new IceBoatItem(false, Boat.Type.BIRCH, new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> JUNGLE_ICE_BOAT = DAI_ITEMS.register("jungle_ice_boat",
+            () -> new IceBoatItem(false, Boat.Type.JUNGLE, new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> ACACIA_ICE_BOAT = DAI_ITEMS.register("acacia_ice_boat",
+            () -> new IceBoatItem(false, Boat.Type.ACACIA, new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> CHERRY_ICE_BOAT = DAI_ITEMS.register("cherry_ice_boat",
+            () -> new IceBoatItem(false, Boat.Type.CHERRY, new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> DARK_OAK_ICE_BOAT = DAI_ITEMS.register("dark_oak_ice_boat",
+            () -> new IceBoatItem(false, Boat.Type.DARK_OAK, new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> MANGROVE_ICE_BOAT = DAI_ITEMS.register("mangrove_ice_boat",
+            () -> new IceBoatItem(false, Boat.Type.MANGROVE, new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> BAMBOO_ICE_RAFT = DAI_ITEMS.register("bamboo_ice_raft",
+            () -> new IceBoatItem(false, Boat.Type.BAMBOO, new Item.Properties().stacksTo(1)));
 
 
     public static final Supplier<BlockItem> SCULK_TNT = DAI_ITEMS.registerSimpleBlockItem("sculk_tnt", daiBlocks.SCULK_TNT);

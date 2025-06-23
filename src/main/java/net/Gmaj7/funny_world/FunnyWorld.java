@@ -135,6 +135,8 @@ public class FunnyWorld
             EntityRenderers.register(daiEntities.SLIME_FISHING_HOOK_ENTITY.get(), FishingHookRenderer::new);
             EntityRenderers.register(daiEntities.WIND_TNT_ENTITY.get(), WindTntRenderer::new);
 
+            EntityRenderers.register(daiEntities.ICE_BOAT_ENTITY.get(), p -> new IceBoatRender(p, false));
+
             event.enqueueWork(() -> {
                 ItemBlockRenderTypes.setRenderLayer(daiFluids.EXTRACTANT_FLOW.get(), RenderType.translucent());
                 ItemBlockRenderTypes.setRenderLayer(daiFluids.EXTRACTANT_STILL.get(), RenderType.translucent());
