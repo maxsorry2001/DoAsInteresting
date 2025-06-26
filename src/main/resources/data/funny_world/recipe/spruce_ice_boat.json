@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "minecraft:spruce_planks"
+    },
+    "b": {
+      "item": "minecraft:ice"
+    }
+  },
+  "pattern": [
+    "aba",
+    "aaa"
+  ],
+  "result": {
+    "count": 1,
+    "id": "funny_world:spruce_ice_boat"
+  }
+}

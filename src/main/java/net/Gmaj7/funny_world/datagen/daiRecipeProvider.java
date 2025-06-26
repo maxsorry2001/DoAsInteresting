@@ -8,6 +8,7 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 
 import java.util.concurrent.CompletableFuture;
@@ -26,5 +27,60 @@ public class daiRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('a', Items.STRING)
                 .define('b', Items.ROTTEN_FLESH)
                 .unlockedBy("has_string", has(Items.STRING)).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, daiItems.ACACIA_ICE_BOAT.get())
+                .pattern("aba")
+                .pattern("aaa")
+                .define('a', Blocks.ACACIA_PLANKS)
+                .define('b', Blocks.ICE)
+                .unlockedBy("has_ice", has(Blocks.ICE)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, daiItems.DARK_OAK_ICE_BOAT.get())
+                .pattern("aba")
+                .pattern("aaa")
+                .define('a', Blocks.DARK_OAK_PLANKS)
+                .define('b', Blocks.ICE)
+                .unlockedBy("has_ice", has(Blocks.ICE)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, daiItems.BAMBOO_ICE_RAFT.get())
+                .pattern("aba")
+                .pattern("aaa")
+                .define('a', Blocks.BAMBOO_PLANKS)
+                .define('b', Blocks.ICE)
+                .unlockedBy("has_ice", has(Blocks.ICE)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, daiItems.BIRCH_ICE_BOAT.get())
+                .pattern("aba")
+                .pattern("aaa")
+                .define('a', Blocks.BIRCH_PLANKS)
+                .define('b', Blocks.ICE)
+                .unlockedBy("has_ice", has(Blocks.ICE)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, daiItems.OAK_ICE_BOAT.get())
+                .pattern("aba")
+                .pattern("aaa")
+                .define('a', Blocks.OAK_PLANKS)
+                .define('b', Blocks.ICE)
+                .unlockedBy("has_ice", has(Blocks.ICE)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, daiItems.CHERRY_ICE_BOAT.get())
+                .pattern("aba")
+                .pattern("aaa")
+                .define('a', Blocks.CHERRY_PLANKS)
+                .define('b', Blocks.ICE)
+                .unlockedBy("has_ice", has(Blocks.ICE)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, daiItems.JUNGLE_ICE_BOAT.get())
+                .pattern("aba")
+                .pattern("aaa")
+                .define('a', Blocks.JUNGLE_PLANKS)
+                .define('b', Blocks.ICE)
+                .unlockedBy("has_ice", has(Blocks.ICE)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, daiItems.MANGROVE_ICE_BOAT.get())
+                .pattern("aba")
+                .pattern("aaa")
+                .define('a', Blocks.MANGROVE_PLANKS)
+                .define('b', Blocks.ICE)
+                .unlockedBy("has_ice", has(Blocks.ICE)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, daiItems.SPRUCE_ICE_BOAT.get())
+                .pattern("aba")
+                .pattern("aaa")
+                .define('a', Blocks.SPRUCE_PLANKS)
+                .define('b', Blocks.ICE)
+                .unlockedBy("has_ice", has(Blocks.ICE)).save(recipeOutput);
     }
 }
