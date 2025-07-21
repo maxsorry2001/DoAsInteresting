@@ -37,19 +37,9 @@ public class IceBoatEntity extends Boat {
                 entity.setDeltaMovement(this.getDeltaMovement());
                 this.setDeltaMovement(0, 0,0);
             }
-        } else if (entity.getBoundingBox().minY <= this.getBoundingBox().minY && !this.hasPassenger(entity)) {
-            Vec3 vec3 = this.getDeltaMovement();
-            Vec3 vec31 = entity.getDeltaMovement();
-            AABB aabb = entity.getBoundingBox();
-            double mT = aabb.getSize() * 3;
-            double m = getBoundingBox().getSize() * 3;
-            Vec3 vec32 = new Vec3((m * vec3.x() + mT * vec31.x()) / (m + mT),
-                    (m * vec3.y()+ mT * vec31.y()) / (m + mT),
-                    (m * vec3.z() + mT * vec31.z()) / (m + mT));
-            entity.setDeltaMovement(vec32);
-            double f = (Math.abs(vec32.length() * (m + mT) - vec31.length() * mT - vec3.length() * m) / 0.2);
-            if(entity instanceof LivingEntity)
-                entity.hurt(new DamageSource(daiFunctions.getHolder(this.level(), Registries.DAMAGE_TYPE, DamageTypes.GENERIC)), (float) f);
+        }
+        else if (entity instanceof LivingEntity && entity.getBoundingBox().minY <= this.getBoundingBox().minY && !this.hasPassenger(entity)) {
+            entity.hurt(new DamageSource(daiFunctions.getHolder(this.level(), Registries.DAMAGE_TYPE, DamageTypes.GENERIC)), ((LivingEntity) entity).getMaxHealth() < 50 ? ((LivingEntity) entity).getMaxHealth() : ((LivingEntity) entity).getMaxHealth() / 3);
         }
     }
 
