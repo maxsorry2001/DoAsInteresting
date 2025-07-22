@@ -60,6 +60,7 @@ public class FunnyWorldTabs {
                         pOutput.accept(daiBlocks.REDSTONE_MAGNET.get());
                         pOutput.accept(daiBlocks.WIND_BLOCK.get());
                         pOutput.accept(daiBlocks.WIND_TNT.get());
+                        pOutput.accept(daiItems.LAVA_CHICKEN_CORE.get());
 
                         pOutput.accept(daiItems.OAK_ICE_BOAT.get());
                         pOutput.accept(daiItems.SPRUCE_ICE_BOAT.get());

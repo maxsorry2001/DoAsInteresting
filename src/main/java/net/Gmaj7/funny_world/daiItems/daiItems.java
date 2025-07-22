@@ -113,11 +113,11 @@ public class daiItems {
     public static final Supplier<Item> BAMBOO_ICE_RAFT = DAI_ITEMS.register("bamboo_ice_raft",
             () -> new IceBoatItem(false, Boat.Type.BAMBOO, new Item.Properties().stacksTo(1)));
 
-
     public static final Supplier<BlockItem> SCULK_TNT = DAI_ITEMS.registerSimpleBlockItem("sculk_tnt", daiBlocks.SCULK_TNT);
     public static final Supplier<BlockItem> ELECTROMAGNETIC_TNT = DAI_ITEMS.registerSimpleBlockItem("electromagnetic_tnt", daiBlocks.ELECTROMAGNETIC_TNT);
     public static final Supplier<BlockItem> REDSTONE_MAGNET = DAI_ITEMS.registerSimpleBlockItem("redstone_magnet", daiBlocks.REDSTONE_MAGNET);
     public static final Supplier<BlockItem> HONEY_FLOOR = DAI_ITEMS.registerSimpleBlockItem("honey_floor", daiBlocks.HONEY_FLOOR);
     public static final Supplier<BlockItem> WIND_BLOCK = DAI_ITEMS.registerSimpleBlockItem("wind_block", daiBlocks.WIND_BLOCK);
     public static final Supplier<BlockItem> WIND_TNT = DAI_ITEMS.registerSimpleBlockItem("wind_tnt", daiBlocks.WIND_TNT);
+    public static final Supplier<BlockItem> LAVA_CHICKEN_CORE = DAI_ITEMS.registerSimpleBlockItem("lava_chicken_core", daiBlocks.LAVA_CHICKEN_CORE, new Item.Properties().stacksTo(1));
 }
