@@ -90,6 +90,7 @@ public class daiItems {
 
     public static final Supplier<Item> EDIBLE_FLINT_AND_STEEL = DAI_ITEMS.register("edible_flint_and_steel",
             () -> new EdibleFlintAndSteel(new Item.Properties().stacksTo(1).food(daiFoods.EDIBLE_FLINT_AND_STEEL).durability(64)));
+    public static final Supplier<Item> LAVA_CHICKEN_INGOT = DAI_ITEMS.registerSimpleItem("lava_chicken_ingot", new Item.Properties().fireResistant());
 
     public static final Supplier<Item> SPRING_FESTIVAL_OVERTURE_DISC = DAI_ITEMS.register("spring_festival_overture_disc",
             () -> new Item(new Item.Properties().stacksTo(1).jukeboxPlayable(daiJukeboxSongs.SPRING_FESTIVAL_OVERTURE).rarity(Rarity.RARE)));

@@ -14,10 +14,13 @@ import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
@@ -25,6 +28,7 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.phys.AABB;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
@@ -33,6 +37,7 @@ import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.Collection;
+import java.util.List;
 
 @EventBusSubscriber(modid = FunnyWorld.MODID)
 public class DamageDispose {
@@ -113,6 +118,22 @@ public class DamageDispose {
             else {
                 ((daiUniqueDataGet) source).getHumanitySet().decreaseHumanity();
                 PacketDistributor.sendToAllPlayers(new daiPackets.daiHumanityPacket(((daiUniqueDataGet) source).getHumanitySet().getHumanity()));
+            }
+            if(((Player) source).hasEffect(daiMobEffects.LAVA_CHICKEN_KING)){
+                Chicken chicken = EntityType.CHICKEN.create(source.level());
+                if(chicken.isBaby()) chicken.setBaby(false);
+                chicken.teleportTo(livingEntity.getX(), livingEntity.getY(), livingEntity.getZ());
+                chicken.igniteForSeconds(20);
+                source.level().addFreshEntity(chicken);
+            }
+        }
+        if(livingEntity instanceof Chicken && event.getSource().is(DamageTypes.LAVA)){
+            List<ItemEntity> list = livingEntity.level().getEntitiesOfClass(ItemEntity.class, livingEntity.getBoundingBox().inflate(2));
+            for (ItemEntity itemEntity : list){
+                if(itemEntity.getItem().is(Items.NETHERITE_INGOT)){
+                    ItemStack itemStack = new ItemStack(daiItems.LAVA_CHICKEN_INGOT.get(), itemEntity.getItem().getCount());
+                    itemEntity.setItem(itemStack);
+                }
             }
         }
     }
