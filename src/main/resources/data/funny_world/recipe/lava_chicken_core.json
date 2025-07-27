@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "minecraft:cooked_chicken"
+    },
+    "b": {
+      "item": "funny_world:lava_chicken_ingot"
+    }
+  },
+  "pattern": [
+    "aaa",
+    "aba",
+    "aaa"
+  ],
+  "result": {
+    "count": 1,
+    "id": "funny_world:lava_chicken_core"
+  }
+}

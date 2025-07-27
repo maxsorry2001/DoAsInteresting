@@ -36,7 +36,7 @@ public class daiMobEffects {
             () -> new FireRingEffect(MobEffectCategory.BENEFICIAL, 33281156));
     public static final DeferredHolder<MobEffect, MobEffect> CARBON_MONOXIDE_POISONING = DAI_EFFECTS.register("carbon_monoxide_poisoning",
             () -> new CarbonMonoxidePosisoningEffect(MobEffectCategory.HARMFUL, 33762251));
-    public static final DeferredHolder<MobEffect, MobEffect> LAVA_CHICKEN_KING = DAI_EFFECTS.register("lava_chicken_king",
-            () -> new daiMobEffect(MobEffectCategory.BENEFICIAL, 0xD67F28));
+    public static final DeferredHolder<MobEffect, MobEffect> LAVA_CHICKEN_POWER = DAI_EFFECTS.register("lava_chicken_power",
+            () -> new LavaChickenPowerEffect(MobEffectCategory.BENEFICIAL, 0xD67F28));
     public static void register(IEventBus eventBus){DAI_EFFECTS.register(eventBus);}
 }

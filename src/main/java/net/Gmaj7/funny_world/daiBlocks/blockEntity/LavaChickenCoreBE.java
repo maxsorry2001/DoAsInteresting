@@ -4,7 +4,9 @@ import net.Gmaj7.funny_world.daiBlocks.daiBlockEntities;
 import net.Gmaj7.funny_world.daiEffects.daiMobEffects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -29,7 +31,7 @@ public class LavaChickenCoreBE extends BlockEntity {
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, LavaChickenCoreBE lavaChickenCoreBE){
-        if(level.isClientSide()) return;
+        if(!(level instanceof ServerLevel)) return;
         lavaChickenCoreBE.time ++;
         if(lavaChickenCoreBE.time == 100){
             lavaChickenCoreBE.time = 0;
@@ -41,15 +43,16 @@ public class LavaChickenCoreBE extends BlockEntity {
                     ItemStack itemStack = new ItemStack(Items.COOKED_CHICKEN);
                     ItemEntity itemEntity = new ItemEntity(level, chicken.getX(), chicken.getY(), chicken.getZ(), itemStack);
                     level.addFreshEntity(itemEntity);
+                    ((ServerLevel) level).sendParticles(ParticleTypes.LAVA, chicken.getX(), chicken.getY(), chicken.getZ(), 5, 0, 0, 0, 0);
                     chicken.remove(Entity.RemovalReason.DISCARDED);
                 }
             }for (Player player : listPlayer){
                 if(lavaChickenCoreBE.getIngot() > 1){
                     player.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 300));
-                    player.getFoodData().eat(Foods.COOKED_CHICKEN);
                 }
-                if(lavaChickenCoreBE.getIngot() > 2)
-                    player.addEffect(new MobEffectInstance(daiMobEffects.LAVA_CHICKEN_KING, 300));
+                if(lavaChickenCoreBE.getIngot() > 2) {
+                    player.addEffect(new MobEffectInstance(daiMobEffects.LAVA_CHICKEN_POWER, 300));
+                }
             }
         }
     }
@@ -57,13 +60,15 @@ public class LavaChickenCoreBE extends BlockEntity {
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
-        tag.putInt("lava_chicken_ingot", lava_chicken_ingot);
+        System.out.println(lava_chicken_ingot);
+        tag.putInt("ingot", this.lava_chicken_ingot);
     }
 
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
-        lava_chicken_ingot = tag.getInt("lava_chicken_ingot");
+        System.out.println(tag.getInt("ingot"));
+        this.lava_chicken_ingot = tag.getInt("ingot");
     }
 
     public boolean ingotAdd(){

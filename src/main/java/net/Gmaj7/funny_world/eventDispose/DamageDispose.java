@@ -28,7 +28,6 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TieredItem;
-import net.minecraft.world.phys.AABB;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
@@ -119,7 +118,7 @@ public class DamageDispose {
                 ((daiUniqueDataGet) source).getHumanitySet().decreaseHumanity();
                 PacketDistributor.sendToAllPlayers(new daiPackets.daiHumanityPacket(((daiUniqueDataGet) source).getHumanitySet().getHumanity()));
             }
-            if(((Player) source).hasEffect(daiMobEffects.LAVA_CHICKEN_KING)){
+            if(((Player) source).hasEffect(daiMobEffects.LAVA_CHICKEN_POWER)){
                 Chicken chicken = EntityType.CHICKEN.create(source.level());
                 if(chicken.isBaby()) chicken.setBaby(false);
                 chicken.teleportTo(livingEntity.getX(), livingEntity.getY(), livingEntity.getZ());

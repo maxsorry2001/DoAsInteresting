@@ -53,6 +53,7 @@
   "item.funny_world.dark_oak_ice_boat": "dark_oak ice boat",
   "item.funny_world.mangrove_ice_boat": "mangrove ice boat",
   "item.funny_world.bamboo_ice_raft": "bamboo ice boat",
+  "item.funny_world.lava_chicken_ingot": "lava chicken ingot",
 
   "effect.funny_world.iiiiiii": "ÌÌÌÌÌÌÌÌÌÌÌÌÌÌ",
   "effect.funny_world.electric_charge": "electric charge",
@@ -63,6 +64,7 @@
   "effect.funny_world.fire_ring": "Fire Ring",
   "effect.funny_world.carbon_monoxide_poisoning": "carbon monoxide poisoning",
   "effect.funny_world.gene_mutation": "gene mutation",
+  "effect.funny_world.lava_chicken_power": "Lava chicken power",
 
   "block.funny_world.sculk_tnt": "sculk TNT",
   "block.funny_world.electromagnetic_tnt": "electromagnetic TNT",
@@ -71,6 +73,7 @@
   "block.funny_world.honey_floor": "honey floor",
   "block.funny_world.extractant_fluid": "extractant fluid",
   "block.funny_world.wind_block": "wind block",
+  "block.funny_world.lava_chicken_core": "lava chicken core",
 
   "entity.funny_world.sculk_tnt_entity": "sculk TNT",
   "entity.funny_world.electromagnetic_tnt_entity": "electromagnetic TNT",

@@ -22,6 +22,7 @@ public class daiBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(daiBlocks.SCULK_TNT.get());
         dropSelf(daiBlocks.WIND_BLOCK.get());
         dropSelf(daiBlocks.WIND_TNT.get());
+        dropSelf(daiBlocks.LAVA_CHICKEN_CORE.get());
     }
 
     @Override

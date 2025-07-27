@@ -1,0 +1,53 @@
+{
+  "parent": "block/block",
+  "display": {
+    "gui": {
+      "rotation": [ 30, 45, 0 ],
+      "translation": [ 0, 0, 0],
+      "scale":[ 1.0, 1.0, 1.0 ]
+    },
+    "ground": {
+      "rotation": [ 0, 0, 0 ],
+      "translation": [ 0, 3, 0],
+      "scale":[ 0.5, 0.5, 0.5 ]
+    },
+    "head": {
+      "rotation": [ 0, 180, 0 ],
+      "translation": [ 0, 0, 0],
+      "scale":[ 1, 1, 1]
+    },
+    "fixed": {
+      "rotation": [ 0, 180, 0 ],
+      "translation": [ 0, 0, 0],
+      "scale":[ 1, 1, 1 ]
+    },
+    "thirdperson_righthand": {
+      "rotation": [ 75, 315, 0 ],
+      "translation": [ 0, 2.5, 0],
+      "scale": [ 0.5, 0.5, 0.5 ]
+    },
+    "firstperson_righthand": {
+      "rotation": [ 0, 315, 0 ],
+      "translation": [ 0, 0, 0],
+      "scale": [ 0.8, 0.8, 0.8 ]
+    }
+  },
+  "textures": {
+    "all": "funny_world:block/lava_chicken_core",
+    "particle": "funny_world:block/lava_chicken_core"
+  },
+  "elements": [
+    {
+      "from": [5, 5, 5],
+      "to": [11, 11, 11],
+      "faces": {
+        "down":  { "uv": [2, 2, 13, 13], "texture": "#all", "cullface": "down" },
+        "up":    { "uv": [2, 2, 13, 13], "texture": "#all"},
+        "north": { "uv": [2, 2, 13, 13], "texture": "#all"},
+        "south": { "uv": [2, 2, 13, 13], "texture": "#all"},
+        "west":  { "uv": [2, 2, 13, 13], "texture": "#all"},
+        "east":  { "uv": [2, 2, 13, 13], "texture": "#all"}
+      }
+    }
+  ]
+}
