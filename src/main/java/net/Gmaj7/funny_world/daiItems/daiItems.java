@@ -82,6 +82,8 @@ public class daiItems {
             () -> new Convex(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> HUMANITY_POCKET = DAI_ITEMS.register("humanity_pocket",
             () -> new HumanityPocket(new Item.Properties().stacksTo(1).component(daiDataComponentTypes.HUMANITY, 50)));
+    public static final Supplier<Item> CLONE_PAPER = DAI_ITEMS.register("clone_paper",
+            () -> new ClonePaper(new Item.Properties().stacksTo(1)));
 
     public static final Supplier<Item> MOMENTUM_ARROW = DAI_ITEMS.register("momentum_arrow",
             () -> new MomentumArrowItem(new Item.Properties()));

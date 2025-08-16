@@ -19,6 +19,7 @@ public class daiItemProperties {
         makeFlame(Items.NETHERITE_SWORD);
         makeMahjong(daiItems.MAHJONG.get());
         makeHoneyBottle(Items.HONEY_BOTTLE);
+        makeClonePaper(daiItems.CLONE_PAPER.get());
     }
 
     private static void makeBow(Item item){
@@ -60,6 +61,13 @@ public class daiItemProperties {
     private static void makeHoneyBottle(Item item){
         ItemProperties.register(item, ResourceLocation.parse("absorbed"), ((pStack, pLevel, pEntity, pSpeed) -> {
             return pStack.has(daiDataComponentTypes.HONEY_EFFECTS) && !pStack.get(daiDataComponentTypes.HONEY_EFFECTS).effects().isEmpty() ?
+                    1.0F : 0.0F;
+        }));
+    }
+
+    private static void makeClonePaper(Item item){
+        ItemProperties.register(item, ResourceLocation.parse("clone_on"), ((pStack, pLevel, pEntity, pSpeed) -> {
+            return pStack.has(daiDataComponentTypes.ENTITY_TYPE) && pStack.has(daiDataComponentTypes.ENTITY_DATA) ?
                     1.0F : 0.0F;
         }));
     }

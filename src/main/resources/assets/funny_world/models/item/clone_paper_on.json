@@ -1,0 +1,6 @@
+{
+  "parent": "funny_world:item/clone_paper",
+  "textures": {
+    "layer0": "funny_world:item/clone_paper_on"
+  }
+}

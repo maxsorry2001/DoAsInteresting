@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "funny_world:item/clone_paper"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "clone_on": 1
+      },
+      "model": "funny_world:item/clone_paper_on"
+    }
+  ]
+}

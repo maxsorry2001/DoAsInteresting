@@ -38,5 +38,7 @@ public class daiMobEffects {
             () -> new CarbonMonoxidePosisoningEffect(MobEffectCategory.HARMFUL, 33762251));
     public static final DeferredHolder<MobEffect, MobEffect> LAVA_CHICKEN_POWER = DAI_EFFECTS.register("lava_chicken_power",
             () -> new LavaChickenPowerEffect(MobEffectCategory.BENEFICIAL, 0xD67F28));
+    public static final DeferredHolder<MobEffect, MobEffect> KEEP_WORKING = DAI_EFFECTS.register("keep_working",
+            () -> new daiMobEffect(MobEffectCategory.NEUTRAL, 0xFFFFFF));
     public static void register(IEventBus eventBus){DAI_EFFECTS.register(eventBus);}
 }

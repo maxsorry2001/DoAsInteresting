@@ -21,6 +21,7 @@ import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
@@ -127,6 +128,15 @@ public class ClickDispose {
             }
             else if (target.level().isDay() && !target.isCurrentlyGlowing()) ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.GLOWING, 500));
                 player.swing(hand);
+            event.setCanceled(true);
+        }
+        if(handStack.is(daiItems.CLONE_PAPER.get()) && target instanceof LivingEntity){
+            CompoundTag compoundTag = new CompoundTag();
+            ((LivingEntity) target).addAdditionalSaveData(compoundTag);
+            compoundTag.remove("UUID");
+            handStack.set(daiDataComponentTypes.ENTITY_TYPE, EntityType.getKey(target.getType()));
+            handStack.set(daiDataComponentTypes.ENTITY_DATA, compoundTag);
+            player.swing(event.getHand());
             event.setCanceled(true);
         }
     }

@@ -1,6 +1,5 @@
 package net.Gmaj7.funny_world.daiEffects.custom;
 
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;

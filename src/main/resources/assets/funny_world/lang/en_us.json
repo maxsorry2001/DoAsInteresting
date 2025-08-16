@@ -54,6 +54,7 @@
   "item.funny_world.mangrove_ice_boat": "mangrove ice boat",
   "item.funny_world.bamboo_ice_raft": "bamboo ice boat",
   "item.funny_world.lava_chicken_ingot": "lava chicken ingot",
+  "item.funny_world.clone_paper": "clone blueprint",
 
   "effect.funny_world.iiiiiii": "ÌÌÌÌÌÌÌÌÌÌÌÌÌÌ",
   "effect.funny_world.electric_charge": "electric charge",
@@ -113,5 +114,6 @@
   "try_to_use_on_illager": "Try to use it on illagers",
   "daisongs_spring_festival_overture": "Spring Festival Overture",
   "honey_has_effect": "The honey looks like has absorbed some effects",
-  "humanity": "humanity:"
+  "humanity": "humanity:",
+  "dai.clone_entity": "Clone Living:"
 }

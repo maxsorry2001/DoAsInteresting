@@ -54,6 +54,7 @@ public class FunnyWorldTabs {
                         pOutput.accept(daiItems.MOMENTUM_ARROW.get());
                         pOutput.accept(daiItems.SLIME_ROD.get());
                         pOutput.accept(daiItems.HUMANITY_POCKET.get());
+                        pOutput.accept(daiItems.CLONE_PAPER.get());
 
                         pOutput.accept(daiBlocks.SCULK_TNT.get());
                         pOutput.accept(daiBlocks.ELECTROMAGNETIC_TNT.get());

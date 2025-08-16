@@ -54,6 +54,7 @@
   "item.funny_world.mangrove_ice_boat": "红木冰船",
   "item.funny_world.bamboo_ice_raft": "冰竹筏",
   "item.funny_world.lava_chicken_ingot": "熔岩烤鸡锭",
+  "item.funny_world.clone_paper": "克隆蓝图",
 
   "effect.funny_world.iiiiiii": "烫烫烫",
   "effect.funny_world.electric_charge": "正电荷",
@@ -113,5 +114,6 @@
   "try_to_use_on_illager": "试试对灾厄村民使用",
   "daisongs_spring_festival_overture": "春节序曲",
   "honey_has_effect": "这瓶蜂蜜貌似吸收了点啥效果",
-  "humanity": "人性:"
+  "humanity": "人性:",
+  "dai.clone_entity": "克隆生物:"
 }
