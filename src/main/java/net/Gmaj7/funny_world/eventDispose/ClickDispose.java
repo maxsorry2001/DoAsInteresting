@@ -130,7 +130,7 @@ public class ClickDispose {
                 player.swing(hand);
             event.setCanceled(true);
         }
-        if(handStack.is(daiItems.CLONE_PAPER.get()) && target instanceof LivingEntity){
+        if(handStack.is(daiItems.CLONE_PAPER.get()) && target instanceof LivingEntity && target.isAlive()){
             CompoundTag compoundTag = new CompoundTag();
             ((LivingEntity) target).addAdditionalSaveData(compoundTag);
             compoundTag.remove("UUID");

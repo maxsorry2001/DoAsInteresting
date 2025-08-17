@@ -82,5 +82,13 @@ public class daiRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('a', Blocks.SPRUCE_PLANKS)
                 .define('b', Blocks.ICE)
                 .unlockedBy("has_ice", has(Blocks.ICE)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, daiItems.CLONE_PAPER.get())
+                .pattern("aba")
+                .pattern("aca")
+                .pattern("aba")
+                .define('a', Items.PAPER)
+                .define('b', Items.EGG)
+                .define('c', Items.NETHER_STAR)
+                .unlockedBy("has_star", has(Items.NETHER_STAR)).save(recipeOutput);
     }
 }

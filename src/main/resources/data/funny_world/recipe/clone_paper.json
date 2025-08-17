@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "minecraft:paper"
+    },
+    "b": {
+      "item": "minecraft:egg"
+    },
+    "c": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "pattern": [
+    "aba",
+    "aca",
+    "aba"
+  ],
+  "result": {
+    "count": 1,
+    "id": "funny_world:clone_paper"
+  }
+}
