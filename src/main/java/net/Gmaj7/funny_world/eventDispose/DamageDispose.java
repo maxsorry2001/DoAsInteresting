@@ -5,10 +5,7 @@ import net.Gmaj7.funny_world.daiEffects.daiMobEffects;
 import net.Gmaj7.funny_world.daiEnchantments.daiEnchantments;
 import net.Gmaj7.funny_world.daiEntities.custom.BrickEntity;
 import net.Gmaj7.funny_world.daiEntities.custom.NetherBrickEntity;
-import net.Gmaj7.funny_world.daiInit.daiArmorMaterials;
-import net.Gmaj7.funny_world.daiInit.daiFunctions;
-import net.Gmaj7.funny_world.daiInit.daiPackets;
-import net.Gmaj7.funny_world.daiInit.daiTiers;
+import net.Gmaj7.funny_world.daiInit.*;
 import net.Gmaj7.funny_world.daiInit.daiUniqueData.daiUniqueDataGet;
 import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.minecraft.core.registries.Registries;
@@ -24,15 +21,11 @@ import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.item.*;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
-import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
-import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
+import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.Collection;
@@ -40,6 +33,40 @@ import java.util.List;
 
 @EventBusSubscriber(modid = FunnyWorld.MODID)
 public class DamageDispose {
+
+    @SubscribeEvent
+    public static void damageComingDeal(LivingIncomingDamageEvent event){
+        DamageSource damageSource = event.getSource();
+        LivingEntity target = event.getEntity();
+        Entity source = damageSource.getEntity();
+        if(source instanceof Player && ((Player) source).getMainHandItem().getItem() instanceof SwordItem && ((Player) source).getMainHandItem().has(daiDataComponentTypes.SWEEPING_TYPE)){
+            Entity hurtTarget = ((daiUniqueDataGet)source).getAttackTarget();
+            if(hurtTarget != target) {
+                Vec3 distance, from, to;
+                int sweeping_type = ((Player) source).getMainHandItem().get(daiDataComponentTypes.SWEEPING_TYPE);
+                switch (sweeping_type){
+                    case 0 -> {
+                        distance = new Vec3(hurtTarget.getX() - source.getX(), hurtTarget.getY(), hurtTarget.getZ() - source.getZ()).multiply(100, 1, 100);
+                        from = new Vec3(hurtTarget.getX() - distance.z(), hurtTarget.getY(), hurtTarget.getZ() + distance.x());
+                        to = new Vec3(hurtTarget.getX() + distance.z(), hurtTarget.getY(), hurtTarget.getZ() - distance.x());
+                    }
+                    default -> {
+                        from = new Vec3(1, 1, 1);
+                        to = new Vec3(1, 1, 1);
+                    }
+                }
+                //Vec3 start = new Vec3(source.getX(), source.getY(), source.getZ()),
+                //        end = new Vec3(hurtTarget.getX(), hurtTarget.getY(), hurtTarget.getZ()),
+                //        distance = new Vec3(end.x() - start.x(), end.y(), end.z() - start.z()).multiply(100, 1, 100),
+                //        from = new Vec3(end.x() - distance.z(), end.y(), end.z() + distance.x()),
+                //        to = new Vec3(end.x() + distance.z(), end.y(), end.z() - distance.x());
+                if (target.getBoundingBox().inflate(1.5).clip(from, to).isEmpty()) {
+                    event.setCanceled(true);
+                }
+            }
+        }
+    }
+
     @SubscribeEvent
     public static void damageDeal(LivingDamageEvent.Pre event){
         DamageSource damageSource = event.getSource();

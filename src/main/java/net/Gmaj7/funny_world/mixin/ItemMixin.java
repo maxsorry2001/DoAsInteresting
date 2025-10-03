@@ -11,10 +11,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.flag.FeatureElement;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TieredItem;
-import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
@@ -47,6 +44,8 @@ public abstract class ItemMixin implements FeatureElement, ItemLike, net.neoforg
                 case 3 -> pStack.set(DataComponents.FOOD, daiFoods.EAT_OF_WORLDS_LV3);
             }
         }
+        if(pStack.getItem() instanceof SwordItem && !pStack.has(daiDataComponentTypes.SWEEPING_TYPE))
+            pStack.set(daiDataComponentTypes.SWEEPING_TYPE, 0);
         else {
             if(!pStack.is(Tags.Items.FOODS) && pStack.has(DataComponents.FOOD)){
                 pStack.remove(DataComponents.FOOD);

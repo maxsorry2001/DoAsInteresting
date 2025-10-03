@@ -132,7 +132,6 @@ public class FunnyWorld
             EntityRenderers.register(daiEntities.MAHJONG_ENTITY.get(), MahjongEntityRenderer::new);
             EntityRenderers.register(daiEntities.MOMENTUM_ARROW_ENTITY.get(), MomentumArrowRenderer::new);
             EntityRenderers.register(daiEntities.ENTITIES_ARROW_ENTITY.get(), EntitiesArrowRenderer::new);
-            EntityRenderers.register(daiEntities.SLIME_FISHING_HOOK_ENTITY.get(), FishingHookRenderer::new);
             EntityRenderers.register(daiEntities.WIND_TNT_ENTITY.get(), WindTntRenderer::new);
 
             EntityRenderers.register(daiEntities.ICE_BOAT_ENTITY.get(), p -> new IceBoatRender(p, false));

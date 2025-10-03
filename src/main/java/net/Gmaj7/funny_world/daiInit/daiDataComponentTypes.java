@@ -52,5 +52,8 @@ public class daiDataComponentTypes {
     public static final Supplier<DataComponentType<ResourceLocation>> ENTITY_TYPE = DAI_DATA_COMPONENT_TYPE.register("entity_type",
             () -> DataComponentType.<ResourceLocation>builder().persistent(ResourceLocation.CODEC).build());
 
+    public static final Supplier<DataComponentType<Integer>> SWEEPING_TYPE = DAI_DATA_COMPONENT_TYPE.register("sweeping_direction",
+            () -> DataComponentType.<Integer>builder().persistent(Codec.INT).build());
+
     public static void register(IEventBus eventBus){DAI_DATA_COMPONENT_TYPE.register(eventBus);}
 }

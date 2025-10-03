@@ -22,8 +22,6 @@ public class daiItems {
             () -> new RedPacket(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> MAHJONG = DAI_ITEMS.register("mahjong",
             () -> new MahjongItem(new Item.Properties().stacksTo(1).durability(108).component(daiDataComponentTypes.MAHJONG_PATTERN, 0).component(daiDataComponentTypes.MAHJONG_POINTS, 0)));
-    public static final Supplier<Item> SLIME_ROD = DAI_ITEMS.register("slime_rod",
-            () -> new SlimeRod(new Item.Properties().stacksTo(1).durability(64)));
 
     public static final Supplier<Item> BLUE_ICE_BOOTS = DAI_ITEMS.register("blue_ice_boots",
             () -> new ArmorItem(daiArmorMaterials.BLUE_ICE, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).durability(128)));
@@ -115,6 +113,13 @@ public class daiItems {
             () -> new IceBoatItem(false, Boat.Type.MANGROVE, new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> BAMBOO_ICE_RAFT = DAI_ITEMS.register("bamboo_ice_raft",
             () -> new IceBoatItem(false, Boat.Type.BAMBOO, new Item.Properties().stacksTo(1)));
+
+    public static final Supplier<Item> PARALLEL_PLATE = DAI_ITEMS.register("parallel_plate",
+            () -> new MathReinforcedPlate(SwordItem.class, 0, new Item.Properties()));
+    public static final Supplier<Item> PERPENDICULAR_PLATE = DAI_ITEMS.register("perpendicular_plate",
+            () -> new MathReinforcedPlate(SwordItem.class, 1, new Item.Properties()));
+    public static final Supplier<Item> VERTICAL_PLATE = DAI_ITEMS.register("vertical_plate",
+            () -> new MathReinforcedPlate(SwordItem.class, 2, new Item.Properties()));
 
     public static final Supplier<BlockItem> SCULK_TNT = DAI_ITEMS.registerSimpleBlockItem("sculk_tnt", daiBlocks.SCULK_TNT);
     public static final Supplier<BlockItem> ELECTROMAGNETIC_TNT = DAI_ITEMS.registerSimpleBlockItem("electromagnetic_tnt", daiBlocks.ELECTROMAGNETIC_TNT);

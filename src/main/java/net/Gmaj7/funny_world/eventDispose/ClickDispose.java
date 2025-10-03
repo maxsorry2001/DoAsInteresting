@@ -7,7 +7,6 @@ import net.Gmaj7.funny_world.daiEffects.daiMobEffects;
 import net.Gmaj7.funny_world.daiEnchantments.daiEnchantments;
 import net.Gmaj7.funny_world.daiEntities.custom.BrickEntity;
 import net.Gmaj7.funny_world.daiEntities.custom.NetherBrickEntity;
-import net.Gmaj7.funny_world.daiEntities.custom.SlimeFishingHookEntity;
 import net.Gmaj7.funny_world.daiInit.daiAttachmentTypes;
 import net.Gmaj7.funny_world.daiInit.daiDataComponentTypes;
 import net.Gmaj7.funny_world.daiInit.daiFunctions;
@@ -278,18 +277,6 @@ public class ClickDispose {
             if (!player.isCreative()) player.getItemInHand(event.getHand()).shrink(1);
             player.swing(event.getHand());
             player.level().playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.EGG_THROW, SoundSource.PLAYERS);
-        }
-        if(itemStackHand.is(Items.FISHING_ROD) && player.fishing != null && player.fishing.getHookedIn() instanceof Slime){
-            ItemStack itemStack = new ItemStack(daiItems.SLIME_ROD.get());
-            player.fishing.getHookedIn().discard();
-            DataComponentMap dataComponentMap = itemStackHand.getComponents();
-            itemStack.applyComponents(dataComponentMap);
-            if(!player.isCreative())
-                itemStackHand.shrink(1);
-            player.addItem(itemStack);
-        }
-        if(itemStackHand.is(daiItems.SLIME_ROD.get()) && player.fishing != null && player.fishing instanceof SlimeFishingHookEntity){
-            player.setDeltaMovement(player.getDeltaMovement().add(3,3,3));
         }
     }
 

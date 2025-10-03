@@ -52,7 +52,6 @@ public class FunnyWorldTabs {
                         pOutput.accept(daiItems.MAHJONG.get());
                         pOutput.accept(daiItems.SPRING_FESTIVAL_OVERTURE_DISC.get());
                         pOutput.accept(daiItems.MOMENTUM_ARROW.get());
-                        pOutput.accept(daiItems.SLIME_ROD.get());
                         pOutput.accept(daiItems.HUMANITY_POCKET.get());
                         pOutput.accept(daiItems.CLONE_PAPER.get());
 
@@ -62,6 +61,8 @@ public class FunnyWorldTabs {
                         pOutput.accept(daiBlocks.WIND_BLOCK.get());
                         pOutput.accept(daiBlocks.WIND_TNT.get());
                         pOutput.accept(daiBlocks.LAVA_CHICKEN_CORE.get());
+
+                        pOutput.accept(daiItems.PARALLEL_PLATE.get());
 
                         pOutput.accept(daiItems.OAK_ICE_BOAT.get());
                         pOutput.accept(daiItems.SPRUCE_ICE_BOAT.get());
