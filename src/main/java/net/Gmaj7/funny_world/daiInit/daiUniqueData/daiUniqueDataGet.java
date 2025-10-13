@@ -12,4 +12,8 @@ public interface daiUniqueDataGet {
     HumanitySet getHumanitySet();
 
     boolean isBlockUsePass(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult);
+
+    BlockPos getOldPos();
+
+    void setOldPos(BlockPos blockPos);
 }
