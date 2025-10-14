@@ -1,7 +1,8 @@
 package net.Gmaj7.funny_world.daiBlocks.custom;
 
 import com.mojang.serialization.MapCodec;
-import net.Gmaj7.funny_world.daiEntities.custom.ElectromagneticTntEntity;
+import net.Gmaj7.funny_world.daiBlocks.daiBlocks;
+import net.Gmaj7.funny_world.daiEntities.custom.GlowTntEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -9,11 +10,9 @@ import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.Equipable;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -30,23 +29,24 @@ import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.Nullable;
 
-public class ElectromagneticTNT extends Block implements Equipable {
-    public static final MapCodec<ElectromagneticTNT> CODEC = simpleCodec(ElectromagneticTNT::new);
+public class GlowTNT extends Block {
+    public static final MapCodec<GlowTNT> CODEC = simpleCodec(GlowTNT::new);
     public static final BooleanProperty UNSTABLE = BlockStateProperties.UNSTABLE;
-    public ElectromagneticTNT(Properties p_49795_) {
-        super(p_49795_);
-        this.registerDefaultState(this.defaultBlockState().setValue(UNSTABLE, Boolean.valueOf(false)));
-    }
 
     @Override
-    protected MapCodec<? extends Block> codec() {
+    public MapCodec<GlowTNT> codec() {
         return CODEC;
+    }
+    public GlowTNT(Properties p_49795_) {
+        super(p_49795_);
+        this.registerDefaultState(this.defaultBlockState().setValue(UNSTABLE, Boolean.valueOf(false)));
     }
 
     public void beExploded(Level level, BlockPos blockPos, @Nullable LivingEntity livingEntity){
         level.setBlock(blockPos, Blocks.AIR.defaultBlockState(), 11);
         explode(level, blockPos, livingEntity);
     }
+
 
     @Override
     public void onCaughtFire(BlockState state, Level world, BlockPos pos, @Nullable net.minecraft.core.Direction face, @Nullable LivingEntity igniter) {
@@ -82,12 +82,13 @@ public class ElectromagneticTNT extends Block implements Equipable {
     @Override
     public void wasExploded(Level pLevel, BlockPos pPos, Explosion pExplosion) {
         if (!pLevel.isClientSide) {
-            ElectromagneticTntEntity electromagneticTntEntity = new ElectromagneticTntEntity(
+            GlowTntEntity glowTntEntity = new GlowTntEntity(
                     pLevel, (double)pPos.getX() + 0.5, (double)pPos.getY(), (double)pPos.getZ() + 0.5, pExplosion.getIndirectSourceEntity()
             );
-            int i = electromagneticTntEntity.getFuse();
-            electromagneticTntEntity.setFuse((short)(pLevel.random.nextInt(i / 4) + i / 8));
-            pLevel.addFreshEntity(electromagneticTntEntity);
+            int i = glowTntEntity.getFuse();
+            glowTntEntity.setFuse((short)(pLevel.random.nextInt(i / 4) + i / 8));
+            pLevel.addFreshEntity(glowTntEntity);
+            pLevel.setBlockAndUpdate(pPos, daiBlocks.GLOW_TNT.get().defaultBlockState());
         }
     }
 
@@ -99,9 +100,10 @@ public class ElectromagneticTNT extends Block implements Equipable {
     @Deprecated
     private static void explode(Level pLevel, BlockPos pPos, @Nullable LivingEntity pEntity) {
         if (!pLevel.isClientSide) {
-            ElectromagneticTntEntity electromagneticTntEntity = new ElectromagneticTntEntity(pLevel, (double)pPos.getX() + 0.5, (double)pPos.getY(), (double)pPos.getZ() + 0.5, pEntity);
-            pLevel.addFreshEntity(electromagneticTntEntity);
-            pLevel.playSound(null, electromagneticTntEntity.getX(), electromagneticTntEntity.getY(), electromagneticTntEntity.getZ(), SoundEvents.LODESTONE_COMPASS_LOCK, SoundSource.BLOCKS, 1.0F, 1.0F);
+            GlowTntEntity glowTntEntity = new GlowTntEntity(pLevel, (double)pPos.getX() + 0.5, (double)pPos.getY(), (double)pPos.getZ() + 0.5, pEntity);
+            pLevel.addFreshEntity(glowTntEntity);
+            pLevel.setBlockAndUpdate(pPos, daiBlocks.GLOW_TNT.get().defaultBlockState());
+            pLevel.playSound(null, glowTntEntity.getX(), glowTntEntity.getY(), glowTntEntity.getZ(), SoundEvents.SCULK_CATALYST_BLOOM, SoundSource.BLOCKS, 1.0F, 1.0F);
             pLevel.gameEvent(pEntity, GameEvent.PRIME_FUSE, pPos);
         }
     }
@@ -149,10 +151,5 @@ public class ElectromagneticTNT extends Block implements Equipable {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(UNSTABLE);
-    }
-
-    @Override
-    public EquipmentSlot getEquipmentSlot() {
-        return EquipmentSlot.CHEST;
     }
 }

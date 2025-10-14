@@ -4,10 +4,7 @@ import net.Gmaj7.funny_world.FunnyWorld;
 import net.Gmaj7.funny_world.daiBlocks.custom.*;
 import net.Gmaj7.funny_world.daiFluids.daiFluids;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LiquidBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
@@ -34,4 +31,8 @@ public class daiBlocks {
             () -> new LiquidBlock(daiFluids.EXTRACTANT_STILL.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));
     public static final DeferredBlock<Block> LAVA_CHICKEN_CORE = DAI_BLOCKS.register("lava_chicken_core",
             () -> new LavaChickenCore(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).sound(SoundType.METAL)));
+    public static final DeferredBlock<Block> GLOW_BLOCK = DAI_BLOCKS.register("glow_block",
+            () -> new AirBlock(BlockBehaviour.Properties.of().lightLevel(p -> 15).noOcclusion().noLootTable().replaceable().air()));
+    public static final DeferredBlock<Block> GLOW_TNT = DAI_BLOCKS.register("glow_tnt",
+            () -> new GlowTNT(BlockBehaviour.Properties.of().lightLevel(p -> 15)));
 }

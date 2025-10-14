@@ -1,15 +1,18 @@
 package net.Gmaj7.funny_world.daiEnchantments;
 
 import net.Gmaj7.funny_world.FunnyWorld;
+import net.Gmaj7.funny_world.daiEnchantments.custom.CharmEnchantmentEffect;
 import net.Gmaj7.funny_world.daiEnchantments.custom.EntropyEnchantmentEffect;
 import net.Gmaj7.funny_world.daiInit.daiTags;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
+import net.minecraft.world.item.enchantment.EnchantmentTarget;
 import net.minecraft.world.item.enchantment.effects.AllOf;
 
 public class daiEnchantments {
@@ -28,6 +31,7 @@ public class daiEnchantments {
     public static final ResourceKey<Enchantment> ENTROPY = ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "entropy"));
     public static final ResourceKey<Enchantment> ABSORB_HONEY = ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "absorb_honey"));
     public static final ResourceKey<Enchantment> SACRIFICE_ARROWS = ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "sacrifice_arrows"));
+    public static final ResourceKey<Enchantment> CHARM = ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "charm"));
 
     public static void bootstrap(BootstrapContext<Enchantment> context){
         var enchantments = context.lookup(Registries.ENCHANTMENT);
@@ -52,6 +56,20 @@ public class daiEnchantments {
                 Enchantment.dynamicCost(5, 3),
                 4,
                 EquipmentSlotGroup.MAINHAND)));
+
+        register(context, CHARM, Enchantment.enchantment(Enchantment.definition(
+                items.getOrThrow(ItemTags.SHARP_WEAPON_ENCHANTABLE),
+                items.getOrThrow(ItemTags.SWORD_ENCHANTABLE),
+                5,
+                1,
+                Enchantment.dynamicCost(1, 3),
+                Enchantment.dynamicCost(5, 3),
+                4,
+                EquipmentSlotGroup.MAINHAND))
+                .withEffect(EnchantmentEffectComponents.POST_ATTACK,
+                        EnchantmentTarget.ATTACKER,
+                        EnchantmentTarget.VICTIM,
+                        AllOf.entityEffects(new CharmEnchantmentEffect())));
     }
     private static void register(BootstrapContext<Enchantment> registry, ResourceKey<Enchantment> key, Enchantment.Builder builder){
         registry.register(key, builder.build(key.location()));

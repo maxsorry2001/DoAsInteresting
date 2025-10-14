@@ -18,4 +18,8 @@ public interface daiUniqueDataGet {
     void setAttackTarget(Entity attackTarget);
 
     boolean isBlockUsePass(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult);
+
+    BlockPos getOldPos();
+
+    void setOldPos(BlockPos blockPos);
 }

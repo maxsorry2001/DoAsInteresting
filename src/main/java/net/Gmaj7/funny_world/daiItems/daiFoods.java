@@ -1,5 +1,7 @@
 package net.Gmaj7.funny_world.daiItems;
 
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 
 public class daiFoods {
@@ -22,5 +24,12 @@ public class daiFoods {
     public static final FoodProperties EAT_OF_WORLDS_LV3 = new FoodProperties.Builder()
             .nutrition(5)
             .saturationModifier(0.9F)
+            .build();
+
+    public static final FoodProperties GLOW_INK_SAC = new FoodProperties.Builder()
+            .nutrition(5)
+            .saturationModifier(0.3F)
+            .alwaysEdible()
+            .effect(new MobEffectInstance(MobEffects.GLOWING, 300, 0), 1)
             .build();
 }

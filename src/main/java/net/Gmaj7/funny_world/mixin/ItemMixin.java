@@ -37,19 +37,23 @@ public abstract class ItemMixin implements FeatureElement, ItemLike, net.neoforg
                 }
             }
         }
-        if(pEntity instanceof Player player && EnchantmentHelper.getEnchantmentLevel(daiFunctions.getHolder(pLevel, Registries.ENCHANTMENT, daiEnchantments.EATER_OF_WORLDS), player) > 0 && !pStack.is(Tags.Items.FOODS)){
-            switch (EnchantmentHelper.getEnchantmentLevel(daiFunctions.getHolder(pLevel, Registries.ENCHANTMENT, daiEnchantments.EATER_OF_WORLDS), player)){
-                case 1 -> pStack.set(DataComponents.FOOD, daiFoods.EAT_OF_WORLDS_LV1);
-                case 2 -> pStack.set(DataComponents.FOOD, daiFoods.EAT_OF_WORLDS_LV2);
-                case 3 -> pStack.set(DataComponents.FOOD, daiFoods.EAT_OF_WORLDS_LV3);
+        if(pStack.is(Items.GLOW_INK_SAC)) {
+            pStack.set(DataComponents.FOOD, daiFoods.GLOW_INK_SAC);
+        }
+        else if(pEntity instanceof Player player){
+            if(EnchantmentHelper.getEnchantmentLevel(daiFunctions.getHolder(pLevel, Registries.ENCHANTMENT, daiEnchantments.EATER_OF_WORLDS), player) > 0 && !pStack.is(Tags.Items.FOODS))
+                switch (EnchantmentHelper.getEnchantmentLevel(daiFunctions.getHolder(pLevel, Registries.ENCHANTMENT, daiEnchantments.EATER_OF_WORLDS), player)){
+                    case 1 -> pStack.set(DataComponents.FOOD, daiFoods.EAT_OF_WORLDS_LV1);
+                    case 2 -> pStack.set(DataComponents.FOOD, daiFoods.EAT_OF_WORLDS_LV2);
+                    case 3 -> pStack.set(DataComponents.FOOD, daiFoods.EAT_OF_WORLDS_LV3);
             }
         }
-        if(pStack.getItem() instanceof SwordItem && !pStack.has(daiDataComponentTypes.SWEEPING_TYPE))
-            pStack.set(daiDataComponentTypes.SWEEPING_TYPE, 0);
         else {
             if(!pStack.is(Tags.Items.FOODS) && pStack.has(DataComponents.FOOD)){
                 pStack.remove(DataComponents.FOOD);
             }
         }
+        if(pStack.getItem() instanceof SwordItem && !pStack.has(daiDataComponentTypes.SWEEPING_TYPE))
+            pStack.set(daiDataComponentTypes.SWEEPING_TYPE, 0);
     }
 }

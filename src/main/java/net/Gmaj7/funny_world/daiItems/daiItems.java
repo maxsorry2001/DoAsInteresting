@@ -128,4 +128,5 @@ public class daiItems {
     public static final Supplier<BlockItem> WIND_BLOCK = DAI_ITEMS.registerSimpleBlockItem("wind_block", daiBlocks.WIND_BLOCK);
     public static final Supplier<BlockItem> WIND_TNT = DAI_ITEMS.registerSimpleBlockItem("wind_tnt", daiBlocks.WIND_TNT);
     public static final Supplier<BlockItem> LAVA_CHICKEN_CORE = DAI_ITEMS.registerSimpleBlockItem("lava_chicken_core", daiBlocks.LAVA_CHICKEN_CORE, new Item.Properties().stacksTo(1));
+    public static final Supplier<BlockItem> GLOW_TNT = DAI_ITEMS.registerSimpleBlockItem("glow_tnt", daiBlocks.GLOW_TNT);
 }

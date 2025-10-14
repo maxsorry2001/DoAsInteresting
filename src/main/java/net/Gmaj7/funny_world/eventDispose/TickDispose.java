@@ -23,6 +23,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.GlowSquid;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.npc.Villager;
@@ -41,6 +42,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderLivingEvent;
+import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
@@ -51,7 +53,6 @@ import java.util.Random;
 
 @EventBusSubscriber(modid = FunnyWorld.MODID)
 public class TickDispose {
-
     @SubscribeEvent
     public static void EntityTickPreDeal(EntityTickEvent.Pre event){
         Entity target = event.getEntity();
@@ -117,6 +118,21 @@ public class TickDispose {
                     entity.clearFire();
                     entity.getItemBySlot(EquipmentSlot.FEET).hurtAndBreak(1, entity, EquipmentSlot.FEET);
                 }
+            }
+            if((target instanceof GlowSquid || target.isCurrentlyGlowing()) && target.isAlive()){
+                BlockPos newPos = target.blockPosition().above();
+                BlockPos oldPos = ((daiUniqueDataGet)target).getOldPos();
+                BlockState newState = target.level().getBlockState(newPos);
+                if(oldPos == null || newPos.distManhattan(oldPos) > 0){
+                    if(oldPos != null) target.level().setBlockAndUpdate(oldPos, Blocks.AIR.defaultBlockState());
+                    if(newState.isAir() && !newState.is(daiBlocks.GLOW_BLOCK.get())) target.level().setBlockAndUpdate(newPos, daiBlocks.GLOW_BLOCK.get().defaultBlockState());
+                    ((daiUniqueDataGet)target).setOldPos(newPos);
+                }
+            }
+            else {
+                BlockPos blockPos = ((daiUniqueDataGet)target).getOldPos();
+                if(blockPos != null && target.level().getBlockState(blockPos).is(daiBlocks.GLOW_BLOCK))
+                    target.level().setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
             }
         }
         else if (target instanceof ItemEntity itemEntity){
@@ -203,6 +219,15 @@ public class TickDispose {
                 event.getPoseStack().translate(0, -event.getEntity().getBoundingBox().getYsize(), 0);
             }
             else event.getPoseStack().scale(i, i, i);
+        }
+    }
+
+    @SubscribeEvent
+    public static void EntityRemoveDeal(EntityLeaveLevelEvent event){
+        if(event.getEntity() instanceof GlowSquid glowSquid){
+             BlockPos blockPos = ((daiUniqueDataGet)glowSquid).getOldPos();
+             if(blockPos != null && event.getLevel().isLoaded(blockPos) && event.getLevel().getBlockState(blockPos).is(daiBlocks.GLOW_BLOCK))
+                event.getLevel().setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
         }
     }
 }
