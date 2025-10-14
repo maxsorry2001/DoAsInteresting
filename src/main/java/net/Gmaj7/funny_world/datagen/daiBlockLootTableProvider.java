@@ -6,6 +6,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.Set;
 
@@ -23,6 +24,7 @@ public class daiBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(daiBlocks.WIND_BLOCK.get());
         dropSelf(daiBlocks.WIND_TNT.get());
         dropSelf(daiBlocks.LAVA_CHICKEN_CORE.get());
+        add(daiBlocks.GLOW_TNT.get(), block -> createSingleItemTable(Blocks.TNT));
     }
 
     @Override

@@ -40,5 +40,7 @@ public class daiMobEffects {
             () -> new LavaChickenPowerEffect(MobEffectCategory.BENEFICIAL, 0xD67F28));
     public static final DeferredHolder<MobEffect, MobEffect> KEEP_WORKING = DAI_EFFECTS.register("keep_working",
             () -> new daiMobEffect(MobEffectCategory.NEUTRAL, 0xFFFFFF));
+    public static final DeferredHolder<MobEffect, MobEffect> CHARM = DAI_EFFECTS.register("charm",
+            () -> new CharmEffect(MobEffectCategory.HARMFUL, 0xFF00FF));
     public static void register(IEventBus eventBus){DAI_EFFECTS.register(eventBus);}
 }

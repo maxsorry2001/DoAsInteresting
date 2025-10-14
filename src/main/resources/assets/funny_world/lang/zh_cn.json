@@ -69,6 +69,7 @@
 
   "block.funny_world.sculk_tnt": "幽匿TNT",
   "block.funny_world.electromagnetic_tnt": "电磁TNT",
+  "block.funny_world.glow_tnt": "光照TNT",
   "block.funny_world.wind_tnt": "旋风TNT",
   "block.funny_world.redstone_magnet": "红石磁铁",
   "block.funny_world.honey_floor": "蜂蜜层",
@@ -77,6 +78,7 @@
   "block.funny_world.lava_chicken_core": "熔岩烤鸡之心",
 
   "entity.funny_world.sculk_tnt_entity": "幽匿TNT",
+  "entity.funny_world.glow_tnt": "光照TNT",
   "entity.funny_world.electromagnetic_tnt_entity": "电磁TNT",
   "entity.funny_world.wind_tnt_entity": "旋风TNT",
   "entity.funny_world.mahjong_entity": "麻将牌",
@@ -96,6 +98,7 @@
   "enchantment.funny_world.entropy": "熵增",
   "enchantment.funny_world.absorb_honey": "吸收",
   "enchantment.funny_world.sacrifice_arrows": "献祭",
+  "enchantment.funny_world.charm": "魅惑",
 
   "death.attack.dai_radiation" : "%1$s由于电磁辐射而全身溃烂",
   "death.attack.dai_radiation.player" : "%1$s由于%2$s发射的电磁辐射而全身溃烂",

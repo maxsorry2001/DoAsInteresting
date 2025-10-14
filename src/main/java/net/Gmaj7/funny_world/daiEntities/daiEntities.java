@@ -107,6 +107,14 @@ public class daiEntities {
                     .clientTrackingRange(10)
                     .build("sculk_tnt"));
 
+    public static final Supplier<EntityType<GlowTntEntity>> GLOW_TNT_ENTITY =
+            ENTITY_TYPES.register("glow_tnt", () -> EntityType.Builder.<GlowTntEntity>of(GlowTntEntity::new, MobCategory.MISC)
+                    .fireImmune()
+                    .sized(0.98F, 0.98F)
+                    .eyeHeight(0.15F)
+                    .clientTrackingRange(10)
+                    .build("sculk_tnt"));
+
     public static final Supplier<EntityType<ThunderBallEntity>> THUNDER_BALL_ENTITY =
             ENTITY_TYPES.register("thunder_ball", () -> EntityType.Builder.<ThunderBallEntity>of(ThunderBallEntity::new, MobCategory.MISC)
                     .fireImmune()

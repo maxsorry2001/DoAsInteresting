@@ -17,6 +17,7 @@ import net.Gmaj7.funny_world.daiItems.daiFoods;
 import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.Gmaj7.funny_world.villager.daiVillagers;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
@@ -46,6 +47,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Blocks;
@@ -216,18 +218,25 @@ public class ClickDispose {
                 }
             }
         }
-        if(event.getHand() == InteractionHand.MAIN_HAND && mainHandItem.is(Items.HONEY_BOTTLE) && !((daiUniqueDataGet)blockState.getBlock()).isBlockUsePass(blockState, player.level(), blockPos, player, event.getHitVec())){
-            if(player.level().isClientSide()) {
-                player.swing(InteractionHand.MAIN_HAND);
-                player.playSound(SoundType.HONEY_BLOCK.getPlaceSound());
+        if(event.getHand() == InteractionHand.MAIN_HAND){
+            if(mainHandItem.is(Items.HONEY_BOTTLE) && !((daiUniqueDataGet)blockState.getBlock()).isBlockUsePass(blockState, player.level(), blockPos, player, event.getHitVec())){
+                if(player.level().isClientSide()) {
+                    player.swing(InteractionHand.MAIN_HAND);
+                    player.playSound(SoundType.HONEY_BLOCK.getPlaceSound());
+                }
+                else {
+                    BlockState honey_floor = daiBlocks.HONEY_FLOOR.get().defaultBlockState();
+                    player.level().setBlockAndUpdate(blockPos.above(), honey_floor);
+                    BlockEntity blockEntity1 = player.level().getBlockEntity(blockPos.above());
+                    if(blockEntity1 instanceof HoneyFloorBlockEntity honeyFloorBlockEntity)
+                        honeyFloorBlockEntity.setHoney_bottle(mainHandItem.copyWithCount(1));
+                    if(!player.isCreative()) mainHandItem.shrink(1);
+                }
             }
-            else {
-                BlockState honey_floor = daiBlocks.HONEY_FLOOR.get().defaultBlockState();
-                player.level().setBlockAndUpdate(blockPos.above(), honey_floor);
-                BlockEntity blockEntity1 = player.level().getBlockEntity(blockPos.above());
-                if(blockEntity1 instanceof HoneyFloorBlockEntity honeyFloorBlockEntity)
-                    honeyFloorBlockEntity.setHoney_bottle(mainHandItem.copyWithCount(1));
+            if(mainHandItem.is(Items.GLOW_INK_SAC) && blockState.is(Blocks.TNT)){
+                player.level().setBlockAndUpdate(blockPos, daiBlocks.GLOW_TNT.get().defaultBlockState());
                 if(!player.isCreative()) mainHandItem.shrink(1);
+                player.swing(InteractionHand.MAIN_HAND);
             }
         }
     }
@@ -235,6 +244,7 @@ public class ClickDispose {
     public static void RightClickItem(PlayerInteractEvent.RightClickItem event){
         Player player = event.getEntity();
         ItemStack itemStackHand = player.getItemInHand(event.getHand());
+
         if (itemStackHand.is(Items.BOW) && EnchantmentHelper.getEnchantmentLevel(daiFunctions.getHolder(player.level(), Registries.ENCHANTMENT, daiEnchantments.SACRIFICE_ARROWS), player) > 0){
             LivingEntity livingEntity = player.level().getNearestEntity(LivingEntity.class, TargetingConditions.forNonCombat().range(6), player, player.getX(), player.getY(), player.getZ(), player.getBoundingBox().inflate(6));
             if(livingEntity != null && livingEntity != player) player.startUsingItem(event.getHand());
@@ -290,6 +300,11 @@ public class ClickDispose {
         }
         if(itemStackHand.is(daiItems.SLIME_ROD.get()) && player.fishing != null && player.fishing instanceof SlimeFishingHookEntity){
             player.setDeltaMovement(player.getDeltaMovement().add(3,3,3));
+        }
+        if(itemStackHand.is(Items.GLOW_INK_SAC)){
+            ItemStack otherHand = player.getItemInHand(event.getHand() == InteractionHand.MAIN_HAND ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND);
+            Holder<Enchantment> holder = daiFunctions.getHolder(player.level(), Registries.ENCHANTMENT, daiEnchantments.CHARM);
+            otherHand.enchant(holder, otherHand.getEnchantmentLevel(holder) + 1);
         }
     }
 

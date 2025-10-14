@@ -33,4 +33,6 @@ public class daiBlocks {
             () -> new LavaChickenCore(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).sound(SoundType.METAL)));
     public static final DeferredBlock<Block> GLOW_BLOCK = DAI_BLOCKS.register("glow_block",
             () -> new AirBlock(BlockBehaviour.Properties.of().lightLevel(p -> 15).noOcclusion().noLootTable().replaceable().air()));
+    public static final DeferredBlock<Block> GLOW_TNT = DAI_BLOCKS.register("glow_tnt",
+            () -> new GlowTNT(BlockBehaviour.Properties.of().lightLevel(p -> 15)));
 }

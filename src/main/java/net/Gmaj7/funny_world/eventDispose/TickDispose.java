@@ -119,21 +119,26 @@ public class TickDispose {
                     entity.getItemBySlot(EquipmentSlot.FEET).hurtAndBreak(1, entity, EquipmentSlot.FEET);
                 }
             }
+            if((target instanceof GlowSquid || target.isCurrentlyGlowing()) && target.isAlive()){
+                BlockPos newPos = target.blockPosition().above();
+                BlockPos oldPos = ((daiUniqueDataGet)target).getOldPos();
+                BlockState newState = target.level().getBlockState(newPos);
+                if(oldPos == null || newPos.distManhattan(oldPos) > 0){
+                    if(oldPos != null) target.level().setBlockAndUpdate(oldPos, Blocks.AIR.defaultBlockState());
+                    if(newState.isAir() && !newState.is(daiBlocks.GLOW_BLOCK.get())) target.level().setBlockAndUpdate(newPos, daiBlocks.GLOW_BLOCK.get().defaultBlockState());
+                    ((daiUniqueDataGet)target).setOldPos(newPos);
+                }
+            }
+            else {
+                BlockPos blockPos = ((daiUniqueDataGet)target).getOldPos();
+                if(blockPos != null && target.level().getBlockState(blockPos).is(daiBlocks.GLOW_BLOCK))
+                    target.level().setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
+            }
         }
         else if (target instanceof ItemEntity itemEntity){
             if(itemEntity.getItem().is(Items.GLOWSTONE_DUST) && itemEntity.isInWater()){
                 itemEntity.level().setBlockAndUpdate(itemEntity.getOnPos(), daiBlocks.EXTRACTANT_FLUID_BLOCK.get().defaultBlockState());
                 itemEntity.discard();
-            }
-        }
-        if(target instanceof GlowSquid && target.isAlive()){
-            BlockPos newPos = target.blockPosition().above();
-            BlockPos oldPos = ((daiUniqueDataGet)target).getOldPos();
-            BlockState newState = target.level().getBlockState(newPos);
-            if(oldPos == null || newPos.distManhattan(oldPos) > 0){
-                if(oldPos != null) target.level().setBlockAndUpdate(oldPos, Blocks.AIR.defaultBlockState());
-                if(newState.isAir() && !newState.is(daiBlocks.GLOW_BLOCK.get())) target.level().setBlockAndUpdate(newPos, daiBlocks.GLOW_BLOCK.get().defaultBlockState());
-                ((daiUniqueDataGet)target).setOldPos(newPos);
             }
         }
     }
