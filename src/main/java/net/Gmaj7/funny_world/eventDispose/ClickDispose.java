@@ -56,8 +56,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
 
 import java.util.List;
 import java.util.Random;
@@ -243,6 +247,7 @@ public class ClickDispose {
     public static void RightClickItem(PlayerInteractEvent.RightClickItem event){
         Player player = event.getEntity();
         ItemStack itemStackHand = player.getItemInHand(event.getHand());
+        ItemStack itemStackOtherHand = player.getItemInHand(event.getHand() == InteractionHand.OFF_HAND ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND);
         if (itemStackHand.is(Items.BOW) && EnchantmentHelper.getEnchantmentLevel(daiFunctions.getHolder(player.level(), Registries.ENCHANTMENT, daiEnchantments.SACRIFICE_ARROWS), player) > 0){
             LivingEntity livingEntity = player.level().getNearestEntity(LivingEntity.class, TargetingConditions.forNonCombat().range(6), player, player.getX(), player.getY(), player.getZ(), player.getBoundingBox().inflate(6));
             if(livingEntity != null && livingEntity != player) player.startUsingItem(event.getHand());
@@ -293,6 +298,11 @@ public class ClickDispose {
                 Holder<Enchantment> holder = daiFunctions.getHolder(player.level(), Registries.ENCHANTMENT, daiEnchantments.CHARM);
                 otherHand.enchant(holder, otherHand.getEnchantmentLevel(holder) + 1);
             }
+        }
+        if(itemStackHand.is(Items.WATER_BUCKET) && itemStackOtherHand.is(daiItems.WATER_BOW.get())){
+            IFluidHandlerItem iFluidHandlerItem = itemStackHand.getCapability(Capabilities.FluidHandler.ITEM);
+            itemStackOtherHand.getCapability(Capabilities.FluidHandler.ITEM).fill(iFluidHandlerItem.getFluidInTank(0), IFluidHandler.FluidAction.EXECUTE);
+            System.out.println(itemStackOtherHand.getCapability(Capabilities.FluidHandler.ITEM).getFluidInTank(0).getAmount());
         }
     }
 

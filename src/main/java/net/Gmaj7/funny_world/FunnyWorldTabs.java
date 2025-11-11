@@ -75,5 +75,6 @@ public class FunnyWorldTabs {
                         pOutput.accept(daiItems.BAMBOO_ICE_RAFT.get());
 
                         pOutput.accept(daiItems.EXTRACTANT_FLUID_BUCKET.get());
+                        pOutput.accept(daiItems.WATER_BOW.get());
                     }).build());
 }

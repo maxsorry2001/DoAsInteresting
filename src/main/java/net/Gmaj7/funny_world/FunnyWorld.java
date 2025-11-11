@@ -11,6 +11,7 @@ import net.Gmaj7.funny_world.daiFluids.daiFluidTypes;
 import net.Gmaj7.funny_world.daiFluids.daiFluids;
 import net.Gmaj7.funny_world.daiInit.*;
 import net.Gmaj7.funny_world.daiInit.daiUniqueData.daiUniqueDataGet;
+import net.Gmaj7.funny_world.daiItems.custom.WaterBow;
 import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.Gmaj7.funny_world.daiItems.daiPotions;
 import net.Gmaj7.funny_world.daiSounds.daiSounds;
@@ -148,6 +149,7 @@ public class FunnyWorld
         @SubscribeEvent
         public static void fluidRegister(RegisterClientExtensionsEvent event){
             event.registerFluidType(daiFluidTypes.EXTRACTANT_FLUID.get().getExtensions(), daiFluidTypes.EXTRACTANT_FLUID);
+            event.registerItem(WaterBow.iClientItemExtensions, daiItems.WATER_BOW.get());
         }
     }
 }

@@ -14,6 +14,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -25,6 +27,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Optional;
 
@@ -40,6 +43,10 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
     @Shadow public abstract boolean hasEffect(Holder<MobEffect> pEffect);
     @Shadow public abstract ItemStack getItemBySlot(EquipmentSlot pSlot);
     @Shadow public abstract float getMaxHealth();
+
+    @Shadow public abstract ItemStack getUseItem();
+
+    @Shadow public abstract double getAttributeValue(Holder<Attribute> attribute);
 
     @Inject(method = "tick", at = @At("HEAD"))
     public void tickMixin(CallbackInfo info){
@@ -80,6 +87,13 @@ public abstract class LivingEntityMixin extends Entity implements Attackable, ne
                     this.removeData(daiAttachmentTypes.RENDER_UP_DOWN);
             }
             else this.setData(daiAttachmentTypes.RENDER_SCALE, a > 1 ? a - (a - 1) / 100 : a + (1 - a) / 100);
+        }
+    }
+
+    @Inject(method = "getDefaultGravity", at = @At("HEAD"), cancellable = true)
+    public void getDefaultGravityMixin(CallbackInfoReturnable ci){
+        if(this.getUseItem().is(daiItems.WATER_BOW.get())){
+            ci.setReturnValue(this.getAttributeValue(Attributes.GRAVITY) / 10);
         }
     }
 

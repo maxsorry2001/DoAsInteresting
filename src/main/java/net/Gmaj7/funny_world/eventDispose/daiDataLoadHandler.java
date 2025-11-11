@@ -1,14 +1,20 @@
 package net.Gmaj7.funny_world.eventDispose;
 
 import net.Gmaj7.funny_world.FunnyWorld;
+import net.Gmaj7.funny_world.daiInit.daiDataComponentTypes;
 import net.Gmaj7.funny_world.daiInit.daiPackets;
+import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.fluids.capability.templates.FluidHandlerItemStack;
+import net.neoforged.neoforge.fluids.capability.wrappers.FluidBucketWrapper;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = FunnyWorld.MODID)
-public class daiPayLoadHandler {
+public class daiDataLoadHandler {
     @SubscribeEvent
     public static void register(final RegisterPayloadHandlersEvent event){
         final PayloadRegistrar payloadRegistrar = event.registrar(FunnyWorld.MODID).versioned("1.0.0").optional();
@@ -16,5 +22,10 @@ public class daiPayLoadHandler {
         payloadRegistrar.playToServer(daiPackets.daiBellHelmetPacket.TYPE, daiPackets.daiBellHelmetPacket.STREAM_CODEC, daiPackets.daiBellHelmetPacket::handle);
         payloadRegistrar.playToServer(daiPackets.daiIceBoatPacket.TYPE, daiPackets.daiIceBoatPacket.STREAM_CODEC, daiPackets.daiIceBoatPacket::handle);
         payloadRegistrar.playToClient(daiPackets.daiHumanityPacket.TYPE, daiPackets.daiHumanityPacket.STREAM_CODEC, daiPackets.daiHumanityPacket::handle);
+    }
+
+    @SubscribeEvent
+    public static void registerCapabilities(RegisterCapabilitiesEvent event){
+        event.registerItem(Capabilities.FluidHandler.ITEM, (itemstack, unused) -> new FluidHandlerItemStack(daiDataComponentTypes.SIMPLE_FLUID_CONTENE, itemstack, 2000), daiItems.WATER_BOW.get());
     }
 }

@@ -8,8 +8,10 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.fluids.SimpleFluidContent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import javax.xml.crypto.Data;
 import java.util.function.Supplier;
 
 public class daiDataComponentTypes {
@@ -54,6 +56,9 @@ public class daiDataComponentTypes {
 
     public static final Supplier<DataComponentType<Integer>> SWEEPING_TYPE = DAI_DATA_COMPONENT_TYPE.register("sweeping_direction",
             () -> DataComponentType.<Integer>builder().persistent(Codec.INT).build());
+
+    public static final Supplier<DataComponentType<SimpleFluidContent>> SIMPLE_FLUID_CONTENE = DAI_DATA_COMPONENT_TYPE.register("simple_fluid_content",
+            () -> DataComponentType.<SimpleFluidContent>builder().persistent(SimpleFluidContent.CODEC).build());
 
     public static void register(IEventBus eventBus){DAI_DATA_COMPONENT_TYPE.register(eventBus);}
 }

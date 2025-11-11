@@ -10,6 +10,7 @@ import net.Gmaj7.funny_world.daiItems.custom.*;
 import net.Gmaj7.funny_world.daiSounds.daiJukeboxSongs;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.*;
+import net.neoforged.neoforge.fluids.SimpleFluidContent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
@@ -47,7 +48,6 @@ public class daiItems {
     public static final Supplier<Item> EXTRACTANT_FLUID_BUCKET = DAI_ITEMS.register("extractant_fluid_bucket",
             () -> new BucketItem(daiFluids.EXTRACTANT_STILL.get(), new Item.Properties().stacksTo(1).craftRemainder(Items.BUCKET)));
 
-
     public static final Supplier<Item> JISTGABBURASH = DAI_ITEMS.registerItem("jistgabburash", Jistgabburash::new);
     public static final Supplier<Item> ELECTRIC_CHARGE = DAI_ITEMS.registerItem("electric_charge", ElectricCharge::new);
     public static final Supplier<Item> NEGATIVE_CHARGE = DAI_ITEMS.registerItem("negative_charge", NegativeCharge::new);
@@ -82,6 +82,8 @@ public class daiItems {
             () -> new HumanityPocket(new Item.Properties().stacksTo(1).component(daiDataComponentTypes.HUMANITY, 50)));
     public static final Supplier<Item> CLONE_PAPER = DAI_ITEMS.register("clone_paper",
             () -> new ClonePaper(new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> WATER_BOW = DAI_ITEMS.register("water_bow",
+            () -> new WaterBow(new Item.Properties().stacksTo(1).component(daiDataComponentTypes.SIMPLE_FLUID_CONTENE, SimpleFluidContent.EMPTY)));
 
     public static final Supplier<Item> MOMENTUM_ARROW = DAI_ITEMS.register("momentum_arrow",
             () -> new MomentumArrowItem(new Item.Properties()));
