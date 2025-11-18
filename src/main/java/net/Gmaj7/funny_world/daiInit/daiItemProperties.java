@@ -10,6 +10,7 @@ public class daiItemProperties {
     public static void addCustomItemProperties(){
         makeBow(daiItems.GRAVITATION_BOW.get());
         makeBow(daiItems.ELECTROMAGNETIC_BOW.get());
+        makeBow(daiItems.WATER_BOW.get());
         makeThunderSword(daiItems.THUNDER_SWORD.get());
         makeFlame(Items.WOODEN_SWORD);
         makeFlame(Items.STONE_SWORD);
@@ -35,7 +36,6 @@ public class daiItemProperties {
             return pEntity != null && pEntity.isUsingItem() && pEntity.getUseItem() == pStack ? 1.0F : 0.0F;
         });
     }
-
     private static void makeThunderSword(Item item){
         ItemProperties.register(item, ResourceLocation.parse("cannot_shoot"), (pStack, pLevel, pEntity, pSeed) -> {
             return pStack.has(daiDataComponentTypes.CANNOT_SHOOT) ? 1.0F : 0.0F;

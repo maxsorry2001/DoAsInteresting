@@ -2,11 +2,11 @@
   "entries": [
     {
       "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
-      "name": "FUNNY_WORLD_ARMPOSE",
+      "name": "FUNNY_WORLD_SIDEWAYS_BOW",
       "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
       "parameters": {
         "class": "net/Gmaj7/funny_world/daiInit/daiArmPose",
-        "field": "TT_POSE"
+        "field": "SIDEWAYS_BOW"
       }
     }
   ]

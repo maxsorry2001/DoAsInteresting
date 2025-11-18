@@ -30,21 +30,21 @@
       "predicate": {
         "pulling": 1
       },
-      "model": "funny_world:item/electromagnetic_bow_0"
+      "model": "funny_world:item/water_bow_0"
     },
     {
       "predicate": {
         "pulling": 1,
         "pull": 0.65
       },
-      "model": "funny_world:item/electromagnetic_bow_1"
+      "model": "funny_world:item/water_bow_1"
     },
     {
       "predicate": {
         "pulling": 1,
         "pull": 0.9
       },
-      "model": "funny_world:item/electromagnetic_bow_2"
+      "model": "funny_world:item/water_bow_2"
     }
   ]
 }

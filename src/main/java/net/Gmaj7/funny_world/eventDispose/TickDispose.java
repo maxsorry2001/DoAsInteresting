@@ -8,6 +8,7 @@ import net.Gmaj7.funny_world.daiFluids.daiFluidTypes;
 import net.Gmaj7.funny_world.daiInit.*;
 import net.Gmaj7.funny_world.daiInit.daiUniqueData.daiUniqueDataGet;
 import net.Gmaj7.funny_world.daiItems.daiItems;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -41,6 +42,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.RenderHandEvent;
 import net.neoforged.neoforge.client.event.RenderLivingEvent;
 import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
@@ -228,6 +230,14 @@ public class TickDispose {
              BlockPos blockPos = ((daiUniqueDataGet)glowSquid).getOldPos();
              if(blockPos != null && event.getLevel().isLoaded(blockPos) && event.getLevel().getBlockState(blockPos).is(daiBlocks.GLOW_BLOCK))
                 event.getLevel().setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
+        }
+    }
+
+    @SubscribeEvent
+    public static void RenderHandDeal(RenderHandEvent event){
+        Player player = Minecraft.getInstance().player;
+        if(player.isUsingItem() && player.getItemInHand(player.getUsedItemHand()).is(daiItems.WATER_BOW.get())){
+            if(event.getHand() != player.getUsedItemHand()) event.setCanceled(true);
         }
     }
 }
