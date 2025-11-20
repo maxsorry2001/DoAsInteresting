@@ -1,7 +1,16 @@
 package net.Gmaj7.funny_world.daiEntities.custom;
 
 import net.Gmaj7.funny_world.daiEntities.daiEntities;
+import net.Gmaj7.funny_world.daiInit.daiFunctions;
 import net.Gmaj7.funny_world.daiItems.daiItems;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -37,12 +46,28 @@ public class WaterKnife extends WaterBowShoot{
 
     @Override
     protected void onHitEntity(EntityHitResult result) {
-        super.onHitEntity(result);
+        this.playSound(this.getHitGroundSoundEvent(), 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
+        Entity entity = result.getEntity();
+        if(entity instanceof LivingEntity && !level().isClientSide()) {
+            entity.hurt(new DamageSource(daiFunctions.getHolder(level(), Registries.DAMAGE_TYPE, DamageTypes.MAGIC), getOwner()), 10);
+            ((ServerLevel)level()).sendParticles(ParticleTypes.SPLASH, result.getLocation().x() + level().random.nextDouble(), (result.getLocation().y() + 1), result.getLocation().z() + level().random.nextDouble(),
+                    15, level().random.nextFloat() - 0.5, level().random.nextFloat() - 0.5, level().random.nextFloat() - 0.5, 1.0);
+        }
+        this.remove(RemovalReason.DISCARDED);
     }
 
     @Override
     protected void onHitBlock(BlockHitResult result) {
-        super.onHitBlock(result);
+        this.playSound(this.getHitGroundSoundEvent(), 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
+        if(!level().isClientSide())
+            ((ServerLevel)level()).sendParticles(ParticleTypes.SPLASH, result.getLocation().x() + level().random.nextDouble(), (result.getLocation().y() + 1), result.getLocation().z() + level().random.nextDouble(),
+                    15, level().random.nextFloat() - 0.5, level().random.nextFloat() - 0.5, level().random.nextFloat() - 0.5, 1.0);
+        this.remove(RemovalReason.DISCARDED);
+    }
+
+    @Override
+    protected SoundEvent getDefaultHitGroundSoundEvent() {
+        return SoundEvents.GENERIC_SPLASH;
     }
 
     @Override

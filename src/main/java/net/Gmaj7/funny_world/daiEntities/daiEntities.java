@@ -159,7 +159,9 @@ public class daiEntities {
     public static final Supplier<EntityType<WaterKnife>> WATER_KNIFE =
             ENTITY_TYPES.register("water_knife", () -> EntityType.Builder.<WaterKnife>of(WaterKnife::new, MobCategory.MISC)
                     .sized(0.5F, 0.5F)
+                    .eyeHeight(0.13F)
                     .clientTrackingRange(4)
+                    .updateInterval(20)
                     .build("water_knife"));
 
 

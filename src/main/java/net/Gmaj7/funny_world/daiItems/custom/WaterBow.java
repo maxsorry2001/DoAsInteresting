@@ -5,9 +5,11 @@ import com.mojang.math.Axis;
 import net.Gmaj7.funny_world.daiEntities.custom.WaterKnife;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -18,8 +20,13 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.client.IArmPoseTransformer;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
@@ -30,6 +37,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class WaterBow extends Item {
+    public static final int shootUse = 100;
     public WaterBow(Properties properties) {
         super(properties);
     }
@@ -45,15 +53,25 @@ public class WaterBow extends Item {
         waterKnife.shootFromRotation(livingEntity, livingEntity.getXRot(), livingEntity.getYRot(), 0 ,2.0F, 1.0F);
         level.addFreshEntity(waterKnife);
         IFluidHandler iFluidHandler = stack.getCapability(Capabilities.FluidHandler.ITEM);
-        if(iFluidHandler.getFluidInTank(0).isEmpty()) iFluidHandler.fill(new FluidStack(Fluids.WATER, 1000), IFluidHandler.FluidAction.EXECUTE);
-        else iFluidHandler.drain(new FluidStack(Fluids.WATER, 100), IFluidHandler.FluidAction.EXECUTE);
+        iFluidHandler.drain(new FluidStack(Fluids.WATER, 100), IFluidHandler.FluidAction.EXECUTE);
     }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player pPlayer, InteractionHand pHand) {
+        BlockHitResult blockhitresult = getPlayerPOVHitResult(level, pPlayer, ClipContext.Fluid.SOURCE_ONLY);
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
-        pPlayer.startUsingItem(pHand);
-        return InteractionResultHolder.consume(itemstack);
+        if(blockhitresult.getType() == HitResult.Type.MISS || !level.getBlockState(blockhitresult.getBlockPos()).is(Blocks.WATER)){
+            if(itemstack.getCapability(Capabilities.FluidHandler.ITEM).getFluidInTank(0).getAmount() > shootUse){
+                pPlayer.startUsingItem(pHand);
+                return InteractionResultHolder.consume(itemstack);
+            }
+            else return InteractionResultHolder.fail(itemstack);
+        }
+        else {
+            itemstack.getCapability(Capabilities.FluidHandler.ITEM).fill(new FluidStack(Fluids.WATER, 1000), IFluidHandler.FluidAction.EXECUTE);
+            level.setBlockAndUpdate(blockhitresult.getBlockPos(), Blocks.AIR.defaultBlockState());
+            return InteractionResultHolder.success(itemstack);
+        }
     }
 
     @Override
@@ -93,7 +111,7 @@ public class WaterBow extends Item {
             int k = arm == HumanoidArm.RIGHT ? 1 : -1;
             if(player.isUsingItem() && player.getUseItem().is(stack.getItem())) {
                 poseStack.translate((float)k * 0.56F, -0.52F + equipProcess * -0.6F, -0.72F);
-                poseStack.translate((float) k * -0.3985682F, 0.18344387F, 0.15731531F);
+                poseStack.translate((float) k * -0.5085682F, 0.18344387F, 0.15731531F);
                 poseStack.mulPose(Axis.XP.rotationDegrees(0F));
                 poseStack.mulPose(Axis.YP.rotationDegrees(k * -22.5F));
                 poseStack.mulPose(Axis.ZP.rotationDegrees(k * 45F));
