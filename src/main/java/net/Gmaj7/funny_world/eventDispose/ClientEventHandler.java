@@ -5,6 +5,7 @@ import net.Gmaj7.funny_world.daiEntities.daiModelLayers;
 import net.Gmaj7.funny_world.daiEntities.model.IronShootEntityModel;
 import net.Gmaj7.funny_world.daiEntities.model.MahjongEntityModel;
 import net.Gmaj7.funny_world.daiEntities.model.ThunderBallModel;
+import net.Gmaj7.funny_world.daiEntities.model.WaterKnifeModel;
 import net.Gmaj7.funny_world.daiGui.hud.ShowHumanityHud;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.RaftModel;
@@ -23,6 +24,7 @@ public class ClientEventHandler {
         event.registerLayerDefinition(IronShootEntityModel.LAYER_LOCATION, IronShootEntityModel::createBodyLayer);
         event.registerLayerDefinition(ThunderBallModel.LAYER_LOCATION, ThunderBallModel::createBodyLayer);
         event.registerLayerDefinition(MahjongEntityModel.LAYER_LOCATION, MahjongEntityModel::createBodyLayer);
+        event.registerLayerDefinition(WaterKnifeModel.LAYER_LOCATION, WaterKnifeModel::createBodyLayer);
 
         for (Boat.Type type : Boat.Type.values()){
             if(type == Boat.Type.BAMBOO) event.registerLayerDefinition(daiModelLayers.createRaftModelName(type), RaftModel::createBodyModel);

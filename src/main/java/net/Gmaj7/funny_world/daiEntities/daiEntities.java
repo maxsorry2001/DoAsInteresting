@@ -156,6 +156,12 @@ public class daiEntities {
                     .clientTrackingRange(10)
                     .build("ice_boat_entity"));
 
+    public static final Supplier<EntityType<WaterKnife>> WATER_KNIFE =
+            ENTITY_TYPES.register("water_knife", () -> EntityType.Builder.<WaterKnife>of(WaterKnife::new, MobCategory.MISC)
+                    .sized(0.5F, 0.5F)
+                    .clientTrackingRange(4)
+                    .build("water_knife"));
+
 
     public static void register(IEventBus eventBus){ENTITY_TYPES.register(eventBus);}
 }

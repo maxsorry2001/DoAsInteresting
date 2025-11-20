@@ -302,7 +302,6 @@ public class ClickDispose {
         if(itemStackHand.is(Items.WATER_BUCKET) && itemStackOtherHand.is(daiItems.WATER_BOW.get())){
             IFluidHandlerItem iFluidHandlerItem = itemStackHand.getCapability(Capabilities.FluidHandler.ITEM);
             itemStackOtherHand.getCapability(Capabilities.FluidHandler.ITEM).fill(iFluidHandlerItem.getFluidInTank(0), IFluidHandler.FluidAction.EXECUTE);
-            System.out.println(itemStackOtherHand.getCapability(Capabilities.FluidHandler.ITEM).getFluidInTank(0).getAmount());
         }
     }
 
