@@ -7,15 +7,22 @@ import net.Gmaj7.funny_world.daiEntities.model.MahjongEntityModel;
 import net.Gmaj7.funny_world.daiEntities.model.ThunderBallModel;
 import net.Gmaj7.funny_world.daiEntities.model.WaterKnifeModel;
 import net.Gmaj7.funny_world.daiGui.hud.ShowHumanityHud;
+import net.Gmaj7.funny_world.daiItems.daiItems;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.RaftModel;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.Boat;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ComputeFovModifierEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
+import net.neoforged.neoforge.client.event.RenderHandEvent;
 
 @EventBusSubscriber(modid = FunnyWorld.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEventHandler {

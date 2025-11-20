@@ -96,7 +96,21 @@ public class WaterBow extends Item {
                 poseStack.translate((float) k * -0.3985682F, 0.18344387F, 0.15731531F);
                 poseStack.mulPose(Axis.XP.rotationDegrees(0F));
                 poseStack.mulPose(Axis.YP.rotationDegrees(k * -22.5F));
-                poseStack.mulPose(Axis.ZP.rotationDegrees(k * 90F));
+                poseStack.mulPose(Axis.ZP.rotationDegrees(k * 45F));
+                float f8 = (float)stack.getUseDuration(player) - ((float)player.getUseItemRemainingTicks() - partialTicks + 1.0F);
+                float f12 = f8 / 20.0F;
+                f12 = (f12 * f12 + f12 * 2.0F) / 3.0F;
+                if (f12 > 1.0F) {
+                    f12 = 1.0F;
+                }
+                if (f12 > 0.1F) {
+                    float f15 = Mth.sin((f8 - 0.1F) * 1.3F);
+                    float f18 = f12 - 0.1F;
+                    float f20 = f15 * f18;
+                    poseStack.translate(f20 * 0.0F, f20 * 0.004F, f20 * 0.0F);
+                }
+                poseStack.translate(f12 * 0.0F, f12 * 0.0F, f12 * 0.04F);
+                poseStack.scale(1.0F, 1.0F, 1.0F + f12 * 0.2F);
             }
             else {
                 float f5 = -0.4F * Mth.sin(Mth.sqrt(swingProcess) * (float) Math.PI);

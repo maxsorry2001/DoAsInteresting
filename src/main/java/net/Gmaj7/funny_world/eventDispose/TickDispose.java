@@ -42,6 +42,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ComputeFovModifierEvent;
 import net.neoforged.neoforge.client.event.RenderHandEvent;
 import net.neoforged.neoforge.client.event.RenderLivingEvent;
 import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
@@ -238,6 +239,21 @@ public class TickDispose {
         Player player = Minecraft.getInstance().player;
         if(player.isUsingItem() && player.getItemInHand(player.getUsedItemHand()).is(daiItems.WATER_BOW.get())){
             if(event.getHand() != player.getUsedItemHand()) event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
+    public static void FovDeal(ComputeFovModifierEvent event){
+        Player player = event.getPlayer();
+        if(player.isUsingItem()){
+            ItemStack itemStack = player.getUseItem();
+            if(itemStack.is(daiItems.WATER_BOW.get())){
+                int i = player.getTicksUsingItem();
+                float f1 = (float)i / 20.0F;
+                if (f1 > 1.0F) f1 = 1.0F;
+                else f1 *= f1;
+                event.setNewFovModifier(1.0F - f1 * 0.15F);
+            }
         }
     }
 }
