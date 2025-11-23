@@ -163,6 +163,13 @@ public class daiEntities {
                     .clientTrackingRange(4)
                     .updateInterval(20)
                     .build("water_knife"));
+    public static final Supplier<EntityType<WaterBomb>> WATER_BOMB =
+            ENTITY_TYPES.register("water_bomb", () -> EntityType.Builder.<WaterBomb>of(WaterBomb::new, MobCategory.MISC)
+                    .sized(0.5F, 0.5F)
+                    .eyeHeight(0.13F)
+                    .clientTrackingRange(4)
+                    .updateInterval(20)
+                    .build("water_bomb"));
 
 
     public static void register(IEventBus eventBus){ENTITY_TYPES.register(eventBus);}

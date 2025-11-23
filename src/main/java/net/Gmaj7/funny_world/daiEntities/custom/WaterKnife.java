@@ -53,7 +53,7 @@ public class WaterKnife extends WaterBowShoot{
             ((ServerLevel)level()).sendParticles(ParticleTypes.SPLASH, result.getLocation().x() + level().random.nextDouble(), (result.getLocation().y() + 1), result.getLocation().z() + level().random.nextDouble(),
                     15, level().random.nextFloat() - 0.5, level().random.nextFloat() - 0.5, level().random.nextFloat() - 0.5, 1.0);
         }
-        this.remove(RemovalReason.DISCARDED);
+        this.discard();
     }
 
     @Override
@@ -63,20 +63,5 @@ public class WaterKnife extends WaterBowShoot{
             ((ServerLevel)level()).sendParticles(ParticleTypes.SPLASH, result.getLocation().x() + level().random.nextDouble(), (result.getLocation().y() + 1), result.getLocation().z() + level().random.nextDouble(),
                     15, level().random.nextFloat() - 0.5, level().random.nextFloat() - 0.5, level().random.nextFloat() - 0.5, 1.0);
         this.remove(RemovalReason.DISCARDED);
-    }
-
-    @Override
-    protected SoundEvent getDefaultHitGroundSoundEvent() {
-        return SoundEvents.GENERIC_SPLASH;
-    }
-
-    @Override
-    public boolean isNoGravity() {
-        return true;
-    }
-
-    @Override
-    protected ItemStack getDefaultPickupItem() {
-        return new ItemStack(Items.ARROW);
     }
 }

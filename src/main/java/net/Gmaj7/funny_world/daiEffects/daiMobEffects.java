@@ -42,5 +42,7 @@ public class daiMobEffects {
             () -> new daiMobEffect(MobEffectCategory.NEUTRAL, 0xFFFFFF));
     public static final DeferredHolder<MobEffect, MobEffect> CHARM = DAI_EFFECTS.register("charm",
             () -> new CharmEffect(MobEffectCategory.HARMFUL, 0xFF00FF));
+    public static final DeferredHolder<MobEffect, MobEffect> DROWN = DAI_EFFECTS.register("drown",
+            () -> new DrownEffect(MobEffectCategory.HARMFUL, 0xFFFFFF));
     public static void register(IEventBus eventBus){DAI_EFFECTS.register(eventBus);}
 }
