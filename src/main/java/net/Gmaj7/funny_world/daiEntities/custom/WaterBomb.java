@@ -8,6 +8,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -23,6 +24,8 @@ import java.util.List;
 public class WaterBomb extends WaterBowShoot{
     private static final float directDamage = 8.0F;
     private static final float wideDamage = 4.0F;
+    public int animationTime = 1;
+    public final AnimationState animationState = new AnimationState();
 
     public WaterBomb(EntityType<? extends WaterBowShoot> entityType, Level level) {
         super(entityType, level);
@@ -46,6 +49,20 @@ public class WaterBomb extends WaterBowShoot{
         this.waterBow = new ItemStack(daiItems.WATER_BOW.get());
         this.setOwner(pOwner);
         this.pickup = Pickup.DISALLOWED;
+    }
+
+    private void setAnimationStates(){
+        if(this.animationTime <= 1){
+            this.animationTime = 20;
+            this.animationState.start(this.tickCount);
+        }
+        else this.animationTime--;
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if(this.level().isClientSide()) this.setAnimationStates();
     }
 
     @Override

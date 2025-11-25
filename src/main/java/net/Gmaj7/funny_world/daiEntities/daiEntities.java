@@ -166,9 +166,7 @@ public class daiEntities {
     public static final Supplier<EntityType<WaterBomb>> WATER_BOMB =
             ENTITY_TYPES.register("water_bomb", () -> EntityType.Builder.<WaterBomb>of(WaterBomb::new, MobCategory.MISC)
                     .sized(0.5F, 0.5F)
-                    .eyeHeight(0.13F)
                     .clientTrackingRange(4)
-                    .updateInterval(20)
                     .build("water_bomb"));
 
 

@@ -2,10 +2,7 @@ package net.Gmaj7.funny_world.eventDispose;
 
 import net.Gmaj7.funny_world.FunnyWorld;
 import net.Gmaj7.funny_world.daiEntities.daiModelLayers;
-import net.Gmaj7.funny_world.daiEntities.model.IronShootEntityModel;
-import net.Gmaj7.funny_world.daiEntities.model.MahjongEntityModel;
-import net.Gmaj7.funny_world.daiEntities.model.ThunderBallModel;
-import net.Gmaj7.funny_world.daiEntities.model.WaterKnifeModel;
+import net.Gmaj7.funny_world.daiEntities.model.*;
 import net.Gmaj7.funny_world.daiGui.hud.ShowHumanityHud;
 import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.minecraft.client.Minecraft;
@@ -32,6 +29,7 @@ public class ClientEventHandler {
         event.registerLayerDefinition(ThunderBallModel.LAYER_LOCATION, ThunderBallModel::createBodyLayer);
         event.registerLayerDefinition(MahjongEntityModel.LAYER_LOCATION, MahjongEntityModel::createBodyLayer);
         event.registerLayerDefinition(WaterKnifeModel.LAYER_LOCATION, WaterKnifeModel::createBodyLayer);
+        event.registerLayerDefinition(WaterBombModel.LAYER_LOCATION, WaterBombModel::createBodyLayer);
 
         for (Boat.Type type : Boat.Type.values()){
             if(type == Boat.Type.BAMBOO) event.registerLayerDefinition(daiModelLayers.createRaftModelName(type), RaftModel::createBodyModel);

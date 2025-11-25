@@ -2,17 +2,24 @@ package net.Gmaj7.funny_world.daiItems.custom;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import net.Gmaj7.funny_world.daiEffects.daiMobEffects;
+import net.Gmaj7.funny_world.daiEntities.custom.WaterBomb;
 import net.Gmaj7.funny_world.daiEntities.custom.WaterKnife;
+import net.Gmaj7.funny_world.daiInit.daiFunctions;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -26,7 +33,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.client.IArmPoseTransformer;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
@@ -49,11 +58,29 @@ public class WaterBow extends Item {
 
     @Override
     public void releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int timeCharged) {
-        WaterKnife waterKnife = new WaterKnife(level, livingEntity, stack);
-        waterKnife.shootFromRotation(livingEntity, livingEntity.getXRot(), livingEntity.getYRot(), 0 ,2.0F, 1.0F);
-        level.addFreshEntity(waterKnife);
+        //WaterKnife waterKnife = new WaterKnife(level, livingEntity, stack);
+        //waterKnife.shootFromRotation(livingEntity, livingEntity.getXRot(), livingEntity.getYRot(), 0 ,2.0F, 1.0F);
+        //level.addFreshEntity(waterKnife);
+        WaterBomb waterBomb = new WaterBomb(level, livingEntity, stack);
+        waterBomb.shootFromRotation(livingEntity, livingEntity.getXRot(), livingEntity.getYRot(), 0 , getPowerForTime(getUseDuration(stack, livingEntity) - timeCharged), 1.0F);
+        level.addFreshEntity(waterBomb);
         IFluidHandler iFluidHandler = stack.getCapability(Capabilities.FluidHandler.ITEM);
         iFluidHandler.drain(new FluidStack(Fluids.WATER, 100), IFluidHandler.FluidAction.EXECUTE);
+    }
+
+    @Override
+    public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
+        Vec3 start = livingEntity.getEyePosition().subtract(0, 0.25, 0);
+        Vec3 end = livingEntity.getLookAngle().normalize().scale(10).add(start);
+        daiFunctions.RayHitResult result = daiFunctions.getLineHitResult(livingEntity.level(), livingEntity, start, end, false, 0.5F);
+        HitResult hitResult = result.getNearest(livingEntity);
+        if(hitResult instanceof EntityHitResult){
+            Entity entity = ((EntityHitResult) hitResult).getEntity();
+            if(entity instanceof LivingEntity && remainingUseDuration % 10 == 0) {
+                if(!((LivingEntity) entity).hasEffect(daiMobEffects.DROWN)) ((LivingEntity) entity).addEffect(new MobEffectInstance(daiMobEffects.DROWN, 200), livingEntity);
+                else entity.hurt(new DamageSource(daiFunctions.getHolder(level, Registries.DAMAGE_TYPE, DamageTypes.DROWN), livingEntity), 1);
+            }
+        }
     }
 
     @Override
@@ -72,6 +99,16 @@ public class WaterBow extends Item {
             level.setBlockAndUpdate(blockhitresult.getBlockPos(), Blocks.AIR.defaultBlockState());
             return InteractionResultHolder.success(itemstack);
         }
+    }
+
+    public static float getPowerForTime(int charge) {
+        float f = (float)charge / 20.0F;
+        f = (f * f + f * 2.0F) / 3.0F;
+        if (f > 1.0F) {
+            f = 1.0F;
+        }
+
+        return f;
     }
 
     @Override
