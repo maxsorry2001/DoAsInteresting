@@ -9,8 +9,6 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.fluids.capability.templates.FluidHandlerItemStack;
-import net.neoforged.neoforge.fluids.capability.templates.FluidHandlerItemStackSimple;
-import net.neoforged.neoforge.fluids.capability.wrappers.FluidBucketWrapper;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
@@ -27,6 +25,6 @@ public class daiDataLoadHandler {
 
     @SubscribeEvent
     public static void registerCapabilities(RegisterCapabilitiesEvent event){
-        event.registerItem(Capabilities.FluidHandler.ITEM, (itemstack, unused) -> new FluidHandlerItemStack(daiDataComponentTypes.SIMPLE_FLUID_CONTENE, itemstack, 2000), daiItems.WATER_BOW.get());
+        event.registerItem(Capabilities.FluidHandler.ITEM, (itemstack, unused) -> new FluidHandlerItemStack(daiDataComponentTypes.SIMPLE_FLUID_CONTENT, itemstack, 2000), daiItems.WATER_BOW.get());
     }
 }

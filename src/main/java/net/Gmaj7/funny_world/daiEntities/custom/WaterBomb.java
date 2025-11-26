@@ -4,7 +4,9 @@ import net.Gmaj7.funny_world.daiEntities.daiEntities;
 import net.Gmaj7.funny_world.daiInit.daiFunctions;
 import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -71,10 +73,13 @@ public class WaterBomb extends WaterBowShoot{
         if(!level().isClientSide() && target instanceof LivingEntity){
             target.hurt(new DamageSource(daiFunctions.getHolder(level(), Registries.DAMAGE_TYPE, DamageTypes.MAGIC), getOwner()),directDamage);
             List<LivingEntity> list = level().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(3));
+            list.remove(target);
             if(getOwner() != null && list.equals(getOwner())) list.remove(getOwner());
             for (LivingEntity livingEntity : list) {
                 livingEntity.hurt(new DamageSource(daiFunctions.getHolder(level(), Registries.DAMAGE_TYPE, DamageTypes.MAGIC), getOwner()), wideDamage);
             }
+            ((ServerLevel)level()).sendParticles(ParticleTypes.SPLASH, result.getLocation().x() + level().random.nextDouble(), (result.getLocation().y() + 1), result.getLocation().z() + level().random.nextDouble(),
+                    30, 3 * (level().random.nextFloat() - 0.5), 3 * (level().random.nextFloat() - 0.5), 3 * (level().random.nextFloat() - 0.5), 1.0);
         }
         this.discard();
     }
@@ -87,10 +92,9 @@ public class WaterBomb extends WaterBowShoot{
             for (LivingEntity livingEntity : list) {
                 livingEntity.hurt(new DamageSource(daiFunctions.getHolder(level(), Registries.DAMAGE_TYPE, DamageTypes.MAGIC), getOwner()), wideDamage);
             }
+            ((ServerLevel)level()).sendParticles(ParticleTypes.SPLASH, result.getLocation().x() + level().random.nextDouble(), (result.getLocation().y() + 1), result.getLocation().z() + level().random.nextDouble(),
+                    30, 3 * (level().random.nextFloat() - 0.5), 3 * (level().random.nextFloat() - 0.5), 3 * (level().random.nextFloat() - 0.5), 1.0);
         }
         this.discard();
     }
-
-
-
 }

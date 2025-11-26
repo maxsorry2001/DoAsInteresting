@@ -5,6 +5,7 @@ import com.mojang.math.Axis;
 import net.Gmaj7.funny_world.daiEffects.daiMobEffects;
 import net.Gmaj7.funny_world.daiEntities.custom.WaterBomb;
 import net.Gmaj7.funny_world.daiEntities.custom.WaterKnife;
+import net.Gmaj7.funny_world.daiInit.daiDataComponentTypes;
 import net.Gmaj7.funny_world.daiInit.daiFunctions;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.LocalPlayer;
@@ -58,18 +59,24 @@ public class WaterBow extends Item {
 
     @Override
     public void releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int timeCharged) {
-        //WaterKnife waterKnife = new WaterKnife(level, livingEntity, stack);
-        //waterKnife.shootFromRotation(livingEntity, livingEntity.getXRot(), livingEntity.getYRot(), 0 ,2.0F, 1.0F);
-        //level.addFreshEntity(waterKnife);
-        WaterBomb waterBomb = new WaterBomb(level, livingEntity, stack);
-        waterBomb.shootFromRotation(livingEntity, livingEntity.getXRot(), livingEntity.getYRot(), 0 , getPowerForTime(getUseDuration(stack, livingEntity) - timeCharged), 1.0F);
-        level.addFreshEntity(waterBomb);
+        int model = (stack.get(daiDataComponentTypes.WATER_BOW_MODEL) == null || stack.get(daiDataComponentTypes.WATER_BOW_MODEL) > 2) ? 0 : stack.get(daiDataComponentTypes.WATER_BOW_MODEL);
+        if(model == 0) {
+            WaterKnife waterKnife = new WaterKnife(level, livingEntity, stack);
+            waterKnife.shootFromRotation(livingEntity, livingEntity.getXRot(), livingEntity.getYRot(), 0 ,2.0F, 1.0F);
+            level.addFreshEntity(waterKnife);
+        }
+        if(model == 1) {
+            WaterBomb waterBomb = new WaterBomb(level, livingEntity, stack);
+            waterBomb.shootFromRotation(livingEntity, livingEntity.getXRot(), livingEntity.getYRot(), 0, getPowerForTime(getUseDuration(stack, livingEntity) - timeCharged), 1.0F);
+            level.addFreshEntity(waterBomb);
+        }
         IFluidHandler iFluidHandler = stack.getCapability(Capabilities.FluidHandler.ITEM);
         iFluidHandler.drain(new FluidStack(Fluids.WATER, 100), IFluidHandler.FluidAction.EXECUTE);
     }
 
     @Override
     public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
+        if(stack.get(daiDataComponentTypes.WATER_BOW_MODEL) != 2) return;
         Vec3 start = livingEntity.getEyePosition().subtract(0, 0.25, 0);
         Vec3 end = livingEntity.getLookAngle().normalize().scale(10).add(start);
         daiFunctions.RayHitResult result = daiFunctions.getLineHitResult(livingEntity.level(), livingEntity, start, end, false, 0.5F);

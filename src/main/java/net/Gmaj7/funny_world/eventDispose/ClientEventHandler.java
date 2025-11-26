@@ -4,22 +4,16 @@ import net.Gmaj7.funny_world.FunnyWorld;
 import net.Gmaj7.funny_world.daiEntities.daiModelLayers;
 import net.Gmaj7.funny_world.daiEntities.model.*;
 import net.Gmaj7.funny_world.daiGui.hud.ShowHumanityHud;
-import net.Gmaj7.funny_world.daiItems.daiItems;
-import net.minecraft.client.Minecraft;
+import net.Gmaj7.funny_world.daiInit.daiKeyMapping;
+import net.Gmaj7.funny_world.daiInit.daiKeySet;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.RaftModel;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.Boat;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.ComputeFovModifierEvent;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
-import net.neoforged.neoforge.client.event.RenderHandEvent;
+import net.neoforged.neoforge.client.event.*;
 
 @EventBusSubscriber(modid = FunnyWorld.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEventHandler {
@@ -39,5 +33,26 @@ public class ClientEventHandler {
     @SubscribeEvent
     public static void registerHud(RegisterGuiLayersEvent event){
         event.registerAboveAll(ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "humanity"), new ShowHumanityHud());
+    }
+
+    @SubscribeEvent
+    public static void registerKey(RegisterKeyMappingsEvent event){
+        event.register(daiKeyMapping.SELECT_WATER_BOW);
+    }
+
+    @EventBusSubscriber(modid = FunnyWorld.MODID, value = Dist.CLIENT)
+    public static class notBusEvent{
+        private static final daiKeySet SELECT_WATER_BOW = new daiKeySet(daiKeyMapping.SELECT_WATER_BOW);
+
+        @SubscribeEvent
+        public static void keyInput(InputEvent.Key event){
+            if(SELECT_WATER_BOW.wasPressed()){
+
+            }
+            if(SELECT_WATER_BOW.wasReleased()){
+
+            }
+            SELECT_WATER_BOW.update();
+        }
     }
 }
