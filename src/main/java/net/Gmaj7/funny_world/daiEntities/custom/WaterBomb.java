@@ -4,6 +4,7 @@ import net.Gmaj7.funny_world.daiEntities.daiEntities;
 import net.Gmaj7.funny_world.daiInit.daiFunctions;
 import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
@@ -20,6 +21,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import org.joml.Vector3f;
 
 import java.util.List;
 
@@ -78,7 +80,7 @@ public class WaterBomb extends WaterBowShoot{
             for (LivingEntity livingEntity : list) {
                 livingEntity.hurt(new DamageSource(daiFunctions.getHolder(level(), Registries.DAMAGE_TYPE, DamageTypes.MAGIC), getOwner()), wideDamage);
             }
-            ((ServerLevel)level()).sendParticles(ParticleTypes.SPLASH, result.getLocation().x() + level().random.nextDouble(), (result.getLocation().y() + 1), result.getLocation().z() + level().random.nextDouble(),
+            ((ServerLevel)level()).sendParticles(new DustParticleOptions(new Vector3f((float) 0xAF / 0xFF, (float) 0xEE / 0xFF, (float) 0xEE / 0xFF), 1.0F), result.getLocation().x() + level().random.nextDouble(), (result.getLocation().y() + 1), result.getLocation().z() + level().random.nextDouble(),
                     30, 3 * (level().random.nextFloat() - 0.5), 3 * (level().random.nextFloat() - 0.5), 3 * (level().random.nextFloat() - 0.5), 1.0);
         }
         this.discard();
@@ -92,7 +94,7 @@ public class WaterBomb extends WaterBowShoot{
             for (LivingEntity livingEntity : list) {
                 livingEntity.hurt(new DamageSource(daiFunctions.getHolder(level(), Registries.DAMAGE_TYPE, DamageTypes.MAGIC), getOwner()), wideDamage);
             }
-            ((ServerLevel)level()).sendParticles(ParticleTypes.SPLASH, result.getLocation().x() + level().random.nextDouble(), (result.getLocation().y() + 1), result.getLocation().z() + level().random.nextDouble(),
+            ((ServerLevel)level()).sendParticles(new DustParticleOptions(new Vector3f((float) 0xAF / 0xFF, (float) 0xEE / 0xFF, (float) 0xEE / 0xFF), 1.0F), result.getLocation().x() + level().random.nextDouble(), (result.getLocation().y() + 1), result.getLocation().z() + level().random.nextDouble(),
                     30, 3 * (level().random.nextFloat() - 0.5), 3 * (level().random.nextFloat() - 0.5), 3 * (level().random.nextFloat() - 0.5), 1.0);
         }
         this.discard();

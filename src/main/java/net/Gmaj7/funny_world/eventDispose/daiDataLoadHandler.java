@@ -20,6 +20,7 @@ public class daiDataLoadHandler {
 
         payloadRegistrar.playToServer(daiPackets.daiBellHelmetPacket.TYPE, daiPackets.daiBellHelmetPacket.STREAM_CODEC, daiPackets.daiBellHelmetPacket::handle);
         payloadRegistrar.playToServer(daiPackets.daiIceBoatPacket.TYPE, daiPackets.daiIceBoatPacket.STREAM_CODEC, daiPackets.daiIceBoatPacket::handle);
+        payloadRegistrar.playToServer(daiPackets.daiWaterBowPacket.TYPE, daiPackets.daiWaterBowPacket.STREAM_CODEC, daiPackets.daiWaterBowPacket::handle);
         payloadRegistrar.playToClient(daiPackets.daiHumanityPacket.TYPE, daiPackets.daiHumanityPacket.STREAM_CODEC, daiPackets.daiHumanityPacket::handle);
     }
 

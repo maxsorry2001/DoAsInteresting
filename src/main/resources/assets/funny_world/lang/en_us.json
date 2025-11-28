@@ -55,6 +55,7 @@
   "item.funny_world.bamboo_ice_raft": "bamboo ice boat",
   "item.funny_world.lava_chicken_ingot": "lava chicken ingot",
   "item.funny_world.clone_paper": "clone blueprint",
+  "item.funny_world.water_bow": "water bow",
 
   "effect.funny_world.iiiiiii": "ÌÌÌÌÌÌÌÌÌÌÌÌÌÌ",
   "effect.funny_world.electric_charge": "electric charge",
@@ -66,6 +67,7 @@
   "effect.funny_world.carbon_monoxide_poisoning": "carbon monoxide poisoning",
   "effect.funny_world.gene_mutation": "gene mutation",
   "effect.funny_world.lava_chicken_power": "Lava chicken power",
+  "effect.funny_world.drown": "drown",
 
   "block.funny_world.sculk_tnt": "sculk TNT",
   "block.funny_world.electromagnetic_tnt": "electromagnetic TNT",
@@ -118,5 +120,8 @@
   "daisongs_spring_festival_overture": "Spring Festival Overture",
   "honey_has_effect": "The honey looks like has absorbed some effects",
   "humanity": "humanity:",
-  "dai.clone_entity": "Clone Living:"
+  "dai.clone_entity": "Clone Living:",
+  "model_0": "water knife",
+  "model_1": "water bomb",
+  "model_2": "drown"
 }

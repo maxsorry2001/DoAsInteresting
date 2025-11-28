@@ -10,6 +10,8 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
@@ -111,6 +113,38 @@ public class daiPackets {
             context.enqueueWork(() -> {
                 if (context.player() instanceof ServerPlayer serverPlayer){
                     serverPlayer.level().explode(null, packet.x, packet.y, packet.z, packet.r, false, Level.ExplosionInteraction.BLOCK);
+                }
+            });
+        }
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
+    public static class daiWaterBowPacket implements CustomPacketPayload {
+        InteractionHand hand;
+
+        public static final CustomPacketPayload.Type<daiWaterBowPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "water_bow"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, daiWaterBowPacket> STREAM_CODEC = CustomPacketPayload.codec(daiWaterBowPacket::write, daiWaterBowPacket::new);
+
+        public daiWaterBowPacket(InteractionHand hand){
+            this.hand = hand;
+        }
+
+        public daiWaterBowPacket(FriendlyByteBuf buf){
+            this.hand = buf.readBoolean() ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
+        }
+
+        public void write(FriendlyByteBuf buf){
+            buf.writeBoolean(hand == InteractionHand.MAIN_HAND);
+        }
+
+        public static void handle(daiWaterBowPacket packet, IPayloadContext context){
+            context.enqueueWork(() -> {
+                if (context.player() instanceof ServerPlayer serverPlayer){
+                    ItemStack itemStack = serverPlayer.getItemInHand(packet.hand);
+                    itemStack.set(daiDataComponentTypes.WATER_BOW_MODEL, (itemStack.get(daiDataComponentTypes.WATER_BOW_MODEL) + 1) % 3);
                 }
             });
         }

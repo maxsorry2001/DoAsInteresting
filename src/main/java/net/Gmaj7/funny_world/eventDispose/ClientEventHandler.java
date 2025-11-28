@@ -6,14 +6,20 @@ import net.Gmaj7.funny_world.daiEntities.model.*;
 import net.Gmaj7.funny_world.daiGui.hud.ShowHumanityHud;
 import net.Gmaj7.funny_world.daiInit.daiKeyMapping;
 import net.Gmaj7.funny_world.daiInit.daiKeySet;
+import net.Gmaj7.funny_world.daiInit.daiPackets;
+import net.Gmaj7.funny_world.daiItems.daiItems;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.RaftModel;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 @EventBusSubscriber(modid = FunnyWorld.MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEventHandler {
@@ -46,11 +52,14 @@ public class ClientEventHandler {
 
         @SubscribeEvent
         public static void keyInput(InputEvent.Key event){
-            if(SELECT_WATER_BOW.wasPressed()){
-
-            }
             if(SELECT_WATER_BOW.wasReleased()){
-
+                Player player = Minecraft.getInstance().player;
+                for (InteractionHand hand : InteractionHand.values()){
+                    if(player.getItemInHand(hand).is(daiItems.WATER_BOW.get()) && !player.isUsingItem()){
+                        PacketDistributor.sendToServer(new daiPackets.daiWaterBowPacket(hand));
+                        break;
+                    }
+                }
             }
             SELECT_WATER_BOW.update();
         }

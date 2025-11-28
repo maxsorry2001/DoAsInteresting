@@ -3,6 +3,7 @@ package net.Gmaj7.funny_world.daiEntities.custom;
 import net.Gmaj7.funny_world.daiEntities.daiEntities;
 import net.Gmaj7.funny_world.daiInit.daiFunctions;
 import net.Gmaj7.funny_world.daiItems.daiItems;
+import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
@@ -18,6 +19,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import org.joml.Vector3f;
 
 public class WaterKnife extends WaterBowShoot{
     public WaterKnife(EntityType<? extends WaterBowShoot> entityType, Level level) {
@@ -50,7 +52,7 @@ public class WaterKnife extends WaterBowShoot{
         Entity entity = result.getEntity();
         if(entity instanceof LivingEntity && !level().isClientSide()) {
             entity.hurt(new DamageSource(daiFunctions.getHolder(level(), Registries.DAMAGE_TYPE, DamageTypes.MAGIC), getOwner()), 10);
-            ((ServerLevel)level()).sendParticles(ParticleTypes.SPLASH, result.getLocation().x() + level().random.nextDouble(), (result.getLocation().y() + 1), result.getLocation().z() + level().random.nextDouble(),
+            ((ServerLevel)level()).sendParticles(new DustParticleOptions(new Vector3f((float) 0xAF / 0xFF, (float) 0xEE / 0xFF, (float) 0xEE / 0xFF), 1.0F), result.getLocation().x() + level().random.nextDouble(), (result.getLocation().y() + 1), result.getLocation().z() + level().random.nextDouble(),
                     15, level().random.nextFloat() - 0.5, level().random.nextFloat() - 0.5, level().random.nextFloat() - 0.5, 1.0);
         }
         this.discard();
@@ -60,7 +62,7 @@ public class WaterKnife extends WaterBowShoot{
     protected void onHitBlock(BlockHitResult result) {
         this.playSound(this.getHitGroundSoundEvent(), 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
         if(!level().isClientSide())
-            ((ServerLevel)level()).sendParticles(ParticleTypes.SPLASH, result.getLocation().x() + level().random.nextDouble(), (result.getLocation().y() + 1), result.getLocation().z() + level().random.nextDouble(),
+            ((ServerLevel)level()).sendParticles(new DustParticleOptions(new Vector3f((float) 0xAF / 0xFF, (float) 0xEE / 0xFF, (float) 0xEE / 0xFF), 1.0F), result.getLocation().x() + level().random.nextDouble(), (result.getLocation().y() + 1), result.getLocation().z() + level().random.nextDouble(),
                     15, level().random.nextFloat() - 0.5, level().random.nextFloat() - 0.5, level().random.nextFloat() - 0.5, 1.0);
         this.remove(RemovalReason.DISCARDED);
     }

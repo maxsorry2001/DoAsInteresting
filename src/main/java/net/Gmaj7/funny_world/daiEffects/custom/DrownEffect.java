@@ -18,15 +18,16 @@ public class DrownEffect extends MobEffect {
 
     @Override
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
-        livingEntity.hurt(new DamageSource(daiFunctions.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, DamageTypes.DROWN)), 2 * amplifier);
+        livingEntity.hurt(new DamageSource(daiFunctions.getHolder(livingEntity.level(), Registries.DAMAGE_TYPE, DamageTypes.DROWN)), 2);
         if(!livingEntity.level().isClientSide()){
-            ((ServerLevel)livingEntity.level()).sendParticles(new DustParticleOptions(new Vector3f(0, 1F, 1F), 1.0F), livingEntity.getX(), livingEntity.getEyeY(), livingEntity.getZ(), 10, livingEntity.level().random.nextFloat() - 0.5, livingEntity.level().random.nextFloat() - 0.5, livingEntity.level().random.nextFloat() - 0.5, 1.0);
+            ((ServerLevel)livingEntity.level()).sendParticles(new DustParticleOptions(new Vector3f((float) 0xAF / 0xFF, (float) 0xEE / 0xFF, (float) 0xEE / 0xFF), 1.0F), livingEntity.getX(), livingEntity.getEyeY(), livingEntity.getZ(), 10, livingEntity.level().random.nextFloat() - 0.5, livingEntity.level().random.nextFloat() - 0.5, livingEntity.level().random.nextFloat() - 0.5, 1.0);
         }
         return true;
     }
 
     @Override
     public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
-        return duration % 40 == 0;
+        int i = 40 >> amplifier;
+        return i > 0 ? duration % i == 0 : true;
     }
 }

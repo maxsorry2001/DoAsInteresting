@@ -70,8 +70,10 @@ public class WaterBow extends Item {
             waterBomb.shootFromRotation(livingEntity, livingEntity.getXRot(), livingEntity.getYRot(), 0, getPowerForTime(getUseDuration(stack, livingEntity) - timeCharged), 1.0F);
             level.addFreshEntity(waterBomb);
         }
-        IFluidHandler iFluidHandler = stack.getCapability(Capabilities.FluidHandler.ITEM);
-        iFluidHandler.drain(new FluidStack(Fluids.WATER, 100), IFluidHandler.FluidAction.EXECUTE);
+        if(model != 2) {
+            IFluidHandler iFluidHandler = stack.getCapability(Capabilities.FluidHandler.ITEM);
+            iFluidHandler.drain(new FluidStack(Fluids.WATER, 10), IFluidHandler.FluidAction.EXECUTE);
+        }
     }
 
     @Override
@@ -88,6 +90,8 @@ public class WaterBow extends Item {
                 else entity.hurt(new DamageSource(daiFunctions.getHolder(level, Registries.DAMAGE_TYPE, DamageTypes.DROWN), livingEntity), 1);
             }
         }
+        IFluidHandler iFluidHandler = stack.getCapability(Capabilities.FluidHandler.ITEM);
+        iFluidHandler.drain(new FluidStack(Fluids.WATER, 2), IFluidHandler.FluidAction.EXECUTE);
     }
 
     @Override
@@ -141,7 +145,8 @@ public class WaterBow extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        tooltipComponents.add(1, Component.literal(String.valueOf(stack.getCapability(Capabilities.FluidHandler.ITEM).getTankCapacity(0))));
+        tooltipComponents.add(1, Component.literal(String.valueOf(stack.getCapability(Capabilities.FluidHandler.ITEM).getTankCapacity(0)) + "mb / 2000 mb"));
+        tooltipComponents.add(2, Component.translatable("model_" + String.valueOf(stack.get(daiDataComponentTypes.WATER_BOW_MODEL))));
     }
 
     public static IClientItemExtensions iClientItemExtensions = new IClientItemExtensions() {
@@ -157,7 +162,7 @@ public class WaterBow extends Item {
                 poseStack.translate((float)k * 0.56F, -0.52F + equipProcess * -0.6F, -0.72F);
                 poseStack.translate((float) k * -0.5085682F, 0.18344387F, 0.15731531F);
                 poseStack.mulPose(Axis.XP.rotationDegrees(0F));
-                poseStack.mulPose(Axis.YP.rotationDegrees(k * -22.5F));
+                poseStack.mulPose(Axis.YP.rotationDegrees(k * -20F));
                 poseStack.mulPose(Axis.ZP.rotationDegrees(k * 45F));
                 float f8 = (float)stack.getUseDuration(player) - ((float)player.getUseItemRemainingTicks() - partialTicks + 1.0F);
                 float f12 = f8 / 20.0F;
