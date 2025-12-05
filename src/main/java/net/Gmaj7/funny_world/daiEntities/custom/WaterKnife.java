@@ -22,6 +22,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import org.joml.Vector3f;
 
 public class WaterKnife extends WaterBowShoot{
+    public static int maxTime = 20;
     public WaterKnife(EntityType<? extends WaterBowShoot> entityType, Level level) {
         super(entityType, level);
         this.pickup = Pickup.DISALLOWED;
@@ -47,6 +48,12 @@ public class WaterKnife extends WaterBowShoot{
     }
 
     @Override
+    public void tick() {
+        if(this.tickCount >= maxTime) this.discard();
+        super.tick();
+    }
+
+    @Override
     protected void onHitEntity(EntityHitResult result) {
         this.playSound(this.getHitGroundSoundEvent(), 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
         Entity entity = result.getEntity();
@@ -55,7 +62,6 @@ public class WaterKnife extends WaterBowShoot{
             ((ServerLevel)level()).sendParticles(new DustParticleOptions(new Vector3f((float) 0xAF / 0xFF, (float) 0xEE / 0xFF, (float) 0xEE / 0xFF), 1.0F), result.getLocation().x() + level().random.nextDouble(), (result.getLocation().y() + 1), result.getLocation().z() + level().random.nextDouble(),
                     15, level().random.nextFloat() - 0.5, level().random.nextFloat() - 0.5, level().random.nextFloat() - 0.5, 1.0);
         }
-        this.discard();
     }
 
     @Override

@@ -90,5 +90,12 @@ public class daiRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('b', Items.EGG)
                 .define('c', Items.NETHER_STAR)
                 .unlockedBy("has_star", has(Items.NETHER_STAR)).save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, daiItems.WATER_BOW.get())
+                .pattern(" ab")
+                .pattern("a b")
+                .pattern(" ab")
+                .define('a', Items.POTION)
+                .define('b', Items.STRING)
+                .unlockedBy("has_potion", has(Items.POTION)).save(recipeOutput);
     }
 }

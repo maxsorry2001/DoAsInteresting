@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "a": {
+      "item": "minecraft:potion"
+    },
+    "b": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    " ab",
+    "a b",
+    " ab"
+  ],
+  "result": {
+    "count": 1,
+    "id": "funny_world:water_bow"
+  }
+}

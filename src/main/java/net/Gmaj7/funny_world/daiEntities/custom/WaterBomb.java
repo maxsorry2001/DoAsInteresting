@@ -73,6 +73,7 @@ public class WaterBomb extends WaterBowShoot{
     protected void onHitEntity(EntityHitResult result) {
         Entity target = result.getEntity();
         if(!level().isClientSide() && target instanceof LivingEntity){
+            this.playSound(this.getHitGroundSoundEvent(), 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
             target.hurt(new DamageSource(daiFunctions.getHolder(level(), Registries.DAMAGE_TYPE, DamageTypes.MAGIC), getOwner()),directDamage);
             List<LivingEntity> list = level().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(3));
             list.remove(target);
@@ -88,6 +89,7 @@ public class WaterBomb extends WaterBowShoot{
 
     @Override
     protected void onHitBlock(BlockHitResult result) {
+        this.playSound(this.getHitGroundSoundEvent(), 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
         if(!level().isClientSide()){
             List<LivingEntity> list = level().getEntitiesOfClass(LivingEntity.class, new AABB(result.getBlockPos()).inflate(3));
             if(getOwner() != null && list.equals(getOwner())) list.remove(getOwner());

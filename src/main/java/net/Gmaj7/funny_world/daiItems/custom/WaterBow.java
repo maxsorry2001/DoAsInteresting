@@ -10,8 +10,11 @@ import net.Gmaj7.funny_world.daiInit.daiFunctions;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -43,6 +46,7 @@ import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
 
 import java.util.List;
 
@@ -87,11 +91,13 @@ public class WaterBow extends Item {
             Entity entity = ((EntityHitResult) hitResult).getEntity();
             if(entity instanceof LivingEntity && remainingUseDuration % 10 == 0) {
                 if(!((LivingEntity) entity).hasEffect(daiMobEffects.DROWN)) ((LivingEntity) entity).addEffect(new MobEffectInstance(daiMobEffects.DROWN, 200), livingEntity);
-                else entity.hurt(new DamageSource(daiFunctions.getHolder(level, Registries.DAMAGE_TYPE, DamageTypes.DROWN), livingEntity), 1);
+                else ((LivingEntity) entity).addEffect(new MobEffectInstance(daiMobEffects.DROWN, 200, ((LivingEntity) entity).getEffect(daiMobEffects.DROWN).getAmplifier() + 1), livingEntity);
+                if(!level.isClientSide()) ((ServerLevel)level).sendParticles(new DustParticleOptions(new Vector3f((float) 0xAF / 0xFF, (float) 0xEE / 0xFF, (float) 0xEE / 0xFF), 1.0F), livingEntity.getX(), livingEntity.getEyeY(), livingEntity.getZ(), 10, livingEntity.level().random.nextFloat() - 0.5, livingEntity.level().random.nextFloat() - 0.5, livingEntity.level().random.nextFloat() - 0.5, 1.0);
+                IFluidHandler iFluidHandler = stack.getCapability(Capabilities.FluidHandler.ITEM);
+                iFluidHandler.drain(new FluidStack(Fluids.WATER, 20), IFluidHandler.FluidAction.EXECUTE);
+                if(iFluidHandler.getFluidInTank(0).getAmount() < 20) livingEntity.stopUsingItem();
             }
         }
-        IFluidHandler iFluidHandler = stack.getCapability(Capabilities.FluidHandler.ITEM);
-        iFluidHandler.drain(new FluidStack(Fluids.WATER, 2), IFluidHandler.FluidAction.EXECUTE);
     }
 
     @Override
@@ -108,6 +114,7 @@ public class WaterBow extends Item {
         else {
             itemstack.getCapability(Capabilities.FluidHandler.ITEM).fill(new FluidStack(Fluids.WATER, 1000), IFluidHandler.FluidAction.EXECUTE);
             level.setBlockAndUpdate(blockhitresult.getBlockPos(), Blocks.AIR.defaultBlockState());
+            pPlayer.playSound(SoundEvents.BUCKET_FILL);
             return InteractionResultHolder.success(itemstack);
         }
     }
@@ -145,7 +152,7 @@ public class WaterBow extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        tooltipComponents.add(1, Component.literal(String.valueOf(stack.getCapability(Capabilities.FluidHandler.ITEM).getTankCapacity(0)) + "mb / 2000 mb"));
+        tooltipComponents.add(1, Component.literal(String.valueOf(stack.getCapability(Capabilities.FluidHandler.ITEM).getFluidInTank(0).getAmount()) + "mb / 2000 mb"));
         tooltipComponents.add(2, Component.translatable("model_" + String.valueOf(stack.get(daiDataComponentTypes.WATER_BOW_MODEL))));
     }
 
@@ -159,11 +166,27 @@ public class WaterBow extends Item {
         public boolean applyForgeHandTransform(PoseStack poseStack, LocalPlayer player, HumanoidArm arm, ItemStack stack, float partialTicks, float equipProcess, float swingProcess) {
             int k = arm == HumanoidArm.RIGHT ? 1 : -1;
             if(player.isUsingItem() && player.getUseItem().is(stack.getItem())) {
+                int type = stack.get(daiDataComponentTypes.WATER_BOW_MODEL);
+                float dx, rz;
+                switch (type){
+                    case 0 -> {
+                        dx = k * -0.5885682F;
+                        rz = k * 25F;
+                    }
+                    case 1 -> {
+                        dx = k * -0.5085682F;
+                        rz = k * 45F;
+                    }
+                    default -> {
+                        dx = k * -0.4485682F;
+                        rz = k * 90;
+                    }
+                }
                 poseStack.translate((float)k * 0.56F, -0.52F + equipProcess * -0.6F, -0.72F);
-                poseStack.translate((float) k * -0.5085682F, 0.18344387F, 0.15731531F);
+                poseStack.translate(dx, 0.18344387F, 0.15731531F);
                 poseStack.mulPose(Axis.XP.rotationDegrees(0F));
                 poseStack.mulPose(Axis.YP.rotationDegrees(k * -20F));
-                poseStack.mulPose(Axis.ZP.rotationDegrees(k * 45F));
+                poseStack.mulPose(Axis.ZP.rotationDegrees(rz));
                 float f8 = (float)stack.getUseDuration(player) - ((float)player.getUseItemRemainingTicks() - partialTicks + 1.0F);
                 float f12 = f8 / 20.0F;
                 f12 = (f12 * f12 + f12 * 2.0F) / 3.0F;
