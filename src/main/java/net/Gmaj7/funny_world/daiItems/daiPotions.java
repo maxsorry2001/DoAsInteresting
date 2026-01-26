@@ -14,6 +14,8 @@ public class daiPotions {
 
     public static final Holder<Potion> GENE_MUTATION_POTION = DAI_POTIONS.register("gene_mutation_potion",
             () -> new Potion(new MobEffectInstance(daiMobEffects.GENE_MUTATION, 3000)));
+    public static final Holder<Potion> ECHO = DAI_POTIONS.register("echo",
+            () -> new Potion(new MobEffectInstance(daiMobEffects.ECHO, 3000)));
 
     public static void register(IEventBus eventBus){
         DAI_POTIONS.register(eventBus);

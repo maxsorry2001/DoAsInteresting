@@ -16,5 +16,6 @@ public class PotionBrewingDispose {
     public static void brewing(RegisterBrewingRecipesEvent event){
         PotionBrewing.Builder builder = event.getBuilder();
         builder.addMix(Potions.POISON, Items.GOLD_INGOT, daiPotions.GENE_MUTATION_POTION);
+        builder.addMix(Potions.AWKWARD, Items.ECHO_SHARD, daiPotions.ECHO);
     }
 }
