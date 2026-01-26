@@ -8,6 +8,7 @@ import net.Gmaj7.funny_world.daiInit.daiDataComponentTypes;
 import net.Gmaj7.funny_world.daiInit.daiTiers;
 import net.Gmaj7.funny_world.daiItems.custom.*;
 import net.Gmaj7.funny_world.daiSounds.daiJukeboxSongs;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.*;
 import net.neoforged.neoforge.fluids.SimpleFluidContent;
@@ -25,7 +26,13 @@ public class daiItems {
             () -> new MahjongItem(new Item.Properties().stacksTo(1).durability(108).component(daiDataComponentTypes.MAHJONG_PATTERN, 0).component(daiDataComponentTypes.MAHJONG_POINTS, 0)));
 
     public static final Supplier<Item> BASS_GUITAR = DAI_ITEMS.register("bass_guitar",
-            () -> new BassGuitar(new Item.Properties().stacksTo(1)));
+            () -> new MusicalInstrument(SoundEvents.NOTE_BLOCK_BASS, new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> GUITAR = DAI_ITEMS.register("guitar",
+            () -> new MusicalInstrument(SoundEvents.NOTE_BLOCK_GUITAR, new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> PLING = DAI_ITEMS.register("pline",
+            () -> new MusicalInstrument(SoundEvents.NOTE_BLOCK_PLING, new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> FLUTE = DAI_ITEMS.register("flute",
+            () -> new MusicalInstrument(SoundEvents.NOTE_BLOCK_FLUTE, new Item.Properties().stacksTo(1)));
 
     public static final Supplier<Item> BLUE_ICE_BOOTS = DAI_ITEMS.register("blue_ice_boots",
             () -> new ArmorItem(daiArmorMaterials.BLUE_ICE, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).durability(128)));

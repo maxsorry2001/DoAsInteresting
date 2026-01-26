@@ -62,7 +62,7 @@ public class FunnyWorldTabs {
                         pOutput.accept(daiBlocks.WIND_TNT.get());
                         pOutput.accept(daiBlocks.LAVA_CHICKEN_CORE.get());
 
-                        pOutput.accept(daiItems.PARALLEL_PLATE.get());
+                        //pOutput.accept(daiItems.PARALLEL_PLATE.get());
 
                         pOutput.accept(daiItems.OAK_ICE_BOAT.get());
                         pOutput.accept(daiItems.SPRUCE_ICE_BOAT.get());
@@ -76,5 +76,7 @@ public class FunnyWorldTabs {
 
                         pOutput.accept(daiItems.EXTRACTANT_FLUID_BUCKET.get());
                         pOutput.accept(daiItems.WATER_BOW.get());
+
+                        pOutput.accept(daiItems.BASS_GUITAR.get());
                     }).build());
 }
