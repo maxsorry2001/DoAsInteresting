@@ -59,23 +59,23 @@ public class TickDispose {
     @SubscribeEvent
     public static void EntityTickPreDeal(EntityTickEvent.Pre event){
         Entity target = event.getEntity();
-        if(target instanceof Player player){
-            int humanity = ((daiUniqueDataGet)player).getHumanitySet().getHumanity();
-            if(player.tickCount % 100 == 0){
-                if (humanity < 0) {
-                    player.hurt(new DamageSource(daiFunctions.getHolder(player.level(), Registries.DAMAGE_TYPE, DamageTypes.OUTSIDE_BORDER)), (0.5F * (-humanity + 25)) / 25);
-                    if(!player.hasEffect(MobEffects.RAID_OMEN))
-                        player.addEffect(new MobEffectInstance(MobEffects.BAD_OMEN, 400));
-                    player.removeEffect(MobEffects.HERO_OF_THE_VILLAGE);
-                }
-                else if (humanity > 100) {
-                    player.heal( (humanity - 75) / 25);
-                    player.addEffect(new MobEffectInstance(MobEffects.HERO_OF_THE_VILLAGE, 400, 4));
-                    player.removeEffect(MobEffects.BAD_OMEN);
-                    player.removeEffect(MobEffects.RAID_OMEN);
-                }
-            }
-        }
+        //if(target instanceof Player player){
+        //    int humanity = ((daiUniqueDataGet)player).getHumanitySet().getHumanity();
+        //    if(player.tickCount % 100 == 0){
+        //        if (humanity < 0) {
+        //            player.hurt(new DamageSource(daiFunctions.getHolder(player.level(), Registries.DAMAGE_TYPE, DamageTypes.OUTSIDE_BORDER)), (0.5F * (-humanity + 25)) / 25);
+        //            if(!player.hasEffect(MobEffects.RAID_OMEN))
+        //                player.addEffect(new MobEffectInstance(MobEffects.BAD_OMEN, 400));
+        //            player.removeEffect(MobEffects.HERO_OF_THE_VILLAGE);
+        //        }
+        //        else if (humanity > 100) {
+        //            player.heal( (humanity - 75) / 25);
+        //            player.addEffect(new MobEffectInstance(MobEffects.HERO_OF_THE_VILLAGE, 400, 4));
+        //            player.removeEffect(MobEffects.BAD_OMEN);
+        //            player.removeEffect(MobEffects.RAID_OMEN);
+        //        }
+        //    }
+        //}
         if(target instanceof LivingEntity entity){
             if(entity.isInFluidType(daiFluidTypes.EXTRACTANT_FLUID.get()) && entity.level().getServer() != null & entity.tickCount % 20 == 0){
                 if(entity.getType().is(EntityTypeTags.ILLAGER) || entity instanceof Villager){
