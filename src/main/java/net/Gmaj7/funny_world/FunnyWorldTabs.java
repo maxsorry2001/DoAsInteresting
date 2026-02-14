@@ -78,5 +78,9 @@ public class FunnyWorldTabs {
                         pOutput.accept(daiItems.WATER_BOW.get());
 
                         pOutput.accept(daiItems.BASS_GUITAR.get());
-                    }).build());
-}
+                        pOutput.accept(daiItems.GUITAR.get());
+                        pOutput.accept(daiItems.PLING.get());
+                        pOutput.accept(daiItems.FLUTE.get());
+                        pOutput.accept(daiItems.HARP.get());
+        }).build());
+        }

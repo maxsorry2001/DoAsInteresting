@@ -3,6 +3,7 @@ package net.Gmaj7.funny_world.daiInit;
 import net.Gmaj7.funny_world.FunnyWorld;
 import net.Gmaj7.funny_world.daiInit.daiUniqueData.HumanitySet;
 import net.Gmaj7.funny_world.daiInit.daiUniqueData.daiUniqueDataGet;
+import net.Gmaj7.funny_world.daiItems.custom.MusicalInstrument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -145,6 +146,37 @@ public class daiPackets {
                 if (context.player() instanceof ServerPlayer serverPlayer){
                     ItemStack itemStack = serverPlayer.getItemInHand(packet.hand);
                     itemStack.set(daiDataComponentTypes.WATER_BOW_MODEL, (itemStack.get(daiDataComponentTypes.WATER_BOW_MODEL) + 1) % 3);
+                }
+            });
+        }
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
+    public static class musicalInstrumentPacket implements CustomPacketPayload {
+        int note;
+
+        public static final CustomPacketPayload.Type<musicalInstrumentPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "musical_instrument_packet"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, musicalInstrumentPacket> STREAM_CODEC = CustomPacketPayload.codec(musicalInstrumentPacket::write, musicalInstrumentPacket::new);
+
+        public musicalInstrumentPacket(int note){
+            this.note = note;
+        }
+
+        public musicalInstrumentPacket(FriendlyByteBuf buf){
+            this.note = buf.readInt();
+        }
+
+        public void write(FriendlyByteBuf buf){
+            buf.writeInt(note);
+        }
+
+        public static void handle(musicalInstrumentPacket packet, IPayloadContext context){
+            context.enqueueWork(() -> {
+                if (context.player() instanceof ServerPlayer serverPlayer && serverPlayer.getMainHandItem().getItem() instanceof MusicalInstrument musicalInstrument){
+                    musicalInstrument.playSound(serverPlayer.level(), serverPlayer, packet.note);
                 }
             });
         }

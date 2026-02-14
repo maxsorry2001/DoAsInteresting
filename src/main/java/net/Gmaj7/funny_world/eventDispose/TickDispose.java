@@ -1,5 +1,9 @@
 package net.Gmaj7.funny_world.eventDispose;
 
+import static org.lwjgl.glfw.GLFW.*;
+
+import it.unimi.dsi.fastutil.ints.Int2IntMap;
+import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
 import net.Gmaj7.funny_world.FunnyWorld;
 import net.Gmaj7.funny_world.daiBlocks.daiBlocks;
 import net.Gmaj7.funny_world.daiEffects.daiMobEffects;
@@ -7,8 +11,11 @@ import net.Gmaj7.funny_world.daiEnchantments.daiEnchantments;
 import net.Gmaj7.funny_world.daiFluids.daiFluidTypes;
 import net.Gmaj7.funny_world.daiInit.*;
 import net.Gmaj7.funny_world.daiInit.daiUniqueData.daiUniqueDataGet;
+import net.Gmaj7.funny_world.daiItems.custom.MusicalInstrument;
 import net.Gmaj7.funny_world.daiItems.daiItems;
+import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.Options;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -43,6 +50,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ComputeFovModifierEvent;
+import net.neoforged.neoforge.client.event.InputEvent;
 import net.neoforged.neoforge.client.event.RenderHandEvent;
 import net.neoforged.neoforge.client.event.RenderLivingEvent;
 import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
@@ -56,6 +64,37 @@ import java.util.Random;
 
 @EventBusSubscriber(modid = FunnyWorld.MODID)
 public class TickDispose {
+    private static final Int2IntMap KEY_TO_NOTE = new Int2IntOpenHashMap();
+    static {
+        // 第一八度 (音阶 1-12，F♯3～F4)
+        KEY_TO_NOTE.put(GLFW_KEY_Z, 1);   // F♯3
+        KEY_TO_NOTE.put(GLFW_KEY_S, 2);   // G3
+        KEY_TO_NOTE.put(GLFW_KEY_X, 3);   // G♯3
+        KEY_TO_NOTE.put(GLFW_KEY_D, 4);   // A3
+        KEY_TO_NOTE.put(GLFW_KEY_C, 5);   // A♯3
+        KEY_TO_NOTE.put(GLFW_KEY_V, 6);   // B3
+        KEY_TO_NOTE.put(GLFW_KEY_G, 7);   // C4
+        KEY_TO_NOTE.put(GLFW_KEY_B, 8);   // C♯4
+        KEY_TO_NOTE.put(GLFW_KEY_H, 9);   // D4
+        KEY_TO_NOTE.put(GLFW_KEY_N, 10);  // D♯4
+        KEY_TO_NOTE.put(GLFW_KEY_J, 11);  // E4
+        KEY_TO_NOTE.put(GLFW_KEY_M, 12);  // F4
+
+        // 第二八度 (音阶 13-24，F♯4～F5)
+        KEY_TO_NOTE.put(GLFW_KEY_W, 13);  // F♯4
+        KEY_TO_NOTE.put(GLFW_KEY_3, 14);  // G4
+        KEY_TO_NOTE.put(GLFW_KEY_E, 15);  // G♯4
+        KEY_TO_NOTE.put(GLFW_KEY_4, 16);  // A4
+        KEY_TO_NOTE.put(GLFW_KEY_R, 17);  // A♯4
+        KEY_TO_NOTE.put(GLFW_KEY_T, 18);  // B4
+        KEY_TO_NOTE.put(GLFW_KEY_6, 19);  // C5
+        KEY_TO_NOTE.put(GLFW_KEY_Y, 20);  // C♯5
+        KEY_TO_NOTE.put(GLFW_KEY_7, 21);  // D5
+        KEY_TO_NOTE.put(GLFW_KEY_U, 22);  // D♯5
+        KEY_TO_NOTE.put(GLFW_KEY_8, 23);  // E5
+        KEY_TO_NOTE.put(GLFW_KEY_I, 24);  // F5
+        KEY_TO_NOTE.put(GLFW_KEY_9, 25);  // F#5
+    }
     @SubscribeEvent
     public static void EntityTickPreDeal(EntityTickEvent.Pre event){
         Entity target = event.getEntity();
@@ -254,6 +293,19 @@ public class TickDispose {
                 else f1 *= f1;
                 event.setNewFovModifier(1.0F - f1 * 0.15F);
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void InputEvent(InputEvent.Key event){
+        Player player = Minecraft.getInstance().player;
+        if(player != null && event.getKey() != GLFW_KEY_Q && event.getKey() != GLFW_KEY_SLASH && player.getMainHandItem().getItem() instanceof MusicalInstrument musicalInstrument) {
+            for (KeyMapping keyMapping : Minecraft.getInstance().options.keyMappings) {
+                keyMapping.consumeClick();
+                keyMapping.setDown(false);
+            }
+            if(KEY_TO_NOTE.containsKey(event.getKey()) && event.getAction() == GLFW_PRESS)
+                PacketDistributor.sendToServer(new daiPackets.musicalInstrumentPacket(KEY_TO_NOTE.get(event.getKey())));
         }
     }
 }

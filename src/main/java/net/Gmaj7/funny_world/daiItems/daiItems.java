@@ -33,6 +33,8 @@ public class daiItems {
             () -> new MusicalInstrument(SoundEvents.NOTE_BLOCK_PLING, new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> FLUTE = DAI_ITEMS.register("flute",
             () -> new MusicalInstrument(SoundEvents.NOTE_BLOCK_FLUTE, new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> HARP = DAI_ITEMS.register("harp",
+            () -> new MusicalInstrument(SoundEvents.NOTE_BLOCK_HARP, new Item.Properties().stacksTo(1)));
 
     public static final Supplier<Item> BLUE_ICE_BOOTS = DAI_ITEMS.register("blue_ice_boots",
             () -> new ArmorItem(daiArmorMaterials.BLUE_ICE, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).durability(128)));

@@ -54,13 +54,11 @@ public class MusicalInstrument extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
-        int note = level.random.nextInt(24) + 1;
-        playSound(level, player, note);
         return super.use(level, player, usedHand);
     }
 
     public void playSound(Level level, Player player, int note){
-        level.playSeededSound(player, player.getX(), player.getY(), player.getZ(), instrument, SoundSource.PLAYERS, 3, NoteBlock.getPitchFromNote(note), level.random.nextLong());
+        level.playSeededSound(null, player.getX(), player.getY(), player.getZ(), instrument, SoundSource.PLAYERS, 3, NoteBlock.getPitchFromNote(note), level.random.nextLong());
         if (player.hasEffect(daiFunctions.getHolder(level, Registries.MOB_EFFECT, daiMobEffects.ECHO.getKey()))){
             dealEcho(level, player, note);
         }
