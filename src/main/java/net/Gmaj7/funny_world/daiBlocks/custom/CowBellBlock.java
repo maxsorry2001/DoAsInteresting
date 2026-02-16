@@ -6,15 +6,15 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.BaseEntityBlock;
 
-public class SnareBlock extends DrumBlock{
-    public static final MapCodec<SnareBlock> CODEC = simpleCodec(SnareBlock::new);
-    public SnareBlock(Properties properties) {
+public class CowBellBlock extends DrumBlock{
+    public static final MapCodec<CowBellBlock> CODEC = simpleCodec(CowBellBlock::new);
+    public CowBellBlock(Properties properties) {
         super(properties);
     }
 
     @Override
     public Holder.Reference<SoundEvent> getSound() {
-        return SoundEvents.NOTE_BLOCK_SNARE;
+        return SoundEvents.NOTE_BLOCK_COW_BELL;
     }
 
     @Override

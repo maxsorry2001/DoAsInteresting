@@ -22,6 +22,8 @@ public class daiDataLoadHandler {
         payloadRegistrar.playToServer(daiPackets.daiIceBoatPacket.TYPE, daiPackets.daiIceBoatPacket.STREAM_CODEC, daiPackets.daiIceBoatPacket::handle);
         payloadRegistrar.playToServer(daiPackets.daiWaterBowPacket.TYPE, daiPackets.daiWaterBowPacket.STREAM_CODEC, daiPackets.daiWaterBowPacket::handle);
         payloadRegistrar.playToServer(daiPackets.musicalInstrumentPacket.TYPE, daiPackets.musicalInstrumentPacket.STREAM_CODEC, daiPackets.musicalInstrumentPacket::handle);
+        payloadRegistrar.playToServer(daiPackets.drumPlayPacket.TYPE, daiPackets.drumPlayPacket.STREAM_CODEC, daiPackets.drumPlayPacket::handle);
+        payloadRegistrar.playToServer(daiPackets.drumBlockSetPacket.TYPE, daiPackets.drumBlockSetPacket.STREAM_CODEC, daiPackets.drumBlockSetPacket::handle);
 
         payloadRegistrar.playToClient(daiPackets.daiHumanityPacket.TYPE, daiPackets.daiHumanityPacket.STREAM_CODEC, daiPackets.daiHumanityPacket::handle);
     }

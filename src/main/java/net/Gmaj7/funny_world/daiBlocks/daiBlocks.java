@@ -37,4 +37,10 @@ public class daiBlocks {
             () -> new GlowTNT(BlockBehaviour.Properties.of().lightLevel(p -> 15)));
     public static final DeferredBlock<Block> BASS_DRUM = DAI_BLOCKS.register("bass_drum",
             () -> new BaseDrumBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).sound(SoundType.SCULK_SENSOR)));
+    public static final DeferredBlock<Block> SNARE = DAI_BLOCKS.register("snare",
+            () -> new SnareBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).sound(SoundType.SCULK_SENSOR)));
+    public static final DeferredBlock<Block> HAT = DAI_BLOCKS.register("snare",
+            () -> new HatBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).sound(SoundType.SCULK_SENSOR)));
+    public static final DeferredBlock<Block> COW_BELL = DAI_BLOCKS.register("snare",
+            () -> new CowBellBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).sound(SoundType.SCULK_SENSOR)));
 }

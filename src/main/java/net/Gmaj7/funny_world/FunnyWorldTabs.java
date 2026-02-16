@@ -82,6 +82,10 @@ public class FunnyWorldTabs {
                         pOutput.accept(daiItems.PLING.get());
                         pOutput.accept(daiItems.FLUTE.get());
                         pOutput.accept(daiItems.HARP.get());
+                        pOutput.accept(daiItems.DRUM_STICK.get());
                         pOutput.accept(daiBlocks.BASS_DRUM.get());
+                        pOutput.accept(daiBlocks.SNARE.get());
+                        pOutput.accept(daiBlocks.HAT.get());
+                        pOutput.accept(daiBlocks.COW_BELL.get());
         }).build());
         }

@@ -1,6 +1,7 @@
 package net.Gmaj7.funny_world.daiInit;
 
 import net.Gmaj7.funny_world.FunnyWorld;
+import net.Gmaj7.funny_world.daiBlocks.blockEntity.DrumBlockEntity;
 import net.Gmaj7.funny_world.daiInit.daiUniqueData.HumanitySet;
 import net.Gmaj7.funny_world.daiInit.daiUniqueData.daiUniqueDataGet;
 import net.Gmaj7.funny_world.daiItems.custom.MusicalInstrument;
@@ -177,6 +178,76 @@ public class daiPackets {
             context.enqueueWork(() -> {
                 if (context.player() instanceof ServerPlayer serverPlayer && serverPlayer.getMainHandItem().getItem() instanceof MusicalInstrument musicalInstrument){
                     musicalInstrument.playSound(serverPlayer.level(), serverPlayer, packet.note);
+                }
+            });
+        }
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
+    public static class drumBlockSetPacket implements CustomPacketPayload {
+        BlockPos blockPos;
+        int key;
+
+        public static final CustomPacketPayload.Type<drumBlockSetPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "drum_set_packet"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, drumBlockSetPacket> STREAM_CODEC = CustomPacketPayload.codec(drumBlockSetPacket::write, drumBlockSetPacket::new);
+
+        public drumBlockSetPacket(BlockPos blockPos, int key){
+            this.blockPos = blockPos;
+            this.key = key;
+        }
+
+        public drumBlockSetPacket(FriendlyByteBuf buf){
+            this.blockPos = buf.readBlockPos();
+            this.key = buf.readInt();
+        }
+
+        public void write(FriendlyByteBuf buf){
+            buf.writeBlockPos(blockPos);
+            buf.writeInt(key);
+        }
+
+        public static void handle(drumBlockSetPacket packet, IPayloadContext context){
+            context.enqueueWork(() -> {
+                if (context.player() instanceof ServerPlayer serverPlayer){
+                    ((DrumBlockEntity)serverPlayer.level().getBlockEntity(packet.blockPos)).putKeyMapping(packet.key, packet.blockPos);
+                }
+            });
+        }
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
+    public static class drumPlayPacket implements CustomPacketPayload {
+        BlockPos blockPos;
+        int key;
+
+        public static final CustomPacketPayload.Type<drumPlayPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(FunnyWorld.MODID, "drum_play_packet"));
+        public static final StreamCodec<RegistryFriendlyByteBuf, drumPlayPacket> STREAM_CODEC = CustomPacketPayload.codec(drumPlayPacket::write, drumPlayPacket::new);
+
+        public drumPlayPacket(BlockPos blockPos, int key){
+            this.blockPos = blockPos;
+            this.key = key;
+        }
+
+        public drumPlayPacket(FriendlyByteBuf buf){
+            this.blockPos = buf.readBlockPos();
+            this.key = buf.readInt();
+        }
+
+        public void write(FriendlyByteBuf buf){
+            buf.writeBlockPos(blockPos);
+            buf.writeInt(key);
+        }
+
+        public static void handle(drumPlayPacket packet, IPayloadContext context){
+            context.enqueueWork(() -> {
+                if (context.player() instanceof ServerPlayer serverPlayer){
+                    ((DrumBlockEntity)serverPlayer.level().getBlockEntity(packet.blockPos)).playSound(packet.key);
                 }
             });
         }

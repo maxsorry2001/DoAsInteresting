@@ -1,15 +1,21 @@
 package net.Gmaj7.funny_world.daiBlocks.custom;
 
 import net.Gmaj7.funny_world.daiBlocks.blockEntity.DrumBlockEntity;
+import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
@@ -96,6 +102,15 @@ public abstract class DrumBlock extends BaseEntityBlock {
             }
         }
         super.onRemove(state, level, pos, newState, movedByPiston);
+    }
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if(!stack.is(daiItems.DRUM_STICK.get()) || level.isClientSide()) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if(!(blockEntity instanceof DrumBlockEntity drumBlockEntity)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        drumBlockEntity.setNote((drumBlockEntity.getNote() + 1) % 25);
+        return ItemInteractionResult.SUCCESS;
     }
 
     public abstract Holder.Reference<SoundEvent> getSound();

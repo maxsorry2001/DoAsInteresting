@@ -10,6 +10,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.level.block.NoteBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -22,6 +24,7 @@ public class DrumBlockEntity extends BlockEntity {
     protected int note = 1;
     private final Map<BlockPos, Set<BlockPos>> adjacency = new HashMap<>();
     public final Map<BlockPos, Integer> memberNotes = new HashMap<>();
+    public final Map<Integer, BlockPos> keyMappings = new HashMap<>();
     public DrumBlockEntity(BlockPos pos, BlockState blockState) {
         super(daiBlockEntities.DRUM_BE.get(), pos, blockState);
     }
@@ -71,6 +74,9 @@ public class DrumBlockEntity extends BlockEntity {
                 if (nbSet != null) nbSet.remove(memberPos);
             }
         }
+        if(keyMappings.containsValue(memberPos)){
+            keyMappings.values().removeIf(v -> v.equals(memberPos));
+        }
         setChanged();
     }
 
@@ -107,6 +113,10 @@ public class DrumBlockEntity extends BlockEntity {
 
         // 现在需要重建所有邻接关系（因为成员位置变了）
         rebuildAdjacency();
+
+        for (var entry : otherCore.keyMappings.entrySet()) {
+            keyMappings.putIfAbsent(entry.getKey(), entry.getValue());
+        }
 
         setChanged();
     }
@@ -146,6 +156,7 @@ public class DrumBlockEntity extends BlockEntity {
         }
         // 新核心自身的音高要从 memberNotes 中取
         newCore.note = memberNotes.get(newCore.worldPosition);
+        newCore.keyMappings.putAll(this.keyMappings);
 
         // 重建邻接
         newCore.rebuildAdjacency();
@@ -199,66 +210,71 @@ public class DrumBlockEntity extends BlockEntity {
         return components;
     }
     public void checkSplit() {
-        if (!isCore) return;
-        if (level == null || level.isClientSide) return;
+        if (!isCore || level == null || level.isClientSide) return;
 
         List<Set<BlockPos>> components = findConnectedComponents();
-        if (components.size() <= 1) return; // 未分裂
+        if (components.size() <= 1) return;
 
-        // 找到包含当前核心自身的分量作为主分量
-        Set<BlockPos> mainComponent = null;
-        for (Set<BlockPos> comp : components) {
-            if (comp.contains(worldPosition)) {
-                mainComponent = comp;
-                break;
-            }
-        }
-        if (mainComponent == null) {
-            // 不应该发生，核心自身不在任何分量中，说明数据异常，直接返回
-            return;
-        }
+        // 找到包含当前核心的分量
+        Set<BlockPos> mainComponent = components.stream()
+                .filter(c -> c.contains(worldPosition))
+                .findFirst().orElse(null);
+        if (mainComponent == null) return;
 
-        // 处理其他分量，为每个分量创建新鼓组
         for (Set<BlockPos> comp : components) {
             if (comp == mainComponent) continue;
+            createNewCoreFromComponent(comp);
+        }
 
-            // 选举新核心（选择分量中位置最小的方块）
-            BlockPos newCorePos = comp.stream().min(BlockPos::compareTo).orElse(null);
-            if (newCorePos == null) continue;
-            if (!(level.getBlockEntity(newCorePos) instanceof DrumBlockEntity newCore)) continue;
+        rebuildAdjacency();
+        setChanged();
+    }
 
-            // 升级为新核心
-            newCore.corePos = newCorePos;
-            newCore.isCore = true;
-            newCore.memberNotes.clear();
-            newCore.adjacency.clear();
+    private void createNewCoreFromComponent(Set<BlockPos> component) {
+        // 选举新核心（位置最小者）
+        BlockPos newCorePos = component.stream().min(BlockPos::compareTo).orElse(null);
+        if (newCorePos == null || !(level.getBlockEntity(newCorePos) instanceof DrumBlockEntity newCore)) return;
 
-            // 将该分量的成员数据复制到新核心
-            for (BlockPos p : comp) {
-                newCore.memberNotes.put(p, memberNotes.get(p));
-            }
-            // 更新这些成员的 corePos 指向新核心
-            for (BlockPos p : comp) {
-                if (!p.equals(newCorePos) && level.getBlockEntity(p) instanceof DrumBlockEntity member) {
-                    member.corePos = newCorePos;
-                    member.isCore = false;
-                    member.setChanged();
-                }
-            }
-            newCore.note = memberNotes.get(newCorePos);
-            newCore.rebuildAdjacency();
-            newCore.setChanged();
+        // 初始化新核心
+        newCore.corePos = newCorePos;
+        newCore.isCore = true;
+        newCore.memberNotes.clear();
+        newCore.adjacency.clear();
 
-            // 从当前核心中移除该分量的数据
-            for (BlockPos p : comp) {
-                memberNotes.remove(p);
-                adjacency.remove(p);
+        // 复制成员音高
+        for (BlockPos p : component) {
+            newCore.memberNotes.put(p, memberNotes.get(p));
+        }
+
+        // 更新成员核心引用（除自身外）
+        for (BlockPos p : component) {
+            if (!p.equals(newCorePos) && level.getBlockEntity(p) instanceof DrumBlockEntity member) {
+                member.corePos = newCorePos;
+                member.isCore = false;
+                member.setChanged();
             }
         }
 
-        // 重建当前核心的邻接表（因为移除了部分成员）
-        rebuildAdjacency();
-        setChanged();
+        newCore.note = memberNotes.get(newCorePos);
+        newCore.rebuildAdjacency();
+
+        // 转移按键映射
+        Iterator<Map.Entry<Integer, BlockPos>> it = keyMappings.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<Integer, BlockPos> entry = it.next();
+            if (component.contains(entry.getValue())) {
+                newCore.keyMappings.put(entry.getKey(), entry.getValue());
+                it.remove();
+            }
+        }
+
+        newCore.setChanged();
+
+        // 从当前核心移除该分量数据
+        for (BlockPos p : component) {
+            memberNotes.remove(p);
+            adjacency.remove(p);
+        }
     }
 
     @Nullable
@@ -286,32 +302,46 @@ public class DrumBlockEntity extends BlockEntity {
                 memberTagList.add(memberTag);
             }
             tag.put("members", memberTagList);
+            ListTag keyMappingList = new ListTag();
+            for (int i : keyMappings.keySet()) {
+                CompoundTag keyMapping = new CompoundTag();
+                keyMapping.putInt("key", i);
+                keyMapping.putLong("block_pos", keyMappings.get(i).asLong());
+                keyMappingList.add(keyMapping);
+            }
+            tag.put("key_mappings", keyMappingList);
         }
     }
 
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
-        if(level != null && !level.isClientSide()) {
-            this.corePos = BlockPos.of(tag.getLong("core_pos"));
-            this.isCore = tag.getBoolean("is_boolean");
-            this.note = tag.getInt("note");
-            ListTag memberLiseTag = tag.getList("members", Tag.TAG_COMPOUND);
-            Set<BlockPos> memberPoses = new HashSet<>();
-            for (int i = 0; i < memberLiseTag.size(); i++) {
-                CompoundTag memberTag = memberLiseTag.getCompound(i);
-                memberPoses.add(BlockPos.of(memberTag.getLong("pos")));
-                memberNotes.put(BlockPos.of(memberTag.getLong("pos")), memberTag.getInt("note"));
+        memberNotes.clear();
+        keyMappings.clear();
+        adjacency.clear();
+        this.corePos = BlockPos.of(tag.getLong("core_pos"));
+        this.isCore = tag.getBoolean("is_core");
+        this.note = tag.getInt("note");
+        ListTag memberLiseTag = tag.getList("members", Tag.TAG_COMPOUND);
+        ListTag keyMappingListTag = tag.getList("key_mappings", Tag.TAG_COMPOUND);
+        Set<BlockPos> memberPoses = new HashSet<>();
+        for (int i = 0; i < memberLiseTag.size(); i++) {
+            CompoundTag memberTag = memberLiseTag.getCompound(i);
+            memberPoses.add(BlockPos.of(memberTag.getLong("pos")));
+            memberNotes.put(BlockPos.of(memberTag.getLong("pos")), memberTag.getInt("note"));
+        }
+        for (int i = 0; i < keyMappingListTag.size(); i++){
+            CompoundTag keyMappingTag = keyMappingListTag.getCompound(i);
+            keyMappings.put(keyMappingTag.getInt("key"), BlockPos.of(keyMappingTag.getLong("block_pos")));
+        }
+        for (BlockPos blockPos : memberPoses) {
+            Set<BlockPos> neighbors = new HashSet<>();
+            for (Direction direction : Direction.values()) {
+                BlockPos neighbor = blockPos.relative(direction);
+                if (memberPoses.contains(neighbor))
+                    neighbors.add(neighbor);
             }
-            for (BlockPos blockPos : memberPoses) {
-                Set<BlockPos> neighbors = new HashSet<>();
-                for (Direction direction : Direction.values()) {
-                    BlockPos neighbor = blockPos.relative(direction);
-                    if (memberPoses.contains(neighbor))
-                        neighbors.add(neighbor);
-                }
-                adjacency.put(blockPos, neighbors);
-            }
+            adjacency.put(blockPos, neighbors);
         }
     }
 
@@ -327,13 +357,29 @@ public class DrumBlockEntity extends BlockEntity {
     }
 
     private Holder.Reference<SoundEvent> getSound(BlockPos blockPos){
-        BlockState blockState = getLevel().getBlockState(blockPos);
+        BlockState blockState = level.getBlockState(blockPos);
         if(blockState.getBlock() instanceof DrumBlock drumBlock) return drumBlock.getSound();
         else return null;
     }
 
-    @Override
-    public void setChanged() {
-        super.setChanged();
+    public void playSound(int key){
+        if(level.isClientSide()) return;
+        if(this.isCore) {
+            if(!keyMappings.containsKey(key)) return;
+            BlockPos blockPos = keyMappings.get(key);
+            level.playSeededSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(), getSound(blockPos), SoundSource.BLOCKS, 3, NoteBlock.getPitchFromNote(memberNotes.get(blockPos)), level.random.nextLong());
+        }
+        else ((DrumBlockEntity)level.getBlockEntity(getCorePos())).playSound(key);
+    }
+
+    public void putKeyMapping(int key, BlockPos blockPos){
+        if(level.isClientSide()) return;
+        if(this.isCore) {
+            keyMappings.values().removeIf(v -> v.equals(blockPos));
+            keyMappings.put(key, blockPos);
+        }
+        else {
+            ((DrumBlockEntity)level.getBlockEntity(getCorePos())).putKeyMapping(key, blockPos);
+        }
     }
 }

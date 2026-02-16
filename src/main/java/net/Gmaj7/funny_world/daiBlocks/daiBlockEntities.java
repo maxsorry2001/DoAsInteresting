@@ -23,7 +23,7 @@ public class daiBlockEntities {
                     LavaChickenCoreBE::new, daiBlocks.LAVA_CHICKEN_CORE.get()).build(null));
     public static final Supplier<BlockEntityType<DrumBlockEntity>> DRUM_BE =
             DAI_BLOCK_ENTITIES.register("drum_be", () -> BlockEntityType.Builder.of(
-                    DrumBlockEntity::new, daiBlocks.BASS_DRUM.get()).build(null));
+                    DrumBlockEntity::new, daiBlocks.BASS_DRUM.get(), daiBlocks.SNARE.get(), daiBlocks.COW_BELL.get(), daiBlocks.HAT.get()).build(null));
 
     public static void register(IEventBus eventBus){
         DAI_BLOCK_ENTITIES.register(eventBus);
