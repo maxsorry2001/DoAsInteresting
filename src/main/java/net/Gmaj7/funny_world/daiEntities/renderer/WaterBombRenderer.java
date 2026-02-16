@@ -2,7 +2,6 @@ package net.Gmaj7.funny_world.daiEntities.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
 import net.Gmaj7.funny_world.FunnyWorld;
 import net.Gmaj7.funny_world.daiEntities.custom.WaterBomb;
 import net.Gmaj7.funny_world.daiEntities.model.WaterBombModel;
@@ -11,7 +10,6 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 
 public class WaterBombRenderer extends EntityRenderer<WaterBomb> {
 

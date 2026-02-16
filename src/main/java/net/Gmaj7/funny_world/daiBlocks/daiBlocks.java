@@ -35,4 +35,6 @@ public class daiBlocks {
             () -> new AirBlock(BlockBehaviour.Properties.of().lightLevel(p -> 15).noOcclusion().noLootTable().replaceable().air()));
     public static final DeferredBlock<Block> GLOW_TNT = DAI_BLOCKS.register("glow_tnt",
             () -> new GlowTNT(BlockBehaviour.Properties.of().lightLevel(p -> 15)));
+    public static final DeferredBlock<Block> BASS_DRUM = DAI_BLOCKS.register("bass_drum",
+            () -> new BaseDrumBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).sound(SoundType.SCULK_SENSOR)));
 }

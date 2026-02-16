@@ -1,7 +1,5 @@
 package net.Gmaj7.funny_world.eventDispose;
 
-import static org.lwjgl.glfw.GLFW.*;
-
 import it.unimi.dsi.fastutil.ints.Int2IntMap;
 import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
 import net.Gmaj7.funny_world.FunnyWorld;
@@ -15,7 +13,6 @@ import net.Gmaj7.funny_world.daiItems.custom.MusicalInstrument;
 import net.Gmaj7.funny_world.daiItems.daiItems;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.Options;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -27,8 +24,6 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.GlowSquid;
@@ -60,6 +55,8 @@ import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.Random;
+
+import static org.lwjgl.glfw.GLFW.*;
 
 
 @EventBusSubscriber(modid = FunnyWorld.MODID)

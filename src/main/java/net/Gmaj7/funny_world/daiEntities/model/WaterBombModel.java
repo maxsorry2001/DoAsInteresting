@@ -8,14 +8,12 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.Gmaj7.funny_world.FunnyWorld;
 import net.Gmaj7.funny_world.daiEntities.animations.WaterBombAnimation;
 import net.Gmaj7.funny_world.daiEntities.custom.WaterBomb;
-import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
 
 public class WaterBombModel<T extends WaterBomb> extends HierarchicalModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor

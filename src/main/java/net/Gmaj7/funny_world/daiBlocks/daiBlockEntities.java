@@ -1,6 +1,7 @@
 package net.Gmaj7.funny_world.daiBlocks;
 
 import net.Gmaj7.funny_world.FunnyWorld;
+import net.Gmaj7.funny_world.daiBlocks.blockEntity.DrumBlockEntity;
 import net.Gmaj7.funny_world.daiBlocks.blockEntity.HoneyFloorBlockEntity;
 import net.Gmaj7.funny_world.daiBlocks.blockEntity.LavaChickenCoreBE;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -20,6 +21,9 @@ public class daiBlockEntities {
     public static final Supplier<BlockEntityType<LavaChickenCoreBE>> LAVA_CHICKEN_BE =
             DAI_BLOCK_ENTITIES.register("lava_chicken_be", () -> BlockEntityType.Builder.of(
                     LavaChickenCoreBE::new, daiBlocks.LAVA_CHICKEN_CORE.get()).build(null));
+    public static final Supplier<BlockEntityType<DrumBlockEntity>> DRUM_BE =
+            DAI_BLOCK_ENTITIES.register("drum_be", () -> BlockEntityType.Builder.of(
+                    DrumBlockEntity::new, daiBlocks.BASS_DRUM.get()).build(null));
 
     public static void register(IEventBus eventBus){
         DAI_BLOCK_ENTITIES.register(eventBus);

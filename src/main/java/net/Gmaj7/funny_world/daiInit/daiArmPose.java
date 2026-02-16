@@ -1,7 +1,6 @@
 package net.Gmaj7.funny_world.daiInit;
 
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 import net.neoforged.fml.common.asm.enumextension.EnumProxy;
 import net.neoforged.neoforge.client.IArmPoseTransformer;
